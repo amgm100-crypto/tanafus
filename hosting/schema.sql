@@ -52,3 +52,9 @@ grant execute on function public.tn_profile(text) to anon, authenticated;
 
 -- Make the owner an admin (after creating the owner user in Authentication > Users):
 -- update auth.users set raw_app_meta_data = raw_app_meta_data || '{"role":"admin"}' where email = '<owner email>';
+
+-- 2026-11-24 migration tanafus_host_pin: presenter PIN per organisation
+-- tn_login also returns the org's own pin; tn_pin_login signs a presenter in with the 6-digit PIN;
+-- tn_set_pin lets the org change its PIN after confirming its password.
+-- (functions tn_pin_login(p_pin), tn_set_pin(p_user,p_pw,p_pin) and the updated tn_login are in the
+--  migration of the same name in Supabase; see list_migrations for the exact SQL)

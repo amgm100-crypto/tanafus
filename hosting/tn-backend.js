@@ -115,6 +115,8 @@
     isAdmin,
     /* org login: the server checks the password, the hash never reaches the browser */
     async login(u, pw){ const { data, error } = await sb.rpc("tn_login", { p_user: u, p_pw: pw }); if (error) throw error; return data || null; },
+    async pinLogin(pin){ const { data, error } = await sb.rpc("tn_pin_login", { p_pin: pin }); if (error) throw error; return data || null; },
+    async setPin(u, pw, pin){ const { data, error } = await sb.rpc("tn_set_pin", { p_user: u, p_pw: pw, p_pin: pin }); if (error) throw error; return data; },
     async profile(u){ const { data, error } = await sb.rpc("tn_profile", { p_user: u }); if (error) return null; return data || null; },
     /* owner login (email + password, Supabase Auth) */
     async ownerLogin(email, pw){ const { error } = await sb.auth.signInWithPassword({ email, password: pw }); if (error) return false; return await isAdmin(); },

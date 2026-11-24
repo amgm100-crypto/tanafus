@@ -480,6 +480,9 @@ footer a,.flink{color:var(--blue-link);text-decoration:none}
 .b4-host{max-width:900px;margin:0 auto}
 .b4-cur{background:color-mix(in srgb,var(--blue) 8%,var(--tile));border-radius:var(--r);padding:16px 18px;margin-bottom:14px;display:grid;gap:6px}
 .b4-cur small{color:var(--muted)}
+.ac-pinf{margin-top:18px;padding-top:18px;border-top:1px solid var(--line,rgba(30,47,77,.12))}.ac-pin-h{margin:0 0 8px;color:var(--muted)}.ac-pin-h b{color:var(--ink)}
+.ac-pincode{font-size:24px;letter-spacing:4px;font-weight:700;color:var(--ink);margin-top:6px;display:inline-block}
+.ac-pinset{display:grid;gap:10px;width:100%}
 .join-how{text-align:start}.join-how h1,.join-how .eyebrow,.join-tag,.join-ic{text-align:center}
 .join-ic{width:72px;height:72px;margin:6px auto 4px;border-radius:22px;display:grid;place-items:center;background:color-mix(in srgb,var(--blue) 12%,var(--tile));color:var(--blue)}.join-ic svg{width:38px;height:38px}
 .join-tag{color:var(--red2);font-weight:600;margin:-4px 0 10px}
@@ -1442,6 +1445,8 @@ html[data-orole=host][data-orient=port][data-omis] #app{max-width:max(420px,calc
     isAdmin,
     /* org login: the server checks the password, the hash never reaches the browser */
     async login(u, pw){ const { data, error } = await sb.rpc("tn_login", { p_user: u, p_pw: pw }); if (error) throw error; return data || null; },
+    async pinLogin(pin){ const { data, error } = await sb.rpc("tn_pin_login", { p_pin: pin }); if (error) throw error; return data || null; },
+    async setPin(u, pw, pin){ const { data, error } = await sb.rpc("tn_set_pin", { p_user: u, p_pw: pw, p_pin: pin }); if (error) throw error; return data; },
     async profile(u){ const { data, error } = await sb.rpc("tn_profile", { p_user: u }); if (error) return null; return data || null; },
     /* owner login (email + password, Supabase Auth) */
     async ownerLogin(email, pw){ const { error } = await sb.auth.signInWithPassword({ email, password: pw }); if (error) return false; return await isAdmin(); },
@@ -4108,6 +4113,19 @@ async function acHash(salt, pw){
   return [...new Uint8Array(h)].map(x => x.toString(16).padStart(2, "0")).join("");
 }
 const acSalt = () => [...crypto.getRandomValues(new Uint8Array(12))].map(x => x.toString(16).padStart(2, "0")).join("");
+const acGenPin = () => String(100000 + crypto.getRandomValues(new Uint32Array(1))[0] % 900000);
+const acValidPin = x => /^\d{6}$/.test(String(x || ""));
+/* host PIN login: the presenter types the organisation's 6-digit PIN instead of its username and password */
+async function acPinLogin(pin){
+  if (window.TN) return TN.pinLogin(pin);
+  const a = (await acList()).find(x => x.pin && x.pin === pin); return a || null;
+}
+async function acSetPin(u, pw, pin){
+  if (window.TN) return TN.setPin(u, pw, pin);
+  const a = await acGet(u); if (!a || await acHash(a.salt, pw) !== a.hash) return "badpw";
+  if ((await acList()).some(x => x.pin === pin && acKey(x.user) !== acKey(u))) return "taken";
+  a.pin = pin; await acPut(a); return "ok";
+}
 const acGenPw = () => { const a = "abcdefghjkmnpqrstuvwxyz23456789"; return [...crypto.getRandomValues(new Uint8Array(8))].map(x => a[x % a.length]).join(""); };
 async function acGet(u){
   u = acKey(u); if (!u) return null;
@@ -4148,7 +4166,7 @@ async function acRefresh(){
   if (!SESSION) return;
   const a = await acGet(SESSION.user);
   if (!a || a.active === false){ SESSION = null; store.set("tn-session", null); acBrand(); return; }
-  SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2}; store.set("tn-session", SESSION); acBrand();
+  SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, pin:a.pin || SESSION.pin || "", host:!!SESSION.host}; store.set("tn-session", SESSION); acBrand();
 }
 function acLogout(){ if (REAL_ADMIN && acPv()) return acPreview("guest"); SESSION = null; store.set("tn-session", null); acBrand(); renderLinks("start"); nav("start"); }
 /* login form, used on the landing page and as the gate in front of the contests */
@@ -4161,9 +4179,28 @@ function acLoginHTML(gate){
       <label><span>كلمة المرور</span><input id="acP" name="password" type="password" dir="ltr" autocomplete="current-password" required></label>
       <p class="ac-err" id="acErr" role="alert"></p>
       <button class="btn lg" type="submit" id="acGo">دخول</button>
+    </form>
+    <form class="ac-form ac-pinf" id="acPinF" autocomplete="off">
+      <p class="ac-pin-h"><b>مقدّم المسابقة؟</b> ادخل برمز المقدّم اللي أعطتك إياه الجهة (٦ أرقام).</p>
+      <label><span>رمز المقدّم</span><input id="acPin" dir="ltr" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="••••••" required></label>
+      <p class="ac-err" id="acPinErr" role="alert"></p>
+      <button class="btn lg sec" type="submit" id="acPinGo">دخول المقدّم</button>
     </form></div>`;
 }
 function acBindLogin(after){
+  const pf = document.getElementById("acPinF");
+  if (pf) pf.onsubmit = async e => { e.preventDefault();
+    const err = document.getElementById("acPinErr"), go = document.getElementById("acPinGo"), inp = document.getElementById("acPin");
+    const pin = inp.value.replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/\D/g, ""); err.textContent = "";
+    if (!acValidPin(pin)){ err.textContent = "رمز المقدّم ٦ أرقام."; return; }
+    go.disabled = true;
+    try { const a = await acPinLogin(pin);
+      if (!a){ err.textContent = "رمز المقدّم غير صحيح."; return; }
+      if (a.active === false){ err.textContent = "حساب الجهة موقوف. تواصل مع إدارة تنافس."; return; }
+      SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, host:true}; store.set("tn-session", SESSION); acBrand();
+      after ? after() : route();
+    } catch(x){ err.textContent = "تعذّر الدخول الآن. حاول مرة ثانية."; }
+    finally { if (go.isConnected) go.disabled = false; } };
   const f = document.getElementById("acForm"); if (!f) return;
   f.onsubmit = async e => { e.preventDefault();
     const err = document.getElementById("acErr"), go = document.getElementById("acGo"); err.textContent = ""; go.disabled = true;
@@ -4173,7 +4210,7 @@ function acBindLogin(after){
       const a = window.TN ? await TN.login(u, pw) : await acGet(u);
       if (!a || (!window.TN && await acHash(a.salt, pw) !== a.hash)){ err.textContent = "اسم المستخدم أو كلمة المرور غير صحيحة."; return; }
       if (a.active === false){ err.textContent = "هذا الحساب موقوف. تواصل مع إدارة تنافس."; return; }
-      SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2}; store.set("tn-session", SESSION); acBrand();
+      SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, pin:a.pin || ""}; store.set("tn-session", SESSION); acBrand();
       after ? after() : route();
     } catch(x){ err.textContent = "تعذّر تسجيل الدخول الآن. حاول مرة ثانية."; }
     finally { if (go.isConnected) go.disabled = false; }
@@ -4193,7 +4230,7 @@ async function acAdmin(){
   window.scrollTo({top:0});
   $app.innerHTML = `<section class="section gut view"><div class="wrap"><h1>حسابات الجهات</h1><p class="lead">جاري التحميل…</p></div></section>`;
   const list = (await acList()).sort((a,b) => String(b.created || "").localeCompare(String(a.created || "")));
-  if (!acEdit) acEdit = {user:"", org:"", pw:acGenPw(), logo:"", c1:AC_BASE.c1, c2:AC_BASE.c2, active:true, isNew:true};
+  if (!acEdit) acEdit = {user:"", org:"", pw:acGenPw(), pin:acGenPin(), logo:"", c1:AC_BASE.c1, c2:AC_BASE.c2, active:true, isNew:true};
   const e = acEdit, on1 = ssOn(e.c1), on2 = ssOn(e.c2);
   $app.innerHTML = `<section class="section gut view"><div class="wrap ac-admin">
     <p class="eyebrow">لوحة التحكم</p><h1>حسابات الجهات</h1>
@@ -4205,6 +4242,8 @@ async function acAdmin(){
         <label><span>اسم المستخدم <small>حروف إنجليزية وأرقام، من ٣ إلى ٢٤</small></span><input id="aeUser" dir="ltr" maxlength="24" autocapitalize="none" spellcheck="false" value="${esc(e.user)}" ${e.isNew ? "" : "readonly"} required></label>
         <label><span>${e.isNew ? "كلمة المرور" : "كلمة مرور جديدة <small>اتركها فارغة لإبقاء القديمة</small>"}</span>
           <div class="ac-pw"><input id="aePw" dir="ltr" maxlength="40" value="${esc(e.pw || "")}" ${e.isNew ? "required" : ""}><button type="button" class="mini" id="aeGen">توليد</button></div></label>
+        <label><span>رمز المقدّم <small>٦ أرقام، يدخل به المقدّم للإعدادات والبدء</small></span>
+          <div class="ac-pw"><input id="aePin" dir="ltr" inputmode="numeric" maxlength="6" value="${esc(e.pin || "")}" required><button type="button" class="mini" id="aePinGen">توليد</button></div></label>
         <div class="ac-brand">
           <label class="ss-logo ac-logo">${e.logo ? `<img src="${e.logo}" alt="شعار الجهة">` : `${I(P.ssimg)}<span>ارفع شعار الجهة</span>`}<input type="file" accept="image/*" id="aeLogo" hidden></label>
           <div class="ac-cols">
@@ -4225,7 +4264,7 @@ async function acAdmin(){
         <h3>الحسابات <small>${n(list.length)}</small></h3>
         ${list.length ? list.map(a => `<div class="ac-row${a.active === false ? " off" : ""}" style="--p1:${a.c1 || AC_BASE.c1};--p2:${a.c2 || AC_BASE.c2}">
           <span class="ac-row-logo">${a.logo ? `<img src="${a.logo}" alt="">` : esc((a.org || a.user || "?").trim().charAt(0))}</span>
-          <span class="ac-row-tx"><b>${esc(a.org || "")}</b><small dir="ltr">${esc(a.user)}</small>${a.active === false ? `<em>موقوف</em>` : ""}</span>
+          <span class="ac-row-tx"><b>${esc(a.org || "")}</b><small dir="ltr">${esc(a.user)}${a.pin ? ` · رمز المقدّم ${esc(a.pin)}` : ""}</small>${a.active === false ? `<em>موقوف</em>` : ""}</span>
           <span class="ac-row-sw"><i></i><i></i></span>
           <span class="ac-row-btns"><button type="button" class="mini" data-acedit="${esc(a.user)}">تعديل</button><button type="button" class="mini" data-actog="${esc(a.user)}">${a.active === false ? "تفعيل" : "إيقاف"}</button><button type="button" class="mini" data-acpv="${esc(a.user)}">معاينة كجهة</button><button type="button" class="mini danger" data-acdel="${esc(a.user)}">حذف</button></span>
         </div>`).join("") : `<p class="sj-sub">لا توجد حسابات بعد. أنشئ أول حساب من النموذج.</p>`}
@@ -4234,9 +4273,10 @@ async function acAdmin(){
     <div class="ac-note" id="acNote"></div>
     <p class="sj-sub">ملاحظة: الحسابات محفوظة الآن داخل الموقع التجريبي وكلمات المرور مشفّرة. مع الاستضافة النهائية تنتقل إلى قاعدة بيانات وخادم تسجيل دخول آمن.</p>
   </div></section>`;
-  const $ = id => document.getElementById(id), keep = () => { e.org = $("aeOrg").value; e.user = $("aeUser").value; e.pw = $("aePw").value; e.active = $("aeAct").checked; };
+  const $ = id => document.getElementById(id), keep = () => { e.org = $("aeOrg").value; e.user = $("aeUser").value; e.pw = $("aePw").value; e.pin = $("aePin").value.trim(); e.active = $("aeAct").checked; };
   const re = () => { const y = scrollY; keep(); acAdmin().then(() => scrollTo({top:y})); };
   $("aeGen").onclick = () => { $("aePw").value = acGenPw(); };
+  $("aePinGen").onclick = () => { let x; do { x = acGenPin(); } while (list.some(a => a.pin === x)); $("aePin").value = x; };
   $("aeLogo").onchange = async ev => { const f = ev.target.files && ev.target.files[0]; if (!f) return;
     try { const {url, canvas} = await ssShrink(f, 240, "image/png"); const c = ssColors(canvas); e.logo = url; if (c.c1) e.c1 = c.c1; if (c.c2) e.c2 = c.c2; } catch(x){}
     re(); };
@@ -4250,24 +4290,26 @@ async function acAdmin(){
     if (!acValidUser(u)) return err.textContent = "اسم المستخدم: حروف إنجليزية صغيرة وأرقام و . _ - فقط، من ٣ إلى ٢٤.";
     if (e.isNew && pw.length < 6) return err.textContent = "كلمة المرور ٦ أحرف على الأقل.";
     if (!e.isNew && pw && pw.length < 6) return err.textContent = "كلمة المرور ٦ أحرف على الأقل.";
+    if (!acValidPin(e.pin)) return err.textContent = "رمز المقدّم ٦ أرقام.";
+    if (list.some(a => a.pin === e.pin && acKey(a.user) !== u)) return err.textContent = "رمز المقدّم مستخدم لجهة ثانية، اختر رمزًا آخر.";
     try {
       const old = await acGet(u);
       if (e.isNew && old) return err.textContent = "اسم المستخدم مستخدم من قبل، اختر اسمًا آخر.";
-      const rec = {user:u, org:e.org.trim(), logo:e.logo || "", c1:e.c1, c2:e.c2, active:e.active !== false, created:(old && old.created) || new Date().toISOString()};
+      const rec = {user:u, org:e.org.trim(), logo:e.logo || "", c1:e.c1, c2:e.c2, active:e.active !== false, pin:e.pin, created:(old && old.created) || new Date().toISOString()};
       if (pw){ rec.salt = acSalt(); rec.hash = await acHash(rec.salt, pw); } else { rec.salt = old.salt; rec.hash = old.hash; }
       await acPut(rec);
-      const shown = pw ? {u, pw, org:rec.org} : null;
+      const shown = pw ? {u, pw, org:rec.org, pin:rec.pin} : null;
       acEdit = null; await acAdmin();
       if (shown){ const nt = $("acNote");
-        nt.innerHTML = `<div class="ac-cred"><b>بيانات دخول ${esc(shown.org)}</b><span>اسم المستخدم: <code dir="ltr">${esc(shown.u)}</code></span><span>كلمة المرور: <code dir="ltr">${esc(shown.pw)}</code></span><button type="button" class="mini" id="acCopy">نسخ البيانات</button><small>احفظها أو أرسلها للجهة الآن؛ كلمة المرور لا تظهر مرة ثانية.</small></div>`;
-        $("acCopy").onclick = async () => { try { await navigator.clipboard.writeText(`تنافس\nاسم المستخدم: ${shown.u}\nكلمة المرور: ${shown.pw}`); $("acCopy").textContent = "تم النسخ"; } catch(x){} };
+        nt.innerHTML = `<div class="ac-cred"><b>بيانات دخول ${esc(shown.org)}</b><span>اسم المستخدم: <code dir="ltr">${esc(shown.u)}</code></span><span>كلمة المرور: <code dir="ltr">${esc(shown.pw)}</code></span><span>رمز المقدّم: <code dir="ltr">${esc(shown.pin)}</code></span><button type="button" class="mini" id="acCopy">نسخ البيانات</button><small>احفظها أو أرسلها للجهة الآن؛ كلمة المرور لا تظهر مرة ثانية.</small></div>`;
+        $("acCopy").onclick = async () => { try { await navigator.clipboard.writeText(`تنافس\nاسم المستخدم: ${shown.u}\nكلمة المرور: ${shown.pw}\nرمز المقدّم: ${shown.pin}`); $("acCopy").textContent = "تم النسخ"; } catch(x){} };
         nt.scrollIntoView({block:"center"}); }
       else flash("تم حفظ التعديلات.");
       if (SESSION && SESSION.user === u) acRefresh();
     } catch(x){ err.textContent = "تعذّر الحفظ: " + (x && x.message || x); }
   };
   $app.querySelectorAll("[data-acedit]").forEach(b => b.onclick = async () => { const a = await acGet(b.dataset.acedit); if (!a) return;
-    acEdit = {user:a.user, org:a.org || "", pw:"", logo:a.logo || "", c1:a.c1 || AC_BASE.c1, c2:a.c2 || AC_BASE.c2, active:a.active !== false, isNew:false}; await acAdmin(); scrollTo({top:0}); });
+    acEdit = {user:a.user, org:a.org || "", pw:"", pin:a.pin || acGenPin(), logo:a.logo || "", c1:a.c1 || AC_BASE.c1, c2:a.c2 || AC_BASE.c2, active:a.active !== false, isNew:false}; await acAdmin(); scrollTo({top:0}); });
   $app.querySelectorAll("[data-acpv]").forEach(b => b.onclick = () => acPreview("org:" + b.dataset.acpv));
   $app.querySelectorAll("[data-actog]").forEach(b => b.onclick = async () => { const a = await acGet(b.dataset.actog); if (!a) return; a.active = a.active === false; await acPut(a); const y = scrollY; await acAdmin(); scrollTo({top:y}); });
   $app.querySelectorAll("[data-acdel]").forEach(b => b.onclick = async () => {
@@ -4308,7 +4350,10 @@ function landing(){
         ${soon.map(() => `<article class="contest ghost" aria-label="مسابقة قادمة">${I(P.plus)}<b>مسابقة جديدة</b><span class="soon">قريبًا</span></article>`).join("")}
       </div>
       ${CAN_EDIT ? `<div class="ac-owner"><div><b>لوحة التحكم</b><span>أنشئ حسابات الجهات المشتركة، وحدد شعار كل جهة وألوانها.</span></div><div class="ac-btns">${window.TN ? `<button type="button" class="mini" id="acOwnerOut">خروج المالك</button>` : ""}<button type="button" class="mini" id="acPvGuest">معاينة كزائر</button><button type="button" class="btn" id="acPanel">حسابات الجهات</button></div></div>` : ""}
-      ${s ? `<div class="ac-owner"><div><b>${esc(s.org || s.user)}</b><span>أنت مسجّل الدخول باسم <span dir="ltr">${esc(s.user)}</span>.</span></div><button type="button" class="mini" id="acOut">تسجيل الخروج</button></div>` : ""}
+      ${s ? `<div class="ac-owner"><div><b>${esc(s.org || s.user)}</b><span>${s.host ? "دخلت كمقدّم للمسابقات برمز المقدّم." : `أنت مسجّل الدخول باسم <span dir="ltr">${esc(s.user)}</span>.`}</span></div><button type="button" class="mini" id="acOut">تسجيل الخروج</button></div>
+        ${s.host ? "" : `<div class="ac-owner ac-pinbox" id="acPinBox"><div><b>رمز المقدّم</b><span>أعطه لمقدّم المسابقة: يدخل به من صفحة الدخول فتظهر له الإعدادات والبدء، بدون كلمة مرور الجهة.</span>
+          <code class="ac-pincode" dir="ltr" id="acPinShow">${s.pin ? "••••••" : "غير محدد"}</code></div>
+          <div class="ac-btns">${s.pin ? `<button type="button" class="mini" id="acPinEye">إظهار</button>` : ""}<button type="button" class="mini" id="acPinChg">${s.pin ? "تغيير" : "تحديد رمز"}</button></div></div>`}` : ""}
       ${!s && !CAN_EDIT ? acLoginHTML(false) : ""}
     </div></div></section>`;
   document.getElementById("ency").onclick = () => nav("cats");
@@ -4316,6 +4361,26 @@ function landing(){
   const pg = document.getElementById("acPvGuest"); if (pg) pg.onclick = () => acPreview("guest");
   const oo = document.getElementById("acOwnerOut"); if (oo) oo.onclick = () => TN.ownerLogout().then(() => location.reload());
   const out = document.getElementById("acOut"); if (out) out.onclick = acLogout;
+  const pe = document.getElementById("acPinEye"); if (pe) pe.onclick = () => { const c = document.getElementById("acPinShow"); const on = pe.dataset.on !== "1"; pe.dataset.on = on ? "1" : ""; c.textContent = on ? s.pin : "••••••"; pe.textContent = on ? "إخفاء" : "إظهار"; };
+  const pc = document.getElementById("acPinChg"); if (pc) pc.onclick = () => {
+    const box = document.getElementById("acPinBox");
+    box.innerHTML = `<form class="ac-form ac-pinset" id="acPinSet"><b>رمز مقدّم جديد</b>
+      <label><span>الرمز الجديد (٦ أرقام)</span><div class="ac-pw"><input id="apNew" dir="ltr" inputmode="numeric" maxlength="6" value="${acGenPin()}" required><button type="button" class="mini" id="apGen">توليد</button></div></label>
+      <label><span>كلمة مرور الجهة للتأكيد</span><input id="apPw" type="password" dir="ltr" autocomplete="current-password" required></label>
+      <p class="ac-err" id="apErr" role="alert"></p>
+      <div class="ac-btns"><button type="submit" class="btn">حفظ الرمز</button><button type="button" class="mini" id="apCancel">إلغاء</button></div></form>`;
+    document.getElementById("apGen").onclick = () => { document.getElementById("apNew").value = acGenPin(); };
+    document.getElementById("apCancel").onclick = () => landing();
+    document.getElementById("acPinSet").onsubmit = async ev => { ev.preventDefault();
+      const err = document.getElementById("apErr"), pin = document.getElementById("apNew").value.trim(), pw = document.getElementById("apPw").value; err.textContent = "";
+      if (!acValidPin(pin)) return err.textContent = "الرمز ٦ أرقام.";
+      try { const r = await acSetPin(s.user, pw, pin);
+        if (r === "badpw") return err.textContent = "كلمة المرور غير صحيحة.";
+        if (r === "taken") return err.textContent = "هذا الرمز مستخدم لجهة ثانية، اختر رمزًا آخر.";
+        if (r !== "ok") return err.textContent = "تعذّر الحفظ. حاول مرة ثانية.";
+        SESSION.pin = pin; store.set("tn-session", SESSION); flash("تم حفظ رمز المقدّم."); landing();
+      } catch(x){ err.textContent = "تعذّر الحفظ. حاول مرة ثانية."; } };
+  };
   const jm = document.getElementById("acJump"); if (jm) jm.onclick = e => { e.preventDefault(); const f = document.getElementById("acLogin"); if (f) f.scrollIntoView({behavior:"smooth", block:"center"}); setTimeout(() => { const u = document.getElementById("acU"); if (u) u.focus({preventScroll:true}); }, 400); };
   acBindLogin(() => landing());
   tkInvite();
@@ -5438,7 +5503,7 @@ function tkBroadcast(){
 /* ---------- setup ---------- */
 async function tkSetup(keepScroll){
   tkStop(); tkTidy();
-  const canHost = DB ? CAN_EDIT : true;
+  const canHost = DB ? (CAN_EDIT || (!!window.TN && !!SESSION)) : true;
   if (!canHost) return tkJoin();
   const y = window.scrollY, T = tkCfg.teams, cats = allCats(), pool = tkPool().length;
   $app.innerHTML = `<section class="view">
@@ -6972,7 +7037,7 @@ let ERH = store.get("er-host", null);            // the host's live game
 const erHostSave = () => store.set("er-host", ERH);
 function erSetup(keepScroll){
   erStop(); tkStop(); erTidy();
-  const canHost = DB ? CAN_EDIT : true;
+  const canHost = DB ? (CAN_EDIT || (!!window.TN && !!SESSION)) : true;
   if (!canHost) return erJoin();
   const c = erCfg, y = window.scrollY, cats = allCats(), T = c.teams, lv = ["سهل","متوسط","صعب"];
   const local = store.get("er-local", null);
@@ -7458,7 +7523,7 @@ const EM_PHN = {lobby:"الاستعداد", work:"مرحلة العمل", build:
 /* ---------- setup ---------- */
 function emSetup(keepScroll){
   emStop(); emTidy();
-  const canHost = DB ? CAN_EDIT : true;
+  const canHost = DB ? (CAN_EDIT || (!!window.TN && !!SESSION)) : true;
   if (!canHost) return emJoin();
   const y = window.scrollY, N = emCfg.teams;
   $app.innerHTML = `<section class="view">
