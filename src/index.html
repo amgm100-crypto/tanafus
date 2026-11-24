@@ -480,6 +480,8 @@ footer a,.flink{color:var(--blue-link);text-decoration:none}
 .b4-host{max-width:900px;margin:0 auto}
 .b4-cur{background:color-mix(in srgb,var(--blue) 8%,var(--tile));border-radius:var(--r);padding:16px 18px;margin-bottom:14px;display:grid;gap:6px}
 .b4-cur small{color:var(--muted)}
+.tk-who{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}.tk-who span{font-size:12px;background:color-mix(in srgb,var(--tc) 12%,var(--tile));color:var(--ink);border-radius:999px;padding:2px 8px}
+.tk-name-in{letter-spacing:normal!important;font-size:22px!important;text-align:center}.tk-me-name{font-weight:600;color:var(--ink)}
 .b4-pair{max-width:420px;text-align:center}.b4-pair p{color:var(--muted);margin:6px 0 12px}
 .b4-qr{background:#fff;border-radius:var(--r);padding:12px;width:min(260px,70vw);margin:0 auto}.b4-qr svg{width:100%;height:auto;display:block}
 .b4-code b{font-size:28px;letter-spacing:4px;color:var(--ink)}
@@ -5386,14 +5388,17 @@ function tkLive(){
   // live bars during a window, device counts in the lobby
   const by = tkDevices();
   $app.querySelectorAll("[data-tkdev]").forEach(el => { const t = +el.dataset.tkdev; el.textContent = `${(by[t] || []).length}/${TK.dev}`; });
+  $app.querySelectorAll("[data-tkwho]").forEach(el => { const h = tkWho(by[+el.dataset.tkwho]); if (el.innerHTML !== h) el.innerHTML = h; });
   if (TK.win){ const c = tkCounts(), mx = Math.max(10, ...Object.values(c));
     TK.win.teams.forEach(t => { const b = $app.querySelector(`[data-tkbar="${t}"]`); if (b){ b.style.setProperty("--w", ((c[t] || 0) / mx * 100) + "%"); b.querySelector("b").textContent = c[t] || 0; } });
     const left = Math.max(0, Math.ceil((TK.endsAt - Date.now()) / 1000)); const cl = document.getElementById("tkClock"); if (cl) cl.textContent = left; }
 }
+const tkWho = list => (list || []).map(p => `<span>${esc((p.presence.tk.name || "").trim() || "بدون اسم")}</span>`).join("");
 function tkTeamsHTML(){
   const by = tkDevices();
   return `<div class="tk-teams" style="--n:${TK.names.length}">${TK.names.map((t,i) => `<div class="tk-team ${(TK.phase === "ready" || TK.phase === "tap" || TK.phase === "q") && i === TK.turn ? "now" : ""}" style="--tc:${TK_COL[i]}">
-    <b>${esc(t)}</b><strong>${TK.scores[i]}</strong><small>${I(P.tkphone)}<span data-tkdev="${i}">${(by[i] || []).length}/${TK.dev}</span><span class="tk-key"> · مفتاح ${TK_KEYS[i].toUpperCase()}</span></small></div>`).join("")}</div>`;
+    <b>${esc(t)}</b><strong>${TK.scores[i]}</strong><small>${I(P.tkphone)}<span data-tkdev="${i}">${(by[i] || []).length}/${TK.dev}</span><span class="tk-key"> · مفتاح ${TK_KEYS[i].toUpperCase()}</span></small>
+    <div class="tk-who" data-tkwho="${i}">${tkWho(by[i])}</div></div>`).join("")}</div>`;
 }
 async function tkRender(){
   if (!TK) return tkSetup();
@@ -5426,7 +5431,8 @@ async function tkRender(){
   } else if (ph === "rtie"){
     main = `<div class="tk-panel"><h2>${TK.tie.length ? "تعادل!" : "لم يكبس أحد"}</h2>
       <p>${TK.tie.length ? TK.tie.map(t => esc(TK.names[t])).join(" و") + " بنفس عدد الكبسات (" + TK.taps[TK.tie[0]] + "). يُعاد التكبيس للجميع." : "يُعاد التكبيس للجميع."}</p>
-      <button class="btn lg" type="button" id="tkAll">أعد التكبيس للجميع</button></div>`;
+      <div class="cta"><button class="btn lg" type="button" id="tkAll">أعد التكبيس للجميع</button><button class="btn lg sec" type="button" id="tkNext">التالي</button></div>
+      <p class="sj-sub">«التالي» يتجاوز سؤال نهاية الجولة بدون نقاط وينتقل لما بعده.</p></div>`;
   } else if (ph === "tap" || ph === "rtap"){
     const teams = TK.win.teams;
     main = `<div class="tk-panel tk-go"><div class="tk-clock" id="tkClock">${TK.dur}</div>
@@ -5464,6 +5470,7 @@ async function tkRender(){
   on("tkUndo", () => { const s = TK.hist.pop(); if (!s) return; tkStop(); const h = TK.hist; TK = Object.assign(s, {hist:h, win:null}); if (TK.phase === "tap" || TK.phase === "rtap") TK.phase = TK.phase === "tap" ? "ready" : "rready"; tkSave(); tkBroadcast(); tkRender(); });
   on("tkFull", () => { try { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); } catch(e){} });
   on("tkMenu", () => nav("tk"));
+  on("tkNext", () => { tkSnap(); TK.round++; TK.turn = 0; TK.phase = TK.rounds && TK.round > TK.rounds ? "end" : "ready"; TK.tie = []; TK.log = "تُجووز سؤال نهاية الجولة"; tkSave(); tkBroadcast(); tkRender(); });
   const ee = $("tkEnd"); if (ee) ee.onclick = () => { if (ee.dataset.sure){ tkSnap(); TK.phase = "end"; TK.win = null; tkSave(); tkBroadcast(); return tkRender(); }
     ee.dataset.sure = "1"; ee.textContent = "متأكد؟ اضغط مرة ثانية"; setTimeout(() => { if (ee.isConnected){ delete ee.dataset.sure; ee.textContent = "إنهاء المسابقة"; } }, 4000); };
   $app.querySelectorAll("[data-tkpad]").forEach(b => b.onpointerdown = e => { e.preventDefault(); tkPad(+b.dataset.tkpad); });
@@ -5493,7 +5500,7 @@ function tkQR(text){
 const tkCodeHTML = c => `<span class="tk-code" dir="ltr">${String(c).slice(0,3)}<i></i>${String(c).slice(3)}</span>`;
 const tkHashCode = () => { const m = decodeURIComponent(location.hash).match(/^#tkjoin\D?(\d{6})/); return m ? m[1] : ""; };
 const tkOnJoin = () => location.hash.startsWith("#tkjoin") || location.hash === "#tk";
-let tkMe = {code: store.get("tk-code", ""), team: store.get("tk-team", null), state:null, win:null, taps:0, end:0, typed:"", tried:false, last:null, delta:0, cam:null};
+let tkMe = {code: store.get("tk-code", ""), team: store.get("tk-team", null), name: store.get("tk-pname", ""), state:null, win:null, taps:0, end:0, typed:"", tried:false, last:null, delta:0, cam:null};
 function tkCamStop(){ const c = tkMe.cam; if (c){ c.stop = true; try { c.stream.getTracks().forEach(t => t.stop()); } catch(e){} tkMe.cam = null; } const o = document.getElementById("tkCamBox"); if (o) o.remove(); }
 async function tkScan(done){
   tkCamStop();
@@ -5525,14 +5532,15 @@ async function tkScan(done){
 async function tkJoin(){
   tkStop(); await tkRoom();
   const hc = tkHashCode(); if (hc){ tkMe.typed = hc; tkMe.tried = true; }
-  const send = p => ROOM && ROOM.presence(p).catch(() => {});
+  const send = p => { if (p && p.tk) p.tk.name = tkMe.name || ""; return ROOM && ROOM.presence(p).catch(() => {}); };
   const draw = () => {
     if (!tkOnJoin()) return;
     const s = tkMe.state, room = !!ROOM;
     if (!room){ $app.innerHTML = `<section class="section gut view"><div class="wrap sheet tk-join"><h1>دخول اللاعبين</h1><p class="lead">لا يمكن ربط هذا الجهاز بغرفة المسابقة. تأكد أنك فتحت الرابط وأنت مسجّل الدخول، وأن الموقع مشارك معك.</p></div></section>`; return; }
     const inRoom = s && s.code && tkMe.code === s.code;
     if (!inRoom){
-      if (s && tkMe.tried && tkMe.typed === s.code){ tkMe.code = s.code; store.set("tk-code", s.code); tkMe.tried = false; return draw(); }
+      if (s && tkMe.tried && tkMe.typed === s.code){ if (store.get("tk-code", "") !== s.code){ tkMe.team = null; store.set("tk-team", null); }
+        tkMe.code = s.code; store.set("tk-code", s.code); tkMe.tried = false; return draw(); }
       const bad = s && tkMe.tried && tkMe.typed.length === 6 && tkMe.typed !== s.code, wait = tkMe.tried && !s;
       $app.innerHTML = `<section class="section gut view"><div class="wrap sheet tk-join">
         <p class="eyebrow">تكبيس</p><h1>ادخل الغرفة</h1>
@@ -5550,8 +5558,18 @@ async function tkJoin(){
       if (!tkMe.typed) setTimeout(() => { try { inp.focus({preventScroll:true}); } catch(e){} }, 50);
       return; }
     const names = s.names || [];
+    if ((tkMe.team == null || tkMe.team >= names.length) && !tkMe.named){
+      if (document.getElementById("tkNameF")) return;            // keep what the player is typing across live updates
+      $app.innerHTML = `<section class="section gut view"><div class="wrap sheet tk-join"><p class="eyebrow">دخلت الغرفة ${tkCodeHTML(s.code)}</p><h1>ما اسمك؟</h1>
+        <p class="lead">يظهر اسمك على شاشة المسابقة تحت فريقك.</p>
+        <form class="tk-form" id="tkNameF"><input id="tkNameIn" class="tk-in tk-name-in" maxlength="20" autocomplete="nickname" placeholder="اكتب اسمك" value="${esc(tkMe.name)}" aria-label="اسمك" required>
+          <button type="submit" class="btn lg">التالي</button></form></div></section>`;
+      const ni = document.getElementById("tkNameIn"); setTimeout(() => { try { ni.focus({preventScroll:true}); } catch(e){} }, 50);
+      document.getElementById("tkNameF").onsubmit = e => { e.preventDefault(); const v = ni.value.trim().replace(/\s+/g, " ").slice(0, 20); if (!v){ ni.focus(); return; }
+        tkMe.name = v; tkMe.named = true; store.set("tk-pname", v); draw(); };
+      return; }
     if (tkMe.team == null || tkMe.team >= names.length){
-      $app.innerHTML = `<section class="section gut view"><div class="wrap sheet tk-join"><p class="eyebrow">دخلت الغرفة ${tkCodeHTML(s.code)}</p><h1>اختر فريقك</h1><div class="tk-pick">${names.map((t,i) => `<button type="button" class="btn lg" data-tkme="${i}" style="background:${TK_COL[i]}">${esc(t)}</button>`).join("")}</div>
+      $app.innerHTML = `<section class="section gut view"><div class="wrap sheet tk-join"><p class="eyebrow">دخلت الغرفة ${tkCodeHTML(s.code)}</p><h1>اختر فريقك</h1><p class="lead">${esc(tkMe.name)}، اختر فريقك بعناية: لا يمكن تغييره بعد الاختيار.</p><div class="tk-pick">${names.map((t,i) => `<button type="button" class="btn lg" data-tkme="${i}" style="background:${TK_COL[i]}">${esc(t)}</button>`).join("")}</div>
         <button type="button" class="mini" id="tkLeave" style="margin-top:18px">خروج من الغرفة</button></div></section>`;
       $app.querySelectorAll("[data-tkme]").forEach(b => b.onclick = () => { tkMe.team = +b.dataset.tkme; tkMe.last = null; store.set("tk-team", tkMe.team); send({tk:{team:tkMe.team, win:null, taps:0}}); draw(); });
       document.getElementById("tkLeave").onclick = leave;
@@ -5589,10 +5607,8 @@ async function tkJoin(){
         <div><small>كبسات فريقك الأخيرة</small><b>${mine == null ? "—" : n(mine)}</b></div>
         <div><small>كبساتك أنت</small><b>${tkMe.win ? n(tkMe.taps) : "—"}</b></div>
       </div>
-      <div class="tk-me-foot"><span>الغرفة ${tkCodeHTML(s.code)}</span><button type="button" class="mini" id="tkChange">تغيير الفريق</button><button type="button" class="mini" id="tkLeave">خروج</button></div>
+      <div class="tk-me-foot"><span>الغرفة ${tkCodeHTML(s.code)}</span><span class="tk-me-name">${esc(tkMe.name || "")}</span></div>
     </div></section>`;
-    document.getElementById("tkChange").onclick = () => { tkMe.team = null; store.set("tk-team", null); send({tk:null}); draw(); };
-    document.getElementById("tkLeave").onclick = leave;
   };
   function leave(){ tkMe.code = ""; tkMe.typed = ""; tkMe.tried = false; tkMe.team = null; store.set("tk-code", ""); store.set("tk-team", null); send({tk:null}); if (location.hash !== "#tkjoin") history.replaceState(null, "", "#tkjoin"); draw(); }
   tkJoin.draw = draw;

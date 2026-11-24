@@ -45,36 +45,61 @@
   }
   const user = { canEdit: isAdmin };
 
-  /* ---------- realtime room ---------- */
+  /* ---------- realtime room ----------
+     Supabase Presence is rate-limited per client (a phone tapping fast got cut off), so presence is
+     carried on broadcast instead: each tab announces its state (throttled), re-announces every 4 s as
+     a heartbeat, and is dropped after 12 s of silence or on "bye". */
   let room = null;
   function makeRoom(){
     const me = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now());
-    const ch = sb.channel("tanafus-live", { config: { broadcast: { self: false, ack: false }, presence: { key: me } } });
-    const handlers = {}, peerSubs = new Set();
-    let mine = {}, prev = {}, ready, readyRes;
+    const ch = sb.channel("tanafus-live", { config: { broadcast: { self: false, ack: false } } });
+    const handlers = {}, peerSubs = new Set(), others = {};      // others: key -> {p, t}
+    let mine = {}, ready, readyRes, joined = false, lastSent = 0, pend = null;
     ready = new Promise(r => readyRes = r);
-    const flat = () => { const st = ch.presenceState(), out = {};
-      Object.keys(st).forEach(k => { const metas = st[k]; if (metas && metas.length) out[k] = metas[metas.length - 1].p || {}; }); return out; };
+    const THROTTLE = 450, BEAT = 4000, EXPIRE = 12000;
     const peerOf = (k, p) => ({ peer: k, presence: p, sameTab: k === me });
+    const notify = ch2 => { if (ch2.joined.length || ch2.updated.length || ch2.left.length) peerSubs.forEach(fn => { try { fn(ch2); } catch(e){} }); };
+    const raw = (event, payload) => ch.send({ type: "broadcast", event, payload });
+    const announce = () => { lastSent = Date.now(); pend = null; return raw("p", { f: me, p: mine }); };
+    const schedule = () => {                                       // leading + trailing throttle
+      if (!joined) return; const wait = THROTTLE - (Date.now() - lastSent);
+      if (wait <= 0 && !pend) return announce();
+      if (!pend) pend = setTimeout(announce, Math.max(0, wait));
+    };
     ch.on("broadcast", { event: "m" }, ({ payload }) => {
       const t = payload && payload.t; (handlers[t] || []).forEach(fn => { try { fn({ type: t, data: payload.d, peer: payload.f, sameTab: false }); } catch(e){} });
     });
-    ch.on("presence", { event: "sync" }, () => {
-      const now = flat(), joined = [], updated = [], left = [];
-      Object.keys(now).forEach(k => { if (!(k in prev)) joined.push(peerOf(k, now[k])); else if (JSON.stringify(prev[k]) !== JSON.stringify(now[k])) updated.push(peerOf(k, now[k])); });
-      Object.keys(prev).forEach(k => { if (!(k in now)) left.push(peerOf(k, prev[k])); });
-      prev = now;
-      if (joined.length || updated.length || left.length) peerSubs.forEach(fn => { try { fn({ joined, updated, left }); } catch(e){} });
+    ch.on("broadcast", { event: "p" }, ({ payload }) => {
+      if (!payload || !payload.f || payload.f === me) return;
+      const k = payload.f, old = others[k], p = payload.p || {};
+      others[k] = { p, t: Date.now() };
+      if (!old) notify({ joined: [peerOf(k, p)], updated: [], left: [] });
+      else if (JSON.stringify(old.p) !== JSON.stringify(p)) notify({ joined: [], updated: [peerOf(k, p)], left: [] });
     });
-    ch.subscribe(status => { if (status === "SUBSCRIBED"){ ch.track({ p: mine }); readyRes(); } });
+    ch.on("broadcast", { event: "hello" }, ({ payload }) => { if (payload && payload.f !== me) setTimeout(announce, Math.random() * 600); });
+    ch.on("broadcast", { event: "bye" }, ({ payload }) => {
+      const k = payload && payload.f; if (!k || !others[k]) return; const o = others[k]; delete others[k];
+      notify({ joined: [], updated: [], left: [peerOf(k, o.p)] });
+    });
+    ch.subscribe(status => {
+      if (status === "SUBSCRIBED"){ joined = true; raw("hello", { f: me }); announce(); readyRes(); }
+      else if (status === "CHANNEL_ERROR" || status === "TIMED_OUT" || status === "CLOSED") joined = false;
+    });
+    setInterval(() => {
+      if (joined && Date.now() - lastSent > BEAT - 200) announce();
+      const now = Date.now(), left = [];
+      Object.keys(others).forEach(k => { if (now - others[k].t > EXPIRE){ left.push(peerOf(k, others[k].p)); delete others[k]; } });
+      if (left.length) notify({ joined: [], updated: [], left });
+    }, 1000);
+    addEventListener("pagehide", () => { try { raw("bye", { f: me }); } catch(e){} });
     return {
-      async emit(type, data){ await ready; const r = await ch.send({ type: "broadcast", event: "m", payload: { t: type, d: data, f: me } }); if (r !== "ok") throw new Error("emit " + r); },
+      async emit(type, data){ await ready; const r = await raw("m", { t: type, d: data, f: me }); if (r !== "ok") throw new Error("emit " + r); },
       on(type, fn){ (handlers[type] = handlers[type] || []).push(fn); return () => { handlers[type] = (handlers[type] || []).filter(x => x !== fn); }; },
       async presence(obj){
         Object.keys(obj || {}).forEach(k => { if (obj[k] === null) delete mine[k]; else mine[k] = obj[k]; });
-        await ready; await ch.track({ p: mine });
+        schedule();
       },
-      peers(){ const now = flat(); if (!(me in now)) now[me] = mine; return Object.keys(now).map(k => peerOf(k, now[k])); },
+      peers(){ return [peerOf(me, mine)].concat(Object.keys(others).map(k => peerOf(k, others[k].p))); },
       onPeers(fn){ peerSubs.add(fn); return () => peerSubs.delete(fn); }
     };
   }
