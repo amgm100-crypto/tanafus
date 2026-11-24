@@ -480,6 +480,9 @@ footer a,.flink{color:var(--blue-link);text-decoration:none}
 .b4-host{max-width:900px;margin:0 auto}
 .b4-cur{background:color-mix(in srgb,var(--blue) 8%,var(--tile));border-radius:var(--r);padding:16px 18px;margin-bottom:14px;display:grid;gap:6px}
 .b4-cur small{color:var(--muted)}
+.b4-pair{max-width:420px;text-align:center}.b4-pair p{color:var(--muted);margin:6px 0 12px}
+.b4-qr{background:#fff;border-radius:var(--r);padding:12px;width:min(260px,70vw);margin:0 auto}.b4-qr svg{width:100%;height:auto;display:block}
+.b4-code b{font-size:28px;letter-spacing:4px;color:var(--ink)}
 .b4-cur p{margin:0;font-size:20px;font-weight:600}
 .b4-cur b{color:var(--good);font-size:20px}
 .b4-host .toolbar{margin-bottom:10px}
@@ -3886,9 +3889,9 @@ function route(){
     return erSetup(); }
   if (h === "ss" || h === "ssgame"){ game = null; renderLinks("");
     return h === "ssgame" && SS ? ssRender() : ssSetup(); }
-  if (h === "b4" || h === "b4game" || h === "b4host"){ game = null; renderLinks("");
+  if (h === "b4" || h === "b4game" || h.startsWith("b4host")){ game = null; renderLinks("");
     if (!BANK.length){ $app.innerHTML = `<div class="empty gut">لا توجد أسئلة بعد.</div>`; return; }
-    if (h === "b4host") return b4Host();
+    if (h.startsWith("b4host")) return b4Host();
     return h === "b4game" && B4 ? b4Render() : b4Setup(); }
   if (h === "sj" || h === "sjgame"){ game = null; renderLinks("");
     if (!BANK.length){ $app.innerHTML = `<div class="empty gut">لا توجد أسئلة بعد.</div>`; return; }
@@ -4635,7 +4638,16 @@ let B4 = store.get("b4-game", null);
 if (B4 && !(B4.h && B4.v && B4.scores)) B4 = null;
 let b4Timer = null, b4Audio = null;
 const b4SaveCfg = () => store.set("b4-cfg", b4Cfg);
-const b4Save = () => { store.set("b4-game", B4); store.set("b4-cur", B4 && B4.q ? {n:B4.q.n, letter:B4.q.letter, question:B4.q.question, answer:B4.q.answer, team:B4.names[B4.turn]} : null); };
+const b4CurOf = () => B4 && B4.q ? {n:B4.q.n, letter:B4.q.letter, question:B4.q.question, answer:B4.q.answer, team:B4.names[B4.turn]} : null;
+const b4Save = () => { if (B4 && !B4.code) B4.code = String(1000 + Math.floor(Math.random() * 9000)); store.set("b4-game", B4); store.set("b4-cur", b4CurOf()); b4Send(); };
+/* host sheet on another device: the game broadcasts the shown question under a 4-digit code */
+let b4Remote = null, b4Wired = false;
+function b4Send(){ if (B4 && B4.code && ROOM) ROOM.emit("b4.cur", {code: B4.code, cur: b4CurOf()}).catch(() => {}); }
+async function b4Wire(){ if (b4Wired) return; const r = await tkRoom(); if (!r || b4Wired) return; b4Wired = true;
+  r.on("b4.ask", m => { const d = m.data || {}; if (B4 && B4.code && d.code === B4.code) b4Send(); }, () => {});
+  r.on("b4.cur", m => { const d = m.data || {}; const c = b4HostCode(); if (!c || d.code !== c) return; b4Remote = {cur: d.cur || null};
+    if (/^#b4host/.test(location.hash)) b4HostCur(); }, () => {}); }
+const b4HostCode = () => { const m = location.hash.match(/^#b4host=(\d{4})/); return m ? m[1] : ""; };
 const b4Name = i => (b4Cfg.names[i] || "").trim() || b4DefName(i);
 /* Question pool: numbered once per page load, so the host sheet and the screen agree */
 let B4Q = null;
@@ -4816,7 +4828,8 @@ function b4Render(){
       <div class="b4-acts"><button class="mini" type="button" id="b4Undo" ${g.hist.length ? "" : "disabled"}>${I(P.sjundo)}تراجع</button>
         <button class="mini" type="button" id="b4Host">${I(P.sjhost)}ورقة الملقي</button>
         <button class="mini" type="button" id="b4Full">${I(P.sjfull)}ملء الشاشة</button>
-        <button class="mini" type="button" id="b4Menu">${I(P.sjgear)}الإعدادات</button></div></div>
+        <button class="mini" type="button" id="b4Menu">${I(P.sjgear)}الإعدادات</button>
+        <button class="mini" type="button" id="b4End">إنهاء المسابقة</button></div></div>
     <div class="b4-main">
       <div class="b4-left">${b4BoardHTML(g.phase)}</div>
       <aside class="b4-right">
@@ -4880,9 +4893,27 @@ function b4Bind(){
   $app.querySelectorAll("[data-b4minus]").forEach(b => b.onclick = () => { const t = +b.dataset.b4minus; g.scores[t] -= 20; g.card = null; g.msg = `خُصمت 20 نقطة من ${g.names[t]}`; b4Save(); b4Render(); });
   if ($("b4Skip")) $("b4Skip").onclick = () => { b4Snap(); g.msg = "تخطى الدور"; g.extra = false; b4EndTurn(); };
   if ($("b4Undo")) $("b4Undo").onclick = () => { const s = g.hist.pop(); if (!s) return; b4StopTimer(); const h = g.hist; B4 = Object.assign(s, {hist:h, msg:"تم التراجع"}); b4Save(); b4Render(); };
-  if ($("b4Host")) $("b4Host").onclick = () => window.open(location.href.split("#")[0] + "#b4host", "_blank");
+  if ($("b4Host")) $("b4Host").onclick = () => { if (!g.code) b4Save(); b4Wire();
+    const link = location.href.split("#")[0] + "#b4host=" + g.code;
+    const ov = document.createElement("div"); ov.className = "overlay"; ov.dir = "rtl";
+    ov.innerHTML = `<div class="sheet-form b4-pair"><div class="fhead"><h3>ورقة الملقي</h3><button type="button" class="mini" data-close>إغلاق</button></div>
+      <p>امسح الرمز بجوال الملقي ليظهر عنده السؤال الحالي وإجابته أولًا بأول.</p>
+      <div class="b4-qr">${tkQR(link)}</div><p class="b4-code">رمز المسابقة <b dir="ltr">${g.code}</b></p>
+      <button type="button" class="btn" id="b4HereOpen">افتح في تبويب جديد على هذا الجهاز</button></div>`;
+    document.body.appendChild(ov);
+    const close = () => ov.remove(); ov.querySelector("[data-close]").onclick = close; ov.onclick = e => { if (e.target === ov) close(); };
+    ov.querySelector("#b4HereOpen").onclick = () => { window.open(link, "_blank"); close(); }; };
+  b4Wire();
   if ($("b4Full")) $("b4Full").onclick = () => { try { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); } catch(e){} };
   if ($("b4Menu")) $("b4Menu").onclick = () => nav("b4");
+  const ee = $("b4End"); if (ee) ee.onclick = () => {
+    if (!ee.dataset.sure){ ee.dataset.sure = "1"; ee.textContent = "متأكد؟ اضغط مرة ثانية";
+      setTimeout(() => { if (ee.isConnected){ delete ee.dataset.sure; ee.textContent = "إنهاء المسابقة"; } }, 4000); return; }
+    b4StopTimer();
+    /* the unfinished round goes to the points leader (no one if tied or nobody scored) */
+    if (g.roundWinner == null){ const best = Math.max(...g.scores), top = g.scores.map((v,i) => v === best ? i : -1).filter(i => i >= 0);
+      if (best > 0 && top.length === 1){ g.roundWinner = top[0]; g.wins[top[0]]++; } }
+    b4Final(); };
 }
 function b4Round(){
   const g = B4, best = Math.max(...g.scores), top = g.scores.map((s,i) => s === best ? i : -1).filter(i => i >= 0);
@@ -4929,11 +4960,12 @@ function b4Final(){
 function b4Host(){
   b4StopTimer();
   const all = b4Bank();
-  const cur = store.get("b4-cur", null);
+  const code = b4HostCode();
+  if (code){ b4Wire().then(() => { if (ROOM) ROOM.emit("b4.ask", {code}).catch(() => {}); }); }
   $app.innerHTML = `<section class="section gut view"><div class="wrap b4-host">
     <div class="b4-top"><div class="b4-title"><b>ورقة الملقي</b><span>بالأربع تربح</span></div>
       <div class="b4-acts"><button class="mini" type="button" id="b4Print">${I(P.sjprint)}طباعة</button><button class="mini" type="button" id="b4Back">العودة للمسابقة</button></div></div>
-    <div class="b4-cur" id="b4cur">${cur ? `<small>السؤال المعروض الآن · رقم ${cur.n} · حرف ${esc(cur.letter)} · اختاره ${esc(cur.team)}</small><p>${esc(cur.question)}</p><b>${esc(cur.answer)}</b>` : `<small>لا يوجد سؤال معروض الآن على هذا الجهاز.</small>`}</div>
+    <div class="b4-cur" id="b4cur"></div>
     <div class="toolbar"><input type="text" id="b4find" inputmode="numeric" placeholder="ابحث برقم السؤال أو بكلمة" aria-label="بحث"></div>
     <div id="b4list"></div>
   </div></section>`;
@@ -4943,12 +4975,18 @@ function b4Host(){
     list.slice(0, f ? 200 : 2000).forEach(q => { if (q.letter !== last){ html += `<h3 class="b4-hl">${q.letter}</h3>`; last = q.letter; }
       html += `<div class="b4-hq"><i>${q.n}</i><span>${esc(q.question)}${q.hard ? ` <em>ذهبي</em>` : ""}</span><b>${esc(q.answer)}</b></div>`; });
     document.getElementById("b4list").innerHTML = html || `<p class="sj-sub">لا توجد نتائج.</p>`; };
-  draw();
+  draw(); b4HostCur();
   document.getElementById("b4find").oninput = draw;
   document.getElementById("b4Print").onclick = () => window.print();
   document.getElementById("b4Back").onclick = () => nav("b4game");
 }
-window.addEventListener("storage", e => { if (e.key === "b4-cur" && location.hash === "#b4host") b4Host(); });
+function b4HostCur(){
+  const el = document.getElementById("b4cur"); if (!el) return;
+  const code = b4HostCode(), cur = code ? (b4Remote ? b4Remote.cur : null) : store.get("b4-cur", null);
+  el.innerHTML = cur ? `<small>السؤال المعروض الآن · رقم ${cur.n} · حرف ${esc(cur.letter)} · اختاره ${esc(cur.team)}${code ? ` · مسابقة ${code}` : ""}</small><p>${esc(cur.question)}</p><b>${esc(cur.answer)}</b>`
+    : `<small>${code ? (b4Remote ? `متصل بالمسابقة ${code}. لا يوجد سؤال معروض الآن.` : `جارٍ الاتصال بالمسابقة ${code}…`) : "لا يوجد سؤال معروض الآن على هذا الجهاز. لعرضه على جوال آخر اضغط «ورقة الملقي» في شاشة المسابقة وامسح الرمز."}</small>`;
+}
+window.addEventListener("storage", e => { if (e.key === "b4-cur" && location.hash === "#b4host") b4HostCur(); });
 
 /* ================= Contest: ٦×٦ =================
    Each team uploads photos of tools or objects; the next team guesses them.
