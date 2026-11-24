@@ -480,6 +480,16 @@ footer a,.flink{color:var(--blue-link);text-decoration:none}
 .b4-host{max-width:900px;margin:0 auto}
 .b4-cur{background:color-mix(in srgb,var(--blue) 8%,var(--tile));border-radius:var(--r);padding:16px 18px;margin-bottom:14px;display:grid;gap:6px}
 .b4-cur small{color:var(--muted)}
+.join-how{text-align:start}.join-how h1,.join-how .eyebrow,.join-tag,.join-ic{text-align:center}
+.join-ic{width:72px;height:72px;margin:6px auto 4px;border-radius:22px;display:grid;place-items:center;background:color-mix(in srgb,var(--blue) 12%,var(--tile));color:var(--blue)}.join-ic svg{width:38px;height:38px}
+.join-tag{color:var(--red2);font-weight:600;margin:-4px 0 10px}
+.join-h{font-size:22px;margin:22px 0 10px}
+.join-steps{counter-reset:js;list-style:none;padding:0;margin:0 0 16px;display:grid;gap:10px}
+.join-steps li{counter-increment:js;position:relative;background:var(--tile);border-radius:var(--r);padding:14px 16px 14px 16px;padding-inline-start:56px;line-height:1.7;font-size:17px;box-shadow:var(--shadow)}
+.join-steps li::before{content:counter(js);position:absolute;inset-inline-start:14px;top:14px;width:30px;height:30px;border-radius:50%;background:var(--blue);color:var(--on-blue,#fff);display:grid;place-items:center;font-weight:700;font-size:15px}
+.join-note{background:color-mix(in srgb,var(--red2) 8%,var(--tile));border-radius:var(--r);padding:12px 16px;color:var(--ink);font-size:15px;margin-bottom:20px}
+.join-how .btn.lg{width:100%}
+.join-list{margin-top:26px;display:grid;gap:8px;text-align:start}.join-list small{color:var(--muted)}.join-list div{display:flex;justify-content:space-between;gap:10px;background:var(--tile);border-radius:12px;padding:10px 14px}.join-list span{color:var(--muted);font-size:14px}
 .tk-who{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}.tk-who span{font-size:12px;background:color-mix(in srgb,var(--tc) 12%,var(--tile));color:var(--ink);border-radius:999px;padding:2px 8px}
 .tk-name-in{letter-spacing:normal!important;font-size:22px!important;text-align:center}.tk-me-name{font-weight:600;color:var(--ink)}
 .b4-pair{max-width:420px;text-align:center}.b4-pair p{color:var(--muted);margin:6px 0 12px}
@@ -3877,6 +3887,7 @@ function route(){
   if (h === "admin"){ game = null; renderLinks("admin"); return admin(); }
   if (h === "accounts"){ game = null; renderLinks("accounts"); return acAdmin(); }
   if (!acHas() && /^(sj|sjgame|b4|b4game|b4host|ss|ssgame|tk|tkplay|er|erhost|erplay|em|emplay)$/.test(h)){ game = null; renderLinks(""); return acGate(); }
+  if (h.startsWith("join")){ game = null; renderLinks(""); return joinPage(); }
   if (h === "em" || h === "emplay" || h.startsWith("emjoin")){ game = null; renderLinks("");
     if (h.startsWith("emjoin")) return emJoin();
     return h === "emplay" && EM ? emRender() : emSetup(); }
@@ -5491,7 +5502,7 @@ function tkFinal(){
 /* ---------- players: room code / QR, then a team-only page ---------- */
 const TK_ART = "https://claude.ai/artifact/P977CPGoxR6XahES6ShSQ8";
 const tkNewCode = () => String(100000 + Math.floor(Math.random() * 900000));
-const tkLink = code => (window.claude && window.claude.use ? TK_ART : location.href.split("#")[0]) + "#tkjoin=" + code;
+const tkLink = code => (window.claude && window.claude.use ? TK_ART : location.href.split("#")[0]) + "#join=" + code;
 function tkQR(text){
   try { const q = qrcode(0, "M"); q.addData(text); q.make();
     return q.createSvgTag({cellSize:4, margin:2, scalable:true}).replace(/fill="black"/g, 'fill="#1E2F4D"').replace(/fill="white"/g, 'fill="#FFFFFF"'); }
@@ -5628,6 +5639,85 @@ async function tkJoin(){
         draw(); return; }
       if (!(tkMe.win && Date.now() < tkMe.end)) draw(); }, () => {});
     if (tkMe.team != null && tkMe.code) send({tk:{team:tkMe.team, win:null, taps:0}});
+  }
+  draw();
+}
+
+/* ---------- players' entry page (#join): one public link for every phone contest ----------
+   The player types or scans the room code; the page recognises which contest owns it from the
+   host's live broadcast, explains that contest clearly, and only then sends the player in. */
+const JOIN_INFO = {
+  tk: { name:"تكبيس", go:"tkjoin", icon:"tkphone", tag:"سرعة وكبس ومعلومات",
+    lead:"كل فريق يكبس على جوالاته بأسرع ما يقدر، ومجموع الكبسات يصير قيمة السؤال اللي يجاوب عليه.",
+    steps:["اكتب اسمك ثم اختر فريقك. <b>الفريق ما يتغير بعد الاختيار</b>، فاختر صح.",
+      "لما يجي دور فريقك يتحول جوالك لزر كبير. <b>اكبس بأسرع ما تقدر</b> حتى ينتهي العداد.",
+      "كبسات كل أفراد الفريق تنجمع وتصير قيمة السؤال اللي يظهر على الشاشة الكبيرة.",
+      "<b>الإجابة الصحيحة تضيف</b> النقاط لفريقك، و<b>الخاطئة تخصمها</b> منه.",
+      "في نهاية كل جولة تكبس كل الفرق مع بعض، والأكثر كبسًا ياخذ السؤال الأخير."],
+    note:"عدد الجوالات المحسوبة لكل فريق يحدده المقدّم. إذا اكتمل العدد، يبقى جوالك متابعًا وكبساته ما تنحسب." },
+  er: { name:"غرفة الهروب", go:"erjoin", icon:"erdoor", tag:"ألغاز وتعاون وسباق مع الوقت",
+    lead:"فريقكم محبوس في غرفة قصة، وما تطلعون إلا إذا حليتوا ألغازها واكتشفتوا رمز الصندوق.",
+    steps:["اختر فريقك من القائمة.",
+      "تمشي داخل الغرفة على جوالك، وتلمس الأغراض المضيئة عشان تفتح ألغازها.",
+      "كل لغز تحله يعطيك رقمًا أو أداة. <b>تعاونوا</b> وتكلموا مع بعض، لأن الألغاز مقسومة بينكم.",
+      "اجمعوا الأرقام لرمز الصندوق (٦ أرقام) وافتحوه عشان تنتقلون للغرفة اللي بعدها.",
+      "<b>الإجابة الخاطئة تخصم من وقتكم</b> وتقفل اللغز لحظات، والتلميح له ثمن من الوقت. والفائز أسرع فريق يطلع."],
+    note:"ثلاث غرف بالترتيب من الأسهل للأصعب. الوقت يظهر فوق الشاشة دائمًا." },
+  em: { name:"إعمار", go:"emjoin", icon:"emcity", tag:"بناء مدن وتحديات وتجارة",
+    lead:"كل فريق يبني مدينته، والموارد تجي من تحديات قصيرة تحلونها على جوالاتكم.",
+    steps:["اختر مدينتك (فريقك) من القائمة.",
+      "في <b>وقت العمل</b> اختر تحديًا قصيرًا على جوالك (أنابيب، دوائر، تسلسل، بلاط). كل تحدي تنجح فيه يعطي مدينتك موارد.",
+      "في <b>وقت البناء</b> يبني قائد الفريق على الخريطة. مكان المبنى مهم: المصنع جنب البيوت يزعّل السكان، والحديقة تفرّحهم.",
+      "بعدها تدور <b>عجلة الأحداث</b>: أزمات مثل الجفاف والزلزال، أو أحداث حلوة. المدن المحمية تنجو، والباقي يلعب تحدي إنقاذ.",
+      "تقدرون تتاجرون بالموارد مع المدن الثانية. يفوز صاحب أكثر مدينة ازدهارًا في النهاية."],
+    note:"كل مدينة تبدأ بأرض مختلفة (ساحلية، جبلية، صحراوية…)، فالتجارة مهمة." }
+};
+let joinMe = { typed:"", tried:false, seen:{}, at:0 };
+const joinHashCode = () => { const m = decodeURIComponent(location.hash).match(/^#join\D?(\d{6})/); return m ? m[1] : ""; };
+async function joinPage(){
+  tkStop(); await tkRoom();
+  const hc = joinHashCode(); if (hc){ joinMe.typed = hc; joinMe.tried = true; joinMe.at = Date.now(); setTimeout(() => { if (joinMe.typed === hc && !joinMe.seen[hc] && joinPage.draw) joinPage.draw(); }, 6200); }
+  const draw = () => {
+    if (!location.hash.startsWith("#join")) return;
+    if (!ROOM){ $app.innerHTML = `<section class="section gut view"><div class="wrap sheet tk-join"><h1>دخول اللاعبين</h1><p class="lead">تعذّر الاتصال بالخادم. تأكد من الإنترنت ثم حدّث الصفحة.</p></div></section>`; return; }
+    const code = joinMe.typed, kind = joinMe.tried && code.length === 6 ? joinMe.seen[code] : "";
+    if (kind){
+      const J = JOIN_INFO[kind];
+      $app.innerHTML = `<section class="section gut view"><div class="wrap sheet tk-join join-how">
+        <p class="eyebrow">وجدنا الغرفة ${tkCodeHTML(code)}</p>
+        <div class="join-ic">${I(P[J.icon] || P.tkphone)}</div><h1>${J.name}</h1><p class="join-tag">${J.tag}</p>
+        <p class="lead">${J.lead}</p>
+        <h2 class="join-h">كيف تلعب؟</h2>
+        <ol class="join-steps">${J.steps.map(x => `<li>${x}</li>`).join("")}</ol>
+        <p class="join-note">${J.note}</p>
+        <button type="button" class="btn lg" id="joinGo">فهمت، ادخل المسابقة</button>
+        <button type="button" class="mini" id="joinBack" style="margin-top:12px">رمز آخر</button></div></section>`;
+      document.getElementById("joinGo").onclick = () => { location.hash = "#" + J.go + "=" + code; };
+      document.getElementById("joinBack").onclick = () => { joinMe.typed = ""; joinMe.tried = false; history.replaceState(null, "", "#join"); draw(); };
+      window.scrollTo({top:0}); return; }
+    const waiting = joinMe.tried && code.length === 6, late = waiting && Date.now() - joinMe.at > 6000;
+    $app.innerHTML = `<section class="section gut view"><div class="wrap sheet tk-join">
+      <p class="eyebrow">تنافس · صفحة اللاعبين</p><h1>ادخل المسابقة</h1>
+      <p class="lead">امسح الباركود الظاهر على شاشة المقدّم، أو اكتب رمز الغرفة (٦ أرقام). ما تحتاج حساب ولا تسجيل دخول.</p>
+      <button type="button" class="btn lg tk-scan" id="joinScan">${I(P.tkcam)} مسح الباركود</button>
+      <div class="tk-or"><span>أو</span></div>
+      <form class="tk-form" id="joinForm"><input id="joinIn" class="tk-in" dir="ltr" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" maxlength="6" placeholder="••••••" value="${esc(code)}" aria-label="رمز الغرفة">
+        <button type="submit" class="btn lg">التالي</button></form>
+      ${late ? `<p class="ss-warn">ما لقينا غرفة مفتوحة بهذا الرمز. تأكد منه من شاشة المقدّم، وتأكد إن المقدّم فتح الغرفة.</p>` : waiting ? `<p class="sj-sub">جاري البحث عن الغرفة…</p>` : ""}
+      <div class="join-list"><small>المسابقات اللي تُلعب بالجوال</small>${Object.values(JOIN_INFO).map(J => `<div><b>${J.name}</b><span>${J.tag}</span></div>`).join("")}</div>
+    </div></section>`;
+    const inp = document.getElementById("joinIn");
+    const tryCode = v => { joinMe.typed = v; joinMe.tried = true; joinMe.at = Date.now(); draw(); setTimeout(() => { if (joinMe.typed === v && !joinMe.seen[v]) draw(); }, 6200); };
+    inp.oninput = () => { const v = inp.value.replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/\D/g, "").slice(0, 6); if (v !== inp.value) inp.value = v; joinMe.typed = v; joinMe.tried = false; if (v.length === 6) tryCode(v); };
+    document.getElementById("joinForm").onsubmit = e => { e.preventDefault(); if (inp.value.length === 6) tryCode(inp.value); };
+    document.getElementById("joinScan").onclick = () => tkScan(c => tryCode(String(c).replace(/\D/g, "").slice(-6)));
+    if (!code) setTimeout(() => { try { inp.focus({preventScroll:true}); } catch(e){} }, 50);
+  };
+  joinPage.draw = draw;
+  if (ROOM && !joinPage.wired){ joinPage.wired = true;
+    const saw = kind => m => { const s = m.data || {}; if (!s.code) return; const fresh = joinMe.seen[s.code] !== kind; joinMe.seen[s.code] = kind;
+      if (fresh && joinMe.tried && joinMe.typed === s.code && location.hash.startsWith("#join")) draw(); };
+    ROOM.on("tk.state", saw("tk"), () => {}); ROOM.on("er.state", saw("er"), () => {}); ROOM.on("em.g", saw("em"), () => {});
   }
   draw();
 }
@@ -6829,7 +6919,7 @@ async function erHost(){
   await tkRoom(); const H = ERH;
   const draw = () => {
     if (location.hash !== "#erhost") return erHostStop();
-    const {by, devs} = erHostTeams(), now = Date.now(), link = (window.claude && window.claude.use ? TK_ART : location.href.split("#")[0]) + "#erjoin=" + H.code;
+    const {by, devs} = erHostTeams(), now = Date.now(), link = (window.claude && window.claude.use ? TK_ART : location.href.split("#")[0]) + "#join=" + H.code;
     const set = (id, html) => { const el = document.getElementById(id); if (el && el.dataset.h !== html){ el.dataset.h = html; el.innerHTML = html; } };
     if (H.phase === "lobby"){
       const teams = H.names.map((t, i) => `<div class="er-tcard" style="--tc:${ER_COL[i]}"><b>${esc(t)}</b><span>${n(devs[i])} / ${n(H.dev)} أجهزة</span><div class="er-pips">${Array.from({length:H.dev}, (_, k) => `<i class="${k < devs[i] ? "on" : ""}"></i>`).join("")}</div></div>`).join("");
@@ -7686,7 +7776,7 @@ function emMemory(el, L, fin, cur){
 }
 
 /* ---------- players: room code / QR, then the team console ---------- */
-const emLink = code => (window.claude && window.claude.use ? TK_ART : location.href.split("#")[0]) + "#emjoin=" + code;
+const emLink = code => (window.claude && window.claude.use ? TK_ART : location.href.split("#")[0]) + "#join=" + code;
 const emHashCode = () => { const m = decodeURIComponent(location.hash).match(/^#emjoin\D?(\d{6})/); return m ? m[1] : ""; };
 let emMe = {code: store.get("em-code", ""), team: store.get("em-team", null), g:null, tv:null, acts:[], seq:Date.now() % 1e9, typed:"", tried:false, recvAt:0, key:"", clk:null};
 function emAct(a){

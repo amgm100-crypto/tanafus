@@ -3,7 +3,7 @@
 
   python3 build.py <supabase_url> <publishable_key> [out_dir]
 
-Reads ../src/index.html, applies the hosting patches, inlines tn-backend.js and writes
+Reads ../index.html, applies the hosting patches, inlines tn-backend.js and writes
 <out_dir>/index.html (default ./dist). Every patch must match exactly once, so the
 build fails loudly if index.html changed under it.
 """
@@ -66,6 +66,11 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     (out / "index.html").write_text(html, encoding="utf-8")
     (out / SUPABASE_JS).write_bytes((HERE / "vendor" / SUPABASE_JS).read_bytes())
+    # short public link for players: <site>/join/ -> <site>/#join
+    (out / "join").mkdir(exist_ok=True)
+    (out / "join" / "index.html").write_text('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+        '<title>تنافس · دخول اللاعبين</title><script>location.replace("../#join" + (location.hash ? "=" + location.hash.replace(/\\D/g, "") : ""))</script>'
+        '<a href="../#join">دخول اللاعبين</a>', encoding="utf-8")
     for extra in ("_headers",):
         p = HERE / extra
         if p.exists():
