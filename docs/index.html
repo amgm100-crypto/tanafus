@@ -1315,6 +1315,125 @@ html[data-orole=host][data-orient=port][data-omis] #app{max-width:max(420px,calc
 .ori-hint.bar .mini{background:color-mix(in srgb,var(--bg) 18%,transparent);color:var(--bg)}
 @media (prefers-reduced-motion:reduce){.ori-dev{animation:none}}
 /*DISP-CSS-END*/
+/*MF-CSS-START*/
+/* حقل الألغام */
+.mf-pts{grid-template-columns:repeat(4,minmax(0,1fr))}
+.mf-pts .bad b{color:var(--bad)}
+.mf-tools{grid-template-columns:repeat(3,minmax(0,1fr))}
+.mf-hand{display:grid;gap:22px;justify-items:center;padding-top:18px}
+.mf-steps{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.mf-steps span{background:var(--tile);border-radius:980px;padding:4px 12px;font-size:14px;color:var(--muted);border-inline-start:4px solid var(--tc)}
+.mf-steps span.now{color:var(--ink);font-weight:600;box-shadow:inset 0 0 0 2px var(--tc)}
+.mf-steps span.done{color:var(--good)}
+.mf-handcard{background:var(--tile);border-radius:28px;padding:clamp(28px,6vw,56px) clamp(20px,5vw,56px);display:grid;gap:12px;justify-items:center;text-align:center;max-width:640px;width:100%;box-shadow:var(--shadow);border-top:8px solid var(--tc,var(--blue))}
+.mf-handcard.ready{--tc:var(--good)}
+.mf-handcard h1{margin:0;font-size:clamp(34px,6vw,58px);line-height:1.1;color:var(--tc)}
+.mf-handcard small{color:var(--muted);font-size:15px}
+.mf-handcard p{margin:0 0 8px;font-size:clamp(17px,2.4vw,21px);line-height:1.6}
+.mf-hand-ic{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--tc,var(--blue)) 14%,var(--tile));color:var(--tc,var(--blue))}
+.mf-hand-ic .mf-mine{width:52px;height:52px}
+.mf-foot{display:flex;justify-content:center}
+.mf-count{font-size:18px;font-weight:600;color:var(--tc)}
+.mf-count small{color:var(--muted);font-weight:400;font-size:14px}
+.mf-count.ok{color:var(--good)}
+.mf-tip{text-align:center;color:var(--muted);margin:10px 0 14px;font-size:15px}
+.mf-actions{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:18px}
+.mf-center{display:grid;justify-items:center;min-width:0}
+.mf-board{display:grid;grid-template-columns:repeat(var(--c),minmax(0,1fr));gap:clamp(5px,1vw,10px);width:min(100%,calc((100vh - 250px) * var(--c) / var(--r)));min-width:min(100%,300px)}
+.mf-cell{aspect-ratio:1;border:0;border-radius:clamp(8px,1.4vw,16px);background:var(--blue);color:var(--on-blue);display:grid;place-items:center;position:relative;font-variant-numeric:tabular-nums;padding:0;overflow:hidden;
+  box-shadow:inset 0 -4px 0 color-mix(in srgb,#14213A 22%,transparent);transition:transform .15s,filter .15s}
+button.mf-cell{cursor:pointer}
+button.mf-cell:hover:not([disabled]){filter:brightness(1.1);transform:translateY(-2px)}
+.mf-n{font-size:clamp(14px,2.4vw,26px);font-weight:700;opacity:.9}
+.mf-mine{width:58%;height:58%}
+.mf-planting .mf-cell{background:var(--tile);color:var(--muted);box-shadow:inset 0 0 0 2px var(--hair)}
+.mf-planting .mf-cell.planted{background:color-mix(in srgb,var(--tc) 16%,var(--tile));color:var(--tc);box-shadow:inset 0 0 0 3px var(--tc);animation:mfPop .25s ease-out}
+.mf-cell.open{background:var(--tile);color:var(--ink);box-shadow:inset 0 0 0 2px var(--hair)}
+.mf-cell.open b{font-size:clamp(20px,3.6vw,40px);font-weight:800}
+.mf-cell.open .mf-by{position:absolute;bottom:6px;inset-inline-start:6px;width:9px;height:9px;border-radius:50%;background:var(--tc)}
+.mf-cell.n1 b{color:var(--c1)}.mf-cell.n2 b{color:var(--c2)}.mf-cell.n3 b{color:var(--c5)}.mf-cell.n4 b{color:var(--c4)}.mf-cell.n5 b,.mf-cell.n6 b,.mf-cell.n7 b,.mf-cell.n8 b{color:var(--c3)}
+.mf-cell.boom{background:radial-gradient(circle at 50% 50%,#FFB340 0 22%,#FF6B3D 45%,#D30F45 100%);color:#1E2F4D}
+.mf-cell.boom.fresh{animation:mfShake .5s ease-out}
+.mf-cell.hidden-mine{background:color-mix(in srgb,var(--bad) 14%,var(--tile));color:var(--bad);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--bad) 40%,transparent)}
+.mf-cell.shut{background:color-mix(in srgb,var(--blue) 22%,var(--tile));color:var(--muted)}
+.mf-dots{position:absolute;bottom:5px;inset-inline:0;display:flex;justify-content:center;gap:3px}
+.mf-dots i{width:10px;height:10px;border-radius:50%;background:var(--tc);box-shadow:0 0 0 2px #fff}
+.mf-cell.det-mine{background:color-mix(in srgb,var(--bad) 70%,var(--blue))}
+.mf-cell.det-safe{background:color-mix(in srgb,var(--good) 60%,var(--blue))}
+.mf-flag{position:absolute;top:4px;inset-inline-end:7px;font-size:clamp(12px,1.8vw,18px);font-weight:700}
+.mf-center.detecting button.mf-cell{outline:3px dashed color-mix(in srgb,var(--c3) 70%,transparent);outline-offset:-5px}
+.mf-tbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.mf-tbar .mini.on{background:var(--c3);color:#fff;border-color:var(--c3)}
+.mf-tbar .mini[disabled]{opacity:.45}
+.mf-clock,.mf-qt{background:var(--tile);border-radius:980px;padding:5px 14px;font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;box-shadow:var(--shadow);min-width:64px;text-align:center}
+.mf-clock.out,.mf-qt.low{color:var(--bad)}
+.mf-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,280px);gap:18px;margin-top:16px;align-items:start}
+.mf-teams{display:grid;gap:10px}
+.mf-team{background:var(--tile);border-radius:16px;padding:10px 14px;display:grid;border-inline-start:6px solid var(--tc);box-shadow:var(--shadow)}
+.mf-team.now{box-shadow:inset 0 0 0 2px var(--tc),var(--shadow)}
+.mf-team small{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mf-team b{font-size:clamp(24px,3vw,32px);font-weight:700;color:var(--tc);font-variant-numeric:tabular-nums;line-height:1.2}
+.mf-tl{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.mf-tl .mf-mine{width:14px;height:14px}
+.mf-tl span{background:var(--bg-alt);border-radius:980px;padding:1px 8px;color:var(--ink)}
+.mf-tl span.used{opacity:.45;text-decoration:line-through}
+.mf-qwrap{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:18px;margin-top:16px;align-items:start}
+.mf-mini .mf-board{width:100%;min-width:0;gap:4px}
+.mf-mini .mf-cell{border-radius:6px;box-shadow:none}
+.mf-mini .mf-n{font-size:11px}
+.mf-mini .mf-cell.open b{font-size:14px}
+.mf-mini .mf-dots i{width:6px;height:6px;box-shadow:none}
+.mf-mini .mf-cell.sel{background:var(--c3);outline:3px solid var(--c3);outline-offset:2px;animation:mfPulse 1.2s ease-in-out infinite}
+.mf-mini button.mf-cell[disabled]{cursor:default;opacity:1}
+.mf-judge{display:flex;gap:10px;flex-wrap:wrap}
+.count.ok{color:var(--good);font-weight:700;font-size:20px}
+.count.no{color:var(--bad);font-weight:700;font-size:20px}
+.mf-pop{position:fixed;inset:0;z-index:200;background:var(--scrim);display:grid;place-items:center;padding:20px;animation:mfFade .2s ease-out}
+.mf-popcard{background:var(--tile);border-radius:28px;padding:clamp(26px,5vw,48px);max-width:560px;width:100%;display:grid;gap:10px;justify-items:center;text-align:center;box-shadow:0 20px 60px rgba(20,33,58,.35);animation:mfPop .35s cubic-bezier(.2,1.4,.4,1)}
+.mf-popcard h2{margin:0;font-size:clamp(30px,5vw,46px);font-weight:800}
+.mf-popcard p{margin:0;font-size:clamp(17px,2.4vw,21px);line-height:1.55}
+.mf-popcard .btn{margin-top:10px}
+.mf-popcard.safe h2{color:var(--good)}
+.mf-popcard.boom h2{color:var(--bad)}
+.mf-popcard.wrong h2{color:var(--muted)}
+.mf-popcard.det.mine h2{color:var(--c3)}
+.mf-popcard.det.safe h2{color:var(--good)}
+.mf-delta{font-size:clamp(18px,2.6vw,24px)!important;font-weight:600}
+.mf-delta .bad{color:var(--bad)}
+.mf-big{width:110px;height:110px;border-radius:50%;display:grid;place-items:center;font-size:62px;font-weight:800;background:var(--bg-alt)}
+.mf-big.x{color:var(--muted)}
+.mf-big.n1{color:var(--c1)}.mf-big.n2{color:var(--c2)}.mf-big.n3{color:var(--c5)}.mf-big.n4{color:var(--c4)}.mf-big.n0{color:var(--muted)}
+.mf-popcard.det .mf-big{color:inherit}
+.mf-popcard.det.mine .mf-big{color:var(--c3)}.mf-popcard.det.safe .mf-big{color:var(--good)}
+.mf-burst{width:140px;height:140px;border-radius:50%;display:grid;place-items:center;color:#1E2F4D;
+  background:radial-gradient(circle,#FFE08A 0 18%,#FFB340 32%,#FF6B3D 55%,#D30F45 72%,transparent 74%);animation:mfBurst .7s cubic-bezier(.2,1.6,.4,1)}
+.mf-burst .mf-mine{width:64px;height:64px}
+.mf-done .mf-rh{font-size:26px;margin:40px 0 4px}
+.mf-rsub{font-size:15px!important;margin-bottom:16px!important}
+.mf-reveal .mf-board{width:min(100%,560px)}
+.mf-legend{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px;font-size:15px}
+.mf-legend span{display:inline-flex;align-items:center;gap:6px}
+.mf-legend i{width:12px;height:12px;border-radius:50%;background:var(--tc)}
+.mf-bonus{font-style:normal;font-size:13px;background:color-mix(in srgb,var(--c3) 15%,transparent);color:var(--c3);border-radius:980px;padding:2px 10px;font-weight:600;white-space:nowrap}
+@keyframes mfPop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+@keyframes mfFade{from{opacity:0}to{opacity:1}}
+@keyframes mfBurst{0%{transform:scale(.2)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes mfShake{0%,100%{transform:none}20%{transform:translate(-4px,2px) rotate(-4deg)}40%{transform:translate(4px,-2px) rotate(4deg)}60%{transform:translate(-3px,1px)}80%{transform:translate(2px,-1px)}}
+@keyframes mfPulse{50%{filter:brightness(1.25)}}
+@media (prefers-reduced-motion:reduce){.mf-cell,.mf-popcard,.mf-burst,.mf-pop,.mf-mini .mf-cell.sel{animation:none!important}}
+@media (max-width:900px){.mf-main,.mf-qwrap{grid-template-columns:1fr}.mf-teams{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.mf-mini{max-width:260px;margin-inline:auto;width:100%}}
+@media (max-width:620px){.mf-pts,.mf-tools{grid-template-columns:1fr 1fr}}
+/* host portrait: board on top, teams in a grid underneath */
+html[data-orole=host][data-orient=port] .mf-main,html[data-orole=host][data-orient=port] .mf-qwrap{grid-template-columns:1fr}
+html[data-orole=host][data-orient=port] .mf-teams{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+html[data-orole=host][data-orient=port] .mf-board{width:100%}
+html[data-orole=host][data-orient=port] .mf-mini{max-width:300px;margin-inline:auto;width:100%}
+@media (orientation:portrait) and (min-width:700px){
+  html[data-orole=host][data-orient=land] .mf-main{grid-template-columns:minmax(0,1fr) minmax(200px,250px)}
+}
+.mf-done .mf-mine{width:58%;height:58%;margin:0;color:inherit}
+.mf-done svg.mf-mine{color:inherit}
+/*MF-CSS-END*/
 </style>
 
 <div dir="rtl" lang="ar">
@@ -3582,6 +3701,7 @@ const P = {
   four:`<rect x="3.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.8"/><path d="M15.5 17l1.5 1.5 2.5-3"/>`,
   five:`<path d="M12 3l8.5 6.2-3.2 10H6.7L3.5 9.2z"/><circle cx="12" cy="12" r="1.2"/><circle cx="12" cy="7" r=".9"/><circle cx="16.3" cy="10.3" r=".9"/><circle cx="7.7" cy="10.3" r=".9"/><circle cx="14.6" cy="15.6" r=".9"/><circle cx="9.4" cy="15.6" r=".9"/>`,
   six:`<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/><text x="12" y="14.2" text-anchor="middle" font-size="6" fill="currentColor" stroke="none" font-family="-apple-system,'IBM Plex Sans Arabic',sans-serif">6</text>`,
+  mine:`<circle cx="12" cy="13" r="6.5"/><path d="M12 3.5v3M12 19.5v1.5M2.5 13H5M19 13h2.5M5.3 6.3l1.8 1.8M16.9 17.9l1.6 1.6M5.3 19.7l1.8-1.8M16.9 8.1l1.8-1.8"/><path d="M9.5 11a2.5 2.5 0 0 1 2.5-2"/>`,
   plus:`<rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke-dasharray="3 3"/><path d="M12 8.5v7M8.5 12h7"/>`,
   sj:`<path d="M3.5 6a2.5 2.5 0 0 1 2.5-2.5h5A2.5 2.5 0 0 1 13.5 6v4a2.5 2.5 0 0 1-2.5 2.5H8l-3 2.5v-2.8A2.5 2.5 0 0 1 3.5 10z"/><path d="M15.5 9.5H18a2.5 2.5 0 0 1 2.5 2.5v4a2.5 2.5 0 0 1-1.5 2.3V21l-3-2.5h-3a2.5 2.5 0 0 1-2.5-2.5v-1"/><text x="8.5" y="10.4" text-anchor="middle" font-size="6.5" fill="currentColor" stroke="none" font-family="-apple-system,'IBM Plex Sans Arabic',sans-serif">س</text><text x="16" y="16.6" text-anchor="middle" font-size="6.5" fill="currentColor" stroke="none" font-family="-apple-system,'IBM Plex Sans Arabic',sans-serif">ج</text>`,
   sjcard:`<rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M12 8.5l1.1 2.3 2.4.3-1.8 1.6.5 2.4-2.2-1.2-2.2 1.2.5-2.4-1.8-1.6 2.4-.3z"/>`,
@@ -3943,7 +4063,7 @@ window.addEventListener("hashchange", () => { if (game && !location.hash.startsW
    The host screen sets html[data-orient][data-orole=host]. Contests with phones (tk, er, em) send
    the players' choice in their room broadcast as `orient`, and each phone applies it. */
 const DISP_DEV = {tk:1, er:1, em:1};
-const DISP_HOST = {sjgame:"sj", b4game:"b4", ssgame:"ss", tkplay:"tk", erhost:"er", emplay:"em"};
+const DISP_HOST = {mfplay:"mf", sjgame:"sj", b4game:"b4", ssgame:"ss", tkplay:"tk", erhost:"er", emplay:"em"};
 const dispRecv = {};
 const dispGet = k => { const d = store.get("disp-" + k, {}) || {}; return {host: d.host === "port" ? "port" : "land", player: d.player === "land" ? "land" : "port"}; };
 function dispSet(k, side, v){ const d = dispGet(k); d[side] = v === "port" ? "port" : "land"; store.set("disp-" + k, d); }
@@ -4012,12 +4132,13 @@ function route(){
   dispRoute(h);
   if (!h.startsWith("tk")) tkStop();
   if (!h.startsWith("em")) emStop();
+  if (!h.startsWith("mf")) mfStop();
   if (!h.startsWith("tkjoin")) tkCamStop();
   if (!/^er(play|join)/.test(h)) erStop();
   if (h !== "erhost") erHostStop();
   if (h === "admin"){ game = null; renderLinks("admin"); return admin(); }
   if (h === "accounts"){ game = null; renderLinks("accounts"); return acAdmin(); }
-  if (!acHas() && /^(sj|sjgame|b4|b4game|b4host|ss|ssgame|tk|tkplay|er|erhost|erplay|em|emplay)$/.test(h)){ game = null; renderLinks(""); return acGate(); }
+  if (!acHas() && /^(sj|sjgame|b4|b4game|b4host|ss|ssgame|tk|tkplay|er|erhost|erplay|em|emplay|mf|mfplay)$/.test(h)){ game = null; renderLinks(""); return acGate(); }
   if (h.startsWith("join")){ game = null; renderLinks(""); return joinPage(); }
   if (h === "em" || h === "emplay" || h.startsWith("emjoin")){ game = null; renderLinks("");
     if (h.startsWith("emjoin")) return emJoin();
@@ -4031,6 +4152,9 @@ function route(){
     if (h === "erhost") return erHost();
     if (h === "erplay") return erPractice();
     return erSetup(); }
+  if (h === "mf" || h === "mfplay"){ game = null; renderLinks("");
+    if (!BANK.length){ $app.innerHTML = `<div class="empty gut">لا توجد أسئلة بعد.</div>`; return; }
+    return h === "mfplay" && MF ? mfRender() : mfSetup(); }
   if (h === "ss" || h === "ssgame"){ game = null; renderLinks("");
     return h === "ssgame" && SS ? ssRender() : ssSetup(); }
   if (h === "b4" || h === "b4game" || h.startsWith("b4host")){ game = null; renderLinks("");
@@ -4082,6 +4206,7 @@ const CONTESTS = [
   {name:"غرفة الهروب", icon:"erdoor", go:"er", desc:"غرفة مجسّمة يمشي فيها الفريق ويحل الألغاز ليفتح الصندوق", how:"ثلاث غرف وثلاث قصص. يتجوّل الفريق في الغرفة ويحل ألغاز المنطق والشيفرات ليجمع رمز الصندوق السداسي قبل انتهاء الوقت.", meta:"٢–١٠ فرق · ٥–١٠ لاعبين"},
   {name:"تكبيس", icon:"tkphone", go:"tk", desc:"أسرع فريق يكبس من جواله يكسب السؤال", how:"اللاعبون يكبسون من جوالاتهم خلال ثوانٍ، وعدد الكبسات قيمة السؤال: الصحيحة تضيفها والخاطئة تخصمها.", meta:"٢–٦ فرق · جوالات"},
   {name:"إعمار", icon:"emcity", go:"em", desc:"كل فريق يبني مدينته وينافس على أزهى مدينة", how:"اللاعبون يحلّون تحديات قصيرة من جوالاتهم ليجمعوا الموارد، ثم يبنون مدينتهم ويتاجرون ويواجهون الأزمات. الأذكى تخطيطًا يبني أزهى مدينة.", meta:"٢–١٠ فرق · جوالات"},
+  {name:"حقل الألغام", icon:"mine", go:"mf", desc:"كل فريق يزرع ألغامه بالسر، ومن يدوس لغمًا ينفجر عليه", how:"كل فريق يزرع ألغامه بالسر في لوحة المربعات، ثم تتناوب الفرق على كشف المربعات بالأسئلة. المربع الآمن يكشف كم لغمًا حوله، واللغم ينفجر على من يدوسه ويكسب صاحبه.", meta:"٢–٨ فرق · شاشة واحدة"},
 ];
 /* ---------- subscriber accounts (organisations) ----------
    Admin (site owner) creates accounts: username, organisation, password, logo, two colours.
@@ -8046,6 +8171,440 @@ async function emInvite(){
 }
 
 /*EM-JS-END*/
+/*MF-JS-START*/
+/* ================= Contest: حقل الألغام =================
+   One shared screen run by the host, no player phones. Before play, each team in
+   turn comes to the host device and secretly plants its mines on the board; the
+   screen hides between teams. A square chosen by two or more teams is a shared
+   mine. Then teams take turns: pick a square, answer a question from the bank.
+   Correct: the square opens. A safe square gives points and shows how many mined
+   squares touch it (minesweeper). A mine explodes on the picker (loss) and every
+   other team that planted it gains; the picker's own mine costs double.
+   Wrong: the square stays covered and the turn passes.
+   Optional tools per team: detector (ask once if a square is mined) and shield
+   (cancels the loss of one explosion). Ends when every safe square is open, the
+   time runs out, or the host ends it. Bonus «أخطر زارع» for the team whose mines
+   caught the most victims. */
+const MF_NAME = "حقل الألغام";
+const MF_PTS = {safe:10, boom:20, own:40, owner:20, bonus:30};
+const MF_SIZES = {"4x5":[5,4], "5x5":[5,5], "6x6":[6,6]};   // [columns, rows]
+const MF_KINDS = [["mcq","اختيار من متعدد"],["tf","صح وخطأ"],["open","سؤال وجواب"]];
+const mfDefName = i => "الفريق " + ["الأول","الثاني","الثالث","الرابع","الخامس","السادس","السابع","الثامن"][i];
+let mfCfg = Object.assign({teams:4, names:Array(8).fill(""), size:"5x5", mines:3, level:"مختلط", kind:"mcq", cats:[], time:30, dur:0, det:true, shield:true, sound:true}, store.get("mf-cfg", {}));
+let MF = store.get("mf-game", null);
+if (MF && !(MF.cells && MF.scores && MF.phase)) MF = null;
+let mfIv = null, mfAC = null;
+const mfSaveCfg = () => store.set("mf-cfg", mfCfg);
+const mfSave = () => store.set("mf-game", MF);
+const mfName = i => (mfCfg.names[i] || "").trim() || mfDefName(i);
+const mfCells = s => { const [c, r] = MF_SIZES[s] || MF_SIZES["5x5"]; return c * r; };
+const mfMaxMines = (teams, size) => Math.max(1, Math.min(5, Math.floor(mfCells(size) / 2 / teams)));
+const mfPoolOf = c => BANK.filter(q => c.cats.includes(q.category) && q.kind === c.kind && (c.level === "مختلط" || q.difficulty === c.level));
+const mfJoin = a => a.length < 2 ? (a[0] || "") : a.slice(0, -1).join("، ") + " و" + a[a.length - 1];
+const mfMinesTxt = k => k === 1 ? "لغم واحد" : k === 2 ? "لغمان" : n(k) + " ألغام";
+
+function mfTidy(){
+  mfCfg.teams = Math.min(8, Math.max(2, +mfCfg.teams || 4));
+  if (!MF_SIZES[mfCfg.size]) mfCfg.size = "5x5";
+  mfCfg.mines = Math.min(mfMaxMines(mfCfg.teams, mfCfg.size), Math.max(1, +mfCfg.mines || 3));
+  if (!["سهل","متوسط","صعب","مختلط"].includes(mfCfg.level)) mfCfg.level = "مختلط";
+  if (!MF_KINDS.some(k => k[0] === mfCfg.kind)) mfCfg.kind = "mcq";
+  const cats = allCats(); mfCfg.cats = (mfCfg.cats || []).filter(c => cats.includes(c));
+  if (![0,15,30,45,60].includes(+mfCfg.time)) mfCfg.time = 30;
+  if (![0,10,15,20,30].includes(+mfCfg.dur)) mfCfg.dur = 0;
+  while (mfCfg.names.length < 8) mfCfg.names.push("");
+}
+function mfMissing(){
+  if (!mfCfg.cats.length) return "اختر مجالًا واحدًا على الأقل للأسئلة";
+  const p = mfPoolOf(mfCfg).length, need = mfCells(mfCfg.size);
+  if (p < need) return `الأسئلة في المجالات المختارة ${n(p)} فقط، وتحتاج اللوحة ${n(need)} على الأقل. أضف مجالات أو غيّر الصعوبة أو النوع`;
+  return "";
+}
+function mfSetup(keepScroll){
+  mfTidy();
+  const y = window.scrollY, cats = allCats(), T = mfCfg.teams, max = mfMaxMines(T, mfCfg.size), cells = mfCells(mfCfg.size);
+  const missing = mfMissing(), cnt = c => BANK.filter(q => q.category === c && q.kind === mfCfg.kind && (mfCfg.level === "مختلط" || q.difficulty === mfCfg.level)).length;
+  const all = cats.length && cats.every(c => mfCfg.cats.includes(c));
+  $app.innerHTML = `<section class="view">
+    <div class="hero gut" style="padding-block:40px 22px"><div class="wrap">
+      <p class="eyebrow">مسابقة</p><h1>${MF_NAME}.</h1>
+      <p>كل فريق يزرع ألغامه بالسر، ثم تتناوب الفرق على كشف المربعات بالأسئلة. انتبه وين تدوس!</p>
+    </div></div>
+    <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
+      ${MF && MF.phase !== "over" ? `<div class="sj-resume"><span>عندك مسابقة جارية (${MF.phase === "plant" ? "مرحلة الزرع" : MF.teams.map((t,i) => esc(t) + " " + n(MF.scores[i])).join(" · ")}).</span><button class="btn" type="button" id="mfResume">متابعة المسابقة</button></div>` : ""}
+      <div class="sj-box"><h3>طريقة اللعب<small>شاشة عرض واحدة، بدون جوالات</small></h3>
+        <ol class="b4-rules">
+          <li><b>الزرع بالسر:</b> يتقدّم كل فريق بدوره إلى جهاز المقدّم، فتظهر له اللوحة كاملة ويختار مربعات ألغامه، ثم تختفي قبل أن يأتي الفريق التالي.</li>
+          <li>إذا اختار فريقان أو أكثر نفس المربع صار <b>لغمًا مشتركًا</b>، وإذا انفجر يأخذ كل أصحابه النقاط.</li>
+          <li><b>اللعب بالدور:</b> الفريق يختار مربعًا، ويجيب عن سؤال من الموسوعة.</li>
+          <li>إذا أجاب صحيحًا انكشف المربع: الآمن يعطيه النقاط ويُظهر كم لغمًا حوله، واللغم ينفجر عليه ويكسب صاحبه. ولغم الفريق نفسه خسارته مضاعفة.</li>
+          <li>إذا أخطأ يبقى المربع مغطّى وينتقل الدور. تنتهي المسابقة بكشف كل المربعات الآمنة أو بانتهاء الوقت.</li>
+        </ol>
+        <div class="b4-pts mf-pts"><span><b>+${MF_PTS.safe}</b>مربع آمن</span><span class="bad"><b>−${MF_PTS.boom}</b>لغم فريق ثاني</span><span class="bad"><b>−${MF_PTS.own}</b>لغم الفريق نفسه</span><span><b>+${MF_PTS.owner}</b>لصاحب اللغم المنفجر</span></div>
+        <p class="sj-sub" style="margin:0">وفي النهاية يأخذ «أخطر زارع» (الفريق الذي أوقعت ألغامه أكثر الفرق) ${n(MF_PTS.bonus)} نقطة إضافية.</p>
+      </div>
+      <div class="sj-box"><h3>الفرق<small>من ٢ إلى ٨</small></h3>
+        ${sjSeg("data-mft", T, [2,3,4,5,6,7,8].map(k => [k, k === 2 ? "فريقان" : n(k)]))}
+        <div class="sj-names">${Array.from({length:T}, (_,i) => `<input type="text" maxlength="24" data-mfn="${i}" style="--tc:var(--c${i+1})" value="${esc(mfCfg.names[i])}" placeholder="${mfDefName(i)}" aria-label="اسم ${mfDefName(i)}">`).join("")}</div>
+      </div>
+      <div class="sj-box sj-two">
+        <div><h4>حجم اللوحة</h4>${sjSeg("data-mfs", mfCfg.size, [["4x5","٥×٤"],["5x5","٥×٥"],["6x6","٦×٦"]])}
+          <p class="sj-sub">${n(cells)} مربعًا مرقّمة.</p></div>
+        <div><h4>ألغام كل فريق</h4><div class="seg" role="radiogroup">${[1,2,3,4,5].map(k => `<button type="button" role="radio" data-mfm="${k}" aria-checked="${k === mfCfg.mines}" ${k > max ? "disabled" : ""}>${n(k)}</button>`).join("")}</div>
+          <p class="sj-sub">${max < 5 ? `الحد الأعلى ${n(max)} مع ${n(T)} فرق على هذه اللوحة، حتى تبقى مربعات آمنة كافية.` : "كل فريق يزرع هذا العدد بالضبط."}</p></div>
+      </div>
+      <div class="sj-box sj-two">
+        <div><h4>نوع الأسئلة</h4>${sjSeg("data-mfk", mfCfg.kind, MF_KINDS)}</div>
+        <div><h4>الصعوبة</h4>${sjSeg("data-mfl", mfCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"],["مختلط","مختلط"]])}</div>
+      </div>
+      <div class="sj-box"><h3>مجالات الأسئلة<small>${n(mfCfg.cats.length)} مختارة · ${n(mfPoolOf(mfCfg).length)} سؤالًا</small></h3>
+        <div><button type="button" class="mini" id="mfAll">${all ? "إلغاء الكل" : "تحديد الكل"}</button></div>
+        <div class="sj-cats" style="--tc:var(--blue)">${cats.map((c,i) => { const m = catMeta(c), k = cnt(c), on = mfCfg.cats.includes(c);
+          return `<button type="button" class="sj-cat ${k ? "" : "na"}" data-mfc="${i}" aria-pressed="${on}" ${k ? "" : "disabled"}>${I(P[m.icon] || P.general)}<span><b>${esc(c)}</b><small>${k ? n(k) + " سؤالًا" : "لا توجد أسئلة بهذا النوع"}</small></span></button>`; }).join("")}</div>
+      </div>
+      <div class="sj-box sj-two">
+        <div><h4>وقت الإجابة</h4>${sjSeg("data-mfq", mfCfg.time, [[0,"بدون"],[15,"١٥ث"],[30,"٣٠ث"],[45,"٤٥ث"],[60,"٦٠ث"]])}
+          <p class="sj-sub">عدّاد يظهر مع كل سؤال، والمقدّم يحكم على الإجابة.</p></div>
+        <div><h4>مدة المسابقة</h4>${sjSeg("data-mfd", mfCfg.dur, [[0,"مفتوحة"],[10,"١٠د"],[15,"١٥د"],[20,"٢٠د"],[30,"٣٠د"]])}
+          <p class="sj-sub">${mfCfg.dur ? "عند انتهاء الوقت تنتهي المسابقة بعد السؤال الحالي." : "تنتهي بكشف كل المربعات الآمنة أو بزر الإنهاء."}</p></div>
+      </div>
+      <div class="sj-box"><h3>أدوات خاصة<small>اختيارية، ولكل فريق مرة واحدة</small></h3>
+        <div class="sj-helps mf-tools">
+          <button type="button" class="sj-help" data-mftool="det" aria-pressed="${!!mfCfg.det}"><b>الكاشف</b><small>في دوره يسأل الفريق: هل هذا المربع فيه لغم؟ فتجيب اللوحة، ثم يكمل دوره.</small></button>
+          <button type="button" class="sj-help" data-mftool="shield" aria-pressed="${!!mfCfg.shield}"><b>الدرع</b><small>يحمي الفريق من خسارة أول انفجار يدوسه، ويبقى لصاحب اللغم نقاطه.</small></button>
+          <button type="button" class="sj-help" data-mftool="sound" aria-pressed="${!!mfCfg.sound}"><b>الأصوات</b><small>صوت انفجار للغم ورنّة للمربع الآمن.</small></button>
+        </div>
+      </div>
+      ${dispBox("mf")}
+    </div></div>
+    ${bar(missing ? esc(missing) : `${n(T)} فرق · ${mfMinesTxt(mfCfg.mines)} لكل فريق · ${n(cells)} مربعًا`, "ابدأ زرع الألغام", "mfGo", !!missing, "start")}</section>`;
+  window.scrollTo({top: keepScroll ? y : 0});
+  const re = () => { mfSaveCfg(); mfSetup(true); };
+  $app.querySelectorAll("[data-mft]").forEach(b => b.onclick = () => { mfCfg.teams = +b.dataset.mft; re(); });
+  $app.querySelectorAll("[data-mfs]").forEach(b => b.onclick = () => { mfCfg.size = b.dataset.mfs; re(); });
+  $app.querySelectorAll("[data-mfm]").forEach(b => b.onclick = () => { mfCfg.mines = +b.dataset.mfm; re(); });
+  $app.querySelectorAll("[data-mfk]").forEach(b => b.onclick = () => { mfCfg.kind = b.dataset.mfk; re(); });
+  $app.querySelectorAll("[data-mfl]").forEach(b => b.onclick = () => { mfCfg.level = b.dataset.mfl; re(); });
+  $app.querySelectorAll("[data-mfq]").forEach(b => b.onclick = () => { mfCfg.time = +b.dataset.mfq; re(); });
+  $app.querySelectorAll("[data-mfd]").forEach(b => b.onclick = () => { mfCfg.dur = +b.dataset.mfd; re(); });
+  $app.querySelectorAll("[data-mftool]").forEach(b => b.onclick = () => { const k = b.dataset.mftool; mfCfg[k] = !mfCfg[k]; re(); });
+  $app.querySelectorAll("[data-mfn]").forEach(inp => inp.oninput = () => { mfCfg.names[+inp.dataset.mfn] = inp.value; mfSaveCfg(); });
+  $app.querySelectorAll("[data-mfc]").forEach(b => b.onclick = () => { const c = cats[+b.dataset.mfc], a = mfCfg.cats;
+    if (a.includes(c)) a.splice(a.indexOf(c), 1); else a.push(c); re(); });
+  document.getElementById("mfAll").onclick = () => { mfCfg.cats = all ? [] : cats.filter(c => cnt(c)); re(); };
+  const r = document.getElementById("mfResume"); if (r) r.onclick = () => nav("mfplay");
+  document.getElementById("mfGo").onclick = mfStart;
+}
+function mfStart(){
+  mfTidy(); if (mfMissing()) return mfSetup(true);
+  const [cols, rows] = MF_SIZES[mfCfg.size], T = mfCfg.teams;
+  MF = { teams: Array.from({length:T}, (_,i) => mfName(i)), scores: Array(T).fill(0), cols, rows, cells: cols * rows, per: mfCfg.mines,
+    cfg: {kind:mfCfg.kind, level:mfCfg.level, cats:mfCfg.cats.slice(), time:+mfCfg.time, dur:+mfCfg.dur, det:!!mfCfg.det, shield:!!mfCfg.shield},
+    phase:"plant", plant:{t:0, sel:[], go:false}, mines:{}, open:{}, det:{}, detUsed:Array(T).fill(false), shield:Array(T).fill(!!mfCfg.shield),
+    victims:Array(T).fill(0), turn:0, cur:null, last:null, detMode:false, used:[], end:null, hist:[], played:0, bonus:[] };
+  mfSave(); nav("mfplay");
+}
+function mfRender(){
+  if (!MF) return mfSetup();
+  mfTickStart();
+  if (MF.phase === "plant") return mfPlant();
+  if (MF.phase === "ready") return mfReady();
+  if (MF.phase === "over") return mfResults();
+  return MF.cur ? mfQuestion() : mfBoard();
+}
+
+/* ---------- sound (synthesised, no files) ---------- */
+function mfSound(kind){
+  if (!mfCfg.sound) return;
+  try {
+    mfAC = mfAC || new (window.AudioContext || window.webkitAudioContext)();
+    const ac = mfAC, t = ac.currentTime, out = ac.createGain(); out.connect(ac.destination);
+    if (kind === "boom"){
+      const len = ac.sampleRate * 1.4, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.2);
+      const src = ac.createBufferSource(), lp = ac.createBiquadFilter(); src.buffer = buf; lp.type = "lowpass";
+      lp.frequency.setValueAtTime(1800, t); lp.frequency.exponentialRampToValueAtTime(90, t + 1.2);
+      out.gain.setValueAtTime(0.9, t); out.gain.exponentialRampToValueAtTime(0.001, t + 1.4);
+      src.connect(lp); lp.connect(out); src.start(t);
+      const o = ac.createOscillator(), g = ac.createGain(); o.type = "sine"; o.frequency.setValueAtTime(120, t); o.frequency.exponentialRampToValueAtTime(35, t + .6);
+      g.gain.setValueAtTime(.8, t); g.gain.exponentialRampToValueAtTime(.001, t + .7); o.connect(g); g.connect(ac.destination); o.start(t); o.stop(t + .7);
+      return;
+    }
+    const notes = kind === "safe" ? [[660,0],[990,.12]] : kind === "wrong" ? [[220,0],[165,.18]] : kind === "plant" ? [[440,0]] : kind === "det" ? [[520,0],[520,.16]] : kind === "tick" ? [[880,0]] : [[523,0],[659,.12],[784,.24],[1046,.36]];
+    notes.forEach(([f, d]) => { const o = ac.createOscillator(), g = ac.createGain(); o.type = kind === "wrong" ? "triangle" : "sine"; o.frequency.value = f;
+      const dur = kind === "plant" || kind === "tick" ? .08 : .28;
+      g.gain.setValueAtTime(0, t + d); g.gain.linearRampToValueAtTime(.25, t + d + .02); g.gain.exponentialRampToValueAtTime(.001, t + d + dur);
+      o.connect(g); g.connect(out); o.start(t + d); o.stop(t + d + dur + .02); });
+  } catch(e){}
+}
+
+/* ---------- board helpers ---------- */
+const mfNbrs = (c) => { const r = Math.floor(c / MF.cols), k = c % MF.cols, out = [];
+  for (let dr = -1; dr <= 1; dr++) for (let dk = -1; dk <= 1; dk++){ if (!dr && !dk) continue;
+    const rr = r + dr, kk = k + dk; if (rr >= 0 && rr < MF.rows && kk >= 0 && kk < MF.cols) out.push(rr * MF.cols + kk); }
+  return out; };
+const mfOwners = c => MF.mines[c] || [];
+const mfAdj = c => mfNbrs(c).filter(x => mfOwners(x).length).length;
+const mfSafeTotal = () => MF.cells - Object.keys(MF.mines).length;
+const mfSafeOpen = () => Object.values(MF.open).filter(o => !o.boom).length;
+const MF_MINE = `<svg class="mf-mine" viewBox="0 0 24 24" aria-hidden="true"><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></g><circle cx="12" cy="12" r="6.2" fill="currentColor"/><circle cx="9.8" cy="9.8" r="1.6" fill="#fff" opacity=".75"/></svg>`;
+const mfDots = owners => `<span class="mf-dots">${owners.map(o => `<i style="--tc:var(--c${o+1})"></i>`).join("")}</span>`;
+
+function mfGrid(mode){
+  // mode: "plant" (current team's selection), "play", "reveal" (end: show every mine)
+  const sel = mode === "plant" ? MF.plant.sel : [], me = MF.plant.t;
+  return `<div class="mf-board" style="--c:${MF.cols};--r:${MF.rows}" role="grid">${Array.from({length:MF.cells}, (_,c) => {
+    const o = MF.open[c], num = n(c + 1);
+    if (mode === "plant"){ const on = sel.includes(c);
+      return `<button type="button" class="mf-cell ${on ? "planted" : ""}" data-mfp="${c}" aria-pressed="${on}" style="--tc:var(--c${me+1})" aria-label="مربع ${num}">${on ? MF_MINE : `<span class="mf-n">${num}</span>`}</button>`; }
+    if (o && o.boom) return `<div class="mf-cell boom ${o.fresh ? "fresh" : ""}" aria-label="مربع ${num}: لغم انفجر">${MF_MINE}${mfDots(o.owners)}</div>`;
+    if (o) return `<div class="mf-cell open n${o.n}" style="--tc:var(--c${o.by+1})" aria-label="مربع ${num}: آمن، حوله ${o.n}"><b>${o.n ? n(o.n) : ""}</b><i class="mf-by"></i></div>`;
+    if (mode === "reveal"){ const ow = mfOwners(c);
+      return ow.length ? `<div class="mf-cell hidden-mine">${MF_MINE}${mfDots(ow)}</div>` : `<div class="mf-cell shut"><span class="mf-n">${num}</span></div>`; }
+    const d = MF.det[c];
+    return `<button type="button" class="mf-cell ${d ? "det-" + d : ""}" data-mfcell="${c}" aria-label="مربع ${num}">${d ? `<span class="mf-flag">${d === "mine" ? "⚠" : "✓"}</span>` : ""}<span class="mf-n">${num}</span></button>`;
+  }).join("")}</div>`;
+}
+
+/* ---------- planting, one team at a time ---------- */
+function mfPlant(){
+  window.scrollTo({top:0});
+  const p = MF.plant, t = p.t, T = MF.teams.length;
+  const dots = `<div class="mf-steps">${MF.teams.map((nm,i) => `<span class="${i < t ? "done" : i === t ? "now" : ""}" style="--tc:var(--c${i+1})">${i < t ? "✓ " : ""}${esc(nm)}</span>`).join("")}</div>`;
+  if (!p.go){
+    $app.innerHTML = `<section class="game gut view"><div class="wrap mf-hand">
+      ${dots}
+      <div class="mf-handcard" style="--tc:var(--c${t+1})">
+        <span class="mf-hand-ic">${MF_MINE}</span>
+        <small>زرع الألغام بالسر · ${n(t+1)} من ${n(T)}</small>
+        <h1>دور ${esc(MF.teams[t])}</h1>
+        <p>يتقدّم ${esc(MF.teams[t])} إلى الشاشة ويختار ${mfMinesTxt(MF.per)}.<br>باقي الفرق تبتعد ولا تنظر إلى الشاشة.</p>
+        <button class="btn lg" type="button" id="mfShow">جاهزين، اعرض اللوحة</button>
+      </div>
+      <div class="mf-foot"><button class="end" type="button" id="mfQuit">إلغاء المسابقة</button></div>
+    </div></section>`;
+    document.getElementById("mfShow").onclick = () => { p.go = true; mfSave(); mfPlant(); };
+    const q = document.getElementById("mfQuit");
+    q.onclick = () => { if (q.dataset.sure){ MF = null; mfSave(); nav("mf"); return; } q.dataset.sure = "1"; q.textContent = "متأكد؟ اضغط مرة ثانية"; setTimeout(() => { if (q.isConnected){ delete q.dataset.sure; q.textContent = "إلغاء المسابقة"; } }, 4000); };
+    return;
+  }
+  const left = MF.per - p.sel.length;
+  $app.innerHTML = `<section class="game gut view mf-planting" style="--tc:var(--c${t+1})"><div class="wrap">
+    <div class="gbar"><div class="turn"><small>يزرع الآن</small><b style="color:var(--c${t+1})">${esc(MF.teams[t])}</b></div>
+      <div class="mf-count ${left ? "" : "ok"}">${left ? `باقي ${mfMinesTxt(left)}` : "✓ اكتمل الزرع"} <small>(${n(p.sel.length)} من ${n(MF.per)})</small></div></div>
+    <p class="mf-tip">اضغط على المربعات اللي تبون تزرعون فيها ألغامكم. اضغط مرة ثانية لإزالة اللغم.</p>
+    <div class="mf-center">${mfGrid("plant")}</div>
+    <div class="mf-actions"><button class="mini" type="button" id="mfRand">اختيار عشوائي</button><button class="mini" type="button" id="mfClr" ${p.sel.length ? "" : "disabled"}>مسح</button>
+      <button class="btn" type="button" id="mfOk" ${left ? "disabled" : ""}>تأكيد وإخفاء اللوحة</button></div>
+  </div></section>`;
+  $app.querySelectorAll("[data-mfp]").forEach(b => b.onclick = () => { const c = +b.dataset.mfp, i = p.sel.indexOf(c);
+    if (i >= 0) p.sel.splice(i, 1); else { if (p.sel.length >= MF.per) p.sel.shift(); p.sel.push(c); mfSound("plant"); }
+    mfSave(); mfPlant(); });
+  document.getElementById("mfRand").onclick = () => { p.sel = shuffle([...Array(MF.cells).keys()]).slice(0, MF.per); mfSave(); mfPlant(); };
+  document.getElementById("mfClr").onclick = () => { p.sel = []; mfSave(); mfPlant(); };
+  document.getElementById("mfOk").onclick = () => {
+    if (p.sel.length !== MF.per) return;
+    p.sel.forEach(c => { (MF.mines[c] = MF.mines[c] || []).push(t); });
+    p.t++; p.sel = []; p.go = false;
+    if (p.t >= T) MF.phase = "ready";
+    mfSave(); mfRender(); };
+}
+function mfReady(){
+  window.scrollTo({top:0});
+  $app.innerHTML = `<section class="game gut view"><div class="wrap mf-hand">
+    <div class="mf-handcard ready">
+      <span class="mf-hand-ic">${MF_MINE}</span>
+      <small>اكتمل الزرع</small>
+      <h1>الحقل جاهز!</h1>
+      <p>زرعت ${n(MF.teams.length)} فرق ألغامها بالسر في ${n(MF.cells)} مربعًا، ولا أحد يعرف مكانها غير أصحابها.<br>يبدأ ${esc(MF.teams[0])}.</p>
+      <button class="btn lg" type="button" id="mfPlay">ابدأ اللعب</button>
+    </div></div></section>`;
+  document.getElementById("mfPlay").onclick = () => { MF.phase = "play"; if (MF.cfg.dur) MF.end = Date.now() + MF.cfg.dur * 60000; mfSound("start"); mfSave(); mfRender(); };
+}
+
+/* ---------- play ---------- */
+function mfSnap(){ const s = {...MF}; delete s.hist; MF.hist.push(JSON.stringify(s)); if (MF.hist.length > 30) MF.hist.shift(); }
+function mfUndo(){ const h = MF.hist; if (!h.length) return; const s = JSON.parse(h.pop()); s.hist = h; if (MF.end && s.end) s.end = MF.end; MF = s; MF.last = null; MF.cur = null; mfSave(); mfRender(); }
+function mfTeams(){
+  return `<div class="mf-teams" style="--n:${MF.teams.length}">${MF.teams.map((t,i) => {
+    const live = Object.entries(MF.mines).filter(([c, o]) => o.includes(i) && !MF.open[c]).length;
+    const tools = [MF.cfg.det ? `<span class="${MF.detUsed[i] ? "used" : ""}">كاشف</span>` : "", MF.cfg.shield ? `<span class="${MF.shield[i] ? "" : "used"}">درع</span>` : ""].join("");
+    return `<div class="mf-team ${i === MF.turn && MF.phase === "play" ? "now" : ""}" style="--tc:var(--c${i+1})"><small>${esc(t)}</small><b>${n(MF.scores[i])}</b>
+      <span class="mf-tl">${MF_MINE}${n(live)} لم ينفجر${tools ? ` ${tools}` : ""}</span></div>`; }).join("")}</div>`;
+}
+function mfClock(){
+  if (!MF.end) return "";
+  const s = Math.max(0, Math.ceil((MF.end - Date.now()) / 1000));
+  return `${n(Math.floor(s / 60))}:${String(s % 60).padStart(2, "0")}`;
+}
+function mfBoard(){
+  window.scrollTo({top:0});
+  const T = MF.teams.length, safeLeft = mfSafeTotal() - mfSafeOpen(), canDet = MF.cfg.det && !MF.detUsed[MF.turn];
+  $app.innerHTML = `<section class="game gut view mf-play"><div class="wrap">
+    <div class="gbar"><div class="turn"><small>الدور على</small><b style="color:var(--c${MF.turn+1})">${esc(MF.teams[MF.turn])}</b><small>· ${MF.detMode ? "اختر المربع اللي تبي تكشفه بالكاشف" : "اختر مربعًا"}</small></div>
+      <div class="mf-tbar">${MF.end ? `<span class="mf-clock" id="mfClock">${mfClock()}</span>` : ""}
+        ${canDet ? `<button type="button" class="mini ${MF.detMode ? "on" : ""}" id="mfDet">${MF.detMode ? "إلغاء الكاشف" : "استخدم الكاشف"}</button>` : ""}
+        <button type="button" class="mini" id="mfSnd" aria-pressed="${!!mfCfg.sound}">${mfCfg.sound ? "الصوت: يعمل" : "الصوت: مطفأ"}</button>
+        <button type="button" class="mini" id="mfUndo" ${MF.hist.length ? "" : "disabled"}>تراجع</button>
+        <button class="end" type="button" id="mfEnd">إنهاء المسابقة</button></div></div>
+    <div class="mf-main">
+      <div class="mf-center ${MF.detMode ? "detecting" : ""}">${mfGrid("play")}
+        <p class="hint">المربعات الآمنة الباقية: ${n(safeLeft)} · الرقم في المربع المكشوف = عدد المربعات الملغومة حوله</p></div>
+      <aside>${mfTeams()}</aside>
+    </div>
+  </div></section>${MF.last ? mfPop() : ""}`;
+  $app.querySelectorAll("[data-mfcell]").forEach(b => b.onclick = () => mfPick(+b.dataset.mfcell));
+  const d = document.getElementById("mfDet"); if (d) d.onclick = () => { MF.detMode = !MF.detMode; mfSave(); mfBoard(); };
+  document.getElementById("mfSnd").onclick = () => { mfCfg.sound = !mfCfg.sound; mfSaveCfg(); mfBoard(); };
+  document.getElementById("mfUndo").onclick = mfUndo;
+  const e = document.getElementById("mfEnd");
+  e.onclick = () => { if (e.dataset.sure){ mfFinish(true); return; } e.dataset.sure = "1"; e.textContent = "متأكد؟ اضغط مرة ثانية"; setTimeout(() => { if (e.isConnected){ delete e.dataset.sure; e.textContent = "إنهاء المسابقة"; } }, 4000); };
+  const go = document.getElementById("mfPopOk"); if (go) { go.onclick = mfPopClose; go.focus(); }
+  Object.values(MF.open).forEach(o => { delete o.fresh; });
+}
+function mfPopClose(){
+  MF.last = null; mfSave();
+  if (MF.phase === "over" || mfSafeOpen() >= mfSafeTotal() || (MF.end && Date.now() >= MF.end)) return mfFinish(false);
+  mfBoard();
+}
+function mfPop(){
+  const L = MF.last, nm = i => `<b style="color:var(--c${i+1})">${esc(MF.teams[i])}</b>`;
+  let ic = "", h = "", body = "", cls = L.kind;
+  if (L.kind === "safe"){ ic = `<span class="mf-big n${L.n}">${n(L.n)}</span>`; h = "مربع آمن!";
+    body = `<p>${L.n === 0 ? "ولا لغم حوله." : L.n === 1 ? "حوله لغم واحد." : L.n === 2 ? "حوله لغمان." : `حوله ${n(L.n)} ألغام.`}</p><p class="mf-delta">${nm(L.t)} +${n(MF_PTS.safe)}</p>`; }
+  else if (L.kind === "boom"){ ic = `<span class="mf-burst">${MF_MINE}</span>`; h = "انفجار!";
+    const others = L.owners.filter(o => o !== L.t);
+    body = `<p>${L.own && !others.length ? `داس ${nm(L.t)} على لغمه نفسه! نسيتوا وين زرعتوه؟` : L.own ? `داس ${nm(L.t)} على لغم مشترك بينه وبين ${mfJoin(others.map(nm))}!` : L.owners.length > 1 ? `لغم مشترك زرعه ${mfJoin(L.owners.map(nm))}.` : `هذا لغم ${nm(L.owners[0])}.`}</p>
+      <p class="mf-delta">${L.shielded ? `🛡 الدرع حمى ${nm(L.t)} من الخسارة` : `${nm(L.t)} <span class="bad">−${n(L.loss)}</span>`}${others.map(o => ` · ${nm(o)} +${n(MF_PTS.owner)}`).join("")}</p>`; }
+  else if (L.kind === "wrong"){ ic = `<span class="mf-big x">✕</span>`; h = "إجابة خاطئة";
+    body = `<p>المربع ${n(L.c + 1)} يبقى مغطّى، والدور ينتقل إلى ${nm(MF.turn)}.</p>`; }
+  else if (L.kind === "det"){ cls = "det " + L.res; ic = `<span class="mf-big">${L.res === "mine" ? "⚠" : "✓"}</span>`; h = L.res === "mine" ? "انتبه! فيه لغم" : "المربع آمن";
+    body = `<p>الكاشف فحص المربع ${n(L.c + 1)} لـ${nm(L.t)}. ${L.res === "mine" ? "لا تدوسه!" : "تقدر تختاره بأمان."}</p><p>أكمل دورك واختر مربعًا.</p>`; }
+  const over = L.kind !== "det" && (mfSafeOpen() >= mfSafeTotal() || (MF.end && Date.now() >= MF.end));
+  return `<div class="mf-pop" role="dialog" aria-modal="true" aria-label="${h}"><div class="mf-popcard ${cls}">${ic}<h2>${h}</h2>${body}
+    <button class="btn lg" type="button" id="mfPopOk">${over ? "عرض النتائج" : L.kind === "det" ? "تمام" : "متابعة"}</button></div></div>`;
+}
+function mfPick(c){
+  if (MF.open[c] || MF.last) return;
+  if (MF.detMode){
+    mfSnap(); const res = mfOwners(c).length ? "mine" : "safe";
+    MF.det[c] = res; MF.detUsed[MF.turn] = true; MF.detMode = false;
+    MF.last = {kind:"det", c, res, t:MF.turn}; mfSound("det"); mfSave(); return mfBoard();
+  }
+  let pool = mfPoolOf(MF.cfg).filter(q => !MF.used.includes(q.id));
+  if (!pool.length){ MF.used = []; pool = mfPoolOf(MF.cfg); }
+  const q = pool[Math.floor(Math.random() * pool.length)];
+  MF.used.push(q.id);
+  MF.cur = {c, q:sjPrep(q), pick:-1, shown:false, t0:Date.now(), rung:false};
+  mfSave(); mfQuestion();
+}
+function mfSwap(){
+  const cur = MF.cur; let pool = mfPoolOf(MF.cfg).filter(q => !MF.used.includes(q.id));
+  if (!pool.length) return;
+  const q = pool[Math.floor(Math.random() * pool.length)]; MF.used.push(q.id);
+  MF.cur = {c:cur.c, q:sjPrep(q), pick:-1, shown:false, t0:Date.now(), rung:false}; mfSave(); mfQuestion();
+}
+function mfQuestion(){
+  window.scrollTo({top:0});
+  const cur = MF.cur, q = cur.q, me = MF.turn, judged = cur.pick >= 0 || cur.shown;
+  const right = q.kind === "open" ? null : cur.pick === q.ai;
+  const opts = q.kind === "open" ? "" : `<div class="choices ${q.kind === "tf" ? "two" : ""}">${q.options.map((o,k) => {
+    const cls = cur.pick < 0 ? "" : k === q.ai ? "correct" : k === cur.pick ? "wrong" : "dim";
+    return `<button type="button" class="choice ${cls}" data-mfo="${k}" ${cur.pick >= 0 ? "disabled" : ""}><span class="k">${KEYS[k] || k+1}</span><span>${esc(o)}</span></button>`; }).join("")}</div>`;
+  const qt = MF.cfg.time && !judged ? `<span class="mf-qt" id="mfQt">${n(Math.max(0, Math.ceil((cur.t0 + MF.cfg.time * 1000 - Date.now()) / 1000)))}</span>` : "";
+  $app.innerHTML = `<section class="game gut view mf-play"><div class="wrap">
+    <div class="gbar"><div class="turn"><small>يجيب</small><b style="color:var(--c${me+1})">${esc(MF.teams[me])}</b><small>· المربع ${n(cur.c + 1)}</small></div>
+      <div class="mf-tbar">${MF.end ? `<span class="mf-clock" id="mfClock">${mfClock()}</span>` : ""}${qt}
+        ${judged ? "" : `<button type="button" class="mini" id="mfSwap">سؤال آخر</button><button class="mini" type="button" id="mfBack">العودة للوحة</button>`}</div></div>
+    <div class="mf-qwrap">
+      <article class="card">
+        <div class="meta-row"><span class="sj-val">المربع ${n(cur.c + 1)}</span><span>${esc(q.category)}</span>${q.difficulty ? `<span class="lvl-${esc(q.difficulty)}">${esc(q.difficulty)}</span>` : ""}</div>
+        <p class="qtext">${esc(q.question)}</p>
+        ${opts}
+        ${q.kind === "open" && cur.shown ? `<div class="answer"><small>الإجابة</small><b>${esc(q.answerText)}</b></div>` : ""}
+        ${judged && q.explanation ? `<div class="note">${esc(q.explanation)}</div>` : ""}
+        <div class="actions">${q.kind === "open"
+          ? (cur.shown ? `<span class="count">هل أجاب ${esc(MF.teams[me])} صحيحًا؟</span><div class="mf-judge"><button class="btn" type="button" data-mfj="1">صح، اكشف المربع</button><button class="btn sec" type="button" data-mfj="0">خطأ</button></div>`
+                       : `<span class="count">يجيب الفريق شفهيًا، ثم أظهر الإجابة.</span><button class="btn" type="button" id="mfShowA">إظهار الإجابة</button>`)
+          : (cur.pick < 0 ? `<span class="count">اضغط على الخيار الذي اختاره الفريق.</span>`
+                         : `<span class="count ${right ? "ok" : "no"}">${right ? "إجابة صحيحة!" : "إجابة خاطئة"}</span><button class="btn" type="button" data-mfj="${right ? 1 : 0}">${right ? "اكشف المربع" : "انقل الدور"}</button>`)}</div>
+      </article>
+      <div class="mf-mini">${mfGrid("play")}</div>
+    </div>
+  </div></section>`;
+  const mini = $app.querySelector(`.mf-mini [data-mfcell="${cur.c}"]`); if (mini) mini.classList.add("sel");
+  $app.querySelectorAll(".mf-mini [data-mfcell]").forEach(b => b.disabled = true);
+  $app.querySelectorAll("[data-mfo]").forEach(b => b.onclick = () => { cur.pick = +b.dataset.mfo; mfSound(cur.pick === q.ai ? "safe" : "wrong"); mfSave(); mfQuestion(); });
+  const sa = document.getElementById("mfShowA"); if (sa) sa.onclick = () => { cur.shown = true; mfSave(); mfQuestion(); };
+  const bk = document.getElementById("mfBack"); if (bk) bk.onclick = () => { MF.cur = null; mfSave(); mfBoard(); };
+  const sw = document.getElementById("mfSwap"); if (sw) sw.onclick = mfSwap;
+  $app.querySelectorAll("[data-mfj]").forEach(b => b.onclick = () => mfResolve(b.dataset.mfj === "1"));
+}
+function mfResolve(ok){
+  const c = MF.cur.c, t = MF.turn, T = MF.teams.length;
+  MF.cur = null; mfSnap();
+  MF.played++;
+  if (!ok){ MF.turn = (t + 1) % T; MF.last = {kind:"wrong", c, t}; mfSound("wrong"); }
+  else {
+    const owners = mfOwners(c);
+    if (!owners.length){ const k = mfAdj(c); MF.open[c] = {by:t, n:k, fresh:1}; MF.scores[t] += MF_PTS.safe; MF.last = {kind:"safe", c, t, n:k}; mfSound("safe"); }
+    else {
+      const own = owners.includes(t), others = owners.filter(o => o !== t);
+      let loss = own ? MF_PTS.own : MF_PTS.boom, shielded = false;
+      if (MF.cfg.shield && MF.shield[t]){ MF.shield[t] = false; shielded = true; loss = 0; }
+      MF.scores[t] -= loss;
+      others.forEach(o => { MF.scores[o] += MF_PTS.owner; MF.victims[o]++; });
+      MF.open[c] = {by:t, boom:true, owners:owners.slice(), fresh:1};
+      MF.last = {kind:"boom", c, t, owners:owners.slice(), own, loss, shielded}; mfSound("boom");
+    }
+    MF.turn = (t + 1) % T;
+  }
+  mfSave(); mfBoard();
+}
+function mfFinish(early){
+  if (MF.phase !== "over"){
+    MF.phase = "over"; MF.early = !!early; MF.cur = null; MF.last = null; MF.detMode = false;
+    const top = Math.max(...MF.victims);
+    MF.bonus = top > 0 ? MF.victims.map((v,i) => v === top ? i : -1).filter(i => i >= 0) : [];
+    MF.bonus.forEach(i => MF.scores[i] += MF_PTS.bonus);
+    mfSave(); mfSound("end");
+  }
+  mfResults();
+}
+function mfResults(){
+  window.scrollTo({top:0});
+  const g = MF, rank = g.teams.map((t,i) => ({t, i, s:g.scores[i]})).sort((a,b) => b.s - a.s);
+  const top = rank.filter(r => r.s === rank[0].s);
+  const head = top.length > 1 ? "تعادل في الصدارة!" : `الفائز: ${esc(rank[0].t)}`;
+  const shared = Object.values(g.mines).filter(o => o.length > 1).length;
+  $app.innerHTML = `<section class="done gut view mf-done"><div class="wrap">${I(P.trophy)}
+    <h1>${head}</h1><p>${g.early ? "أُنهيت المسابقة قبل كشف كل المربعات" : g.end && Date.now() >= g.end && mfSafeOpen() < mfSafeTotal() ? "انتهى وقت المسابقة" : "انكشفت كل المربعات الآمنة"} · ${n(g.played)} سؤالًا</p>
+    <ol class="sj-rank">${rank.map((r,k) => `<li style="--tc:var(--c${r.i+1})"><i>${n(k+1)}</i><b>${esc(r.t)}${g.bonus.includes(r.i) ? ` <em class="mf-bonus">أخطر زارع +${n(MF_PTS.bonus)}</em>` : ""}</b><span>${n(r.s)}</span></li>`).join("")}</ol>
+    <h2 class="mf-rh">وين كانت الألغام؟</h2>
+    <p class="mf-rsub">كل نقطة ملوّنة تدل على الفريق اللي زرع اللغم${shared ? ` · ${shared === 1 ? "لغم واحد مشترك" : n(shared) + " ألغام مشتركة"} بين أكثر من فريق` : ""}.</p>
+    <div class="mf-center mf-reveal">${mfGrid("reveal")}</div>
+    <div class="mf-legend">${g.teams.map((t,i) => `<span style="--tc:var(--c${i+1})"><i></i>${esc(t)}</span>`).join("")}</div>
+    <div class="cta" style="margin-top:28px"><button class="btn" type="button" id="mfAgain">مسابقة جديدة بنفس الإعدادات</button>
+      <button class="btn sec" type="button" id="mfEdit">تعديل الإعدادات</button></div></div></section>`;
+  document.getElementById("mfAgain").onclick = () => { MF = null; mfSave(); mfStart(); };
+  document.getElementById("mfEdit").onclick = () => { MF = null; mfSave(); nav("mf"); };
+}
+
+/* ---------- clocks ---------- */
+function mfTickStart(){ if (!mfIv) mfIv = setInterval(mfTick, 250); }
+function mfStop(){ clearInterval(mfIv); mfIv = null; }
+function mfTick(){
+  if (!MF || MF.phase !== "play" || location.hash !== "#mfplay") return;
+  const ck = document.getElementById("mfClock"); if (ck) ck.textContent = mfClock();
+  if (MF.end && Date.now() >= MF.end){ if (ck) ck.classList.add("out");
+    if (!MF.cur && !MF.last){ mfFinish(false); return; } }
+  const cur = MF.cur, qt = document.getElementById("mfQt");
+  if (cur && qt && MF.cfg.time && !cur.rung){ const s = Math.max(0, Math.ceil((cur.t0 + MF.cfg.time * 1000 - Date.now()) / 1000));
+    if (qt.textContent !== n(s)){ qt.textContent = n(s); if (s <= 5 && s > 0) mfSound("tick"); }
+    qt.classList.toggle("low", s <= 5);
+    if (s === 0 && !cur.rung){ cur.rung = true; qt.textContent = "انتهى الوقت"; mfSound("wrong"); mfSave(); } }
+}
+/*MF-JS-END*/
 load();
 })();
 </script>
