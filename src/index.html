@@ -1756,6 +1756,17 @@ body[data-ct] .subnav{background:color-mix(in srgb,var(--ctbg) 86%,transparent)}
 .tn-rep td.z{color:color-mix(in srgb,var(--muted) 55%,transparent)}
 .tn-rep td.sum{font-weight:700;color:var(--blue)}
 .tn-rep tr:last-child td{border-bottom:0}
+/* TN-FREE owner box */
+.tn-free-list{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(380px,1fr))}
+@media (max-width:620px){.tn-free-list{grid-template-columns:1fr}}
+.tn-free-row{display:flex;align-items:center;gap:10px;background:var(--tile);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow)}
+.tn-free-row.on{box-shadow:0 0 0 2px var(--blue),var(--shadow)}
+.tn-free-n{display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center;flex:1;min-width:0}
+.tn-free-n svg{grid-row:span 2;width:22px;height:22px;color:var(--blue)}
+.tn-free-n small{color:var(--muted);font-size:12px}
+.tn-free-row input[type=date]{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--hair);border-radius:10px;background:var(--bg);color:var(--ink)}
+/* TN-FREE */
+.tn-cards .c-badge.free{display:inline-block;justify-self:start;align-self:flex-start;width:fit-content;color:#fff;background:var(--blue);font-size:13px;font-weight:600;padding:4px 12px;border-radius:999px;margin-bottom:4px}
 </style>
 
 <div dir="rtl" lang="ar">
@@ -4066,7 +4077,7 @@ async function load(){
         const d = await r.json(); RAW = (Array.isArray(d) ? d : (d.questions||[])).filter(q => q && q.question); break; } catch(e){}
     }
   }
-  rebuild();
+  rebuild(); await freeLoad();
   acBrand(); acPvBar(); acRefresh().then(() => acPvBar()).then(() => { if (!SESSION && !CAN_EDIT && /^#(sj|b4|ss|tk$|tkplay|er$|erhost|erplay|em$|emplay)/.test(location.hash)) route(); });
   route();
 }
@@ -4391,6 +4402,24 @@ async function tnCounts(){
                  + `<span class="tn-cnt" id="tnCntV">${I(P.tnvisit)}<b>${n(c.visitors || 0)} زائر</b><small>زاروا المنصة حتى الآن</small></span>`;
   } catch(e){}
 }
+async function tnFreeBox(){
+  if (!CAN_EDIT) return; const host = document.querySelector(".ac-admin"); if (!host) return;
+  const today = new Date(Date.now() + 3 * 3600e3).toISOString().slice(0, 10);
+  const sec = document.createElement("section"); sec.className = "tn-rep tn-free";
+  const draw = () => { sec.innerHTML = `<h2>مسابقات مجانية لفترة محدودة</h2><p class="lead">المسابقة المفعّلة هنا يلعبها أي زائر بدون تسجيل حتى التاريخ المحدد (بتوقيت الرياض)، وبعده ترجع للجهات المشتركة فقط.</p>
+    <div class="tn-free-list">${CONTESTS.filter(c => c.go).map(c => { const on = freeOn(c.go), v = FREE[c.go] || "";
+      return `<label class="tn-free-row${on ? " on" : ""}"><span class="tn-free-n">${I(P[c.icon])}<b>${c.name}</b><small>${on ? "مجانية حتى " + freeDate(c.go) : v ? "انتهت الفترة" : "للجهات فقط"}</small></span>
+        <input type="date" data-free="${c.go}" value="${esc(v)}" min="${today}" aria-label="آخر يوم مجاني لـ ${c.name}">
+        ${v ? `<button type="button" class="mini" data-free-off="${c.go}">إيقاف</button>` : ""}</label>`; }).join("")}</div>
+    <p class="amsg" id="tnFreeMsg" role="status"></p>`;
+    const save = async (k, v) => { const next = Object.assign({}, FREE); if (v) next[k] = v; else delete next[k];
+      const m = sec.querySelector("#tnFreeMsg"); m.textContent = "جارٍ الحفظ…";
+      try { if (DB) await DB.doc("meta/free").set(next); FREE = next; store.set("tn-free", FREE); draw(); sec.querySelector("#tnFreeMsg").textContent = "تم الحفظ."; }
+      catch(e){ m.textContent = "تعذّر الحفظ."; } };
+    sec.querySelectorAll("[data-free]").forEach(i => i.onchange = () => save(i.dataset.free, i.value));
+    sec.querySelectorAll("[data-free-off]").forEach(b => b.onclick = e => { e.preventDefault(); save(b.dataset.freeOff, ""); }); };
+  draw(); host.appendChild(sec);
+}
 async function tnReport(){
   if (!CAN_EDIT || !window.TN || !TN.report) return;
   const host = document.querySelector(".ac-admin"); if (!host) return;
@@ -4401,7 +4430,7 @@ async function tnReport(){
   (rows || []).forEach(r => { const a = by[r.acct] = by[r.acct] || {n:{}, tot:0, last:""}; a.n[r.contest] = Number(r.n) || 0; a.tot += Number(r.n) || 0; if (String(r.last) > a.last) a.last = String(r.last); });
   const names = {}; accts.forEach(a => names[a.user] = a.org || a.user);
   const keys = [...new Set(accts.map(a => a.user).concat(Object.keys(by)))].sort((x, y) => ((by[y] || {}).tot || 0) - ((by[x] || {}).tot || 0));
-  const label = k => k === "" ? "<b>زوار بدون حساب</b><small>الموسوعة المجانية</small>" : k === "owner" ? "<b>المالك</b><small>تجارب لوحة التحكم</small>" : `<b>${esc(names[k] || k)}</b><small dir="ltr">${esc(k)}</small>`;
+  const label = k => k === "" ? "<b>زوار بدون حساب</b><small>الموسوعة وبالأربع تربح</small>" : k === "owner" ? "<b>المالك</b><small>تجارب لوحة التحكم</small>" : `<b>${esc(names[k] || k)}</b><small dir="ltr">${esc(k)}</small>`;
   const day = t => { if (!t) return "—"; const d = new Date(t); return isNaN(d) ? "—" : d.toLocaleDateString("en-GB"); };
   const sec = document.createElement("section"); sec.className = "tn-rep";
   sec.innerHTML = `<h2>سجل اللعب</h2><p class="lead">كم مرة لعب كل حساب في كل مسابقة. تُحسب المرة عند بدء اللعب من صفحة الإعدادات.</p>
@@ -4427,8 +4456,8 @@ function route(){
     if (orgCanEdit()){ orgqEnter(); renderLinks("admin"); return admin(); }
     renderLinks(""); return acGate(); }
   orgqLeave();
-  if (h === "accounts"){ game = null; renderLinks("accounts"); return acAdmin().then(tnReport); }
-  if (!acHas() && /^(sj|sjgame|b4|b4game|b4host|ss|ssgame|tk|tkplay|er|erhost|erplay|em|emplay|mf|mfplay)$/.test(h)){ game = null; renderLinks(""); return acGate(); }
+  if (h === "accounts"){ game = null; renderLinks("accounts"); return acAdmin().then(tnFreeBox).then(tnReport); }
+  if (!acHas() && !freeOn(tnCt(h)) && /^(sj|sjgame|b4|b4game|b4host|ss|ssgame|tk|tkplay|er|erhost|erplay|em|emplay|mf|mfplay)$/.test(h)){ game = null; renderLinks(""); return acGate(); }
   if (h.startsWith("join")){ game = null; renderLinks(""); return joinPage(); }
   if (h === "em" || h === "emplay" || h.startsWith("emjoin")){ game = null; renderLinks("");
     if (h.startsWith("emjoin")) return emJoin();
@@ -4490,6 +4519,16 @@ function bar(info, label, id, disabled, prev){
 $app.addEventListener("click", e => { const b = e.target.closest("[data-prev]"); if (b) nav(b.dataset.prev); });
 
 /* Landing: the encyclopedia on top, then the competitions */
+/* contests open to everyone for a limited time (TN-FREE). The owner sets an end date per contest in the
+   control panel; it lives in meta/free (public read) or, in a standalone copy, in this browser. */
+let FREE = store.get("tn-free", {});
+const freeEnd = k => FREE && FREE[k] ? Date.parse(FREE[k] + "T23:59:59+03:00") : 0;
+const freeOn = k => !!k && Date.now() <= freeEnd(k);
+const freeDate = k => { const d = new Date(freeEnd(k)); return isNaN(d) ? "" : d.toLocaleDateString("ar-SA-u-nu-latn-ca-gregory", {day:"numeric", month:"long", timeZone:"Asia/Riyadh"}); };
+async function freeLoad(){
+  if (!DB) return;
+  try { const d = await DB.doc("meta/free").get(); FREE = d.exists ? (d.data() || {}) : {}; store.set("tn-free", FREE); } catch(e){}
+}
 const CONTESTS = [
   {name:"سين جيم", icon:"sj", go:"sj", desc:"لوحة مجالات وأسئلة بقيم 200 و400 و600", how:"كل فريق يختار مجالاته، وفي دوره يختار سؤالًا بقيمة 200 أو 400 أو 600. الإجابة الصحيحة تكسب النقاط، ومع كل فريق وسائل مساعدة.", meta:"⁦2–4⁩ فرق"},
   {name:"بالأربع تربح", icon:"four", go:"b4", desc:"لوحة حروف، وكل إجابة صحيحة ترسم ضلعًا", how:"لوحة مربعات بالحروف. كل إجابة صحيحة ترسم ضلعًا، ومن يغلق المربع يكسب نقاطه، ومعها بطاقات حظ.", meta:"⁦2–4⁩ فرق"},
@@ -4914,14 +4953,15 @@ function landing(){
           <em>ادخل الموسوعة ‹</em></span>
       </button>
       <h2 class="band-h">المسابقات</h2>
-      ${ok ? "" : `<p class="band-sub">تعرّف على مسابقات تنافس. اللعب فيها متاح للجهات المشتركة بعد <a href="#" id="acJump">تسجيل الدخول</a>.</p>`}
+      ${ok ? "" : `<p class="band-sub">تعرّف على مسابقات تنافس. اللعب فيها متاح للجهات المشتركة بعد <a href="#" id="acJump">تسجيل الدخول</a>${CONTESTS.some(c => freeOn(c.go)) ? `، و${CONTESTS.filter(c => freeOn(c.go)).map(c => "«" + c.name + "»").join(" و")} مجانية للجميع لفترة محدودة` : ""}.</p>`}
       <div class="contests tn-cards">
         ${CONTESTS.filter(c => c.go).map(c => {
           const duo = ["tk", "em", "er"].includes(c.go), img = (f, a, wd, ht) => `<img src="shots/${f}.webp" alt="${a}" width="${wd}" height="${ht}" loading="lazy" decoding="async">`;
           const shot = `<span class="c-shot${duo ? " duo" : ""}"><span class="c-scr">${img(c.go, `شاشة العرض في مسابقة ${c.name}`, 960, 600)}</span>${duo ? `<span class="c-ph">${img(c.go + "-p", `جوال المتسابق في مسابقة ${c.name}`, 360, 780)}</span>` : ""}</span>`;
           const views = `<span class="c-views"><span>${I(P.tnscreen)}شاشة العرض</span>${duo ? `<span>${I(P.tnphone)}جوال المتسابق</span>` : `<span class="muted">بدون جوالات</span>`}</span>`;
-          const body = `${c.go === "er" ? `<span class="c-badge">جديد · غرف ثلاثية الأبعاد</span>` : ""}<span class="c-head">${I(P[c.icon])}<b>${c.name}</b></span>${views}<small>${c.how || c.desc}</small>${c.meta ? `<span class="c-meta">${c.meta}</span>` : ""}`;
-          return ok ? `<button type="button" class="contest live${c.go === "er" ? " feat" : ""}" data-go="${c.go}">${shot}<span class="c-body">${body}<span class="go">العب الآن</span></span></button>`
+          const free = freeOn(c.go), live = ok || free;
+          const body = `${c.go === "er" ? `<span class="c-badge">جديد · غرف ثلاثية الأبعاد</span>` : free ? `<span class="c-badge free">مجانية للجميع حتى ${freeDate(c.go)}</span>` : ""}<span class="c-head">${I(P[c.icon])}<b>${c.name}</b></span>${views}<small>${c.how || c.desc}</small>${c.meta ? `<span class="c-meta">${c.meta}</span>` : ""}`;
+          return live ? `<button type="button" class="contest live${c.go === "er" ? " feat" : ""}" data-go="${c.go}">${shot}<span class="c-body">${body}<span class="go">العب الآن</span></span></button>`
                     : `<article class="contest info${c.go === "er" ? " feat" : ""}">${shot}<span class="c-body">${body}</span></article>`; }).join("")}
       </div>
       <div class="contests-soon">
@@ -4968,7 +5008,7 @@ function landing(){
   tkInvite();
   emInvite();
   $app.querySelectorAll("[data-go]").forEach(b => b.onclick = () => {
-    if (acHas()) return nav(b.dataset.go);
+    if (acHas() || freeOn(b.dataset.go)) return nav(b.dataset.go);
     const f = document.getElementById("acLogin"); if (f){ f.scrollIntoView({behavior:"smooth", block:"center"}); setTimeout(() => { const u = document.getElementById("acU"); if (u) u.focus({preventScroll:true}); }, 400); }
   });
 }
