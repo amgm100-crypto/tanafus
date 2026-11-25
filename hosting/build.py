@@ -71,6 +71,11 @@ def main():
     (out / "join" / "index.html").write_text('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
         '<title>تنافس · دخول اللاعبين</title><script>location.replace("../#join" + (location.hash ? "=" + location.hash.replace(/\\D/g, "") : ""))</script>'
         '<a href="../#join">دخول اللاعبين</a>', encoding="utf-8")
+    shots = HERE / "shots"                       # contest-card screenshots (display + phone)
+    if shots.is_dir():
+        (out / "shots").mkdir(parents=True, exist_ok=True)
+        for f in shots.glob("*.webp"):
+            (out / "shots" / f.name).write_bytes(f.read_bytes())
     for extra in ("_headers", "404.html"):
         p = HERE / extra
         if p.exists():

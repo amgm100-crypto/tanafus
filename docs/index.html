@@ -1549,6 +1549,49 @@ html.tn-motion .contest.live.rv.in:hover{transform:translateY(-3px)}
 a.btn{text-decoration:none}
 .tn-plans-note{text-align:center;color:var(--muted);font-size:14px;margin:16px 0 0}
 @media (max-width:860px){.tn-plans-grid{grid-template-columns:1fr;max-width:460px;margin-inline:auto}}
+/* TN-CARDS: contest cards with in-game screenshots */
+.contests.tn-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.tn-cards .contest{padding:0;align-items:stretch;text-align:start;overflow:hidden;min-height:0;gap:0;border-radius:22px}
+.tn-cards .c-shot{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid color-mix(in srgb,var(--hair) 70%,transparent);background:radial-gradient(120% 90% at 85% 0%,color-mix(in srgb,#0071e3 15%,transparent),transparent 60%),linear-gradient(160deg,color-mix(in srgb,#0071e3 7%,var(--bg-alt)),var(--bg-alt))}
+.tn-cards .c-scr,.tn-cards .c-ph{position:absolute;display:block;overflow:hidden;background:#fff;border:solid #1d2b4f;box-shadow:0 18px 40px -18px rgba(16,32,72,.45),0 2px 6px rgba(16,32,72,.12);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.tn-cards .c-scr{inset-inline:10%;top:9%;aspect-ratio:16/10;border-width:5px;border-radius:12px}
+.tn-cards .duo .c-scr{inset-inline:6% auto;width:76%;top:9%}
+.tn-cards .c-ph{inset-inline-end:7%;top:12%;height:84%;aspect-ratio:360/780;border-width:4px;border-radius:20px}
+.tn-cards .c-ph::before{content:"";position:absolute;z-index:1;left:50%;top:4px;transform:translateX(-50%);width:30%;height:8px;border-radius:8px;background:#1d2b4f}
+.tn-cards .c-scr img,.tn-cards .c-ph img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+.tn-cards .contest:hover .c-scr{transform:translateY(-4px)}
+.tn-cards .contest:hover .c-ph{transform:translateY(-8px) rotate(1.5deg)}
+.tn-cards .c-views{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.tn-cards .c-views>span{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;color:#2b3c66;background:color-mix(in srgb,#0071e3 9%,transparent);padding:3px 10px;border-radius:99px}
+.tn-cards .c-views>span.muted{color:#5b6785;background:color-mix(in srgb,var(--hair) 55%,transparent);font-weight:500}
+.tn-cards .contest .c-views svg{width:14px;height:14px;margin:0}
+.tn-cards .feat .c-shot{flex:0 0 58%;border-bottom:0;border-inline-start:1px solid color-mix(in srgb,var(--hair) 70%,transparent)}
+.tn-cards .feat .c-scr{border-width:6px;border-radius:14px}
+.tn-cards .feat .c-ph{border-width:5px;border-radius:26px}
+@media (prefers-reduced-motion:reduce){.tn-cards .c-scr,.tn-cards .c-ph{transition:none}.tn-cards .contest:hover .c-scr,.tn-cards .contest:hover .c-ph{transform:none}}
+.tn-cards .c-body{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:16px 18px 18px;flex:1}
+.tn-cards .c-head{display:flex;align-items:center;gap:10px}
+.tn-cards .contest .c-head svg{width:30px;height:30px;margin:0;flex:none}
+.tn-cards .contest b{font-size:20px;font-weight:700}
+.tn-cards .contest small{font-size:14px;line-height:1.6}
+.tn-cards .contest .c-meta{margin-top:auto}
+.tn-cards .contest .go{margin-top:auto;align-self:stretch;justify-content:center;min-height:40px;font-size:15px}
+.tn-cards .contest .c-meta + .go{margin-top:12px}
+.contests-soon{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.contests-soon .contest{min-height:0;flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;padding:14px 16px;text-align:start}
+.contests-soon .contest svg{width:26px;height:26px;margin:0}
+.contests-soon .contest b{font-size:16px}
+.contests-soon .contest .soon{margin-top:0;margin-inline-start:auto}
+.tn-cards .contest.feat{grid-column:1/-1;order:-1;flex-direction:row}
+.tn-cards .feat .c-body{justify-content:center;padding:32px 34px;gap:10px}
+.tn-cards .feat b{font-size:30px}
+.tn-cards .feat small{font-size:16px}
+.tn-cards .feat .c-head svg{width:38px;height:38px}
+.tn-cards .feat .go{align-self:flex-start;padding-inline:28px;margin-top:14px}
+.tn-cards .feat .c-badge{display:inline-flex;font-size:13px;font-weight:600;color:var(--accent,#0071e3);background:color-mix(in srgb,var(--accent,#0071e3) 10%,transparent);padding:4px 12px;border-radius:99px}
+@media (max-width:820px){.tn-cards .contest.feat{flex-direction:column}.tn-cards .feat .c-shot{flex:none;border-inline-start:0;border-bottom:1px solid color-mix(in srgb,var(--hair) 70%,transparent)}.tn-cards .feat .c-body{padding:18px}.tn-cards .feat b{font-size:22px}.tn-cards .feat .go{align-self:stretch}}
+@media (max-width:980px){.contests.tn-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.contests.tn-cards{grid-template-columns:1fr}.contests-soon{grid-template-columns:1fr}}
 </style>
 
 <div dir="rtl" lang="ar">
@@ -1561,7 +1604,7 @@ a.btn{text-decoration:none}
 </div>
 
 <script src="supabase-2.45.4.js"></script>
-<script>window.TN_CONFIG = {"url": "https://lodyekkanxslaloentmm.supabase.co", "key": "sb_publishable_eqQppiNX3Cb7ECpJhDaMrA_ueaWozXV"};
+<script>window.TN_CONFIG = {"url": "https://pcawdjzmvsdiynimgbgu.supabase.co", "key": "sb_publishable_fqP8mKShZEGlXKU2eAatFg_elP8Q257"};
 /* تنافس — hosted backend adapter (Supabase).
    Re-implements the three capabilities the site used on claude.ai, with the same API:
      db   : doc(path).get/set/delete, collection(name).get        -> table public.docs
@@ -3731,7 +3774,7 @@ const store = { get(k,d){ try{ const v = localStorage.getItem(k); return v==null
 
 /* Thin line icons (24-unit grid, 1.5 stroke) */
 const I = (p, cls="i") => `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
-const P = {
+const P = {tnscreen:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>', tnphone:'<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/>', 
   erdoor:`<path d="M6 21V4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21"/><path d="M3.5 21h17"/><circle cx="14.5" cy="12.5" r="1"/><path d="M10 7.5h4"/>`,
   erbulb:`<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3Z"/>`,
   erbook:`<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5Z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5Z"/>`,
@@ -4740,10 +4783,17 @@ function landing(){
       </button>
       <h2 class="band-h">المسابقات</h2>
       ${ok ? "" : `<p class="band-sub">تعرّف على مسابقات تنافس. اللعب فيها متاح للجهات المشتركة بعد <a href="#" id="acJump">تسجيل الدخول</a>.</p>`}
-      <div class="contests">
-        ${CONTESTS.map(c => c.go ? (ok ? `<button type="button" class="contest live" data-go="${c.go}">${I(P[c.icon])}<b>${c.name}</b><small>${c.how || c.desc}</small>${c.meta ? `<span class="c-meta">${c.meta}</span>` : ""}<span class="go">العب الآن</span></button>`
-            : `<article class="contest info">${I(P[c.icon])}<b>${c.name}</b><small>${c.how || c.desc}</small>${c.meta ? `<span class="c-meta">${c.meta}</span>` : ""}</article>`)
-          : `<article class="contest">${I(P[c.icon])}<b>${c.name}</b><span class="soon">قيد التجهيز</span></article>`).join("")}
+      <div class="contests tn-cards">
+        ${CONTESTS.filter(c => c.go).map(c => {
+          const duo = ["tk", "em", "er"].includes(c.go), img = (f, a, wd, ht) => `<img src="shots/${f}.webp" alt="${a}" width="${wd}" height="${ht}" loading="lazy" decoding="async">`;
+          const shot = `<span class="c-shot${duo ? " duo" : ""}"><span class="c-scr">${img(c.go, `شاشة العرض في مسابقة ${c.name}`, 960, 600)}</span>${duo ? `<span class="c-ph">${img(c.go + "-p", `جوال المتسابق في مسابقة ${c.name}`, 360, 780)}</span>` : ""}</span>`;
+          const views = `<span class="c-views"><span>${I(P.tnscreen)}شاشة العرض</span>${duo ? `<span>${I(P.tnphone)}جوال المتسابق</span>` : `<span class="muted">بدون جوالات</span>`}</span>`;
+          const body = `${c.go === "er" ? `<span class="c-badge">جديد · غرف ثلاثية الأبعاد</span>` : ""}<span class="c-head">${I(P[c.icon])}<b>${c.name}</b></span>${views}<small>${c.how || c.desc}</small>${c.meta ? `<span class="c-meta">${c.meta}</span>` : ""}`;
+          return ok ? `<button type="button" class="contest live${c.go === "er" ? " feat" : ""}" data-go="${c.go}">${shot}<span class="c-body">${body}<span class="go">العب الآن</span></span></button>`
+                    : `<article class="contest info${c.go === "er" ? " feat" : ""}">${shot}<span class="c-body">${body}</span></article>`; }).join("")}
+      </div>
+      <div class="contests-soon">
+        ${CONTESTS.filter(c => !c.go).map(c => `<article class="contest">${I(P[c.icon])}<b>${c.name}</b><span class="soon">قيد التجهيز</span></article>`).join("")}
         ${soon.map(() => `<article class="contest ghost" aria-label="مسابقة قادمة">${I(P.plus)}<b>مسابقة جديدة</b><span class="soon">قريبًا</span></article>`).join("")}
       </div>
       ${tnHow()}
