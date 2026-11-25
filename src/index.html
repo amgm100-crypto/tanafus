@@ -1497,11 +1497,14 @@ html.tn-motion .rv.in{opacity:1;transform:none}
 html.tn-motion .contest.live.rv.in:hover{transform:translateY(-3px)}
 @media (prefers-reduced-motion:reduce){.tn-mq-track{animation:none}html.tn-motion .rv{opacity:1;transform:none}}
 /* TN-ODO */
-.tn-odo{display:inline-flex;direction:ltr;unicode-bidi:isolate;vertical-align:top;line-height:inherit;font-variant-numeric:tabular-nums}
+.tn-odo{display:inline-flex;transform-origin:center;direction:ltr;unicode-bidi:isolate;vertical-align:top;line-height:inherit;font-variant-numeric:tabular-nums}
 .tn-od{display:inline-block;height:1lh;overflow:hidden}
 .tn-odr{display:flex;flex-direction:column;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
 .tn-odr span{display:block;height:1lh;text-align:center}
 .tn-odc{line-height:inherit}
+/* games style their own spans (e.g. .b4-ts span): keep the odometer immune */
+.tn-odo,.tn-odo span{font-size:inherit!important;font-weight:inherit!important;color:inherit!important;letter-spacing:inherit!important;line-height:inherit!important;margin:0!important;padding:0!important;border:0!important;background:none!important;min-width:0!important;width:auto!important;opacity:1!important;position:static!important;box-shadow:none!important}
+.tn-odo{display:inline-flex!important}.tn-od{display:inline-block!important}.tn-odr{display:flex!important}.tn-odr span{display:block!important}.tn-odc{display:inline!important}
 @media (prefers-reduced-motion:reduce){.tn-odr{transition:none}}
 /* TN-HERO */
 .tn-hero{position:relative;overflow:hidden;isolation:isolate}
@@ -1779,6 +1782,84 @@ body[data-ct] .subnav{background:color-mix(in srgb,var(--ctbg) 86%,transparent)}
 .ac-glist label{display:flex;align-items:center;gap:8px;font-size:15px;padding:8px 10px;border-radius:10px;background:var(--bg-alt)}
 .ac-glist svg{width:18px;height:18px;color:var(--blue)}
 .ac-row-tx .ac-gsum{display:block;color:var(--blue-link);font-size:12px}
+/* TN-ORDER */
+#tnContests,#tnPlH,#acLogin{scroll-margin-top:72px}
+.links{overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}
+.links::-webkit-scrollbar{display:none}
+.links button{white-space:nowrap}
+.gnav .links .nav-login{background:#D1B871;color:#26323E!important;border-radius:999px;padding-inline:14px;font-weight:600}
+.gnav .links .nav-login:hover{background:#DDC583}
+.gnav .links .nav-out{border:1.5px solid rgba(209,184,113,.7);border-radius:999px;padding-inline:14px}
+.contest.info{cursor:pointer;text-align:start;font:inherit;color:inherit;border:0}
+.contest .go.sec{background:transparent;color:var(--blue-link);box-shadow:inset 0 0 0 1.5px currentColor}
+.tn-about .ab-back{margin-bottom:18px;display:inline-flex;flex-direction:row;align-items:center;gap:6px;padding-block:8px}
+.tn-about .ab-back svg{width:18px;height:18px}
+@media (max-width:560px){.gnav .wrap{height:auto;flex-wrap:wrap;row-gap:0;padding-block:6px}.gnav .links{order:3;flex:1 0 100%;margin:0 -6px;padding-bottom:2px}.gnav .links button{font-size:13px;padding-inline:7px}.gnav .links .nav-login,.gnav .links .nav-out{padding-inline:11px;margin-inline-start:auto}}
+.ab-head{display:flex;gap:18px;align-items:center;margin-bottom:22px}
+.ab-head h1{margin:0}.ab-head .lead{margin:6px 0 0}
+.ab-ic{flex:none;display:grid;place-items:center;width:84px;height:84px;border-radius:24px;background:color-mix(in srgb,var(--ct,var(--blue)) 18%,var(--tile));color:var(--ct,var(--blue))}
+.ab-ic svg{width:44px;height:44px}
+.ab-shots{display:grid;grid-template-columns:1fr;gap:18px;align-items:end;margin-bottom:22px}
+.ab-shots.duo{grid-template-columns:minmax(0,1fr) 230px}
+.ab-fig{margin:0;background:var(--tile);border-radius:22px;padding:12px;box-shadow:var(--shadow)}
+.ab-fig img{display:block;width:100%;height:auto;border-radius:14px}
+.ab-fig.ph img{border-radius:22px}
+.ab-fig figcaption{text-align:center;color:var(--muted);font-size:13px;margin-top:8px}
+.ab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.ab-list{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:10px}
+.ab-list li{display:flex;gap:8px;align-items:flex-start}
+.ab-list svg{flex:none;width:20px;height:20px;color:var(--blue)}
+.ab-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px}
+.ab-note{text-align:center;color:var(--muted)}
+@media (max-width:760px){.ab-shots.duo{grid-template-columns:1fr 34%}.ab-grid{grid-template-columns:1fr}.ab-head{flex-direction:column;align-items:flex-start}.ab-ic{width:64px;height:64px}}
+.ord-steps{list-style:none;display:flex;gap:8px;padding:0;margin:0 0 22px;flex-wrap:wrap}
+.ord-steps li{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;padding:6px 12px 6px 6px;border-radius:999px;background:var(--tile)}
+.ord-steps li i{font-style:normal;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--hair);color:var(--ink);font-size:13px;font-weight:700}
+.ord-steps li.on{color:var(--ink);font-weight:600}.ord-steps li.on i{background:var(--blue);color:var(--on-blue)}
+.ord-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:18px 0}
+.ord-pick{position:relative;display:flex;flex-direction:column;text-align:start;font:inherit;color:inherit;background:var(--tile);border:0;border-radius:20px;overflow:hidden;cursor:pointer;box-shadow:var(--shadow),inset 0 0 0 1px var(--hair);transition:box-shadow .2s,transform .2s}
+.ord-pick:hover{transform:translateY(-2px)}
+.ord-pick img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.ord-pick-tx{display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-items:center;padding:12px 14px}
+.ord-pick-tx svg{grid-row:span 2;width:22px;height:22px;color:var(--blue)}
+.ord-pick-tx small{color:var(--muted)}
+.ord-tick{position:absolute;top:10px;inset-inline-start:10px;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.9);color:transparent;box-shadow:0 2px 8px rgba(38,50,62,.2)}
+.ord-tick svg{width:18px;height:18px}
+.ord-pick.on{box-shadow:0 0 0 3px var(--blue),var(--shadow)}
+.ord-pick.on .ord-tick{background:var(--blue);color:#fff}
+.ord-pick:disabled{cursor:default;opacity:1}
+.ord-bar{position:sticky;bottom:12px;z-index:3;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:#26323E;color:#F8F8FA;border-radius:18px;padding:14px 20px;box-shadow:0 14px 34px -14px rgba(38,50,62,.6);margin:8px 0 14px}
+.ord-price{font-size:28px;font-weight:800;color:#D1B871}.ord-price small{font-size:13px;font-weight:500;color:rgba(248,248,250,.7)}
+.ord-acts{display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap;margin-top:10px}
+.ord-form{display:grid;gap:14px;max-width:720px}
+.ord-form label>span,.ord-logo>span{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+.ord-form input,.ord-form textarea{width:100%;box-sizing:border-box;font:inherit;padding:12px 14px;border:1px solid var(--hair);border-radius:12px;background:var(--bg);color:var(--ink)}
+.ord-form .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:620px){.ord-form .g2{grid-template-columns:1fr}}
+.ord-logo{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.ord-logo>span{width:100%}
+.ord-done{max-width:640px;text-align:center}
+.ord-done .ord-steps{justify-content:center}
+.ord-wa{display:inline-grid;place-items:center;width:96px;height:96px;border-radius:50%;background:#25A35A;color:#fff;margin:10px auto 6px;box-shadow:0 16px 34px -12px rgba(37,163,90,.6)}
+.ord-wa svg{width:52px;height:52px}
+.ord-sum{color:var(--muted)}
+.inb-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.inb-card{background:var(--tile);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow);border-inline-start:4px solid var(--blue)}
+.inb-card.st-done,.inb-card.st-cancelled{opacity:.65;border-inline-start-color:var(--hair)}
+.inb-card.st-contacted{border-inline-start-color:#D1B871}
+.inb-top{display:flex;align-items:center;gap:10px}
+.inb-top img{width:44px;height:44px;object-fit:contain;border-radius:10px;background:#fff}
+.inb-top>div{flex:1;min-width:0}.inb-top b{display:block}.inb-top small{color:var(--muted);font-size:12px}
+.inb-top select{font:inherit;font-size:13px;padding:5px 8px;border-radius:10px;border:1px solid var(--hair);background:var(--bg);color:var(--ink)}
+.inb-card p{margin:10px 0}
+.inb-body{white-space:pre-wrap}
+.inb-acts{display:flex;gap:8px;flex-wrap:wrap}
+.inb-acts .mini{display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.inb-acts svg{width:16px;height:16px}
+.inb-kind{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:color-mix(in srgb,var(--blue) 14%,transparent);color:var(--blue)}
+.inb-kind.k-complaint{background:color-mix(in srgb,#D07362 18%,transparent);color:#B4523F}
+.inb-kind.k-suggestion{background:color-mix(in srgb,#D1B871 28%,transparent);color:#7A6020}
+.inb-done{font-size:13px;display:flex;gap:6px;align-items:center}
+.tn-inbox h2 small{font-size:14px;color:var(--muted);font-weight:500}
 </style>
 
 <div dir="rtl" lang="ar">
@@ -3833,7 +3914,7 @@ const store = { get(k,d){ try{ const v = localStorage.getItem(k); return v==null
 
 /* Thin line icons (24-unit grid, 1.5 stroke) */
 const I = (p, cls="i") => `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
-const P = {tnvisit:'<circle cx="9" cy="8" r="3.2"/><path d="M3 19c.6-3.4 3-5.2 6-5.2s5.4 1.8 6 5.2"/><path d="M15.5 5.2a3 3 0 0 1 0 5.6M17.5 14.2c1.9.7 3.1 2.3 3.5 4.8"/>', tnscreen:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>', tnphone:'<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/>', 
+const P = {tnwa:'<path d="M4.5 19.5l1.2-3.6A8 8 0 1 1 8.6 18.8z"/><path d="M9.2 8.6c.3 2.6 2.4 4.9 5.2 5.4l1-1.2-1.8-.9-.8.8c-1-.4-1.9-1.3-2.3-2.3l.8-.8-.9-1.8z"/>', tnmail:'<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/>', tnchat:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/>', tvisit0:'', tnvisit:'<circle cx="9" cy="8" r="3.2"/><path d="M3 19c.6-3.4 3-5.2 6-5.2s5.4 1.8 6 5.2"/><path d="M15.5 5.2a3 3 0 0 1 0 5.6M17.5 14.2c1.9.7 3.1 2.3 3.5 4.8"/>', tnscreen:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>', tnphone:'<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/>', 
   erdoor:`<path d="M6 21V4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21"/><path d="M3.5 21h17"/><circle cx="14.5" cy="12.5" r="1"/><path d="M10 7.5h4"/>`,
   erbulb:`<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3Z"/>`,
   erbook:`<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5Z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5Z"/>`,
@@ -4414,6 +4495,195 @@ async function tnCounts(){
                  + `<span class="tn-cnt" id="tnCntV">${I(P.tnvisit)}<b>${n(c.visitors || 0)} زائر</b><small>زاروا المنصة حتى الآن</small></span>`;
   } catch(e){}
 }
+/* ---------- TN-ORDER: jump targets, contest details, ordering, contact, owner inbox ---------- */
+function tnJump(h){
+  const id = h === "contests" ? "tnContests" : h === "plans" ? "tnPlH" : "acLogin";
+  requestAnimationFrame(() => { const el = document.getElementById(id) || document.querySelector(".ac-owner");
+    if (el) el.scrollIntoView({block: h === "login" ? "center" : "start"});
+    if (h === "login"){ const u = document.getElementById("acU"); if (u) u.focus({preventScroll:true}); } });
+}
+const TN_ABOUT = {
+  sj:["لوحة مجالات بأسئلة قيمتها 200 و400 و600", "كل فريق يختار مجالاته ويختار سؤاله في دوره", "وسائل مساعدة يختارها المقدّم من ست وسائل", "أسئلة مفتوحة من موسوعة تنافس أو من أسئلة جهتك"],
+  b4:["لوحة حروف من 3×3 إلى 5×5", "مربعات ذهبية بنقاط مضاعفة", "أربع بطاقات حظ تقلب النتيجة", "ورقة المقدّم تفتح على جواله"],
+  ss:["كل فريق يرفع صوره بنفسه", "كل إجابة صحيحة تزيل 10% من التغبيش", "التخمين المبكر يكسب نقاطًا أكثر", "شعار جهتك على شريحة العرض"],
+  mf:["شاشة واحدة بدون جوالات", "كل فريق يزرع ألغامه بالسر", "كاشف ودرع لكل فريق", "مكافأة «أخطر زارع» في النهاية"],
+  tk:["اللاعبون يدخلون بالباركود من جوالاتهم", "خمس ثوانٍ تكبيس قبل كل سؤال", "عدد الكبسات هو قيمة السؤال", "تكبيس جماعي يحسم نهاية الجولة"],
+  em:["تحديات قصيرة على جوال كل لاعب", "بناء المدينة والتجارة بين الفرق", "أزمات ومشاريع مشتركة", "الأذكى تخطيطًا يبني أزهى مدينة"],
+  er:["ثلاث غرف وثلاث قصص من السهل إلى الصعب", "كل لاعب يتجوّل في الغرفة من جواله", "ألغاز منطق وشيفرات وصندوق برمز سداسي", "شاشة العرض تعرض غرفة كل فريق حيّة"]
+};
+function tnAbout(k){
+  const c = CONTESTS.find(x => x.go === k); if (!c) return tn404();
+  window.scrollTo({top:0}); document.body.dataset.ct = k;
+  const duo = ["tk", "em", "er"].includes(k), can = gameOk(k), free = freeOn(k) && !SESSION && !CAN_EDIT;
+  const img = (f, a, cls) => `<figure class="ab-fig ${cls}"><img src="shots/${f}.webp" alt="${a}" loading="lazy" decoding="async"><figcaption>${a}</figcaption></figure>`;
+  $app.innerHTML = `<section class="section gut view tn-about"><div class="wrap">
+    <button type="button" class="btn sec ab-back" id="abBack">${I(P.back)}عودة</button>
+    <div class="ab-head"><span class="ab-ic">${I(P[c.icon])}</span><div><p class="eyebrow">${c.meta || "مسابقة"}</p><h1>${c.name}</h1><p class="lead">${c.desc}</p></div></div>
+    <div class="ab-shots${duo ? " duo" : ""}">${img(k, "شاشة العرض", "scr")}${duo ? img(k + "-p", "جوال المتسابق", "ph") : ""}</div>
+    <div class="ab-grid">
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2><p>${c.how}</p></div>
+      <div class="sj-box"><h2 class="sjh">أبرز ما فيها</h2><ul class="ab-list">${(TN_ABOUT[k] || []).map(x => `<li>${I(P.check)}${x}</li>`).join("")}</ul></div>
+    </div>
+    <div class="ab-cta">${can ? `<button type="button" class="btn lg" id="abPlay">${free ? "العب الآن مجانًا" : "العب الآن"}</button>` : `<a class="btn lg" href="#order-one">اطلبها لجهتك · ${k === "er" ? 99 : 39} ريال</a><a class="btn sec lg" href="#plans">كل الباقات</a>`}
+      <button type="button" class="btn sec lg" id="abBack2">عودة</button></div>
+    ${free ? `<p class="ab-note">«${c.name}» مجانية للجميع حتى ${freeDate(k)}.</p>` : ""}
+  </div></section>`;
+  const back = () => { if (history.length > 1 && TNS.prev && TNS.prev !== "about-" + k) history.back(); else nav("contests"); };
+  document.getElementById("abBack").onclick = back; document.getElementById("abBack2").onclick = back;
+  const pl = document.getElementById("abPlay"); if (pl) pl.onclick = () => nav(k);
+}
+/* ordering */
+const ORD = {plan:"", games:[], step:1, f:{org:"", person:"", phone:"", email:"", logo:""}, sent:false};
+const ORD_PLANS = {one:{n:"مسابقة واحدة", max:1}, five:{n:"خمس مسابقات", max:5}, all:{n:"كل المسابقات", max:99}};
+const ordPrice = () => { const er = ORD.games.includes("er"); return ORD.plan === "one" ? (er ? 99 : 39) : ORD.plan === "five" ? (er ? 199 : 149) : 299; };
+const toEnDigits = x => String(x || "").replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+const normPhone = x => { let d = toEnDigits(x).replace(/[^\d+]/g, ""); if (/^05\d{8}$/.test(d)) d = "966" + d.slice(1); return d.replace(/^\+/, ""); };
+function tnOrder(plan, again){
+  if (!ORD_PLANS[plan]) return nav("plans");
+  if (!again && (ORD.plan !== plan || ORD.sent)){ ORD.plan = plan; ORD.sent = false; ORD.step = 1; ORD.games = plan === "all" ? CONTESTS.filter(c => c.go).map(c => c.go) : []; }
+  window.scrollTo({top:0}); const P0 = ORD_PLANS[plan], live = CONTESTS.filter(c => c.go);
+  const stepper = `<ol class="ord-steps"><li class="${ORD.step >= 1 ? "on" : ""}"><i>1</i>المسابقات</li><li class="${ORD.step >= 2 ? "on" : ""}"><i>2</i>بيانات الجهة</li><li class="${ORD.sent ? "on" : ""}"><i>3</i>تم الطلب</li></ol>`;
+  if (ORD.sent){
+    $app.innerHTML = `<section class="section gut view"><div class="wrap ord-done">${stepper}
+      <span class="ord-wa">${I(P.tnwa)}</span><h1>تم استلام طلبك</h1>
+      <p class="lead">سيتم التواصل معكم عبر الواتساب على الرقم <b dir="ltr">${esc(ORD.f.phone)}</b> لإتمام الطلب.</p>
+      <p class="ord-sum">${P0.n} · ${ORD.games.map(g => (CONTESTS.find(c => c.go === g) || {}).name).join("، ")} · <b>${ordPrice()} ريال</b> دفعة واحدة</p>
+      <p><button type="button" class="btn lg" id="ordHome">الرجوع للرئيسية</button></p></div></section>`;
+    document.getElementById("ordHome").onclick = () => nav("start"); return;
+  }
+  const summary = `<div class="ord-bar"><span><b>${P0.n}</b> · ${ORD.games.length ? ORD.games.map(g => (CONTESTS.find(c => c.go === g) || {}).name).join("، ") : "لم تختر بعد"}</span><span class="ord-price">${ordPrice()} <small>ريال · دفعة واحدة</small></span></div>`;
+  if (ORD.step === 1){
+    const need = plan === "all" ? 0 : P0.max, full = plan !== "all" && ORD.games.length >= P0.max;
+    $app.innerHTML = `<section class="section gut view tn-order"><div class="wrap">${stepper}
+      <p class="eyebrow">اختر باقتك</p><h1>${P0.n}</h1>
+      <p class="lead">${plan === "all" ? "الباقة تشمل كل المسابقات الحالية، وكل مسابقة جديدة تنضاف لجهتك تلقائيًا." : plan === "one" ? "اختر المسابقة اللي تبيها لجهتك." : `اختر ${n(need)} مسابقات (${n(ORD.games.length)} من ${n(need)}).`}</p>
+      <div class="ord-grid">${live.map(c => { const on = ORD.games.includes(c.go), dis = plan === "all" || (!on && full && plan !== "one");
+        return `<button type="button" class="ord-pick${on ? " on" : ""}" data-pick="${c.go}" ${dis && plan === "all" ? "disabled" : ""} aria-pressed="${on}">
+          <img src="shots/${c.go}.webp" alt="" loading="lazy"><span class="ord-pick-tx">${I(P[c.icon])}<b>${c.name}</b><small>${c.go === "er" ? (plan === "five" ? "+50 ريال" : plan === "one" ? "99 ريال" : "مشمولة") : plan === "one" ? "39 ريال" : "مشمولة"}</small></span><i class="ord-tick">${I(P.check)}</i></button>`; }).join("")}</div>
+      ${summary}
+      <p class="ac-err" id="ordErr" role="alert"></p>
+      <div class="ord-acts"><a class="btn sec lg" href="#plans">رجوع للباقات</a><button type="button" class="btn lg" id="ordNext">التالي: بيانات الجهة</button></div>
+    </div></section>`;
+    $app.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => { const g = b.dataset.pick; if (plan === "all") return;
+      if (plan === "one") ORD.games = [g];
+      else if (ORD.games.includes(g)) ORD.games = ORD.games.filter(x => x !== g);
+      else if (ORD.games.length < P0.max) ORD.games = ORD.games.concat(g);
+      const y = scrollY; tnOrder(plan, true); scrollTo({top:y}); });
+    document.getElementById("ordNext").onclick = () => { const e = document.getElementById("ordErr");
+      if (plan === "one" && ORD.games.length !== 1) return e.textContent = "اختر مسابقة.";
+      if (plan === "five" && ORD.games.length !== Math.min(5, live.length)) return e.textContent = `اختر ${n(Math.min(5, live.length))} مسابقات.`;
+      ORD.step = 2; tnOrder(plan, true); };
+    return;
+  }
+  const f = ORD.f;
+  $app.innerHTML = `<section class="section gut view tn-order"><div class="wrap">${stepper}
+    <p class="eyebrow">${P0.n}</p><h1>بيانات الجهة</h1><p class="lead">نكمل طلبك ونتواصل معك عبر الواتساب.</p>
+    ${summary}
+    <form class="sj-box ord-form" id="ordF" novalidate>
+      <label><span>اسم الجهة</span><input id="ofOrg" maxlength="80" value="${esc(f.org)}" placeholder="مثال: مدرسة الرواد" required></label>
+      <label><span>اسم مقدّم الطلب</span><input id="ofPerson" maxlength="80" value="${esc(f.person)}" autocomplete="name" required></label>
+      <label><span>رقم الجوال (واتساب)</span><input id="ofPhone" dir="ltr" inputmode="tel" autocomplete="tel" maxlength="20" value="${esc(f.phone)}" placeholder="05xxxxxxxx" required></label>
+      <label><span>البريد الإلكتروني</span><input id="ofEmail" dir="ltr" type="email" autocomplete="email" maxlength="120" value="${esc(f.email)}" placeholder="name@example.com" required></label>
+      <div class="ord-logo"><span>شعار الجهة</span>
+        <label class="ss-logo ac-logo">${f.logo ? `<img src="${f.logo}" alt="شعار الجهة">` : `${I(P.ssimg)}<span>ارفع الشعار</span>`}<input type="file" accept="image/*" id="ofLogo" hidden></label>
+        ${f.logo ? `<button type="button" class="mini" id="ofNoLogo">إزالة</button>` : `<small class="sj-sub">صورة واضحة، PNG أو JPG.</small>`}</div>
+      <p class="ac-err" id="ordErr" role="alert"></p>
+      <div class="ord-acts"><button type="button" class="btn sec lg" id="ordBack">رجوع</button><button type="submit" class="btn lg" id="ordGo">إرسال الطلب</button></div>
+    </form></div></section>`;
+  const $ = id => document.getElementById(id);
+  const keep = () => { f.org = $("ofOrg").value; f.person = $("ofPerson").value; f.phone = $("ofPhone").value; f.email = $("ofEmail").value; };
+  $("ordBack").onclick = () => { keep(); ORD.step = 1; tnOrder(plan, true); };
+  $("ofLogo").onchange = async ev => { const file = ev.target.files && ev.target.files[0]; if (!file) return; keep();
+    try { const {url} = await ssShrink(file, 320, "image/png"); f.logo = url; } catch(x){} const y = scrollY; tnOrder(plan, true); scrollTo({top:y}); };
+  const nl = $("ofNoLogo"); if (nl) nl.onclick = () => { keep(); f.logo = ""; const y = scrollY; tnOrder(plan, true); scrollTo({top:y}); };
+  $("ordF").onsubmit = async ev => { ev.preventDefault(); keep(); const err = $("ordErr"); err.textContent = "";
+    const phone = normPhone(f.phone), email = f.email.trim();
+    if (f.org.trim().length < 2) return err.textContent = "اكتب اسم الجهة.";
+    if (f.person.trim().length < 2) return err.textContent = "اكتب اسم مقدّم الطلب.";
+    if (!/^\d{8,15}$/.test(phone)) return err.textContent = "رقم الجوال غير صحيح. مثال: 0512345678";
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return err.textContent = "البريد الإلكتروني غير صحيح.";
+    if (!f.logo) return err.textContent = "ارفع شعار الجهة.";
+    const go = $("ordGo"); go.disabled = true; go.textContent = "جارٍ الإرسال…";
+    const payload = {plan, games:ORD.games, price:ordPrice(), org:f.org.trim(), person:f.person.trim(), phone, email, logo:f.logo};
+    try {
+      let r = "ok";
+      if (window.TN && TN.order) r = await TN.order(payload);
+      else { const all = store.get("tn-orders", []); all.unshift(Object.assign({id:Date.now(), at:new Date().toISOString(), status:"new"}, payload)); store.set("tn-orders", all); }
+      if (r !== "ok") throw new Error(r);
+      f.phone = toEnDigits(f.phone); ORD.sent = true; tnOrder(plan, true);
+    } catch(x){ go.disabled = false; go.textContent = "إرسال الطلب";
+      err.textContent = /phone/.test(x.message) ? "رقم الجوال غير صحيح." : /email/.test(x.message) ? "البريد الإلكتروني غير صحيح." : /logo/.test(x.message) ? "الشعار كبير، جرّب صورة أصغر." : "تعذّر إرسال الطلب الآن. حاول مرة ثانية."; }
+  };
+}
+/* contact us */
+const CT = {kind:"inquiry", sent:false};
+const CT_KINDS = {inquiry:"استفسار", suggestion:"مقترح", complaint:"شكوى"};
+function tnContact(){
+  window.scrollTo({top:0});
+  if (CT.sent){ $app.innerHTML = `<section class="section gut view"><div class="wrap ord-done"><span class="ord-wa">${I(P.tnchat)}</span><h1>وصلتنا رسالتك</h1>
+      <p class="lead">شكرًا لك. نراجع ${CT_KINDS[CT.kind]} ونرد عليك في أقرب وقت.</p><p><button type="button" class="btn lg" id="ctHome">الرجوع للرئيسية</button> <button type="button" class="btn sec lg" id="ctNew">رسالة جديدة</button></p></div></section>`;
+    document.getElementById("ctHome").onclick = () => nav("start"); document.getElementById("ctNew").onclick = () => { CT.sent = false; tnContact(); }; return; }
+  $app.innerHTML = `<section class="section gut view tn-order"><div class="wrap">
+    <p class="eyebrow">نسعد بسماعك</p><h1>تواصل معنا</h1><p class="lead">اكتب استفسارك أو مقترحك أو شكواك، ونرد عليك على الجوال أو البريد.</p>
+    <form class="sj-box ord-form" id="ctF" novalidate>
+      <div class="seg" role="radiogroup" aria-label="نوع الرسالة">${Object.entries(CT_KINDS).map(([k, v]) => `<button type="button" role="radio" data-ck="${k}" aria-checked="${CT.kind === k}">${v}</button>`).join("")}</div>
+      <label><span>الاسم</span><input id="ctName" maxlength="80" autocomplete="name" required></label>
+      <div class="g2"><label><span>رقم الجوال</span><input id="ctPhone" dir="ltr" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="05xxxxxxxx"></label>
+        <label><span>البريد الإلكتروني</span><input id="ctEmail" dir="ltr" type="email" autocomplete="email" maxlength="120" placeholder="name@example.com"></label></div>
+      <small class="sj-sub">اكتب الجوال أو البريد، أو الاثنين.</small>
+      <label><span>رسالتك</span><textarea id="ctBody" rows="5" maxlength="2000" required></textarea></label>
+      <p class="ac-err" id="ctErr" role="alert"></p>
+      <div class="ord-acts"><button type="submit" class="btn lg" id="ctGo">إرسال</button></div>
+    </form></div></section>`;
+  const $ = id => document.getElementById(id);
+  $app.querySelectorAll("[data-ck]").forEach(b => b.onclick = () => { CT.kind = b.dataset.ck; $app.querySelectorAll("[data-ck]").forEach(x => x.setAttribute("aria-checked", x === b)); });
+  $("ctF").onsubmit = async ev => { ev.preventDefault(); const err = $("ctErr"); err.textContent = "";
+    const name = $("ctName").value.trim(), phone = $("ctPhone").value.trim() ? normPhone($("ctPhone").value) : "", email = $("ctEmail").value.trim(), body = $("ctBody").value.trim();
+    if (name.length < 2) return err.textContent = "اكتب اسمك.";
+    if (!phone && !email) return err.textContent = "اكتب رقم الجوال أو البريد الإلكتروني عشان نرد عليك.";
+    if (phone && !/^\d{8,15}$/.test(phone)) return err.textContent = "رقم الجوال غير صحيح.";
+    if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return err.textContent = "البريد الإلكتروني غير صحيح.";
+    if (body.length < 5) return err.textContent = "اكتب رسالتك.";
+    const go = $("ctGo"); go.disabled = true; go.textContent = "جارٍ الإرسال…";
+    const payload = {kind:CT.kind, name, phone, email, body};
+    try { let r = "ok";
+      if (window.TN && TN.contact) r = await TN.contact(payload);
+      else { const all = store.get("tn-msgs", []); all.unshift(Object.assign({id:Date.now(), at:new Date().toISOString(), status:"new"}, payload)); store.set("tn-msgs", all); }
+      if (r !== "ok") throw new Error(r); CT.sent = true; tnContact();
+    } catch(x){ go.disabled = false; go.textContent = "إرسال"; err.textContent = "تعذّر الإرسال الآن. حاول مرة ثانية."; } };
+}
+/* owner inbox: orders and messages */
+const ORD_ST = {new:"جديد", contacted:"تم التواصل", done:"مكتمل", cancelled:"ملغي"};
+const waLink = p => "https://wa.me/" + normPhone(p);
+async function tnInbox(){
+  if (!CAN_EDIT) return; const host = document.querySelector(".ac-admin"); if (!host) return;
+  let orders = [], msgs = [];
+  try { if (window.TN && TN.inbox){ [orders, msgs] = await Promise.all([TN.inbox("orders"), TN.inbox("messages")]); } else { orders = store.get("tn-orders", []); msgs = store.get("tn-msgs", []); } } catch(e){}
+  if (!document.body.contains(host)) return;
+  const sec = document.createElement("section"); sec.className = "tn-rep tn-inbox"; sec.id = "tnInbox";
+  const day = t => { const d = new Date(t); return isNaN(d) ? "" : d.toLocaleString("en-GB", {timeZone:"Asia/Riyadh", day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"}); };
+  const nm = g => (CONTESTS.find(c => c.go === g) || {}).name || g;
+  sec.innerHTML = `<h2>طلبات الباقات <small>${n(orders.filter(o => o.status === "new").length)} جديد</small></h2>
+    ${orders.length ? `<div class="inb-list">${orders.map(o => `<article class="inb-card st-${esc(o.status)}">
+      <div class="inb-top">${o.logo ? `<img src="${o.logo}" alt="">` : ""}<div><b>${esc(o.org)}</b><small>${esc(o.person)} · ${day(o.at)}</small></div>
+        <select data-ost="${o.id}" aria-label="حالة الطلب">${Object.entries(ORD_ST).map(([k, v]) => `<option value="${k}" ${o.status === k ? "selected" : ""}>${v}</option>`).join("")}</select></div>
+      <p><b>${(ORD_PLANS[o.plan] || {}).n || o.plan}</b> · ${(o.games || []).map(nm).join("، ")} · <b>${n(o.price || 0)} ريال</b></p>
+      <div class="inb-acts"><a class="mini" href="${waLink(o.phone)}" target="_blank" rel="noopener">${I(P.tnwa)}<span dir="ltr">${esc(o.phone)}</span></a><a class="mini" href="mailto:${esc(o.email)}">${I(P.tnmail)}<span dir="ltr">${esc(o.email)}</span></a></div>
+    </article>`).join("")}</div>` : `<p class="lead">لا توجد طلبات بعد.</p>`}
+    <h2 style="margin-top:28px">رسائل التواصل <small>${n(msgs.filter(m => m.status === "new").length)} جديدة</small></h2>
+    ${msgs.length ? `<div class="inb-list">${msgs.map(m => `<article class="inb-card st-${esc(m.status)}">
+      <div class="inb-top"><span class="inb-kind k-${esc(m.kind)}">${CT_KINDS[m.kind] || m.kind}</span><div><b>${esc(m.name)}</b><small>${day(m.at)}</small></div>
+        <label class="inb-done"><input type="checkbox" data-mst="${m.id}" ${m.status === "done" ? "checked" : ""}> تم الرد</label></div>
+      <p class="inb-body">${esc(m.body)}</p>
+      <div class="inb-acts">${m.phone ? `<a class="mini" href="${waLink(m.phone)}" target="_blank" rel="noopener">${I(P.tnwa)}<span dir="ltr">${esc(m.phone)}</span></a>` : ""}${m.email ? `<a class="mini" href="mailto:${esc(m.email)}">${I(P.tnmail)}<span dir="ltr">${esc(m.email)}</span></a>` : ""}</div>
+    </article>`).join("")}</div>` : `<p class="lead">لا توجد رسائل بعد.</p>`}`;
+  host.appendChild(sec);
+  const setSt = async (table, id, st, localKey) => {
+    if (window.TN && TN.setStatus) await TN.setStatus(table, id, st);
+    else { const all = store.get(localKey, []); const x = all.find(r => String(r.id) === String(id)); if (x) x.status = st; store.set(localKey, all); } };
+  sec.querySelectorAll("[data-ost]").forEach(sel => sel.onchange = async () => { try { await setSt("orders", sel.dataset.ost, sel.value, "tn-orders"); sel.closest(".inb-card").className = "inb-card st-" + sel.value; } catch(e){ flash("تعذّر الحفظ."); } });
+  sec.querySelectorAll("[data-mst]").forEach(cb => cb.onchange = async () => { const st = cb.checked ? "done" : "new"; try { await setSt("messages", cb.dataset.mst, st, "tn-msgs"); cb.closest(".inb-card").className = "inb-card st-" + st; } catch(e){ cb.checked = !cb.checked; } });
+}
 async function tnFreeBox(){
   if (!CAN_EDIT) return; const host = document.querySelector(".ac-admin"); if (!host) return;
   const today = new Date(Date.now() + 3 * 3600e3).toISOString().slice(0, 10);
@@ -4468,7 +4738,7 @@ function route(){
     if (orgCanEdit()){ orgqEnter(); renderLinks("admin"); return admin(); }
     renderLinks(""); return acGate(); }
   orgqLeave();
-  if (h === "accounts"){ game = null; renderLinks("accounts"); return acAdmin().then(tnFreeBox).then(tnReport); }
+  if (h === "accounts"){ game = null; renderLinks("accounts"); return acAdmin().then(tnFreeBox).then(tnInbox).then(tnReport); }
   if (!gameOk(tnCt(h)) && /^(sj|sjgame|b4|b4game|b4host|ss|ssgame|tk|tkplay|er|erhost|erplay|em|emplay|mf|mfplay)$/.test(h)){ game = null; renderLinks(""); return SESSION ? acNoGame(tnCt(h)) : acGate(); }
   if (h.startsWith("join")){ game = null; renderLinks(""); return joinPage(); }
   if (h === "em" || h === "emplay" || h.startsWith("emjoin")){ game = null; renderLinks("");
@@ -4496,6 +4766,10 @@ function route(){
     if (!BANK.length){ $app.innerHTML = `<div class="empty gut">لا توجد أسئلة بعد.</div>`; return; }
     return h === "sjgame" && SJ ? (SJ.cur ? sjQuestion() : sjBoard()) : sjSetup(); }
   if (h === "" || h === "home" || h === "start"){ game = null; renderLinks("start"); landing(); return tnCounts(); }
+  if (h === "contests" || h === "plans" || h === "login"){ game = null; renderLinks(h); landing(); tnJump(h); return tnCounts(); }
+  if (h.startsWith("about-")){ game = null; renderLinks("contests"); return tnAbout(h.slice(6)); }
+  if (h.startsWith("order-")){ game = null; renderLinks("plans"); return tnOrder(h.slice(6)); }
+  if (h === "contact"){ game = null; renderLinks("contact"); return tnContact(); }
   if (!/^(cats|level|type|teams|play)$/.test(h)){ game = null; renderLinks(""); return tn404(); }
   renderLinks("cats");
   if (!BANK.length){ $app.innerHTML = `<div class="empty gut">لا توجد أسئلة بعد. أضفها من <a href="#admin">إدارة الأسئلة</a>.</div>`; return; }
@@ -4508,11 +4782,12 @@ function route(){
   return home();  // #cats and anything unknown inside the encyclopedia
 }
 function renderLinks(cur){
-  document.getElementById("links").innerHTML = `<button type="button" data-nav="start" aria-current="${cur==="start"}">الرئيسية</button><button type="button" data-nav="cats" aria-current="${cur==="cats"}">موسوعة الأسئلة</button>`
+  document.getElementById("links").innerHTML = `<button type="button" data-nav="contests" aria-current="${cur==="contests"}">مسابقات تنافس</button><button type="button" data-nav="plans" aria-current="${cur==="plans"}">الباقات</button><button type="button" data-nav="contact" aria-current="${cur==="contact"}">تواصل معنا</button>`
     + (CAN_EDIT ? `<button type="button" data-nav="admin" aria-current="${cur==="admin"}">إدارة الأسئلة</button><button type="button" data-nav="accounts" aria-current="${cur==="accounts"}">حسابات الجهات</button>`
        : orgCanEdit() ? `<button type="button" data-nav="admin" aria-current="${cur==="admin"}">إدارة الأسئلة</button>` : "")
-    + (SESSION ? `<button type="button" id="acNavOut">خروج</button>` : "");
+    + (SESSION ? `<button type="button" class="nav-out" id="acNavOut">تسجيل الخروج</button>` : (CAN_EDIT && window.TN) ? `<button type="button" class="nav-out" id="acNavOwnerOut">تسجيل الخروج</button>` : CAN_EDIT ? "" : `<button type="button" class="nav-login" data-nav="login" aria-current="${cur==="login"}">تسجيل الدخول</button>`);
   const o = document.getElementById("acNavOut"); if (o) o.onclick = acLogout;
+  const oo = document.getElementById("acNavOwnerOut"); if (oo) oo.onclick = () => TN.ownerLogout().then(() => { location.hash = ""; location.reload(); });
   document.querySelectorAll(".flink").forEach(x => x.hidden = !(CAN_EDIT || orgCanEdit()));
   document.querySelectorAll("[data-nav]").forEach(b => b.onclick = () => nav(b.dataset.nav));
 }
@@ -4830,18 +5105,18 @@ const TNM = { sig: "", nums: new Map(), qs: new Map(), io: null, raf: 0,
   EASE: "cubic-bezier(.2,.8,.2,1)",
   Q: ".qtext,.b4-qt,.mf-qt,.er-q,.tk-qb,.ss-q,.sj-q",
   NOBUMP: /clock|timer|time|count|cd|code|pin|qr|-tick|mq/i };
-function tnmIn(el, d){ try { el.animate([{opacity:0, transform:"translateY(14px) scale(.98)"}, {opacity:1, transform:"none"}], {duration:460, delay:d, easing:TNM.EASE, fill:"backwards"}); } catch(e){} }
+function tnmIn(el, d){ try { el.animate([{opacity:0, transform:"translateY(26px) scale(.96)"}, {opacity:1, transform:"none"}], {duration:620, delay:d, easing:TNM.EASE, fill:"backwards"}); } catch(e){} }
 function tnmVisible(el){ const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight && r.width > 0; }
 function tnmEnter(view){
   if (!TNM.io) TNM.io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting){ tnmIn(x.target, +x.target.dataset.tnd || 0); delete x.target.dataset.tnd; TNM.io.unobserve(x.target); } }), {threshold:0.08});
   const blocks = []; view.querySelectorAll(".wrap").forEach(w => { if (w.closest(".gnav")) return; [...w.children].forEach(c => blocks.push(c)); });
   const queue = (el, d) => { if (tnmVisible(el)) tnmIn(el, d); else { el.dataset.tnd = String(Math.min(d, 120)); TNM.io.observe(el); } };
-  blocks.slice(0, 30).forEach((b, i) => queue(b, Math.min(i * 60, 360)));
+  blocks.slice(0, 30).forEach((b, i) => queue(b, Math.min(i * 90, 540)));
   let grids = 0;
   view.querySelectorAll("div,ul,ol,section").forEach(g => {
     if (grids > 24 || g.children.length < 3 || g.children.length > 140 || g.querySelector("canvas")) return;
     const cs = getComputedStyle(g); if (cs.display !== "grid" && cs.display !== "inline-grid") return;
-    grids++; [...g.children].forEach((c, i) => { if (c.offsetParent !== null) queue(c, 140 + Math.min(i * 28, 520)); });
+    grids++; [...g.children].forEach((c, i) => { if (c.offsetParent !== null) queue(c, 160 + Math.min(i * 45, 700)); });
   });
 }
 function tnmQuestions(view){
@@ -4862,7 +5137,9 @@ function tnOdo(el, from, to, up, col){
   el.offsetWidth; di = 0;
   const tds = to.replace(/[^\d]/g, "").split("");
   el.querySelectorAll(".tn-odr").forEach((r, i) => { r.style.transitionDelay = (i * 60) + "ms"; r.style.transform = `translateY(-${(+tds[i]) * 10}%)`; });
-  try { const c = col || (up ? "var(--good)" : "var(--bad)"); el.animate([{color: c}, {color: c, offset:.6}, {}], {duration:1200, easing:"ease-out"}); } catch(e){}
+  try { const c = col || (up ? "#1FBF6A" : "#E5484D"), box = el.firstElementChild;
+    el.animate([{color: c}, {color: c, offset:.6}, {}], {duration:1300, easing:"ease-out"});
+    if (!col && box) box.animate([{transform:"scale(1)", textShadow:"none"}, {transform:"scale(1.4)", textShadow:`0 0 14px ${c}, 0 0 28px ${c}`, offset:.25}, {transform:"scale(1)", textShadow:`0 0 10px ${c}`, offset:.7}, {transform:"scale(1)", textShadow:"none"}], {duration:1100, easing:"cubic-bezier(.3,1.4,.5,1)"}); } catch(e){}
   clearTimeout(el._tnodoT); el._tnodoT = setTimeout(() => { if (el.dataset.tnodo === to){ delete el.dataset.tnodo; el.textContent = to; } }, 1400);
 }
 function tnmNumbers(view, fresh){
@@ -4928,13 +5205,13 @@ function tnHeroBind(){
 function tnPlans(){
   const P = [
     {n:"الموسوعة", who:"للجميع، بدون تسجيل", price:"مجانًا", f:[`${n(BANK.length)} سؤال في ${n(allCats().length)} مجالًا`, "ثلاث مستويات وثلاثة أنواع أسئلة", "من فريقين إلى 50 فريقًا"], cta:"ادخل الموسوعة", go:"cats"},
-    {n:"مسابقة واحدة", who:"اختر المسابقة اللي تناسبك", price:`39 <small>ريال · دفعة واحدة</small>`, f:["غرفة الهروب: 99 ريال", "تبقى لجهتك دائمًا", "شعار الجهة وألوانها وأسئلتها الخاصة", "رمز مقدّم ودخول اللاعبين بالباركود"], cta:"دخول الجهات"},
-    {n:"خمس مسابقات", who:"تختارها الجهة", price:`149 <small>ريال · دفعة واحدة</small>`, f:["199 ريال إذا كانت غرفة الهروب منها", "توفّر 24% عن الشراء بالمفرد", "تبقى لجهتك دائمًا", "شعار الجهة وألوانها وأسئلتها الخاصة"], cta:"دخول الجهات"},
-    {n:"كل المسابقات", who:"العشر كاملة مع غرفة الهروب", price:`299 <small>ريال · دفعة واحدة</small>`, hot:1, f:["كل المسابقات الحالية والقادمة", "توفّر 34% عن الشراء بالمفرد", "تبقى لجهتك دائمًا", "شعار الجهة وألوانها وأسئلتها الخاصة"], cta:"دخول الجهات"}];
+    {n:"مسابقة واحدة", plan:"one", who:"اختر المسابقة اللي تناسبك", price:`39 <small>ريال · دفعة واحدة</small>`, f:["غرفة الهروب: 99 ريال", "تبقى لجهتك دائمًا", "شعار الجهة وألوانها وأسئلتها الخاصة", "رمز مقدّم ودخول اللاعبين بالباركود"], cta:"دخول الجهات"},
+    {n:"خمس مسابقات", plan:"five", who:"تختارها الجهة", price:`149 <small>ريال · دفعة واحدة</small>`, f:["199 ريال إذا كانت غرفة الهروب منها", "توفّر 24% عن الشراء بالمفرد", "تبقى لجهتك دائمًا", "شعار الجهة وألوانها وأسئلتها الخاصة"], cta:"دخول الجهات"},
+    {n:"كل المسابقات", plan:"all", who:"العشر كاملة مع غرفة الهروب", price:`299 <small>ريال · دفعة واحدة</small>`, hot:1, f:["كل المسابقات الحالية والقادمة", "توفّر 34% عن الشراء بالمفرد", "تبقى لجهتك دائمًا", "شعار الجهة وألوانها وأسئلتها الخاصة"], cta:"دخول الجهات"}];
   return `<section class="tn-plans" aria-labelledby="tnPlH"><h2 class="tn-how-h" id="tnPlH">الاشتراكات</h2><p class="tn-how-sub">الموسوعة مجانية دائمًا. المسابقات تشتريها الجهة مرة واحدة وتبقى لها.</p>
     <div class="tn-plans-grid">${P.map(p => `<article class="tn-plan${p.hot ? " hot" : ""}">${p.hot ? `<span class="tag">الأوفر</span>` : ""}<h3>${p.n}</h3><p class="who">${p.who}</p>
       <div class="price">${p.price}</div><ul>${p.f.map(x => `<li>${x}</li>`).join("")}</ul>
-      ${p.go ? `<a class="btn${p.hot ? "" : " sec"}" href="#${p.go}">${p.cta}</a>` : `<button type="button" class="btn${p.hot ? "" : " sec"}" data-tnplan>${p.cta}</button>`}</article>`).join("")}</div></section>`;
+      ${p.go ? `<a class="btn sec" href="#${p.go}">${p.cta}</a>` : `<a class="btn${p.hot ? "" : " sec"}" href="#order-${p.plan}">اختر باقتك</a>`}</article>`).join("")}</div></section>`;
 }
 function tn404(){
   const pool = BANK.filter(q => (q.kind === "mcq" || q.kind === "tf") && q.options && q.options.length >= 2 && q.ai >= 0);
@@ -4982,7 +5259,7 @@ function landing(){
           <span>${n(BANK.length)} سؤال في ${n(cats)} مجالًا. اختر المجالات والصعوبة والنوع، والعب مع الفرق بدون تسجيل.</span>
           <em>ادخل الموسوعة ‹</em></span>
       </button>
-      <h2 class="band-h">المسابقات</h2>
+      <h2 class="band-h" id="tnContests">المسابقات</h2>
       ${ok ? "" : `<p class="band-sub">تعرّف على مسابقات تنافس. اللعب فيها متاح للجهات المشتركة بعد <a href="#" id="acJump">تسجيل الدخول</a>${CONTESTS.some(c => freeOn(c.go)) ? `، و${CONTESTS.filter(c => freeOn(c.go)).map(c => "«" + c.name + "»").join(" و")} مجانية للجميع لفترة محدودة` : ""}.</p>`}
       <div class="contests tn-cards">
         ${CONTESTS.filter(c => c.go).map(c => {
@@ -4992,7 +5269,7 @@ function landing(){
           const free = freeOn(c.go) && !(ok && gameOk(c.go) && !CAN_EDIT && SESSION && !Array.isArray(SESSION.games)), live = gameOk(c.go), locked = ok && !live;
           const body = `${c.go === "er" ? `<span class="c-badge">جديد · غرف ثلاثية الأبعاد</span>` : free ? `<span class="c-badge free">مجانية للجميع حتى ${freeDate(c.go)}</span>` : locked ? `<span class="c-badge lock">غير مشمولة في اشتراككم</span>` : ""}<span class="c-head">${I(P[c.icon])}<b>${c.name}</b></span>${views}<small>${c.how || c.desc}</small>${c.meta ? `<span class="c-meta">${c.meta}</span>` : ""}`;
           return live ? `<button type="button" class="contest live${c.go === "er" ? " feat" : ""}" data-go="${c.go}">${shot}<span class="c-body">${body}<span class="go">العب الآن</span></span></button>`
-                    : `<article class="contest info${c.go === "er" ? " feat" : ""}">${shot}<span class="c-body">${body}</span></article>`; }).join("")}
+                    : `<button type="button" class="contest info${c.go === "er" ? " feat" : ""}" data-about="${c.go}">${shot}<span class="c-body">${body}<span class="go sec">التفاصيل والصور</span></span></button>`; }).join("")}
       </div>
       <div class="contests-soon">
         ${CONTESTS.filter(c => !c.go).map(c => `<article class="contest">${I(P[c.icon])}<b>${c.name}</b><span class="soon">قيد التجهيز</span></article>`).join("")}
@@ -5037,7 +5314,9 @@ function landing(){
   acBindLogin(() => landing());
   tkInvite();
   emInvite();
+  $app.querySelectorAll("[data-about]").forEach(b => b.onclick = () => nav("about-" + b.dataset.about));
   $app.querySelectorAll("[data-go]").forEach(b => b.onclick = () => {
+    if (!SESSION && !CAN_EDIT) return nav("about-" + b.dataset.go);
     if (gameOk(b.dataset.go)) return nav(b.dataset.go);
     const f = document.getElementById("acLogin"); if (f){ f.scrollIntoView({behavior:"smooth", block:"center"}); setTimeout(() => { const u = document.getElementById("acU"); if (u) u.focus({preventScroll:true}); }, 400); }
   });

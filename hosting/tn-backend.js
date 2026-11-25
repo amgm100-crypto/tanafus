@@ -120,6 +120,11 @@
     /* organisation's own questions (TN-ORGQ): token from TN.login / TN.pinLogin */
     async orgqGet(tok){ const { data, error } = await sb.rpc("tn_orgq_get", { p_tok: tok }); if (error) throw error; return data; },
     async orgqSave(tok, items){ const { data, error } = await sb.rpc("tn_orgq_save", { p_tok: tok, p_items: items }); if (error) throw error; return data; },
+    /* plan orders, contact messages and the owner's inbox (TN-ORDER) */
+    async order(p){ const { data, error } = await sb.rpc("tn_order", { p }); if (error) throw error; return data; },
+    async contact(p){ const { data, error } = await sb.rpc("tn_contact", { p }); if (error) throw error; return data; },
+    async inbox(table){ const { data, error } = await sb.from(table).select("*").order("at", { ascending: false }).limit(300); if (error) throw error; return data || []; },
+    async setStatus(table, id, status){ const { error } = await sb.from(table).update({ status }).eq("id", id); if (error) throw error; },
     /* counters and play log (TN-ID) */
     async visit(vid){ await sb.rpc("tn_visit", { p_vid: vid }); },
     async play(acct, contest){ await sb.rpc("tn_play", { p_acct: acct || "", p_contest: contest }); },
