@@ -1,40 +1,48 @@
 <!doctype html>
-<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"></head><body>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"></head><body>
 <title>تنافس</title>
+<meta name="description" content="تنافس: مسابقات ثقافية جماعية للمدارس والأندية والجهات، وموسوعة أكثر من 6,700 سؤال مجانية.">
+<meta name="theme-color" content="#26323E">
+<meta property="og:type" content="website"><meta property="og:locale" content="ar_SA"><meta property="og:site_name" content="تنافس">
+<meta property="og:title" content="تنافس · مسابقات ثقافية للجهات"><meta property="og:description" content="تنافس: مسابقات ثقافية جماعية للمدارس والأندية والجهات، وموسوعة أكثر من 6,700 سؤال مجانية.">
+<meta property="og:image" content="https://amgm100-crypto.github.io/tanafus/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='28' fill='%231E2F4D'/%3E%3Cg fill='%23fff'%3E%3Crect x='28' y='74' width='64' height='12'/%3E%3Crect x='80' y='50' width='12' height='36'/%3E%3Crect x='28' y='50' width='12' height='36'/%3E%3C/g%3E%3Crect x='44' y='30' width='12' height='12' fill='%233D95FF'/%3E%3Crect x='64' y='30' width='12' height='12' fill='%23FF6B61'/%3E%3C/svg%3E">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap">
 <style>
 /* Layout: Apple-style storefront — translucent global nav, centered headline, icon strip, gray promo tiles; game = one question card with a team turn strip */
 :root{
   --bg:#FFFFFF;
-  --bg-alt:#F2F5FA;
+  --bg-alt:#F8F8FA;
   --tile:#FFFFFF;
-  --ink:#1E2F4D;
-  --muted:#5F6D85;
-  --hair:#D5DCE7;
-  --blue:#0071E3;
-  --blue-link:#0066CC;
+  --ink:#26323E;
+  --muted:#5B656E;
+  --hair:#DFE1E5;
+  --blue:#0B7D65;
+  --blue-link:#0A6E59;
   --on-blue:#FFFFFF;
-  --nav:rgba(250,251,254,.82);
+  --nav:rgba(38,50,62,.94);
   --good:#248A3D; --good-soft:#E3F4E7;
   --bad:#D70015;  --bad-soft:#FCE6E8;
-  --red2:#E0413A;
-  --shadow:0 4px 24px rgba(30,47,77,.08);
-  --scrim:rgba(30,47,77,.38);
+  --red2:#D1B871;
+  --shadow:0 4px 24px rgba(38,50,62,.08);
+  --scrim:rgba(38,50,62,.42);
   --c1:#0071E3;--c2:#248A3D;--c3:#C93400;--c4:#8944AB;--c5:#D30F45;--c6:#0E7C86;--c7:#3634A3;--c8:#B25000;
-  --f:-apple-system,BlinkMacSystemFont,"SF Arabic","SF Pro Text","IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif;
-  --r:18px;
+  --f:"Readex Pro","IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"SF Arabic","Segoe UI",Tahoma,sans-serif;
+  --r:14px;
+  --gold:#D1B871;--gold-ink:#8F7128;--teal:#509CB5;--coral:#D07362;--purple:#83779F;--amber:#DBA24F;--sage:#439086;--slate:#26323E;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#14213A;--bg-alt:#1A2944;--tile:#22355A;--ink:#EEF2F9;--muted:#A9B6CC;--hair:#34496F;--blue:#3D95FF;--blue-link:#6AAEFF;--on-blue:#FFFFFF;
-  --nav:rgba(20,33,58,.82);--red2:#FF6B61;--good:#3FD27A;--good-soft:#1C4237;--bad:#FF6B61;--bad-soft:#4A2A3A;--shadow:none;--scrim:rgba(10,18,34,.55);
+  --bg:#1C252F;--bg-alt:#212B36;--tile:#2A3541;--ink:#F1F3F5;--muted:#A9B2BC;--hair:#3A4654;--blue:#24A385;--blue-link:#5CC6AA;--on-blue:#FFFFFF;--gold-ink:#D1B871;
+  --nav:rgba(28,37,47,.94);--red2:#D1B871;--good:#3FD27A;--good-soft:#1C4237;--bad:#FF6B61;--bad-soft:#4A2A3A;--shadow:none;--scrim:rgba(10,18,34,.55);
   --c1:#0A84FF;--c2:#30D158;--c3:#FF9F0A;--c4:#BF5AF2;--c5:#FF375F;--c6:#40C8E0;--c7:#5E5CE6;--c8:#FFB340;color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#14213A;--bg-alt:#1A2944;--tile:#22355A;--ink:#EEF2F9;--muted:#A9B6CC;--hair:#34496F;--blue:#3D95FF;--blue-link:#6AAEFF;--on-blue:#FFFFFF;
-  --nav:rgba(20,33,58,.82);--red2:#FF6B61;--good:#3FD27A;--good-soft:#1C4237;--bad:#FF6B61;--bad-soft:#4A2A3A;--shadow:none;--scrim:rgba(10,18,34,.55);
+  --bg:#1C252F;--bg-alt:#212B36;--tile:#2A3541;--ink:#F1F3F5;--muted:#A9B2BC;--hair:#3A4654;--blue:#24A385;--blue-link:#5CC6AA;--on-blue:#FFFFFF;--gold-ink:#D1B871;
+  --nav:rgba(28,37,47,.94);--red2:#D1B871;--good:#3FD27A;--good-soft:#1C4237;--bad:#FF6B61;--bad-soft:#4A2A3A;--shadow:none;--scrim:rgba(10,18,34,.55);
   --c1:#0A84FF;--c2:#30D158;--c3:#FF9F0A;--c4:#BF5AF2;--c5:#FF375F;--c6:#40C8E0;--c7:#5E5CE6;--c8:#FFB340;color-scheme:dark}
 
 *{box-sizing:border-box}
@@ -312,14 +320,14 @@ footer a,.flink{color:var(--blue-link);text-decoration:none}
 /* سين جيم */
 .sj-setup{max-width:780px;margin:0 auto;display:grid;gap:16px}
 .sj-box{background:var(--bg-alt);border-radius:var(--r);padding:20px clamp(16px,3vw,24px);display:grid;gap:12px}
-.sj-box h3{margin:0;font-size:19px;font-weight:600;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
-.sj-box h3 small{font-size:13px;color:var(--muted);font-weight:400}
+.sj-box :is(h2,h3):not(.h4){margin:0;font-size:19px;font-weight:600;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sj-box :is(h2,h3):not(.h4) small{font-size:13px;color:var(--muted);font-weight:400}
 .sj-box .seg{background:color-mix(in srgb,var(--hair) 60%,transparent)}
 .sj-box .seg button{font-size:16px;padding:10px}
 .sj-sub{font-size:13px;color:var(--muted);margin:-4px 0 0}
 .sj-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .sj-two>div{display:grid;gap:10px;align-content:start}
-.sj-two h4{margin:0;font-size:15px;font-weight:600}
+.sj-two h2.h4{margin:0;font-size:15px;font-weight:600}
 .sj-names{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .sj-names input{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--tile);border:1px solid var(--hair);border-inline-start:5px solid var(--tc);border-radius:12px;padding:10px 14px;min-height:46px}
 .sj-names input:focus{outline:2px solid var(--blue);outline-offset:1px}
@@ -737,9 +745,9 @@ footer a,.flink{color:var(--blue-link);text-decoration:none}
 .ac-cred code{font-size:18px;font-weight:700;background:var(--tile);padding:2px 8px;border-radius:8px}
 .ac-cred small{color:var(--muted)}.ac-cred .mini{justify-self:start}
 @media (max-width:820px){.ac-login{grid-template-columns:1fr}.ac-grid{grid-template-columns:1fr}}
-.ac-pvbar{position:fixed;z-index:70;bottom:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:#1E2F4D;color:#fff;border-radius:980px;padding:8px 10px 8px 16px;box-shadow:0 8px 30px rgba(20,33,58,.35);font-size:14px;max-width:calc(100vw - 32px);flex-wrap:wrap;justify-content:center}
+.ac-pvbar{position:fixed;z-index:70;bottom:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:#26323E;color:#fff;border-radius:980px;padding:8px 10px 8px 16px;box-shadow:0 8px 30px rgba(20,33,58,.35);font-size:14px;max-width:calc(100vw - 32px);flex-wrap:wrap;justify-content:center}
 .ac-pvbar button{border:0;border-radius:980px;padding:6px 12px;font:inherit;font-size:13px;background:rgba(255,255,255,.16);color:#fff;cursor:pointer}
-.ac-pvbar #acPvEnd{background:#fff;color:#1E2F4D;font-weight:700}
+.ac-pvbar #acPvEnd{background:#fff;color:#26323E;font-weight:700}
 .empty{padding:80px 16px;text-align:center;color:var(--muted)}
 footer{background:var(--bg-alt);color:var(--muted);font-size:12px;padding-block:18px 26px;border-top:1px solid var(--hair)}
 footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
@@ -781,13 +789,13 @@ body.er-lock{overflow:hidden}
 .er-canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
 .er-canvas:active{cursor:grabbing}
 .er-tags{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.er-tag{position:absolute;left:0;top:0;pointer-events:auto;display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.94);color:#1E2F4D;border:0;border-radius:980px;padding:5px 12px 5px 10px;font-size:13px;font-weight:600;white-space:nowrap;box-shadow:0 3px 14px rgba(30,47,77,.18);transition:background .2s;will-change:transform}
+.er-tag{position:absolute;left:0;top:0;pointer-events:auto;display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.94);color:#26323E;border:0;border-radius:980px;padding:5px 12px 5px 10px;font-size:13px;font-weight:600;white-space:nowrap;box-shadow:0 3px 14px rgba(30,47,77,.18);transition:background .2s;will-change:transform}
 .er-tag i{width:9px;height:9px;border-radius:50%;background:#F5B942;box-shadow:0 0 0 3px rgba(245,185,66,.25);flex:none}
 .er-tag[data-state="solved"] i{background:#248A3D;box-shadow:0 0 0 3px rgba(36,138,61,.2)}
 .er-tag[data-state="solved"]{color:#248A3D}
 .er-tag[data-state="locked"] i{background:#D70015;box-shadow:0 0 0 3px rgba(215,0,21,.18)}
 .er-tag[data-state="cool"] i{background:#FF9F0A;animation:erblink .5s infinite}
-.er-tag.chest{background:#1E2F4D;color:#FFFFFF;font-size:14px;padding:7px 14px 7px 12px}
+.er-tag.chest{background:#26323E;color:#FFFFFF;font-size:14px;padding:7px 14px 7px 12px}
 .er-tag.chest[data-state="ready"]{background:#248A3D;animation:erpulse 1.2s ease-in-out infinite}
 .er-tag.chest i{background:#A9B6CC;box-shadow:none}
 .er-tag.chest[data-state="ready"] i{background:#FFFFFF}
@@ -804,33 +812,33 @@ body.er-lock{overflow:hidden}
 .er-chip b{font-variant-numeric:tabular-nums}
 .er-chip.team i{width:12px;height:12px;border-radius:50%;background:var(--tc)}
 .er-chip.ttl{display:grid;gap:0;padding:6px 14px;line-height:1.25}
-.er-chip.ttl small{font-size:11.5px;color:#5F6D85}
+.er-chip.ttl small{font-size:11.5px;color:#5B656E}
 .er-chip.ttl b{font-size:16px}
 .er-chip.hint svg{color:#E8B100}
-.er-time{display:grid;justify-items:center;background:#1E2F4D;color:#FFFFFF;border-radius:18px;padding:6px 22px 8px;box-shadow:0 6px 24px rgba(30,47,77,.3);min-width:150px}
+.er-time{display:grid;justify-items:center;background:#26323E;color:#FFFFFF;border-radius:18px;padding:6px 22px 8px;box-shadow:0 6px 24px rgba(30,47,77,.3);min-width:150px}
 .er-time small{font-size:11px;opacity:.75}
 .er-time b{font-size:30px;line-height:1.05;font-variant-numeric:tabular-nums;letter-spacing:.02em}
 .er-time.warm{background:#B25000}
 .er-time.hot{background:#D70015;animation:erhot 1s ease-in-out infinite}
 @keyframes erhot{50%{transform:scale(1.05)}}
-.er-ib{width:42px;height:42px;border-radius:14px;border:0;background:rgba(255,255,255,.92);display:grid;place-items:center;box-shadow:0 4px 18px rgba(30,47,77,.12);color:#1E2F4D}
+.er-ib{width:42px;height:42px;border-radius:14px;border:0;background:rgba(255,255,255,.92);display:grid;place-items:center;box-shadow:0 4px 18px rgba(30,47,77,.12);color:#26323E}
 .er-ib svg{width:20px;height:20px}
 .er-ib.x{color:#D70015}
 
 .er-bag{position:absolute;bottom:max(12px,env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);max-width:calc(100% - 24px);transition:transform .3s}
 .er-bag.pop{transform:translateX(-50%) scale(1.06)}
 .er-bag-in{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:22px;padding:8px 14px;box-shadow:0 8px 30px rgba(30,47,77,.18);overflow-x:auto;scrollbar-width:none}
-.er-bag-ic{display:grid;justify-items:center;color:#5F6D85;font-size:11px;gap:0}
+.er-bag-ic{display:grid;justify-items:center;color:#5B656E;font-size:11px;gap:0}
 .er-bag-ic svg{width:24px;height:24px;color:var(--tc)}
 .er-digits{display:flex;gap:6px}
-.er-digit{width:46px;height:58px;border-radius:12px;background:#F2F5FA;display:grid;place-items:center;align-content:center;gap:0;box-shadow:inset 0 0 0 1.5px #D5DCE7;color:#A9B6CC}
-.er-digit small{font-size:10.5px;color:#5F6D85;line-height:1.2}
+.er-digit{width:46px;height:58px;border-radius:12px;background:#F8F8FA;display:grid;place-items:center;align-content:center;gap:0;box-shadow:inset 0 0 0 1.5px #DFE1E5;color:#A9B6CC}
+.er-digit small{font-size:10.5px;color:#5B656E;line-height:1.2}
 .er-digit b{font-size:24px;line-height:1.1;font-weight:700;font-variant-numeric:tabular-nums}
 .er-digit.got{background:linear-gradient(170deg,#FFF6DA,#F4DDA0);box-shadow:inset 0 0 0 1.5px #D9B850;color:#6B4E00}
 .er-digit.big{width:76px;height:92px}
 .er-digit.big b{font-size:42px}
-.er-items{display:flex;gap:6px;border-inline-start:1px solid #D5DCE7;padding-inline-start:12px}
-.er-item{display:grid;justify-items:center;gap:2px;font-size:10.5px;color:#1E2F4D;min-width:58px}
+.er-items{display:flex;gap:6px;border-inline-start:1px solid #DFE1E5;padding-inline-start:12px}
+.er-item{display:grid;justify-items:center;gap:2px;font-size:10.5px;color:#26323E;min-width:58px}
 .er-item svg{width:28px;height:28px;color:#B25000;background:#FBEFC4;border-radius:10px;padding:4px}
 .er-item.used{opacity:.45}
 
@@ -841,12 +849,12 @@ body.er-lock{overflow:hidden}
 .er-panel.win{box-shadow:0 0 0 4px #3FD27A,0 20px 60px rgba(30,47,77,.28)}
 .er-ph{display:flex;align-items:center;gap:12px;padding:16px 18px 12px;border-bottom:1px solid #E6EBF2}
 .er-ph h3{margin:0;font-size:21px;line-height:1.2}
-.er-ph small{color:#5F6D85;font-size:12.5px}
+.er-ph small{color:#5B656E;font-size:12.5px}
 .er-ph>div{flex:1;min-width:0}
 .er-pic{width:46px;height:46px;border-radius:14px;background:color-mix(in srgb,var(--tc) 12%,#FFFFFF);color:var(--tc);display:grid;place-items:center;flex:none;font-size:24px;font-weight:700}
 .er-pic svg{width:26px;height:26px}
 .er-pic.gold{background:#FBEFC4;color:#8A6A00}
-.er-x{width:36px;height:36px;border-radius:50%;border:0;background:#F2F5FA;font-size:22px;line-height:1;color:#5F6D85;flex:none}
+.er-x{width:36px;height:36px;border-radius:50%;border:0;background:#F8F8FA;font-size:22px;line-height:1;color:#5B656E;flex:none}
 .er-pb{padding:14px 18px;overflow-y:auto;flex:1;display:grid;gap:12px;align-content:start;font-size:16px;line-height:1.6}
 .er-pb p{margin:0}
 .er-pf{display:flex;gap:10px;justify-content:space-between;padding:12px 18px 16px;border-top:1px solid #E6EBF2}
@@ -855,16 +863,16 @@ body.er-lock{overflow:hidden}
 .er-pf .btn small{font-size:12px;opacity:.8}
 .er-q{display:grid;gap:10px}
 .er-q p{margin:0}
-.er-small{font-size:13px;color:#5F6D85}
+.er-small{font-size:13px;color:#5B656E}
 .er-center{display:grid;place-items:center}
 .er-seq{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;padding:6px 0}
-.er-seq span{min-width:52px;height:52px;padding:0 8px;border-radius:14px;background:#F2F5FA;display:grid;place-items:center;font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.er-seq span{min-width:52px;height:52px;padding:0 8px;border-radius:14px;background:#F8F8FA;display:grid;place-items:center;font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
 .er-seq span.q{background:var(--tc);color:#FFFFFF}
 .er-seq i{font-style:normal;color:#A9B6CC}
-.er-eqs{display:grid;gap:8px;background:#F2F5FA;border-radius:16px;padding:14px}
-.er-eqs hr{border:0;border-top:2px dashed #D5DCE7;margin:4px 0;width:100%}
+.er-eqs{display:grid;gap:8px;background:#F8F8FA;border-radius:16px;padding:14px}
+.er-eqs hr{border:0;border-top:2px dashed #DFE1E5;margin:4px 0;width:100%}
 .er-eq{display:flex;align-items:center;justify-content:center;gap:8px;font-size:22px;font-weight:700}
-.er-eq b{color:#5F6D85;font-weight:600}
+.er-eq b{color:#5B656E;font-weight:600}
 .er-eq em{font-style:normal;min-width:44px;text-align:center;background:#FFFFFF;border-radius:10px;padding:2px 8px;font-variant-numeric:tabular-nums}
 .er-sym svg{width:36px;height:36px;display:block}
 .er-clock{width:170px;height:170px}
@@ -872,18 +880,18 @@ body.er-lock{overflow:hidden}
 .er-steps{margin:0;padding-inline-start:22px;display:grid;gap:4px}
 .er-steps li{padding:2px 0}
 .er-grid3{display:grid;grid-template-columns:repeat(3,64px);gap:6px;justify-content:center}
-.er-grid3 span{height:64px;border-radius:14px;background:#F2F5FA;display:grid;place-items:center;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.er-grid3 span{height:64px;border-radius:14px;background:#F8F8FA;display:grid;place-items:center;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
 .er-grid3 span.q{background:var(--tc);color:#FFFFFF}
-.er-grid3 span.e{background:#FFFFFF;box-shadow:inset 0 0 0 2px #D5DCE7}
-.er-code-word{font-size:40px;font-weight:700;text-align:center;letter-spacing:.3em;color:#3634A3;background:#F2F5FA;border-radius:16px;padding:10px}
+.er-grid3 span.e{background:#FFFFFF;box-shadow:inset 0 0 0 2px #DFE1E5}
+.er-code-word{font-size:40px;font-weight:700;text-align:center;letter-spacing:.3em;color:#3634A3;background:#F8F8FA;border-radius:16px;padding:10px}
 .er-alpha{display:grid;grid-template-columns:repeat(auto-fill,minmax(32px,1fr));gap:3px}
-.er-alpha span{display:grid;justify-items:center;background:#F2F5FA;border-radius:8px;padding:2px 0;line-height:1.2}
+.er-alpha span{display:grid;justify-items:center;background:#F8F8FA;border-radius:8px;padding:2px 0;line-height:1.2}
 .er-alpha b{font-size:17px}
-.er-alpha small{font-size:10px;color:#5F6D85}
+.er-alpha small{font-size:10px;color:#5B656E}
 .er-alpha.abj{grid-template-columns:repeat(auto-fill,minmax(40px,1fr))}
 .er-lamps{display:flex;gap:10px;justify-content:center;padding:8px 0}
-.er-lamp{display:grid;justify-items:center;gap:4px;border:0;background:none;padding:0;color:#5F6D85}
-.er-lamp i{width:44px;height:44px;border-radius:50%;background:#D5DCE7;box-shadow:inset 0 -4px 0 rgba(30,47,77,.12);transition:background .15s,box-shadow .15s}
+.er-lamp{display:grid;justify-items:center;gap:4px;border:0;background:none;padding:0;color:#5B656E}
+.er-lamp i{width:44px;height:44px;border-radius:50%;background:#DFE1E5;box-shadow:inset 0 -4px 0 rgba(30,47,77,.12);transition:background .15s,box-shadow .15s}
 .er-lamp.on i{background:#FFD60A;box-shadow:0 0 18px #FFD60A,inset 0 -4px 0 rgba(178,80,0,.25)}
 .er-lamp small{font-size:13px;font-weight:600;min-height:18px}
 .er-lamps.sw .er-lamp{cursor:pointer}
@@ -892,22 +900,22 @@ body.er-lock{overflow:hidden}
 .er-gate{font-style:normal;font-size:15px;border-radius:980px;padding:3px 10px;background:rgba(255,255,255,.14);font-weight:600}
 .er-gate.and{color:#7FE3EE}.er-gate.or{color:#FFD60A}.er-gate.not{color:#FF9A92}.er-gate.xor{color:#C4B5FD}
 .er-lockers{display:flex;gap:6px;justify-content:center}
-.er-lockers span{width:46px;height:60px;border-radius:8px;background:#D5DCE7;display:grid;place-items:center;font-weight:700;font-size:20px;color:#1E2F4D;box-shadow:inset 0 -4px 0 rgba(30,47,77,.12)}
+.er-lockers span{width:46px;height:60px;border-radius:8px;background:#DFE1E5;display:grid;place-items:center;font-weight:700;font-size:20px;color:#26323E;box-shadow:inset 0 -4px 0 rgba(30,47,77,.12)}
 .er-paths{width:100%;max-width:300px;height:auto}
 .er-kq{font-size:20px;font-weight:600;line-height:1.5}
-.er-num{width:100%;font:inherit;font-size:30px;font-weight:700;text-align:center;border:2px solid #D5DCE7;border-radius:16px;padding:10px;color:#1E2F4D;background:#FFFFFF;font-variant-numeric:tabular-nums;-webkit-user-select:text;user-select:text}
+.er-num{width:100%;font:inherit;font-size:30px;font-weight:700;text-align:center;border:2px solid #DFE1E5;border-radius:16px;padding:10px;color:#26323E;background:#FFFFFF;font-variant-numeric:tabular-nums;-webkit-user-select:text;user-select:text}
 .er-num:focus{outline:none;border-color:var(--tc)}
 .er-opts{display:grid;gap:8px}
-.er-opt{text-align:start;border:2px solid #E6EBF2;background:#F7F9FC;border-radius:14px;padding:12px 14px;font-size:16px;line-height:1.5;color:#1E2F4D}
+.er-opt{text-align:start;border:2px solid #E6EBF2;background:#F7F9FC;border-radius:14px;padding:12px 14px;font-size:16px;line-height:1.5;color:#26323E}
 .er-opt[aria-pressed="true"]{border-color:var(--tc);background:color-mix(in srgb,var(--tc) 8%,#FFFFFF);font-weight:600}
 .er-rose{position:relative;width:260px;height:260px;margin:0 auto;border-radius:50%;background:radial-gradient(circle,#FBF7EF 0 55%,#F2E6CC 56% 100%);box-shadow:inset 0 0 0 4px #C9A253}
 .er-rose-c{position:absolute;left:50%;top:50%;width:14px;height:14px;border-radius:50%;background:#C9A253;transform:translate(-50%,-50%)}
-.er-dir{position:absolute;transform:translate(-50%,-50%);border:0;border-radius:980px;padding:4px 8px;font-size:12px;background:#FFFFFF;box-shadow:0 2px 8px rgba(30,47,77,.15);color:#1E2F4D;white-space:nowrap}
+.er-dir{position:absolute;transform:translate(-50%,-50%);border:0;border-radius:980px;padding:4px 8px;font-size:12px;background:#FFFFFF;box-shadow:0 2px 8px rgba(30,47,77,.15);color:#26323E;white-space:nowrap}
 .er-dir[aria-pressed="true"]{background:var(--tc);color:#FFFFFF}
 .er-mapwrap{display:grid;justify-items:center;gap:4px}
 .er-n{font-weight:700;color:#D70015;font-size:14px}
 .er-map{display:grid;grid-template-columns:repeat(var(--w),minmax(0,1fr));gap:3px;width:min(100%,300px);background:#2C5D8F;padding:6px;border-radius:14px}
-.er-cell{aspect-ratio:1;border:0;border-radius:6px;background:#9CC9DF;display:grid;place-items:center;padding:0;color:#1E2F4D}
+.er-cell{aspect-ratio:1;border:0;border-radius:6px;background:#9CC9DF;display:grid;place-items:center;padding:0;color:#26323E}
 .er-cell.isl{background:#E7D3A2}
 .er-cell svg{width:70%;height:70%}
 .er-cell[aria-pressed="true"]{background:#FFFFFF;box-shadow:inset 0 0 0 3px #D70015}
@@ -933,9 +941,9 @@ body.er-lock{overflow:hidden}
 .er-dial{display:grid;justify-items:center;gap:2px;background:linear-gradient(180deg,#5C3F24,#7A5634);border-radius:12px;padding:6px 4px;width:50px;color:#FBEFC4}
 .er-dial small{font-size:14px;font-weight:700;color:#F0D683}
 .er-dial button{border:0;background:rgba(255,255,255,.12);color:#FBEFC4;border-radius:8px;width:38px;height:30px;font-size:13px}
-.er-dial b{font-size:30px;font-variant-numeric:tabular-nums;background:#FBF7EF;color:#1E2F4D;border-radius:8px;width:40px;text-align:center;line-height:1.3}
+.er-dial b{font-size:30px;font-variant-numeric:tabular-nums;background:#FBF7EF;color:#26323E;border-radius:8px;width:40px;text-align:center;line-height:1.3}
 
-.er-toast{position:absolute;bottom:120px;left:50%;transform:translate(-50%,20px);background:#1E2F4D;color:#FFFFFF;border-radius:980px;padding:10px 20px;font-size:15px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;max-width:calc(100% - 32px);text-align:center}
+.er-toast{position:absolute;bottom:120px;left:50%;transform:translate(-50%,20px);background:#26323E;color:#FFFFFF;border-radius:980px;padding:10px 20px;font-size:15px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;max-width:calc(100% - 32px);text-align:center}
 .er-toast.show{opacity:1;transform:translate(-50%,0)}
 .er-toast.good{background:#248A3D}
 .er-toast.bad{background:#D70015}
@@ -948,22 +956,22 @@ body.er-lock{overflow:hidden}
 .er-modal.story .er-card .btn,.er-card .btn{justify-self:center;margin-top:6px}
 .er-eyebrow{color:var(--red2)!important;font-weight:700;font-size:14px!important}
 .er-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;text-align:center}
-.er-facts span{background:#F2F5FA;border-radius:14px;padding:10px 6px;display:grid}
+.er-facts span{background:#F8F8FA;border-radius:14px;padding:10px 6px;display:grid}
 .er-facts b{font-size:24px;font-variant-numeric:tabular-nums}
-.er-facts small{font-size:12px;color:#5F6D85}
+.er-facts small{font-size:12px;color:#5B656E}
 .er-burst{justify-self:center;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,#FFF6DA,#F4DDA0);display:grid;place-items:center;color:#8A6A00;animation:erglow 1.6s ease-in-out infinite}
 .er-burst svg{width:46px;height:46px}
 @keyframes erglow{50%{box-shadow:0 0 0 18px rgba(244,221,160,.35)}}
 .er-modal.lose .er-burst{background:#FCE6E8;color:#D70015}
 .er-res{list-style:none;padding:0;margin:4px 0;display:grid;gap:6px;text-align:start}
-.er-res li{display:flex;gap:10px;align-items:center;background:#F2F5FA;border-radius:12px;padding:10px 14px}
+.er-res li{display:flex;gap:10px;align-items:center;background:#F8F8FA;border-radius:12px;padding:10px 14px}
 .er-res li b{flex:1}
-.er-res li span{font-size:13px;color:#5F6D85}
+.er-res li span{font-size:13px;color:#5B656E}
 .er-res li.ok span{color:#248A3D;font-weight:700}
 .er-res li.no span{color:#D70015}
 .er-res li em{font-style:normal;font-variant-numeric:tabular-nums;font-weight:700}
 .er-loading{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:14px;background:#E4ECF5;text-align:center;padding:20px}
-.er-spin{width:44px;height:44px;border-radius:50%;border:4px solid #D5DCE7;border-top-color:var(--tc,#0071E3);animation:erspin 1s linear infinite;justify-self:center}
+.er-spin{width:44px;height:44px;border-radius:50%;border:4px solid #DFE1E5;border-top-color:var(--tc,#0071E3);animation:erspin 1s linear infinite;justify-self:center}
 @keyframes erspin{to{transform:rotate(360deg)}}
 @media (max-width:734px){
   .er-hud{left:8px;right:8px;gap:6px}
@@ -1083,7 +1091,7 @@ button.em-cell:not(.on):hover{box-shadow:inset 0 0 0 2px var(--tc,var(--blue))}
 .em-st.st-need{background:color-mix(in srgb,var(--c3) 16%,var(--tile));color:var(--c3)}
 .em-side{display:grid;gap:12px;position:sticky;top:60px}
 .em-box{background:var(--tile);border-radius:18px;padding:14px;box-shadow:var(--shadow);display:grid;gap:8px}
-.em-box h4{margin:0;font-size:15px}
+.em-box h2.h4{margin:0;font-size:15px}
 .em-pj{display:grid;gap:4px}
 .em-pj>div:first-child{display:flex;justify-content:space-between;font-size:14px}
 .em-pj>div:first-child span{color:var(--muted);font-variant-numeric:tabular-nums}
@@ -1174,7 +1182,7 @@ button.em-cell:not(.on):hover{box-shadow:inset 0 0 0 2px var(--tc,var(--blue))}
 .em-tos button{border:1.5px solid var(--hair);background:var(--tile);border-radius:980px;padding:6px 12px;font-size:14px}
 .em-tos button.on{border-color:var(--tc);background:color-mix(in srgb,var(--tc) 14%,var(--tile));color:var(--tc);font-weight:600}
 .em-two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.em-two h4{margin:0 0 6px;font-size:14px}
+.em-two h2.h4{margin:0 0 6px;font-size:14px}
 .em-two1{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .em-amt{display:flex;align-items:center;gap:4px;background:var(--bg-alt);border-radius:10px;padding:4px;margin-bottom:4px}
 .em-amt i{font-style:normal;width:24px;text-align:center}
@@ -1296,7 +1304,7 @@ html[data-orole=host][data-orient=port][data-omis] #app{max-width:max(420px,calc
 .ori-hint.full{inset:0;background:rgba(20,33,58,.94);color:#fff;display:grid;place-items:center;padding:24px;text-align:center}
 .ori-hint.full .ori-card{display:grid;gap:12px;justify-items:center;max-width:380px}
 .ori-hint.full b{font-size:24px;line-height:1.3}
-.ori-hint.full p{margin:0;color:#D5DCE7;font-size:15px}
+.ori-hint.full p{margin:0;color:#DFE1E5;font-size:15px}
 .ori-hint .ori-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px}
 .ori-hint.full .mini{background:rgba(255,255,255,.14);color:#fff}
 .ori-dev{width:54px;height:88px;border:4px solid #fff;border-radius:12px;position:relative;margin-bottom:8px;animation:oriTurn 2.4s ease-in-out infinite}
@@ -1352,7 +1360,7 @@ button.mf-cell:hover:not([disabled]){filter:brightness(1.1);transform:translateY
 .mf-cell.open b{font-size:clamp(20px,3.6vw,40px);font-weight:800}
 .mf-cell.open .mf-by{position:absolute;bottom:6px;inset-inline-start:6px;width:9px;height:9px;border-radius:50%;background:var(--tc)}
 .mf-cell.n1 b{color:var(--c1)}.mf-cell.n2 b{color:var(--c2)}.mf-cell.n3 b{color:var(--c5)}.mf-cell.n4 b{color:var(--c4)}.mf-cell.n5 b,.mf-cell.n6 b,.mf-cell.n7 b,.mf-cell.n8 b{color:var(--c3)}
-.mf-cell.boom{background:radial-gradient(circle at 50% 50%,#FFB340 0 22%,#FF6B3D 45%,#D30F45 100%);color:#1E2F4D}
+.mf-cell.boom{background:radial-gradient(circle at 50% 50%,#FFB340 0 22%,#FF6B3D 45%,#D30F45 100%);color:#26323E}
 .mf-cell.boom.fresh{animation:mfShake .5s ease-out}
 .mf-cell.hidden-mine{background:color-mix(in srgb,var(--bad) 14%,var(--tile));color:var(--bad);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--bad) 40%,transparent)}
 .mf-cell.shut{background:color-mix(in srgb,var(--blue) 22%,var(--tile));color:var(--muted)}
@@ -1405,7 +1413,7 @@ button.mf-cell:hover:not([disabled]){filter:brightness(1.1);transform:translateY
 .mf-big.n1{color:var(--c1)}.mf-big.n2{color:var(--c2)}.mf-big.n3{color:var(--c5)}.mf-big.n4{color:var(--c4)}.mf-big.n0{color:var(--muted)}
 .mf-popcard.det .mf-big{color:inherit}
 .mf-popcard.det.mine .mf-big{color:var(--c3)}.mf-popcard.det.safe .mf-big{color:var(--good)}
-.mf-burst{width:140px;height:140px;border-radius:50%;display:grid;place-items:center;color:#1E2F4D;
+.mf-burst{width:140px;height:140px;border-radius:50%;display:grid;place-items:center;color:#26323E;
   background:radial-gradient(circle,#FFE08A 0 18%,#FFB340 32%,#FF6B3D 55%,#D30F45 72%,transparent 74%);animation:mfBurst .7s cubic-bezier(.2,1.6,.4,1)}
 .mf-burst .mf-mine{width:64px;height:64px}
 .mf-done .mf-rh{font-size:26px;margin:40px 0 4px}
@@ -1552,17 +1560,17 @@ a.btn{text-decoration:none}
 /* TN-CARDS: contest cards with in-game screenshots */
 .contests.tn-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .tn-cards .contest{padding:0;align-items:stretch;text-align:start;overflow:hidden;min-height:0;gap:0;border-radius:22px}
-.tn-cards .c-shot{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid color-mix(in srgb,var(--hair) 70%,transparent);background:radial-gradient(120% 90% at 85% 0%,color-mix(in srgb,#0071e3 15%,transparent),transparent 60%),linear-gradient(160deg,color-mix(in srgb,#0071e3 7%,var(--bg-alt)),var(--bg-alt))}
-.tn-cards .c-scr,.tn-cards .c-ph{position:absolute;display:block;overflow:hidden;background:#fff;border:solid #1d2b4f;box-shadow:0 18px 40px -18px rgba(16,32,72,.45),0 2px 6px rgba(16,32,72,.12);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.tn-cards .c-shot{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid color-mix(in srgb,var(--hair) 70%,transparent);background:radial-gradient(120% 90% at 85% 0%,color-mix(in srgb,#0B7D65 15%,transparent),transparent 60%),linear-gradient(160deg,color-mix(in srgb,#0B7D65 7%,var(--bg-alt)),var(--bg-alt))}
+.tn-cards .c-scr,.tn-cards .c-ph{position:absolute;display:block;overflow:hidden;background:#fff;border:solid #26323E;box-shadow:0 18px 40px -18px rgba(16,32,72,.45),0 2px 6px rgba(16,32,72,.12);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .tn-cards .c-scr{inset-inline:10%;top:9%;aspect-ratio:16/10;border-width:5px;border-radius:12px}
 .tn-cards .duo .c-scr{inset-inline:6% auto;width:76%;top:9%}
 .tn-cards .c-ph{inset-inline-end:7%;top:12%;height:84%;aspect-ratio:360/780;border-width:4px;border-radius:20px}
-.tn-cards .c-ph::before{content:"";position:absolute;z-index:1;left:50%;top:4px;transform:translateX(-50%);width:30%;height:8px;border-radius:8px;background:#1d2b4f}
+.tn-cards .c-ph::before{content:"";position:absolute;z-index:1;left:50%;top:4px;transform:translateX(-50%);width:30%;height:8px;border-radius:8px;background:#26323E}
 .tn-cards .c-scr img,.tn-cards .c-ph img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
 .tn-cards .contest:hover .c-scr{transform:translateY(-4px)}
 .tn-cards .contest:hover .c-ph{transform:translateY(-8px) rotate(1.5deg)}
 .tn-cards .c-views{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
-.tn-cards .c-views>span{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;color:#2b3c66;background:color-mix(in srgb,#0071e3 9%,transparent);padding:3px 10px;border-radius:99px}
+.tn-cards .c-views>span{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;color:#26323E;background:color-mix(in srgb,#0B7D65 9%,transparent);padding:3px 10px;border-radius:99px}
 .tn-cards .c-views>span.muted{color:#5b6785;background:color-mix(in srgb,var(--hair) 55%,transparent);font-weight:500}
 .tn-cards .contest .c-views svg{width:14px;height:14px;margin:0}
 .tn-cards .feat .c-shot{flex:0 0 58%;border-bottom:0;border-inline-start:1px solid color-mix(in srgb,var(--hair) 70%,transparent)}
@@ -1588,7 +1596,7 @@ a.btn{text-decoration:none}
 .tn-cards .feat small{font-size:16px}
 .tn-cards .feat .c-head svg{width:38px;height:38px}
 .tn-cards .feat .go{align-self:flex-start;padding-inline:28px;margin-top:14px}
-.tn-cards .feat .c-badge{display:inline-flex;font-size:13px;font-weight:600;color:var(--accent,#0071e3);background:color-mix(in srgb,var(--accent,#0071e3) 10%,transparent);padding:4px 12px;border-radius:99px}
+.tn-cards .feat .c-badge{display:inline-flex;font-size:13px;font-weight:600;color:var(--accent,#0B7D65);background:color-mix(in srgb,var(--accent,#0B7D65) 10%,transparent);padding:4px 12px;border-radius:99px}
 @media (max-width:820px){.tn-cards .contest.feat{flex-direction:column}.tn-cards .feat .c-shot{flex:none;border-inline-start:0;border-bottom:1px solid color-mix(in srgb,var(--hair) 70%,transparent)}.tn-cards .feat .c-body{padding:18px}.tn-cards .feat b{font-size:22px}.tn-cards .feat .go{align-self:stretch}}
 @media (max-width:980px){.contests.tn-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:620px){.contests.tn-cards{grid-template-columns:1fr}.contests-soon{grid-template-columns:1fr}}
@@ -1606,7 +1614,7 @@ a.btn{text-decoration:none}
 .er-vbot{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--tile);padding:12px 18px}
 .er-live .er-stp i{width:20px;height:20px;border-radius:7px}
 .er-live .er-stp i.chest.on{background:var(--good)}
-.er-live .er-left{font-size:28px;color:#1d2b4f}
+.er-live .er-left{font-size:28px;color:#26323E}
 .er-live .er-left.warm{color:#B25000}
 .er-live .er-left.hot{color:var(--bad)}
 .er-vdone{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:4px;background:color-mix(in srgb,var(--good) 55%,transparent);color:#fff;font-size:46px;font-weight:800;text-shadow:0 4px 18px rgba(16,32,72,.35)}
@@ -1614,6 +1622,83 @@ a.btn{text-decoration:none}
 .er-board:has(.er-live){grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));gap:18px}
 .er-board.coop:has(.er-live){max-width:900px;margin-inline:auto}
 @media (max-width:900px){.er-board:has(.er-live){grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}}
+/* TN-QA: former h4 sub-labels keep the h4 look */
+h2.h4{font-size:1em;font-weight:700;margin-block:1.33em}
+/* TN-QA: touch targets on touch screens */
+@media (pointer:coarse){
+  .cat .info{width:34px;height:34px}
+  .cat .info::after{content:"";position:absolute;inset:-6px}
+  #selAll,button.link{min-height:40px;padding-block:8px}
+  footer a,.flink{display:inline-block;padding-block:11px}
+  .logo{min-height:40px}
+  .mini{min-height:40px}
+  .seg button{min-width:42px;flex:1 0 auto}
+}
+/* TN-THEME: hadena-inspired palette and layout */
+html{scrollbar-color:var(--blue) transparent}
+::selection{background:color-mix(in srgb,var(--blue) 22%,transparent)}
+body{font-feature-settings:"ss01"}
+/* dark slate nav, light text, gold current link */
+.gnav{--ink:#F8F8FA;--blue-link:#D1B871;color:#F8F8FA;border-bottom:1px solid rgba(255,255,255,.08)}
+.gnav .links button{color:rgba(248,248,250,.82)}
+.gnav .links button:hover{background:rgba(255,255,255,.08)}
+.gnav .links button[aria-current="true"]{color:#D1B871}
+/* eyebrow: a row of coloured shapes then gold text */
+.eyebrow{color:var(--gold-ink)!important;font-weight:600}
+.eyebrow::before{content:"";display:inline-block;width:52px;height:10px;margin-inline-end:8px;vertical-align:-1px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 74 14'%3E%3Ccircle cx='7' cy='7' r='6' fill='%23D07362'/%3E%3Cpath d='M17 13 24 1 31 13Z' fill='%230B7D65'/%3E%3Crect x='35' y='1' width='5' height='12' rx='1.5' fill='%23D1B871'/%3E%3Crect x='46' y='2' width='9' height='9' rx='2' transform='rotate(45 50.5 6.5)' fill='%23509CB5'/%3E%3Ccircle cx='66' cy='7' r='6' fill='%2383779F'/%3E%3C/svg%3E") center/contain no-repeat}
+.ency-tx em,.join-tag,.er-eyebrow{color:var(--gold-ink)!important}
+.band-h::after,.section h1::after{width:64px!important;height:12px!important;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 74 14'%3E%3Ccircle cx='7' cy='7' r='6' fill='%23D07362'/%3E%3Cpath d='M17 13 24 1 31 13Z' fill='%230B7D65'/%3E%3Crect x='35' y='1' width='5' height='12' rx='1.5' fill='%23D1B871'/%3E%3Crect x='46' y='2' width='9' height='9' rx='2' transform='rotate(45 50.5 6.5)' fill='%23509CB5'/%3E%3Ccircle cx='66' cy='7' r='6' fill='%2383779F'/%3E%3C/svg%3E") center/contain no-repeat!important;border-radius:0!important}
+/* dark hero with geometric shapes */
+.tn-hero{--ink:#F8F8FA;--muted:rgba(248,248,250,.74);--tile:rgba(255,255,255,.05);--hair:rgba(255,255,255,.12);--gold-ink:#D1B871;
+  background:radial-gradient(rgba(255,255,255,.035) 1px,transparent 1.4px) 0 0/22px 22px,#26323E;color:#F8F8FA;padding-block:84px 64px!important}
+.tn-hero .hero-wm .wm,.tn-hero h1{color:#F8F8FA}
+.tn-hero p{color:rgba(248,248,250,.8)}
+.tn-hero .tn-fl i{border-radius:0;box-shadow:none!important;opacity:.92}
+.tn-hero .tn-fl i>b{color:transparent!important}
+.tn-hero .tn-fl i:nth-child(3n+1){clip-path:polygon(50% 6%,96% 92%,4% 92%);border-radius:0}
+.tn-hero .tn-fl i:nth-child(3n+2){border-radius:50%}
+.tn-hero .tn-fl i:nth-child(3n){border-radius:24%;--r:45deg}
+.tn-hero .tn-fl i:nth-child(8n+1){background:#0B7D65}
+.tn-hero .tn-fl i:nth-child(8n+2){background:#D1B871}
+.tn-hero .tn-fl i:nth-child(8n+3){background:#509CB5}
+.tn-hero .tn-fl i:nth-child(8n+4){background:#D07362}
+.tn-hero .tn-fl i:nth-child(8n+5){background:#83779F}
+.tn-hero .tn-fl i:nth-child(8n+6){background:#DBA24F}
+.tn-hero .tn-fl i:nth-child(8n+7){background:#439086}
+.tn-hero .tn-fl i:nth-child(8n){background:#D1B871}
+.tn-hero .intro-pts{display:inline-flex;gap:0;padding:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;margin-top:30px}
+.tn-hero .intro-pts>span{background:none;box-shadow:none;border-radius:0;padding:12px 20px}
+.tn-hero .intro-pts>span+span{border-inline-start:1px solid rgba(255,255,255,.1)}
+.tn-hero .intro-pts svg{color:#D1B871}
+.tn-hero .intro-pts b{color:#F8F8FA}
+.tn-hero .intro-pts small{color:rgba(248,248,250,.66)}
+.tn-hero .ac-hello{color:#F8F8FA}
+@media (max-width:620px){.tn-hero{padding-block:56px 40px!important}.tn-hero .intro-pts{display:grid}.tn-hero .intro-pts>span+span{border-inline-start:0;border-top:1px solid rgba(255,255,255,.1)}}
+/* encyclopedia tile: green tint, gold link */
+.ency{border-radius:20px}
+/* how-to-play: dark numbered cards with coloured titles and a corner shape */
+.tn-steps li{background:#26323E;color:#F8F8FA;box-shadow:0 18px 40px -22px rgba(38,50,62,.6)}
+.tn-steps li p{color:rgba(248,248,250,.74)}
+.tn-steps .num{background:none!important;-webkit-text-fill-color:currentColor;color:#D1B871}
+.tn-steps li:nth-child(2) .num{color:#509CB5}
+.tn-steps li:nth-child(3) .num{color:#D07362}
+.tn-steps .num small{color:rgba(248,248,250,.55);-webkit-text-fill-color:rgba(248,248,250,.55)}
+.tn-steps li::before{content:"";position:absolute;inset-inline-end:-26px;bottom:-26px;width:96px;height:96px;border-radius:26%;transform:rotate(45deg);background:rgba(255,255,255,.05)}
+.tn-steps li::after{background:linear-gradient(90deg,#0B7D65,#D1B871,#509CB5,#D07362)!important}
+/* contest cards */
+.tn-cards .c-shot{background:radial-gradient(120% 90% at 85% 0%,color-mix(in srgb,#0B7D65 14%,transparent),transparent 60%),linear-gradient(160deg,#F1F5F3,#ECEFF3)}
+.tn-cards .c-views>span{color:var(--ink)}
+.tn-cards .feat .c-badge{color:#6B5520;background:color-mix(in srgb,#D1B871 30%,transparent)}
+.contest .go{border-radius:999px}
+/* plans: gold badge on the featured plan */
+.tn-plan .badge,.tn-plans .badge{background:#D1B871!important;color:#26323E!important}
+/* buttons: pill shapes like the reference */
+.btn{border-radius:999px}
+/* footer: dark slate */
+footer{background:#26323E;color:rgba(248,248,250,.7);border-top:0}
+.band-sub a{color:var(--blue-link);font-weight:600}
+@media (max-width:620px){.tn-hero .tn-fl i{opacity:.45}}
+footer a,footer .flink{color:#D1B871}
 </style>
 
 <div dir="rtl" lang="ar">
@@ -3890,7 +3975,7 @@ async function load(){
     const local = DB ? null : store.get("bank-local", null);
     if (Array.isArray(local)){ RAW = local; SOURCE = "local"; }
     else for (const u of ["questions.json","../question-bank/questions.json"]){
-      try { const r = await fetch(u,{cache:"no-store"}); if (!r.ok) continue;
+      try { const r = await fetch(u,{cache:"no-cache"}); if (!r.ok) continue;
         const d = await r.json(); RAW = (Array.isArray(d) ? d : (d.questions||[])).filter(q => q && q.question); break; } catch(e){}
     }
   }
@@ -4125,9 +4210,9 @@ function dispSeg(k, side, cur){
 }
 function dispBox(k){
   const d = dispGet(k);
-  return `<div class="sj-box disp-box"><h3>خيارات العرض</h3><div class="sj-two">
-    <div><h4>شاشة العرض</h4>${dispSeg(k, "host", d.host)}<p class="sj-sub">اختر «طولي» إذا كانت الشاشة أو التلفزيون مثبّتًا بشكل عمودي، فتترتّب لوحة المسابقة في عمود واحد.</p></div>
-    <div><h4>شاشة المتسابقين</h4>${dispSeg(k, "player", d.player)}<p class="sj-sub">${DISP_DEV[k] ? "يصل الخيار إلى جوالات المتسابقين من غرفة المسابقة، وتترتّب صفحتهم على حسبه." : "هذه المسابقة تُلعب على شاشة العرض وحدها بدون جوالات، فيُحفظ هذا الخيار ولا يغيّر شيئًا فيها الآن."}</p></div>
+  return `<div class="sj-box disp-box"><h2 class="sjh">خيارات العرض</h2><div class="sj-two">
+    <div><h2 class="h4">شاشة العرض</h2>${dispSeg(k, "host", d.host)}<p class="sj-sub">اختر «طولي» إذا كانت الشاشة أو التلفزيون مثبّتًا بشكل عمودي، فتترتّب لوحة المسابقة في عمود واحد.</p></div>
+    <div><h2 class="h4">شاشة المتسابقين</h2>${dispSeg(k, "player", d.player)}<p class="sj-sub">${DISP_DEV[k] ? "يصل الخيار إلى جوالات المتسابقين من غرفة المسابقة، وتترتّب صفحتهم على حسبه." : "هذه المسابقة تُلعب على شاشة العرض وحدها بدون جوالات، فيُحفظ هذا الخيار ولا يغيّر شيئًا فيها الآن."}</p></div>
   </div></div>`;
 }
 document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-dv]"); if (!b) return;
@@ -4281,7 +4366,7 @@ function acPvBar(){
   document.getElementById("acPvG").onclick = () => acPreview("guest");
   document.getElementById("acPvEnd").onclick = () => acPreview("");
 }
-const AC_BASE = {c1:"#0071E3", c2:"#E0413A"};
+const AC_BASE = {c1:"#0B7D65", c2:"#D1B871"};
 const acHas = () => CAN_EDIT || !!SESSION;
 const acKey = u => String(u || "").trim().toLowerCase();
 const acValidUser = u => /^[a-z0-9._-]{3,24}$/.test(u);
@@ -5001,7 +5086,7 @@ function sjSetup(keepScroll){
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${SJ ? `<div class="sj-resume"><span>عندك لعبة جارية (${SJ.teams.map((t,i) => esc(t) + " " + n(SJ.scores[i])).join(" · ")}).</span><button class="btn" type="button" id="sjResume">متابعة اللعبة</button></div>` : ""}
-      <div class="sj-box"><h3>طريقة اللعب</h3>
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
           <li>يختار كل فريق مجالاته (مجالًا أو اثنين أو ثلاثة)، وتظهر كلها على لوحة واحدة، ولكل مجال 3 أو 6 أسئلة.</li>
           <li>في كل دور يختار الفريق صاحب الدور مجالًا وقيمة السؤال من اللوحة.</li>
@@ -5012,20 +5097,20 @@ function sjSetup(keepScroll){
         <div class="b4-pts"><span><b>200</b>سؤال سهل</span><span><b>400</b>سؤال متوسط</span><span class="g"><b>600</b>سؤال صعب</span></div>
         <p class="sj-sub" style="margin:0">لكل فريق ثلاث وسائل مساعدة تختارونها من الإعدادات، ويستخدم كل وسيلة مرة واحدة في دوره قبل إظهار الإجابة.</p>
       </div>
-      <div class="sj-box"><h3>الفرق<small>من 2 إلى 4</small></h3>
+      <div class="sj-box"><h2 class="sjh">الفرق<small>من 2 إلى 4</small></h2>
         ${sjSeg("data-sjt", T, [[2,"فريقان"],[3,"3 فرق"],[4,"4 فرق"]])}
         <div class="sj-names">${Array.from({length:T}, (_,i) => `<input type="text" maxlength="24" data-sjn="${i}" style="--tc:var(--c${i+1})" value="${esc(sjCfg.names[i])}" placeholder="${sjDefName(i)}" aria-label="اسم ${sjDefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>عدد المجالات لكل فريق</h4>${sjSeg("data-sjp", sjCfg.perTeam, [[1,"مجال"],[2,"مجالان"],[3,"3 مجالات"]])}</div>
-        <div><h4>عدد الأسئلة في كل مجال</h4>${sjSeg("data-sjq", sjCfg.perCat, [[3,"3 أسئلة"],[6,"6 أسئلة"]])}
+        <div><h2 class="h4">عدد المجالات لكل فريق</h2>${sjSeg("data-sjp", sjCfg.perTeam, [[1,"مجال"],[2,"مجالان"],[3,"3 مجالات"]])}</div>
+        <div><h2 class="h4">عدد الأسئلة في كل مجال</h2>${sjSeg("data-sjq", sjCfg.perCat, [[3,"3 أسئلة"],[6,"6 أسئلة"]])}
           <p class="sj-sub">${sjCfg.perCat === 3 ? "سؤال واحد بكل قيمة: 200 و400 و600." : "سؤالان بكل قيمة: 200 و400 و600."}</p></div>
       </div>
-      <div class="sj-box"><h3>الوسائل المساعدة<small>اختر ثلاثًا، ولكل فريق استخدام واحد لكل وسيلة · ${n(sjCfg.helpers.length)}/3</small></h3>
+      <div class="sj-box"><h2 class="sjh">الوسائل المساعدة<small>اختر ثلاثًا، ولكل فريق استخدام واحد لكل وسيلة · ${n(sjCfg.helpers.length)}/3</small></h2>
         <div class="sj-helps">${SJ_HELPERS.map(h => { const on = sjCfg.helpers.includes(h.id);
           return `<button type="button" class="sj-help" data-sjh="${h.id}" aria-pressed="${on}"><b>${h.name}</b><small>${h.desc}</small></button>`; }).join("")}</div>
       </div>
-      <div class="sj-box"><h3>مجالات الفرق<small>اختر الفريق ثم مجالاته، والمجال لا يتكرر بين فريقين</small></h3>
+      <div class="sj-box"><h2 class="sjh">مجالات الفرق<small>اختر الفريق ثم مجالاته، والمجال لا يتكرر بين فريقين</small></h2>
         <div class="sj-tabs" role="tablist">${Array.from({length:T}, (_,i) => `<button type="button" role="tab" class="sj-tab ${sjCfg.cats[i].length === sjCfg.perTeam ? "full" : ""}" data-sjtab="${i}" aria-selected="${i === tab}" style="--tc:var(--c${i+1})"><i></i><b>${esc(sjName(i))}</b><span>${n(sjCfg.cats[i].length)}/${n(sjCfg.perTeam)}</span></button>`).join("")}</div>
         <div class="sj-cats" style="--tc:var(--c${tab+1})">${cats.map((c,i) => { const o = owner[c], ok = sjAvail(c), m = catMeta(c);
           if (o != null && o !== tab) return `<button type="button" class="sj-cat taken" style="--tc:var(--c${o+1})" aria-disabled="true" data-sjc="${i}">${I(P[m.icon] || P.general)}<span><b>${esc(c)}</b><small>${esc(sjName(o))}</small></span></button>`;
@@ -5225,16 +5310,16 @@ function b4Setup(keepScroll){
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${B4 ? `<div class="sj-resume"><span>عندك مسابقة جارية: الجولة ${n(B4.round)} (${B4.names.map((t,i) => esc(t) + " " + n(B4.scores[i])).join(" · ")}).</span><button class="btn" type="button" id="b4Resume">متابعة المسابقة</button></div>` : ""}
-      <div class="sj-box"><h3>الفرق<small>من 2 إلى 4</small></h3>
+      <div class="sj-box"><h2 class="sjh">الفرق<small>من 2 إلى 4</small></h2>
         ${sjSeg("data-b4t", T, [[2,"فريقان"],[3,"3 فرق"],[4,"4 فرق"]])}
         <div class="sj-names">${Array.from({length:T}, (_,i) => `<input type="text" maxlength="24" data-b4n="${i}" style="--tc:${B4_COL[i]}" value="${esc(b4Cfg.names[i])}" placeholder="${b4DefName(i)}" aria-label="اسم ${b4DefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>حجم اللوحة</h4>${sjSeg("data-b4s", b4Cfg.n, [[3,"3×3"],[4,"4×4"],[5,"5×5"]])}
+        <div><h2 class="h4">حجم اللوحة</h2>${sjSeg("data-b4s", b4Cfg.n, [[3,"3×3"],[4,"4×4"],[5,"5×5"]])}
           <p class="sj-sub">${n(b4Cfg.n * b4Cfg.n)} مربعًا، منها ${n(b4Gold(b4Cfg.n))} ${b4Gold(b4Cfg.n) === 1 ? "ذهبي" : "ذهبية"}.</p></div>
-        <div><h4>وقت الإجابة</h4>${sjSeg("data-b4time", b4Cfg.time, B4_TIMES.map(t => [t, t + " ث"]))}</div>
+        <div><h2 class="h4">وقت الإجابة</h2>${sjSeg("data-b4time", b4Cfg.time, B4_TIMES.map(t => [t, t + " ث"]))}</div>
       </div>
-      <div class="sj-box"><h3>طريقة اللعب</h3>
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
           <li>يختار الفريق صاحب الدور مربعًا من اللوحة.</li>
           <li>يُطرح سؤال تبدأ إجابته بحرف المربع، ويُحتسب الحرف بعد «ال».</li>
@@ -5581,7 +5666,7 @@ function ssColors(canvas){
   const c1 = top[0], c2 = top.find(c => far(c, c1));
   return {c1: c1 ? hex(c1) : null, c2: c2 ? hex(c2) : null};
 }
-const ssOn = hex => { const v = parseInt(hex.slice(1), 16), r = v >> 16, g = (v >> 8) & 255, b = v & 255; return (r * 299 + g * 587 + b * 114) / 1000 > 150 ? "#1E2F4D" : "#FFFFFF"; };
+const ssOn = hex => { const v = parseInt(hex.slice(1), 16), r = v >> 16, g = (v >> 8) & 255, b = v & 255; return (r * 299 + g * 587 + b * 114) / 1000 > 150 ? "#26323E" : "#FFFFFF"; };
 const ssVars = () => `--ss1:${ssBrand.c1};--ss2:${ssBrand.c2};--ss1on:${ssOn(ssBrand.c1)};--ss2on:${ssOn(ssBrand.c2)}`;
 function ssTidy(){
   ssCfg.teams = Math.min(4, Math.max(2, +ssCfg.teams || 2));
@@ -5608,7 +5693,7 @@ async function ssSetup(keepScroll){
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${SS ? `<div class="sj-resume"><span>عندك مسابقة جارية (${SS.names.map((t,i) => esc(t) + " " + n(SS.t[i].score)).join(" · ")}).</span><button class="btn" type="button" id="ssResume">متابعة المسابقة</button></div>` : ""}
-      <div class="sj-box"><h3>طريقة اللعب</h3>
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
           <li>تختار كل مجموعة صورًا لأدوات أو جمادات، ويخمّنها الفريق المنافس.</li>
           <li>كل إجابة صحيحة تخفّف التغبيش 10%، والإجابة الخاطئة تنقل الدور.</li>
@@ -5617,11 +5702,11 @@ async function ssSetup(keepScroll){
         <p class="ss-warn">جهّزوا الصور قبل عرض الشاشة على البروجكتر، حتى لا يراها المتسابقون.</p>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>عدد الفرق</h4>${sjSeg("data-sst", T, [[2,"فريقان"],[3,"3 فرق"],[4,"4 فرق"]])}</div>
-        <div><h4>عدد الصور لكل فريق</h4>${sjSeg("data-ssp", ssCfg.per, [1,2,3,4,5,6].map(k => [k, n(k)]))}</div>
-        <div><h4>متى يُفتح التخمين</h4>${sjSeg("data-ssk", ssCfg.k, [[1,"كل إجابة"],[2,"كل إجابتين"],[3,"كل 3 إجابات"]])}
+        <div><h2 class="h4">عدد الفرق</h2>${sjSeg("data-sst", T, [[2,"فريقان"],[3,"3 فرق"],[4,"4 فرق"]])}</div>
+        <div><h2 class="h4">عدد الصور لكل فريق</h2>${sjSeg("data-ssp", ssCfg.per, [1,2,3,4,5,6].map(k => [k, n(k)]))}</div>
+        <div><h2 class="h4">متى يُفتح التخمين</h2>${sjSeg("data-ssk", ssCfg.k, [[1,"كل إجابة"],[2,"كل إجابتين"],[3,"كل 3 إجابات"]])}
           <p class="sj-sub">عدد الإجابات الصحيحة على الصورة قبل أن يُسمح بالتخمين.</p></div>
-        <div><h4>التخمين الخاطئ</h4>${sjSeg("data-sspen", ssCfg.pen ? 1 : 0, [[1,"خصم 10 نقاط"],[0,"بلا خصم"]])}</div>
+        <div><h2 class="h4">التخمين الخاطئ</h2>${sjSeg("data-sspen", ssCfg.pen ? 1 : 0, [[1,"خصم 10 نقاط"],[0,"بلا خصم"]])}</div>
       </div>
       ${Array.from({length:T}, (_,t) => `<div class="sj-box ss-team" style="--tc:${SS_COL[t]}">
         <h3><span class="ss-tdot"></span><input type="text" maxlength="24" data-ssn="${t}" value="${esc(ssCfg.names[t])}" placeholder="${ssDefName(t)}" aria-label="اسم ${ssDefName(t)}"><small>صوره يخمّنها ${esc(ssName((t + 1) % T))}</small></h3>
@@ -5631,7 +5716,7 @@ async function ssSetup(keepScroll){
             ${x.src ? `<button type="button" class="ss-x" data-ssdel="${t}-${i}" aria-label="حذف الصورة">×</button>` : ""}
             <input type="text" maxlength="40" data-ssname="${t}-${i}" value="${esc(x.name || "")}" placeholder="اسم الأداة" aria-label="اسم الأداة في الصورة ${n(i+1)}"></div>`; }).join("")}</div>
       </div>`).join("")}
-      <div class="sj-box"><h3>هوية النادي<small>اختياري</small></h3>
+      <div class="sj-box"><h2 class="sjh">هوية النادي<small>اختياري</small></h2>
         <div class="ss-brand">
           <label class="ss-logo">${ssBrand.logo ? `<img src="${ssBrand.logo}" alt="شعار النادي">` : `${I(P.ssimg)}<span>ارفع شعار النادي</span>`}<input type="file" accept="image/*" id="ssLogo" hidden></label>
           <div class="ss-bf">
@@ -5856,7 +5941,7 @@ async function tkSetup(keepScroll){
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${TK ? `<div class="sj-resume"><span>عندك مسابقة جارية: الجولة ${n(TK.round)} (${TK.names.map((t,i) => esc(t) + " " + TK.scores[i]).join(" · ")}).</span><button class="btn" type="button" id="tkResume">متابعة</button></div>` : ""}
-      <div class="sj-box"><h3>طريقة اللعب</h3>
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
           <li>عند فتح الغرفة يظهر رمز دخول من ست أرقام وباركود. يصوّر اللاعبون الباركود أو يكتبون الرمز، ثم يختار كل لاعب فريقه، ولا يرى في جواله إلا ما يخص فريقه.</li>
           <li>في دور الفريق تظهر على جوالات أعضائه صفحة تكبيس لمدة ${n(tkCfg.dur)} ثوانٍ، ومجموع كبساتهم هو قيمة سؤالهم.</li>
@@ -5864,19 +5949,19 @@ async function tkSetup(keepScroll){
           <li>بعد أن يأخذ كل فريق دوره يُفتح التكبيس لجميع الفرق معًا، والفريق الأكثر كبسًا يأخذ السؤال بنفس الطريقة. وعند التعادل يُعاد التكبيس للجميع.</li>
         </ol>
       </div>
-      <div class="sj-box"><h3>الفرق<small>من 2 إلى 6</small></h3>
+      <div class="sj-box"><h2 class="sjh">الفرق<small>من 2 إلى 6</small></h2>
         ${sjSeg("data-tkt", T, [2,3,4,5,6].map(k => [k, n(k)]))}
         <div class="sj-names">${Array.from({length:T}, (_,i) => `<input type="text" maxlength="24" data-tkn="${i}" style="--tc:${TK_COL[i]}" value="${esc(tkCfg.names[i])}" placeholder="${tkDefName(i)}" aria-label="اسم ${tkDefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>عدد الأجهزة لكل فريق</h4>
+        <div><h2 class="h4">عدد الأجهزة لكل فريق</h2>
           <div class="stepper ss-step"><button type="button" id="tkDevPlus" aria-label="زيادة">+</button><output>${n(tkCfg.dev)}</output><button type="button" id="tkDevMinus" aria-label="إنقاص">−</button></div>
           <p class="sj-sub">تُحسب كبسات أول ${n(tkCfg.dev)} أجهزة تنضم لكل فريق فقط، حتى تكون المنافسة عادلة.</p></div>
-        <div><h4>مدة التكبيس</h4>${sjSeg("data-tkd", tkCfg.dur, [3,5,7,10].map(k => [k, n(k) + " ث"]))}</div>
-        <div><h4>عدد الجولات</h4>${sjSeg("data-tkr", tkCfg.rounds, [[3,"3"],[5,"5"],[10,"10"],[0,"مفتوح"]])}</div>
-        <div><h4>مستوى الأسئلة</h4>${sjSeg("data-tkl", tkCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"],["*","مختلط"]])}</div>
+        <div><h2 class="h4">مدة التكبيس</h2>${sjSeg("data-tkd", tkCfg.dur, [3,5,7,10].map(k => [k, n(k) + " ث"]))}</div>
+        <div><h2 class="h4">عدد الجولات</h2>${sjSeg("data-tkr", tkCfg.rounds, [[3,"3"],[5,"5"],[10,"10"],[0,"مفتوح"]])}</div>
+        <div><h2 class="h4">مستوى الأسئلة</h2>${sjSeg("data-tkl", tkCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"],["*","مختلط"]])}</div>
       </div>
-      <div class="sj-box"><h3>المجالات<small>${tkCfg.cats.length ? n(tkCfg.cats.length) + " مختارة" : "كل المجالات"} · ${n(pool)} سؤال</small></h3>
+      <div class="sj-box"><h2 class="sjh">المجالات<small>${tkCfg.cats.length ? n(tkCfg.cats.length) + " مختارة" : "كل المجالات"} · ${n(pool)} سؤال</small></h2>
         <div class="sj-cats" style="--tc:var(--blue)">${cats.map((c,i) => { const m = catMeta(c), on = tkCfg.cats.includes(c);
           return `<button type="button" class="sj-cat" data-tkc="${i}" aria-pressed="${on}">${I(P[m.icon] || P.general)}<span><b>${esc(c)}</b></span></button>`; }).join("")}</div>
       </div>
@@ -6041,7 +6126,7 @@ const tkNewCode = () => String(100000 + Math.floor(Math.random() * 900000));
 const tkLink = code => (window.claude && window.claude.use ? TK_ART : location.href.split("#")[0]) + "#join=" + code;
 function tkQR(text){
   try { const q = qrcode(0, "M"); q.addData(text); q.make();
-    return q.createSvgTag({cellSize:4, margin:2, scalable:true}).replace(/fill="black"/g, 'fill="#1E2F4D"').replace(/fill="white"/g, 'fill="#FFFFFF"'); }
+    return q.createSvgTag({cellSize:4, margin:2, scalable:true}).replace(/fill="black"/g, 'fill="#26323E"').replace(/fill="white"/g, 'fill="#FFFFFF"'); }
   catch(e){ return ""; }
 }
 const tkCodeHTML = c => `<span class="tk-code" dir="ltr">${String(c).slice(0,3)}<i></i>${String(c).slice(3)}</span>`;
@@ -6360,7 +6445,7 @@ const ER_GEN = {
   clock(R, lv){
     const H = erRi(R,1,12), stepM = lv <= 1 ? 5 : lv === 2 ? 10 : 2, M = erRi(R,0,59/stepM|0) * stepM % 60;
     const face = (h, m, mirror) => { const ha = ((h % 12) + m/60) * 30, ma = m * 6;
-      return `<svg class="er-clock${mirror ? " mirror" : ""}" viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="#FBF7EF" stroke="#8B6B43" stroke-width="5"/>${Array.from({length:12},(_,i) => `<line x1="60" y1="${i%3?10:8}" x2="60" y2="${i%3?16:20}" stroke="#5F6D85" stroke-width="${i%3?2:4}" transform="rotate(${i*30} 60 60)"/>`).join("")}${mirror ? "" : [12,3,6,9].map((k,i) => `<text x="${[60,98,60,22][i]}" y="${[33,64,96,64][i]}" font-size="12" text-anchor="middle" fill="#1E2F4D" font-family="sans-serif">${k}</text>`).join("")}<line x1="60" y1="60" x2="60" y2="30" stroke="#1E2F4D" stroke-width="6" stroke-linecap="round" transform="rotate(${ha} 60 60)"/><line x1="60" y1="60" x2="60" y2="16" stroke="#C93400" stroke-width="3.5" stroke-linecap="round" transform="rotate(${ma} 60 60)"/><circle cx="60" cy="60" r="4.5" fill="#1E2F4D"/></svg>`; };
+      return `<svg class="er-clock${mirror ? " mirror" : ""}" viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="#FBF7EF" stroke="#8B6B43" stroke-width="5"/>${Array.from({length:12},(_,i) => `<line x1="60" y1="${i%3?10:8}" x2="60" y2="${i%3?16:20}" stroke="#5B656E" stroke-width="${i%3?2:4}" transform="rotate(${i*30} 60 60)"/>`).join("")}${mirror ? "" : [12,3,6,9].map((k,i) => `<text x="${[60,98,60,22][i]}" y="${[33,64,96,64][i]}" font-size="12" text-anchor="middle" fill="#26323E" font-family="sans-serif">${k}</text>`).join("")}<line x1="60" y1="60" x2="60" y2="30" stroke="#26323E" stroke-width="6" stroke-linecap="round" transform="rotate(${ha} 60 60)"/><line x1="60" y1="60" x2="60" y2="16" stroke="#C93400" stroke-width="3.5" stroke-linecap="round" transform="rotate(${ma} 60 60)"/><circle cx="60" cy="60" r="4.5" fill="#26323E"/></svg>`; };
     const hm = (h, m) => `${h}:${String(m).padStart(2,"0")}`;
     if (lv <= 0){ const add = erPick(R,[45,75,90,105,135,150,200]), tot = (H%12)*60 + M + add, nh = Math.floor(tot/60) % 12 || 12;
       return { title:"ساعة السفينة", html:`<div class="er-center">${face(H, M)}</div><p>تبحر السفينة بعد <b>${add}</b> دقيقة من الوقت الظاهر على الساعة. عند أي ساعة تبحر؟ (اكتب رقم الساعة من 1 إلى 12)</p>`,
@@ -6668,7 +6753,7 @@ function erThree(){
 const ER_THEME = [
   {bg:"#E4ECF5", fog:"#E4ECF5", wall:"#F6F0E4", trim:"#8B6B43", base:"#6E5537", hemi:["#FFF6E8","#B9A27F"], sun:"#FFF1DA", sunI:1.0, hemiI:.75, ring:"#F5B942"},
   {bg:"#1A2944", fog:"#1A2944", wall:"#24375C", trim:"#C9A253", base:"#14213A", hemi:["#9DB8F0","#2A3A5E"], sun:"#C7D8FF", sunI:.55, hemiI:.55, ring:"#F5C542"},
-  {bg:"#DCE5EF", fog:"#DCE5EF", wall:"#DDE5EE", trim:"#1593A3", base:"#5F6D85", hemi:["#E8F1FB","#7F8EA8"], sun:"#FFFFFF", sunI:.75, hemiI:.5, ring:"#12B5C9"}
+  {bg:"#DCE5EF", fog:"#DCE5EF", wall:"#DDE5EE", trim:"#1593A3", base:"#5B656E", hemi:["#E8F1FB","#7F8EA8"], sun:"#FFFFFF", sunI:.75, hemiI:.5, ring:"#12B5C9"}
 ];
 function erTex(T, w, h, draw, rep){
   const c = document.createElement("canvas"); c.width = w; c.height = h; const x = c.getContext("2d"); draw(x, w, h);
@@ -6689,7 +6774,7 @@ function erFloorTex(T, r){
       x.fillStyle = (i + j) % 2 ? "#314873" : "#2B3F66"; x.fillRect(i*s, j*s, s, s);
       x.save(); x.translate(cx, cy); x.fillStyle = "#C9A253"; x.globalAlpha = .55;
       for (let k = 0; k < 2; k++){ x.rotate(Math.PI/4); x.fillRect(-s*.22, -s*.22, s*.44, s*.44); } x.restore();
-      x.fillStyle = "#1E2F4D"; x.beginPath(); x.arc(cx, cy, s*.1, 0, 7); x.fill();
+      x.fillStyle = "#26323E"; x.beginPath(); x.arc(cx, cy, s*.1, 0, 7); x.fill();
       x.strokeStyle = "rgba(201,162,83,.35)"; x.strokeRect(i*s + 1, j*s + 1, s - 2, s - 2); }
   }, [3, 2.2]);
   return erTex(T, 512, 512, (x, w, h) => {                   // clean lab tiles
@@ -6793,11 +6878,11 @@ class ErScene {
       this.scene.add(this.box(.08, .06, 3.2, "#1FA7B8", -3.2, 2.2, -2.9)); this.scene.add(this.box(.08, .06, 3.2, "#1FA7B8", -3.2, .03, -2.9));
       const screenTex = erTex(T, 256, 144, (x, w, h) => { x.fillStyle = "#13324A"; x.fillRect(0,0,w,h); x.strokeStyle = "#22C3D6"; x.lineWidth = 3; x.beginPath(); for (let i = 0; i <= 20; i++) x.lineTo(i*w/20, h*.6 - Math.sin(i*.8)*h*.25 - (i%3)*6); x.stroke(); x.fillStyle = "#F2B233"; x.fillRect(16, 16, 60, 10); x.fillStyle = "#7FE3EE"; x.fillRect(16, 32, 110, 6); x.fillRect(16, 44, 80, 6); });
       const big = new T.Mesh(new T.PlaneGeometry(2.2, 1.24), new T.MeshBasicMaterial({map:screenTex})); this.onWall([1,0], big, .2, 1.9, .11);
-      this.onWall([1,0], this.box(2.32, 1.36, .05, "#5F6D85", 0, 0, 0), .2, 1.9, .07);
+      this.onWall([1,0], this.box(2.32, 1.36, .05, "#5B656E", 0, 0, 0), .2, 1.9, .07);
       this.plant(5.3, 3.8, "#2E9C6A"); this.plant(-5.3, 3.9, "#2E9C6A");
       [[-.5, -3.2],[2.6, 3.6]].forEach(([x,z]) => { const d = this.group(x, z); d.add(this.box(1.3, .06, .6, "#F4F7FA", 0, .74, 0)); [[-.58,-.24],[.58,-.24],[-.58,.24],[.58,.24]].forEach(([a,b]) => d.add(this.box(.05, .74, .05, "#A9B6CC", a, .37, b)));
         d.add(this.box(.5, .32, .03, "#34496F", 0, 1.0, -.1)); const sc = new T.Mesh(new T.PlaneGeometry(.46, .28), new T.MeshBasicMaterial({map:screenTex})); sc.position.set(0, 1.0, -.08); d.add(sc);
-        const ch = this.cyl(.22, .22, .08, "#22C3D6", 0, .45, .5, 16); d.add(ch); d.add(this.cyl(.03, .03, .42, "#5F6D85", 0, .22, .5, 8)); });
+        const ch = this.cyl(.22, .22, .08, "#22C3D6", 0, .45, .5, 16); d.add(ch); d.add(this.cyl(.03, .03, .42, "#5B656E", 0, .22, .5, 8)); });
       for (let i = -1; i <= 1; i++){ const l = this.box(.08, .04, 6, "#FFFFFF", i*3, 3.05, 0, {emissive:"#E6FBFF", emissiveIntensity:.9}); l.castShadow = false; this.scene.add(l); }
       this.lamp(0, 3.0, 0, "#E8FBFF", true);
     }
@@ -6806,7 +6891,7 @@ class ErScene {
   candle(x, z){ const g = this.group(x, z); g.add(this.cyl(.12, .14, .06, "#C9A253", 0, .03, 0, 12)); g.add(this.cyl(.05, .05, .3, "#F6EEDD", 0, .21, 0, 10)); const f = this.sph(.04, this.glow("#FFB347", 2), 0, .4, 0); f.scale.y = 1.6; g.add(f);
     const L = new this.T.PointLight("#FFB347", .6, 3.2); L.position.y = .5; g.add(L); this.anim.push(t => { L.intensity = .5 + Math.sin(t*9 + x)*.08 + Math.sin(t*23)*.05; f.scale.x = 1 + Math.sin(t*17 + z)*.12; }); return g; }
   lamp(x, y, z, c, flat){ const T = this.T; const L = new T.PointLight(c, .55, 14); L.position.set(x, y - .6, z); this.scene.add(L);
-    if (!flat){ this.scene.add(this.cyl(.01, .01, .5, "#5F6D85", x, y - .1, z, 6)); const sh = new T.Mesh(new T.ConeGeometry(.32, .3, 20, 1, true), erMat(T, "#8B6B43", {side:T.DoubleSide})); sh.position.set(x, y - .45, z); this.scene.add(sh); this.scene.add(this.sph(.09, this.glow(c, 1.6), x, y - .55, z)); } }
+    if (!flat){ this.scene.add(this.cyl(.01, .01, .5, "#5B656E", x, y - .1, z, 6)); const sh = new T.Mesh(new T.ConeGeometry(.32, .3, 20, 1, true), erMat(T, "#8B6B43", {side:T.DoubleSide})); sh.position.set(x, y - .45, z); this.scene.add(sh); this.scene.add(this.sph(.09, this.glow(c, 1.6), x, y - .55, z)); } }
   /* ---------- stations ---------- */
   buildStations(){
     const room = ER_ROOMS[this.r];
@@ -6836,7 +6921,7 @@ class ErScene {
     g.add(this.box(.3, .12, .2, "#6E5537", .3, .87, .18)); }
   m_wallclock(g){ const T = this.T; const c = new T.Group(); c.position.set(0, 2.05, .05);
     const face = this.cyl(.48, .48, .08, "#FBF7EF", 0, 0, 0, 40); face.rotation.x = Math.PI/2; c.add(face); const rim = new T.Mesh(new T.TorusGeometry(.48, .05, 10, 40), erMat(T, "#8B6B43")); c.add(rim);
-    const hh = this.box(.04, .26, .02, "#1E2F4D", 0, .1, .06); const mh = this.box(.025, .38, .02, "#C93400", 0, .16, .07); const hg = new T.Group(); hg.position.z = .0; hg.add(hh); const mg = new T.Group(); mg.add(mh); c.add(hg); c.add(mg);
+    const hh = this.box(.04, .26, .02, "#26323E", 0, .1, .06); const mh = this.box(.025, .38, .02, "#C93400", 0, .16, .07); const hg = new T.Group(); hg.position.z = .0; hg.add(hh); const mg = new T.Group(); mg.add(mh); c.add(hg); c.add(mg);
     this.anim.push(t => { mg.rotation.z = -t*.6; hg.rotation.z = -t*.05; }); g.add(c);
     g.add(this.box(1.2, .9, .5, "#8B6B43", 0, .45, .25)); g.add(this.box(1.1, .05, .45, "#A0703F", 0, .92, .25)); g.add(this.box(.12, .12, .03, "#C9A253", 0, .6, .51)); }
   m_lantern(g){ const T = this.T; g.add(this.cyl(.32, .4, .2, "#5C4A33", 0, .1, 0, 8)); g.add(this.cyl(.05, .05, 1.0, "#5C4A33", 0, .7, 0, 8));
@@ -6844,9 +6929,9 @@ class ErScene {
     g.add(this.cyl(.08, .34, .22, "#5C4A33", 0, 1.88, 0, 8)); g.add(this.cyl(.3, .3, .05, "#5C4A33", 0, 1.21, 0, 8));
     const L = new T.PointLight("#FFC85A", .9, 5); L.position.y = 1.5; g.add(L); this.lantern = {mat:glassM, L, base:"#FFC85A"}; }
   m_compass(g){ const T = this.T; g.add(this.cyl(.22, .3, .9, "#8B6B43", 0, .45, 0, 12)); g.add(this.cyl(.38, .38, .06, "#C9A253", 0, .93, 0, 32, {metalness:.6, roughness:.35}));
-    const face = new T.Mesh(new T.CircleGeometry(.33, 32), new T.MeshStandardMaterial({map:erTex(T, 128, 128, (x, w, h) => { x.fillStyle = "#F6EEDD"; x.fillRect(0,0,w,h); x.fillStyle = "#1E2F4D"; x.font = "bold 18px sans-serif"; x.textAlign = "center"; x.fillText("N", w/2, 22); x.strokeStyle = "#8B6B43"; for (let i = 0; i < 16; i++){ x.save(); x.translate(w/2, h/2); x.rotate(i*Math.PI/8); x.beginPath(); x.moveTo(0, -50); x.lineTo(0, i % 2 ? -44 : -38); x.stroke(); x.restore(); } })}));
+    const face = new T.Mesh(new T.CircleGeometry(.33, 32), new T.MeshStandardMaterial({map:erTex(T, 128, 128, (x, w, h) => { x.fillStyle = "#F6EEDD"; x.fillRect(0,0,w,h); x.fillStyle = "#26323E"; x.font = "bold 18px sans-serif"; x.textAlign = "center"; x.fillText("N", w/2, 22); x.strokeStyle = "#8B6B43"; for (let i = 0; i < 16; i++){ x.save(); x.translate(w/2, h/2); x.rotate(i*Math.PI/8); x.beginPath(); x.moveTo(0, -50); x.lineTo(0, i % 2 ? -44 : -38); x.stroke(); x.restore(); } })}));
     face.rotation.x = -Math.PI/2; face.position.y = .965; g.add(face);
-    const nd = new T.Group(); nd.position.y = .98; const a = this.box(.03, .01, .28, "#D70015", 0, 0, -.14), b = this.box(.03, .01, .28, "#5F6D85", 0, 0, .14); nd.add(a); nd.add(b); g.add(nd); this.anim.push(t => nd.rotation.y = Math.sin(t*.9)*.35 + Math.sin(t*2.3)*.08); }
+    const nd = new T.Group(); nd.position.y = .98; const a = this.box(.03, .01, .28, "#D70015", 0, 0, -.14), b = this.box(.03, .01, .28, "#5B656E", 0, 0, .14); nd.add(a); nd.add(b); g.add(nd); this.anim.push(t => nd.rotation.y = Math.sin(t*.9)*.35 + Math.sin(t*2.3)*.08); }
   m_cabinet(g){ g.add(this.box(1.2, 2.1, .6, "#7A5634", 0, 1.05, 0)); g.add(this.box(.56, 1.85, .03, "#8E6239", -.29, 1.08, .31)); g.add(this.box(.56, 1.85, .03, "#8E6239", .29, 1.08, .31));
     g.add(this.box(.04, .2, .04, "#C9A253", -.05, 1.1, .34)); g.add(this.box(.04, .2, .04, "#C9A253", .05, 1.1, .34)); g.add(this.box(1.3, .08, .66, "#5C3F24", 0, 2.12, 0));
     const lock = new this.T.Group(); lock.position.set(0, 1.25, .36); lock.add(this.box(.16, .14, .05, "#C9A253", 0, 0, 0, {metalness:.6, roughness:.35})); const sh = new this.T.Mesh(new this.T.TorusGeometry(.055, .015, 6, 16, Math.PI), erMat(this.T, "#A9B6CC", {metalness:.7})); sh.position.y = .07; lock.add(sh); g.add(lock); this.padlock = this.padlock || {}; this.padlock[g.userData.sid] = lock; }
@@ -6875,19 +6960,19 @@ class ErScene {
   m_panel(g){ const T = this.T; const p = new T.Mesh(new T.PlaneGeometry(1.6, 1.1), new T.MeshStandardMaterial({map:erTex(T, 320, 220, (x, w, h) => { x.fillStyle = "#13324A"; x.fillRect(0,0,w,h); x.strokeStyle = "#22C3D6"; x.lineWidth = 3;
       for (let i = 0; i < 6; i++){ x.beginPath(); x.moveTo(20, 30 + i*30); x.lineTo(90 + i*12, 30 + i*30); x.lineTo(110 + i*12, 60 + (i%3)*40); x.lineTo(w - 30, 60 + (i%3)*40); x.stroke(); }
       x.fillStyle = "#F2B233"; [[110,60],[160,100],[200,140],[260,100]].forEach(([a,b]) => { x.fillRect(a - 14, b - 12, 28, 24); }); }), emissive:"#FFFFFF", emissiveIntensity:.35}));
-    p.position.set(0, 1.85, .05); g.add(p); g.add(this.box(1.7, 1.2, .05, "#5F6D85", 0, 1.85, .02));
+    p.position.set(0, 1.85, .05); g.add(p); g.add(this.box(1.7, 1.2, .05, "#5B656E", 0, 1.85, .02));
     [-.5, 0, .5].forEach((x, i) => { const sw = this.box(.12, .22, .08, i === 1 ? "#F2B233" : "#A9B6CC", x, 1.05, .08); g.add(sw); }); g.add(this.box(1.6, .1, .3, "#A9B6CC", 0, .95, .12)); }
-  m_lockers(g){ const C = ["#E0413A","#0071E3","#248A3D","#E8B100","#8944AB"]; C.forEach((c, i) => { g.add(this.box(.44, 1.9, .5, "#D5DCE7", -.92 + i*.46, .95, 0)); g.add(this.box(.36, 1.7, .03, c, -.92 + i*.46, .95, .26, {roughness:.5})); g.add(this.box(.05, .14, .03, "#F4F7FA", -.78 + i*.46, 1.0, .28)); }); }
+  m_lockers(g){ const C = ["#E0413A","#0071E3","#248A3D","#E8B100","#8944AB"]; C.forEach((c, i) => { g.add(this.box(.44, 1.9, .5, "#DFE1E5", -.92 + i*.46, .95, 0)); g.add(this.box(.36, 1.7, .03, c, -.92 + i*.46, .95, .26, {roughness:.5})); g.add(this.box(.05, .14, .03, "#F4F7FA", -.78 + i*.46, 1.0, .28)); }); }
   m_terminal(g){ this.table(g, 1.4, .75, "#F4F7FA"); const T = this.T; g.add(this.box(.9, .55, .05, "#34496F", 0, 1.15, -.12));
     const sc = new T.Mesh(new T.PlaneGeometry(.84, .49), new T.MeshBasicMaterial({map:erTex(T, 256, 150, (x, w, h) => { x.fillStyle = "#13324A"; x.fillRect(0,0,w,h); x.fillStyle = "#22C3D6"; x.font = "bold 40px sans-serif"; x.textAlign = "center"; x.fillText("◇ + ○ = ?", w/2, h/2 + 14); })}));
     sc.position.set(0, 1.15, -.09); g.add(sc); g.add(this.box(.6, .03, .2, "#A9B6CC", 0, .82, .15)); }
   m_robot(g){ const T = this.T, body = new T.Group(); g.add(body); body.add(this.cyl(.32, .38, .9, "#C9D4E2", 0, .75, 0, 20)); body.add(this.cyl(.38, .38, .1, "#1FA7B8", 0, .3, 0, 20));
     const head = this.sph(.3, "#C9D4E2", 0, 1.45, 0); body.add(head); const visor = this.box(.42, .14, .05, "#13324A", 0, 1.47, .26); body.add(visor);
     const eyeM = this.glow("#22C3D6", 2.2); [-.09, .09].forEach(x => body.add(this.sph(.035, eyeM, x, 1.47, .29)));
-    const ant = this.cyl(.012, .012, .25, "#5F6D85", 0, 1.85, 0, 6); body.add(ant); body.add(this.sph(.04, this.glow("#F2B233", 2), 0, 1.98, 0));
+    const ant = this.cyl(.012, .012, .25, "#5B656E", 0, 1.85, 0, 6); body.add(ant); body.add(this.sph(.04, this.glow("#F2B233", 2), 0, 1.98, 0));
     [-.42, .42].forEach(x => { const a = this.cyl(.06, .06, .55, "#A9B6CC", x, .85, 0, 10); a.rotation.z = x > 0 ? .25 : -.25; body.add(a); });
     this.anim.push(t => { body.position.y = Math.sin(t*2) * .04; head.rotation.y = Math.sin(t*.7)*.5; }); }
-  m_holo(g){ const T = this.T; g.add(this.cyl(.6, .65, .75, "#D5DCE7", 0, .375, 0, 32)); g.add(this.cyl(.62, .62, .04, "#1FA7B8", 0, .77, 0, 32, {emissive:"#1FA7B8", emissiveIntensity:.6}));
+  m_holo(g){ const T = this.T; g.add(this.cyl(.6, .65, .75, "#DFE1E5", 0, .375, 0, 32)); g.add(this.cyl(.62, .62, .04, "#1FA7B8", 0, .77, 0, 32, {emissive:"#1FA7B8", emissiveIntensity:.6}));
     const gr = new T.GridHelper(1.0, 5, "#22C3D6", "#22C3D6"); gr.position.y = 1.25; gr.material.transparent = true; gr.material.opacity = .8; g.add(gr);
     const cone = new T.Mesh(new T.CylinderGeometry(.55, .5, .45, 32, 1, true), new T.MeshBasicMaterial({color:"#22C3D6", transparent:true, opacity:.12, side:T.DoubleSide, depthWrite:false})); cone.position.y = 1.0; g.add(cone);
     this.anim.push(t => gr.rotation.y = t*.3); }
@@ -6898,7 +6983,7 @@ class ErScene {
   /* ---------- chest ---------- */
   buildChest(){
     const T = this.T, [x, z] = ER_ROOMS[this.r].chest, g = this.group(x, z, Math.PI*.08), r = this.r;
-    const wood = erMat(T, r === 2 ? "#5F6D85" : r === 1 ? "#5C3F24" : "#7A5634"), band = erMat(T, r === 2 ? "#22C3D6" : "#C9A253", {metalness:.6, roughness:.35});
+    const wood = erMat(T, r === 2 ? "#5B656E" : r === 1 ? "#5C3F24" : "#7A5634"), band = erMat(T, r === 2 ? "#22C3D6" : "#C9A253", {metalness:.6, roughness:.35});
     g.add(this.box(1.1, .55, .7, wood, 0, .3, 0)); [-.4, .4].forEach(bx => g.add(this.box(.06, .57, .72, band, bx, .3, 0)));
     const lid = new T.Group(); lid.position.set(0, .58, -.35); g.add(lid);
     const top = this.box(1.12, .2, .72, wood, 0, .1, .36); lid.add(top); [-.4, .4].forEach(bx => lid.add(this.box(.06, .22, .74, band, bx, .1, .36)));
@@ -6926,7 +7011,7 @@ class ErScene {
     const legs = [-.09, .09].map(x => { const l = this.cyl(.065, .06, .42, "#34496F", x, .21, 0, 10); g.add(l); return l; });
     g.add(this.cyl(.19, .24, .56, shirt, 0, .7, 0, 16)); const sh = this.sph(.2, shirt, 0, .98, 0); sh.scale.set(1, .45, 1); g.add(sh);
     const head = this.sph(.19, "#F1C9A5", 0, 1.2, 0, {roughness:.8}); g.add(head); const hair = this.sph(.2, "#34496F", 0, 1.26, -.02); hair.scale.set(1, .7, 1); g.add(hair);
-    [-.065, .065].forEach(x => g.add(this.sph(.024, "#1E2F4D", x, 1.22, .17)));
+    [-.065, .065].forEach(x => g.add(this.sph(.024, "#26323E", x, 1.22, .17)));
     g.userData.legs = legs; g.userData.t = 0; return g; }
   peerAvatar(id, color, x, z){ let p = this.peers[id]; if (!p){ p = this.peers[id] = {g:this.avatar(color), tx:x, tz:z}; p.g.position.set(x, 0, z); this.scene.add(p.g); } p.tx = x; p.tz = z; return p; }
   dropPeer(id){ const p = this.peers[id]; if (p){ this.scene.remove(p.g); delete this.peers[id]; } }
@@ -7393,7 +7478,7 @@ function erSetup(keepScroll){
       ${ERH && ERH.phase !== "end" ? `<div class="sj-resume"><span>عندك مسابقة جارية (${n(ERH.names.length)} فرق، رمز الدخول ${ERH.code}).</span><button class="btn" type="button" id="erResume">متابعة</button></div>` : ""}
       ${local && local.startAt ? `<div class="sj-resume"><span>عندك تجربة جارية على هذا الجهاز.</span><button class="btn" type="button" id="erResumeL">متابعة التجربة</button></div>` : ""}
       <div class="er-stories">${ER_ROOMS.map((r, i) => `<article class="er-story r${i}" ${i >= c.rooms ? 'data-off="1"' : ""}><span class="er-snum">${n(i + 1)}</span><small>${r.tag} · ${["الأسهل","أصعب","الأصعب"][i]}</small><b>${r.name}</b><p>${r.intro[0]}</p></article>`).join("")}</div>
-      <div class="sj-box"><h3>طريقة اللعب</h3>
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
           <li>يفتح المقدّم الغرفة فيظهر رمز دخول وباركود. يدخل كل لاعب من جواله أو جهازه ويختار فريقه (من ${n(5)} إلى ${n(10)} لاعبين في الفريق)، أو يلعب الفريق كله على جهاز واحد.</li>
           <li>يرى كل لاعب الغرفة مجسّمة ويمشي فيها بنفسه: يضغط على أي ركن فتمشي شخصيته إليه، ويظهر لغز يحتاج تفكيرًا: منطق، وشيفرات، وأنماط، واستنتاج.</li>
@@ -7402,22 +7487,22 @@ function erSetup(keepScroll){
           <li>عند فتح الصندوق تنتقل الرحلة إلى القصة التالية. ${c.mode === "race" ? "الفائز من يهرب من أكثر الغرف في أقل وقت، وشاشة العرض تتابع تقدّم الفرق." : "في وضع التعاون تعمل كل الفرق معًا على الرحلة نفسها وبوقت واحد."}</li>
         </ol>
       </div>
-      <div class="sj-box"><h3>نوع اللعب</h3>${sjSeg("data-erm", c.mode, [["race","سباق بين الفرق"],["coop","تعاون: كل الفرق فريق واحد"]])}</div>
-      <div class="sj-box"><h3>الفرق<small>من 2 إلى 10</small></h3>
+      <div class="sj-box"><h2 class="sjh">نوع اللعب</h2>${sjSeg("data-erm", c.mode, [["race","سباق بين الفرق"],["coop","تعاون: كل الفرق فريق واحد"]])}</div>
+      <div class="sj-box"><h2 class="sjh">الفرق<small>من 2 إلى 10</small></h2>
         ${sjSeg("data-ert", T, [2,3,4,5,6,7,8,9,10].map(k => [k, n(k)]))}
         <div class="sj-names er-names">${Array.from({length:T}, (_, i) => `<input type="text" maxlength="24" data-ern="${i}" style="--tc:${ER_COL[i]}" value="${esc(c.names[i])}" placeholder="${erDefName(i)}" aria-label="اسم ${erDefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>مستوى الألغاز</h4>${sjSeg("data-erl", c.base, [[0,"سهل"],[1,"متوسط"],[2,"صعب"]])}<p class="sj-sub">${["مناسب للمرحلة المتوسطة: ألغاز مباشرة وأرقام صغيرة.","مناسب للمرحلة الثانوية: خطوات أكثر ورموز بدل أرقام الخانات.","مناسب للجامعة: استنتاج متعدد الخطوات وشيفرات مركّبة."][c.base]} والصعوبة تزيد من غرفة إلى أخرى.</p></div>
-        <div><h4>اللاعبون في كل فريق</h4>${sjSeg("data-erd", c.dev, [5,6,7,8,9,10].map(k => [k, n(k)]))}<p class="sj-sub">تُحسب أول ${n(c.dev)} أجهزة تنضم لكل فريق، والأجهزة الزائدة تشاهد فقط.</p></div>
-        <div><h4>وقت كل غرفة</h4>${sjSeg("data-ermin", c.mins, [10,15,20,30,45].map(k => [k, n(k) + " د"]))}</div>
-        <div><h4>عدد الغرف (القصص)</h4>${sjSeg("data-err", c.rooms, [[1,"الأولى فقط"],[2,"غرفتان"],[3,"الثلاث"]])}</div>
-        <div><h4>التلميحات لكل فريق</h4>${sjSeg("data-erh", c.hints, [0,1,2,3,4,5].map(k => [k, n(k)]))}</div>
-        <div><h4>خصم التلميح</h4>${sjSeg("data-erhc", c.hc, [[30,"30 ث"],[60,"دقيقة"],[120,"دقيقتان"]])}</div>
-        <div><h4>خصم الإجابة الخاطئة</h4>${sjSeg("data-erp", c.pen, [[0,"بدون"],[15,"15 ث"],[30,"30 ث"],[60,"دقيقة"]])}</div>
-        <div><h4>صناديق المعرفة</h4>${sjSeg("data-erk", c.know ? 1 : 0, [[1,"مفعّلة"],[0,"بدون"]])}<p class="sj-sub">صندوقان ذهبيان في كل غرفة بأسئلة اختيار من الموسوعة.</p></div>
+        <div><h2 class="h4">مستوى الألغاز</h2>${sjSeg("data-erl", c.base, [[0,"سهل"],[1,"متوسط"],[2,"صعب"]])}<p class="sj-sub">${["مناسب للمرحلة المتوسطة: ألغاز مباشرة وأرقام صغيرة.","مناسب للمرحلة الثانوية: خطوات أكثر ورموز بدل أرقام الخانات.","مناسب للجامعة: استنتاج متعدد الخطوات وشيفرات مركّبة."][c.base]} والصعوبة تزيد من غرفة إلى أخرى.</p></div>
+        <div><h2 class="h4">اللاعبون في كل فريق</h2>${sjSeg("data-erd", c.dev, [5,6,7,8,9,10].map(k => [k, n(k)]))}<p class="sj-sub">تُحسب أول ${n(c.dev)} أجهزة تنضم لكل فريق، والأجهزة الزائدة تشاهد فقط.</p></div>
+        <div><h2 class="h4">وقت كل غرفة</h2>${sjSeg("data-ermin", c.mins, [10,15,20,30,45].map(k => [k, n(k) + " د"]))}</div>
+        <div><h2 class="h4">عدد الغرف (القصص)</h2>${sjSeg("data-err", c.rooms, [[1,"الأولى فقط"],[2,"غرفتان"],[3,"الثلاث"]])}</div>
+        <div><h2 class="h4">التلميحات لكل فريق</h2>${sjSeg("data-erh", c.hints, [0,1,2,3,4,5].map(k => [k, n(k)]))}</div>
+        <div><h2 class="h4">خصم التلميح</h2>${sjSeg("data-erhc", c.hc, [[30,"30 ث"],[60,"دقيقة"],[120,"دقيقتان"]])}</div>
+        <div><h2 class="h4">خصم الإجابة الخاطئة</h2>${sjSeg("data-erp", c.pen, [[0,"بدون"],[15,"15 ث"],[30,"30 ث"],[60,"دقيقة"]])}</div>
+        <div><h2 class="h4">صناديق المعرفة</h2>${sjSeg("data-erk", c.know ? 1 : 0, [[1,"مفعّلة"],[0,"بدون"]])}<p class="sj-sub">صندوقان ذهبيان في كل غرفة بأسئلة اختيار من الموسوعة.</p></div>
       </div>
-      ${c.know ? `<div class="sj-box"><h3>مجالات أسئلة الصناديق<small>${c.cats.length ? n(c.cats.length) + " مختارة" : "كل المجالات"}</small></h3>
+      ${c.know ? `<div class="sj-box"><h2 class="sjh">مجالات أسئلة الصناديق<small>${c.cats.length ? n(c.cats.length) + " مختارة" : "كل المجالات"}</small></h2>
         <div class="sj-cats" style="--tc:var(--blue)">${cats.map((x, i) => { const mm = catMeta(x), on = c.cats.includes(x); return `<button type="button" class="sj-cat" data-erc="${i}" aria-pressed="${on}">${I(P[mm.icon] || P.general)}<span><b>${esc(x)}</b></span></button>`; }).join("")}</div></div>` : ""}
       ${dispBox("er")}
     </div></div>
@@ -7908,7 +7993,7 @@ function emSetup(keepScroll){
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${EM ? `<div class="sj-resume"><span>عندك مسابقة جارية: الجولة ${n(EM.round)} من ${n(EM.rounds)}.</span><button class="btn" type="button" id="emResume">متابعة</button></div>` : ""}
-      <div class="sj-box"><h3>طريقة اللعب</h3>
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
           <li>كل فريق يبدأ بأرض مختلفة: ساحلية أو صحراوية أو جبلية أو واحة تجارية. ولكل أرض مورد وفير ومورد قليل، فتحتاج المدن بعضها.</li>
           <li><b>مرحلة العمل:</b> كل لاعب يختار من جواله تحديًا قصيرًا: الأنابيب تعطي ماء، ولوحة الكهرباء طاقة، والسوق ذهبًا، والبنّاء حجارة، والخريطة من كل مورد. كل تحدٍّ ينجح يضيف للمخزن مباشرة.</li>
@@ -7918,17 +8003,17 @@ function emSetup(keepScroll){
           <li>في النهاية تُحسب نقاط الازدهار من السكان ورضاهم والمباني والمعالم والمشاريع.</li>
         </ol>
       </div>
-      <div class="sj-box"><h3>المدن<small>من 2 إلى 10 فرق</small></h3>
+      <div class="sj-box"><h2 class="sjh">المدن<small>من 2 إلى 10 فرق</small></h2>
         <div class="stepper ss-step"><button type="button" id="emTPlus" aria-label="زيادة" ${N >= 10 ? "disabled" : ""}>+</button><output>${n(N)}</output><button type="button" id="emTMinus" aria-label="إنقاص" ${N <= 2 ? "disabled" : ""}>−</button></div>
         <div class="sj-names">${Array.from({length:N}, (_,i) => `<input type="text" maxlength="24" data-emn="${i}" style="--tc:${EM_COL[i]}" value="${esc(emCfg.names[i])}" placeholder="${emDefName(i)}" aria-label="اسم ${emDefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>عدد الجولات</h4>${sjSeg("data-emr", emCfg.rounds, [[5,"5"],[7,"7"],[10,"10"]])}</div>
-        <div><h4>المستوى</h4>${sjSeg("data-eml", emCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"]])}</div>
-        <div><h4>وقت العمل</h4>${sjSeg("data-emw", emCfg.work, [[90,"1.5 د"],[150,"2.5 د"],[180,"3 د"],[240,"4 د"]])}</div>
-        <div><h4>وقت البناء</h4>${sjSeg("data-emb", emCfg.build, [[45,"45 ث"],[60,"1 د"],[90,"1.5 د"]])}</div>
-        <div><h4>الأزمات</h4>${sjSeg("data-emc", emCfg.crises ? 1 : 0, [[1,"مفعّلة"],[0,"أحداث حلوة فقط"]])}</div>
-        <div><h4>الانسحاب من المشاريع</h4>${sjSeg("data-emx", emCfg.betray ? 1 : 0, [[0,"ممنوع"],[1,"مسموح مع خسارة سمعة"]])}</div>
+        <div><h2 class="h4">عدد الجولات</h2>${sjSeg("data-emr", emCfg.rounds, [[5,"5"],[7,"7"],[10,"10"]])}</div>
+        <div><h2 class="h4">المستوى</h2>${sjSeg("data-eml", emCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"]])}</div>
+        <div><h2 class="h4">وقت العمل</h2>${sjSeg("data-emw", emCfg.work, [[90,"1.5 د"],[150,"2.5 د"],[180,"3 د"],[240,"4 د"]])}</div>
+        <div><h2 class="h4">وقت البناء</h2>${sjSeg("data-emb", emCfg.build, [[45,"45 ث"],[60,"1 د"],[90,"1.5 د"]])}</div>
+        <div><h2 class="h4">الأزمات</h2>${sjSeg("data-emc", emCfg.crises ? 1 : 0, [[1,"مفعّلة"],[0,"أحداث حلوة فقط"]])}</div>
+        <div><h2 class="h4">الانسحاب من المشاريع</h2>${sjSeg("data-emx", emCfg.betray ? 1 : 0, [[0,"ممنوع"],[1,"مسموح مع خسارة سمعة"]])}</div>
       </div>
       <p class="sj-sub" style="text-align:center">المستوى يكبّر حجم التحديات ويقلّل وقتها. والمنافسة تناسب المتوسط والثانوي والجامعة.</p>
       ${dispBox("em")}
@@ -8005,11 +8090,11 @@ async function emRender(){
         ${st && (ph === "rescue" || ph === "result" || ph === "spin") ? `<div class="em-st st-${st}">${{safe:"✓ محمية", need:"⏳ تحاول الإنقاذ", saved:"✓ أنقذت نفسها", lost:"✗ تضررت", good:"✓"}[st]} ${esc(EM.ev.note[t] || "")}</div>` : ""}
       </button>`; }).join("")}</div>
       <aside class="em-side">
-        <div class="em-box"><h4>المشاريع المشتركة</h4>${EM_PK.map(p => { const P = EM.proj[p], D = EM_PJ[p], tot = EM_RK.reduce((s, r) => s + (D.need[r] || 0), 0), have = EM_RK.reduce((s, r) => s + Math.min(D.need[r] || 0, P.have[r] || 0), 0);
+        <div class="em-box"><h2 class="h4">المشاريع المشتركة</h2>${EM_PK.map(p => { const P = EM.proj[p], D = EM_PJ[p], tot = EM_RK.reduce((s, r) => s + (D.need[r] || 0), 0), have = EM_RK.reduce((s, r) => s + Math.min(D.need[r] || 0, P.have[r] || 0), 0);
           return `<div class="em-pj${P.done ? " done" : ""}"><div><b>${D.e} ${D.n}</b><span>${P.done ? "اكتمل" : n(Math.round(have / tot * 100)) + "%"}</span></div><i style="--w:${have / tot * 100}%"></i>
             <div class="em-pjm">${Object.keys(P.by).map(t => `<span style="--tc:${EM_COL[t]}">${esc(EM.names[t])}</span>`).join("") || "<small>بلا شركاء بعد</small>"}</div></div>`; }).join("")}</div>
-        <div class="em-box"><h4>آخر الأخبار</h4><ul class="em-log">${EM.log.slice(0, 7).map(l => `<li>${esc(l.s)}</li>`).join("") || "<li>تبدأ الأخبار مع أول جولة.</li>"}</ul></div>
-        <div class="em-box em-rank"><h4>الترتيب</h4><ol>${EM.names.map((nm, t) => ({nm, t, s: emScore(t).total})).sort((a, b) => b.s - a.s).map(r => `<li style="--tc:${EM_COL[r.t]}"><b>${esc(r.nm)}</b><span>${n(r.s)}</span></li>`).join("")}</ol></div>
+        <div class="em-box"><h2 class="h4">آخر الأخبار</h2><ul class="em-log">${EM.log.slice(0, 7).map(l => `<li>${esc(l.s)}</li>`).join("") || "<li>تبدأ الأخبار مع أول جولة.</li>"}</ul></div>
+        <div class="em-box em-rank"><h2 class="h4">الترتيب</h2><ol>${EM.names.map((nm, t) => ({nm, t, s: emScore(t).total})).sort((a, b) => b.s - a.s).map(r => `<li style="--tc:${EM_COL[r.t]}"><b>${esc(r.nm)}</b><span>${n(r.s)}</span></li>`).join("")}</ol></div>
       </aside></div>
   </div></section>`;
   const $ = id => document.getElementById(id), on = (id, f) => { const e = $(id); if (e) e.onclick = f; };
@@ -8136,8 +8221,8 @@ function emTradeHTML(ctx){
   return `${emOffersHTML(ctx, true)}
     <div class="em-card em-new"><h3>عرض جديد</h3>
       <div class="em-tos">${tos.map(i => `<button type="button" class="${emUI.to === i ? "on" : ""}" data-emto="${i}" style="--tc:${EM_COL[i]}">${esc(g.names[i])} <small>${EM_TERR[g.terr[i]].e}</small></button>`).join("")}</div>
-      <div class="em-two"><div><h4>نعطيهم</h4>${EM_RK.map(r => emStepper("tr", "give", r, emUI.give[r])).join("")}</div>
-      <div><h4>ونأخذ منهم</h4>${EM_RK.map(r => emStepper("tr", "get", r, emUI.get[r])).join("")}</div></div>
+      <div class="em-two"><div><h2 class="h4">نعطيهم</h2>${EM_RK.map(r => emStepper("tr", "give", r, emUI.give[r])).join("")}</div>
+      <div><h2 class="h4">ونأخذ منهم</h2>${EM_RK.map(r => emStepper("tr", "get", r, emUI.get[r])).join("")}</div></div>
       <button type="button" class="btn" id="emSendOf">أرسل العرض</button></div>`;
 }
 function emOffersHTML(ctx, act){
@@ -8481,7 +8566,7 @@ function mfSetup(keepScroll){
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${MF && MF.phase !== "over" ? `<div class="sj-resume"><span>عندك مسابقة جارية (${MF.phase === "plant" ? "مرحلة الزرع" : MF.teams.map((t,i) => esc(t) + " " + n(MF.scores[i])).join(" · ")}).</span><button class="btn" type="button" id="mfResume">متابعة المسابقة</button></div>` : ""}
-      <div class="sj-box"><h3>طريقة اللعب<small>شاشة عرض واحدة، بدون جوالات</small></h3>
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب<small>شاشة عرض واحدة، بدون جوالات</small></h2>
         <ol class="b4-rules">
           <li><b>الزرع بالسر:</b> يتقدّم كل فريق بدوره إلى جهاز المقدّم، فتظهر له اللوحة كاملة ويختار مربعات ألغامه، ثم تختفي قبل أن يأتي الفريق التالي.</li>
           <li>إذا اختار فريقان أو أكثر نفس المربع صار <b>لغمًا مشتركًا</b>، وإذا انفجر يأخذ كل أصحابه النقاط.</li>
@@ -8492,32 +8577,32 @@ function mfSetup(keepScroll){
         <div class="b4-pts mf-pts"><span><b>+${MF_PTS.safe}</b>مربع آمن</span><span class="bad"><b>−${MF_PTS.boom}</b>لغم فريق ثاني</span><span class="bad"><b>−${MF_PTS.own}</b>لغم الفريق نفسه</span><span><b>+${MF_PTS.owner}</b>لصاحب اللغم المنفجر</span></div>
         <p class="sj-sub" style="margin:0">وفي النهاية يأخذ «أخطر زارع» (الفريق الذي أوقعت ألغامه أكثر الفرق) ${n(MF_PTS.bonus)} نقطة إضافية.</p>
       </div>
-      <div class="sj-box"><h3>الفرق<small>من 2 إلى 8</small></h3>
+      <div class="sj-box"><h2 class="sjh">الفرق<small>من 2 إلى 8</small></h2>
         ${sjSeg("data-mft", T, [2,3,4,5,6,7,8].map(k => [k, k === 2 ? "فريقان" : n(k)]))}
         <div class="sj-names">${Array.from({length:T}, (_,i) => `<input type="text" maxlength="24" data-mfn="${i}" style="--tc:var(--c${i+1})" value="${esc(mfCfg.names[i])}" placeholder="${mfDefName(i)}" aria-label="اسم ${mfDefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>حجم اللوحة</h4>${sjSeg("data-mfs", mfCfg.size, [["4x5","5×4"],["5x5","5×5"],["6x6","6×6"]])}
+        <div><h2 class="h4">حجم اللوحة</h2>${sjSeg("data-mfs", mfCfg.size, [["4x5","5×4"],["5x5","5×5"],["6x6","6×6"]])}
           <p class="sj-sub">${n(cells)} مربعًا مرقّمة.</p></div>
-        <div><h4>ألغام كل فريق</h4><div class="seg" role="radiogroup">${[1,2,3,4,5].map(k => `<button type="button" role="radio" data-mfm="${k}" aria-checked="${k === mfCfg.mines}" ${k > max ? "disabled" : ""}>${n(k)}</button>`).join("")}</div>
+        <div><h2 class="h4">ألغام كل فريق</h2><div class="seg" role="radiogroup">${[1,2,3,4,5].map(k => `<button type="button" role="radio" data-mfm="${k}" aria-checked="${k === mfCfg.mines}" ${k > max ? "disabled" : ""}>${n(k)}</button>`).join("")}</div>
           <p class="sj-sub">${max < 5 ? `الحد الأعلى ${n(max)} مع ${n(T)} فرق على هذه اللوحة، حتى تبقى مربعات آمنة كافية.` : "كل فريق يزرع هذا العدد بالضبط."}</p></div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>نوع الأسئلة</h4>${sjSeg("data-mfk", mfCfg.kind, MF_KINDS)}</div>
-        <div><h4>الصعوبة</h4>${sjSeg("data-mfl", mfCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"],["مختلط","مختلط"]])}</div>
+        <div><h2 class="h4">نوع الأسئلة</h2>${sjSeg("data-mfk", mfCfg.kind, MF_KINDS)}</div>
+        <div><h2 class="h4">الصعوبة</h2>${sjSeg("data-mfl", mfCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"],["مختلط","مختلط"]])}</div>
       </div>
-      <div class="sj-box"><h3>مجالات الأسئلة<small>${n(mfCfg.cats.length)} مختارة · ${n(mfPoolOf(mfCfg).length)} سؤالًا</small></h3>
+      <div class="sj-box"><h2 class="sjh">مجالات الأسئلة<small>${n(mfCfg.cats.length)} مختارة · ${n(mfPoolOf(mfCfg).length)} سؤالًا</small></h2>
         <div><button type="button" class="mini" id="mfAll">${all ? "إلغاء الكل" : "تحديد الكل"}</button></div>
         <div class="sj-cats" style="--tc:var(--blue)">${cats.map((c,i) => { const m = catMeta(c), k = cnt(c), on = mfCfg.cats.includes(c);
           return `<button type="button" class="sj-cat ${k ? "" : "na"}" data-mfc="${i}" aria-pressed="${on}" ${k ? "" : "disabled"}>${I(P[m.icon] || P.general)}<span><b>${esc(c)}</b><small>${k ? n(k) + " سؤالًا" : "لا توجد أسئلة بهذا النوع"}</small></span></button>`; }).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>وقت الإجابة</h4>${sjSeg("data-mfq", mfCfg.time, [[0,"بدون"],[15,"15ث"],[30,"30ث"],[45,"45ث"],[60,"60ث"]])}
+        <div><h2 class="h4">وقت الإجابة</h2>${sjSeg("data-mfq", mfCfg.time, [[0,"بدون"],[15,"15ث"],[30,"30ث"],[45,"45ث"],[60,"60ث"]])}
           <p class="sj-sub">عدّاد يظهر مع كل سؤال، والمقدّم يحكم على الإجابة.</p></div>
-        <div><h4>مدة المسابقة</h4>${sjSeg("data-mfd", mfCfg.dur, [[0,"مفتوحة"],[10,"10د"],[15,"15د"],[20,"20د"],[30,"30د"]])}
+        <div><h2 class="h4">مدة المسابقة</h2>${sjSeg("data-mfd", mfCfg.dur, [[0,"مفتوحة"],[10,"10د"],[15,"15د"],[20,"20د"],[30,"30د"]])}
           <p class="sj-sub">${mfCfg.dur ? "عند انتهاء الوقت تنتهي المسابقة بعد السؤال الحالي." : "تنتهي بكشف كل المربعات الآمنة أو بزر الإنهاء."}</p></div>
       </div>
-      <div class="sj-box"><h3>أدوات خاصة<small>اختيارية، ولكل فريق مرة واحدة</small></h3>
+      <div class="sj-box"><h2 class="sjh">أدوات خاصة<small>اختيارية، ولكل فريق مرة واحدة</small></h2>
         <div class="sj-helps mf-tools">
           <button type="button" class="sj-help" data-mftool="det" aria-pressed="${!!mfCfg.det}"><b>الكاشف</b><small>في دوره يسأل الفريق: هل هذا المربع فيه لغم؟ فتجيب اللوحة، ثم يكمل دوره.</small></button>
           <button type="button" class="sj-help" data-mftool="shield" aria-pressed="${!!mfCfg.shield}"><b>الدرع</b><small>يحمي الفريق من خسارة أول انفجار يدوسه، ويبقى لصاحب اللغم نقاطه.</small></button>
