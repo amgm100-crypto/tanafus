@@ -1783,6 +1783,10 @@ body[data-ct] .subnav{background:color-mix(in srgb,var(--ctbg) 86%,transparent)}
 .ac-glist svg{width:18px;height:18px;color:var(--blue)}
 .ac-row-tx .ac-gsum{display:block;color:var(--blue-link);font-size:12px}
 /* TN-ORDER */
+.fr-brand{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+@media (max-width:620px){.fr-brand{grid-template-columns:1fr}}
+.fr-brand .ac-prev{min-width:0}
+.inb-sw{display:inline-flex;gap:4px;vertical-align:middle;margin-inline-start:6px}.inb-sw i{width:14px;height:14px;border-radius:4px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
 #tnContests,#tnPlH,#acLogin{scroll-margin-top:72px}
 .links{overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}
 .links::-webkit-scrollbar{display:none}
@@ -1997,6 +2001,7 @@ body[data-ct] .subnav{background:color-mix(in srgb,var(--ctbg) 86%,transparent)}
     async orgqSave(tok, items){ const { data, error } = await sb.rpc("tn_orgq_save", { p_tok: tok, p_items: items }); if (error) throw error; return data; },
     /* plan orders, contact messages and the owner's inbox (TN-ORDER) */
     async order(p){ const { data, error } = await sb.rpc("tn_order", { p }); if (error) throw error; return data; },
+    async freeReg(p){ const { data, error } = await sb.rpc("tn_free_reg", { p }); if (error) throw error; return data; },
     async contact(p){ const { data, error } = await sb.rpc("tn_contact", { p }); if (error) throw error; return data; },
     async inbox(table){ const { data, error } = await sb.from(table).select("*").order("at", { ascending: false }).limit(300); if (error) throw error; return data || []; },
     async setStatus(table, id, status){ const { error } = await sb.from(table).update({ status }).eq("id", id); if (error) throw error; },
@@ -4793,13 +4798,71 @@ function tnContact(){
       if (r !== "ok") throw new Error(r); CT.sent = true; tnContact();
     } catch(x){ go.disabled = false; go.textContent = "إرسال"; err.textContent = "تعذّر الإرسال الآن. حاول مرة ثانية."; } };
 }
+/* free-contest registration form */
+const FR = {f:{org:"", person:"", phone:"", email:"", logo:"", c1:"", c2:""}};
+function tnFreeReg(k){
+  const c = CONTESTS.find(x => x.go === k); if (!c) return tn404();
+  window.scrollTo({top:0}); const f = FR.f, c1 = f.c1 || AC_BASE.c1, c2 = f.c2 || AC_BASE.c2;
+  $app.innerHTML = `<section class="section gut view tn-order"><div class="wrap">
+    <p class="eyebrow">مجانية للجميع حتى ${freeDate(k)}</p><h1>سجّل جهتك وابدأ «${c.name}»</h1>
+    <p class="lead">خطوة وحدة قبل اللعب: بيانات جهتك وشعارها، والمسابقة تظهر بهوية جهتك وألوانها.</p>
+    <form class="sj-box ord-form" id="frF" novalidate>
+      <label><span>اسم الجهة</span><input id="frOrg" maxlength="80" value="${esc(f.org)}" placeholder="مثال: مدرسة الرواد" required></label>
+      <label><span>اسم المسؤول</span><input id="frPerson" maxlength="80" value="${esc(f.person)}" autocomplete="name" required></label>
+      <div class="g2"><label><span>رقم الجوال (واتساب)</span><input id="frPhone" dir="ltr" inputmode="tel" autocomplete="tel" maxlength="20" value="${esc(f.phone)}" placeholder="05xxxxxxxx" required></label>
+        <label><span>البريد الإلكتروني (اختياري)</span><input id="frEmail" dir="ltr" type="email" autocomplete="email" maxlength="120" value="${esc(f.email)}" placeholder="name@example.com"></label></div>
+      <div class="ord-logo"><span>شعار الجهة</span>
+        <label class="ss-logo ac-logo">${f.logo ? `<img src="${f.logo}" alt="شعار الجهة">` : `${I(P.ssimg)}<span>ارفع الشعار</span>`}<input type="file" accept="image/png,image/jpeg,image/webp" id="frLogo" hidden></label>
+        <div class="ac-cols">
+          <label><span>اللون الأساسي</span><input type="color" id="frC1" value="${c1}"></label>
+          <label><span>اللون الثاني</span><input type="color" id="frC2" value="${c2}"></label>
+          ${f.logo ? `<button type="button" class="mini" id="frNoLogo">إزالة الشعار</button>` : `<small class="sj-sub">الألوان تُقترح تلقائيًا من الشعار.</small>`}
+        </div></div>
+      <div class="ac-prev" style="--p1:${c1};--p2:${c2};--p1on:${ssOn(c1)}">
+        <div class="ac-prev-nav">${f.logo ? `<img src="${f.logo}" alt="">` : ""}<b>${esc(f.org || "اسم الجهة")}</b><i></i><i></i></div>
+        <div class="ac-prev-body"><small>معاينة الواجهة</small><span class="ac-prev-btn">العب الآن</span><span class="ac-prev-tag">${c.name}</span></div>
+      </div>
+      <p class="ac-err" id="frErr" role="alert"></p>
+      <div class="ord-acts"><button type="button" class="btn sec lg" id="frBack">رجوع</button><button type="submit" class="btn lg" id="frGo">سجّل وابدأ اللعب</button></div>
+      <small class="sj-sub">جهتك مشتركة في تنافس؟ <a href="#login">سجّل الدخول</a> بدل التسجيل هنا.</small>
+    </form></div></section>`;
+  const $ = id => document.getElementById(id);
+  const keep = () => { f.org = $("frOrg").value; f.person = $("frPerson").value; f.phone = $("frPhone").value; f.email = $("frEmail").value; f.c1 = $("frC1").value; f.c2 = $("frC2").value; };
+  const redraw = () => { const y = scrollY; tnFreeReg(k); scrollTo({top:y}); }, re = () => { keep(); redraw(); };
+  $("frBack").onclick = () => { keep(); history.length > 1 ? history.back() : nav("about-" + k); };
+  $("frOrg").oninput = () => { const b = $app.querySelector(".ac-prev-nav b"); if (b) b.textContent = $("frOrg").value || "اسم الجهة"; };
+  $("frC1").onchange = re; $("frC2").onchange = re;
+  $("frLogo").onchange = async ev => { const file = ev.target.files && ev.target.files[0]; if (!file) return; keep();
+    try { const {url, canvas} = await ssShrink(file, 320, "image/png"); const cc = ssColors(canvas); f.logo = url; if (cc.c1) f.c1 = cc.c1; if (cc.c2) f.c2 = cc.c2; } catch(x){} redraw(); };
+  const nl = $("frNoLogo"); if (nl) nl.onclick = () => { keep(); f.logo = ""; redraw(); };
+  $("frF").onsubmit = async ev => { ev.preventDefault(); keep(); const err = $("frErr"); err.textContent = "";
+    const phone = normPhone(f.phone), email = f.email.trim();
+    if (f.org.trim().length < 2) return err.textContent = "اكتب اسم الجهة.";
+    if (f.person.trim().length < 2) return err.textContent = "اكتب اسم المسؤول.";
+    if (!/^\d{8,15}$/.test(phone)) return err.textContent = "رقم الجوال غير صحيح. مثال: 0512345678";
+    if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return err.textContent = "البريد الإلكتروني غير صحيح.";
+    if (!f.logo) return err.textContent = "ارفع شعار الجهة.";
+    const go = $("frGo"); go.disabled = true; go.textContent = "جارٍ التسجيل…";
+    const payload = {contest:k, org:f.org.trim(), person:f.person.trim(), phone, email, logo:f.logo, c1:f.c1 || AC_BASE.c1, c2:f.c2 || AC_BASE.c2};
+    try {
+      let r = "ok";
+      if (window.TN && TN.freeReg) r = await TN.freeReg(payload);
+      else { const all = store.get("tn-freeregs", []); all.unshift(Object.assign({id:Date.now(), at:new Date().toISOString(), status:"new"}, payload)); store.set("tn-freeregs", all); }
+      if (r !== "ok") throw new Error(r);
+      FREG[k] = {org:payload.org, logo:payload.logo, c1:payload.c1, c2:payload.c2}; store.set("tn-freereg", FREG); acBrand(); nav(k);
+    } catch(x){ go.disabled = false; go.textContent = "سجّل وابدأ اللعب"; const m = x.message || "";
+      err.textContent = m === "phone" ? "رقم الجوال غير صحيح." : m === "email" ? "البريد الإلكتروني غير صحيح." : m === "logo" ? "الشعار كبير أو صيغته غير مدعومة. جرّب PNG أو JPG."
+        : m === "limit" ? "سجّلت بهذا الرقم أكثر من مرة اليوم. تواصل معنا إذا احتجت مساعدة." : m === "busy" ? "التسجيل مزدحم الآن. حاول بعد قليل." : "تعذّر التسجيل الآن. حاول مرة ثانية."; }
+  };
+}
 /* owner inbox: orders and messages */
 const ORD_ST = {new:"جديد", contacted:"تم التواصل", done:"مكتمل", cancelled:"ملغي"};
 const waLink = p => "https://wa.me/" + normPhone(p);
 async function tnInbox(){
   if (!CAN_EDIT) return; const host = document.querySelector(".ac-admin"); if (!host) return;
-  let orders = [], msgs = [];
+  let orders = [], msgs = [], fregs = [];
   try { if (window.TN && TN.inbox){ [orders, msgs] = await Promise.all([TN.inbox("orders"), TN.inbox("messages")]); } else { orders = store.get("tn-orders", []); msgs = store.get("tn-msgs", []); } } catch(e){}
+  try { fregs = window.TN && TN.inbox ? await TN.inbox("free_regs") : store.get("tn-freeregs", []); } catch(e){}
   if (!document.body.contains(host)) return;
   const sec = document.createElement("section"); sec.className = "tn-rep tn-inbox"; sec.id = "tnInbox";
   const day = t => { const d = new Date(t); return isNaN(d) ? "" : d.toLocaleString("en-GB", {timeZone:"Asia/Riyadh", day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"}); };
@@ -4811,6 +4874,14 @@ async function tnInbox(){
       <p><b>${(ORD_PLANS[o.plan] || {}).n || o.plan}</b> · ${(o.games || []).map(nm).join("، ")} · <b>${n(o.price || 0)} ريال</b></p>
       <div class="inb-acts"><a class="mini" href="${waLink(o.phone)}" target="_blank" rel="noopener">${I(P.tnwa)}<span dir="ltr">${esc(o.phone)}</span></a><a class="mini" href="mailto:${esc(o.email)}">${I(P.tnmail)}<span dir="ltr">${esc(o.email)}</span></a></div>
     </article>`).join("")}</div>` : `<p class="lead">لا توجد طلبات بعد.</p>`}
+    <h2 style="margin-top:28px">تسجيلات المسابقات المجانية <small>${n(fregs.filter(o => o.status === "new").length)} جديد</small></h2>
+    ${fregs.length ? `<div class="inb-list">${fregs.map(o => `<article class="inb-card st-${esc(o.status)}">
+      <div class="inb-top">${o.logo ? `<img src="${o.logo}" alt="">` : ""}<div><b>${esc(o.org)}</b><small>${esc(o.person)} · ${day(o.at)}</small></div>
+        <select data-fst="${o.id}" aria-label="حالة التسجيل">${Object.entries(ORD_ST).map(([k, v]) => `<option value="${k}" ${o.status === k ? "selected" : ""}>${v}</option>`).join("")}</select></div>
+      <p>لعب <b>${esc(nm(o.contest))}</b> مجانًا${o.c1 ? `<span class="inb-sw"><i style="background:${esc(o.c1)}"></i><i style="background:${esc(o.c2 || o.c1)}"></i></span>` : ""}</p>
+      <div class="inb-acts"><a class="mini" href="${waLink(o.phone)}" target="_blank" rel="noopener">${I(P.tnwa)}<span dir="ltr">${esc(o.phone)}</span></a>${o.email ? `<a class="mini" href="mailto:${esc(o.email)}">${I(P.tnmail)}<span dir="ltr">${esc(o.email)}</span></a>` : ""}
+        <button type="button" class="mini" data-facct="${o.id}">أنشئ لها حساب</button></div>
+    </article>`).join("")}</div>` : `<p class="lead">لا توجد تسجيلات بعد.</p>`}
     <h2 style="margin-top:28px">رسائل التواصل <small>${n(msgs.filter(m => m.status === "new").length)} جديدة</small></h2>
     ${msgs.length ? `<div class="inb-list">${msgs.map(m => `<article class="inb-card st-${esc(m.status)}">
       <div class="inb-top"><span class="inb-kind k-${esc(m.kind)}">${CT_KINDS[m.kind] || m.kind}</span><div><b>${esc(m.name)}</b><small>${day(m.at)}</small></div>
@@ -4823,6 +4894,10 @@ async function tnInbox(){
     if (window.TN && TN.setStatus) await TN.setStatus(table, id, st);
     else { const all = store.get(localKey, []); const x = all.find(r => String(r.id) === String(id)); if (x) x.status = st; store.set(localKey, all); } };
   sec.querySelectorAll("[data-ost]").forEach(sel => sel.onchange = async () => { try { await setSt("orders", sel.dataset.ost, sel.value, "tn-orders"); sel.closest(".inb-card").className = "inb-card st-" + sel.value; } catch(e){ flash("تعذّر الحفظ."); } });
+  sec.querySelectorAll("[data-fst]").forEach(sel => sel.onchange = async () => { try { await setSt("free_regs", sel.dataset.fst, sel.value, "tn-freeregs"); sel.closest(".inb-card").className = "inb-card st-" + sel.value; } catch(e){ flash("تعذّر الحفظ."); } });
+  sec.querySelectorAll("[data-facct]").forEach(b => b.onclick = async () => { const o = fregs.find(r => String(r.id) === b.dataset.facct); if (!o) return;
+    acEdit = {user:"", org:o.org || "", pw:acGenPw(), pin:acGenPin(), logo:o.logo || "", c1:o.c1 || AC_BASE.c1, c2:o.c2 || AC_BASE.c2, active:true, games:null, isNew:true};
+    await route(); requestAnimationFrame(() => { const u = document.getElementById("aeUser") || document.querySelector(".ac-admin input"); if (u){ u.scrollIntoView({block:"center"}); u.focus({preventScroll:true}); } }); });
   sec.querySelectorAll("[data-mst]").forEach(cb => cb.onchange = async () => { const st = cb.checked ? "done" : "new"; try { await setSt("messages", cb.dataset.mst, st, "tn-msgs"); cb.closest(".inb-card").className = "inb-card st-" + st; } catch(e){ cb.checked = !cb.checked; } });
 }
 async function tnFreeBox(){
@@ -4880,6 +4955,7 @@ function route(){
     renderLinks(""); return acGate(); }
   orgqLeave();
   if (h === "accounts"){ game = null; renderLinks("accounts"); return acAdmin().then(tnFreeBox).then(tnInbox).then(tnReport); }
+  if (/^(sj|b4|ss|mf|tk|em|er)$/.test(h) && fregNeed(h)){ game = null; renderLinks(""); return tnFreeReg(h); }
   if (!gameOk(tnCt(h)) && /^(sj|sjgame|b4|b4game|b4host|ss|ssgame|tk|tkplay|er|erhost|erplay|em|emplay|mf|mfplay)$/.test(h)){ game = null; renderLinks(""); return SESSION ? acNoGame(tnCt(h)) : acGate(); }
   if (h.startsWith("join")){ game = null; renderLinks(""); return joinPage(); }
   if (h === "em" || h === "emplay" || h.startsWith("emjoin")){ game = null; renderLinks("");
@@ -4953,6 +5029,11 @@ let FREE = store.get("tn-free", {});
 const freeEnd = k => FREE && FREE[k] ? Date.parse(FREE[k] + "T23:59:59+03:00") : 0;
 const freeOn = k => !!k && Date.now() <= freeEnd(k);
 const freeDate = k => { const d = new Date(freeEnd(k)); return isNaN(d) ? "" : d.toLocaleDateString("ar-SA-u-nu-latn-ca-gregory", {day:"numeric", month:"long", timeZone:"Asia/Riyadh"}); };
+/* TN-FREEREG: before a visitor plays a free contest they register their organisation once (per contest);
+   its logo and colours then dress the site for them while the free window lasts. */
+let FREG = store.get("tn-freereg", {}) || {};
+const fregNeed = k => !!k && !SESSION && !CAN_EDIT && freeOn(k) && !FREG[k];
+const fregBrand = () => { if (SESSION || CAN_EDIT) return null; const k = Object.keys(FREG).find(x => freeOn(x)); return k ? FREG[k] : null; };
 async function freeLoad(){
   if (!DB) return;
   try { const d = await DB.doc("meta/free").get(); FREE = d.exists ? (d.data() || {}) : {}; store.set("tn-free", FREE); } catch(e){}
@@ -5038,7 +5119,7 @@ function acBrand(){
   orgqSync();
   let st = document.getElementById("acBrandCss");
   if (!st){ st = document.createElement("style"); st.id = "acBrandCss"; document.body.appendChild(st); }
-  const s = SESSION;
+  const s = SESSION || fregBrand();
   st.textContent = s && s.c1 ? `:root:not(#ac-brand){--blue:${s.c1};--blue-link:${s.c1};--on-blue:${ssOn(s.c1)};--red2:${s.c2 || s.c1}}` : "";
   const b = document.getElementById("acNavOrg");
   if (b) b.remove();

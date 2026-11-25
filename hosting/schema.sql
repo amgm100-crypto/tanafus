@@ -67,3 +67,48 @@ grant execute on function public.tn_profile(text) to anon, authenticated;
 
 -- 2026-11-25 migration tanafus_org_games: tn_login, tn_pin_login and tn_profile also return the account's `games` (null = all contests).
 -- tanafus_orders_contact (2026-11-25): orders + messages tables (admin RLS), tn_order(p jsonb) / tn_contact(p jsonb) RPCs for anon, returning ok or an error code.
+
+-- tanafus_free_regs (2026-11-25): sign-ups for contests that are free for a limited time (TN-FREEREG).
+-- A visitor registers their organisation (name, contact, logo, colours) once per contest before playing it.
+-- free_regs is admin-only (RLS); anon inserts only through tn_free_reg, which validates and rate-limits
+-- (3 per phone per day, 30 per hour site-wide) and returns 'ok' or an error code.
+create table if not exists public.free_regs (
+  id bigint generated always as identity primary key,
+  at timestamptz not null default now(),
+  contest text not null, org text not null, person text not null,
+  phone text not null, email text, logo text, c1 text, c2 text,
+  status text not null default 'new'
+);
+create index if not exists free_regs_phone_at on public.free_regs (phone, at);
+alter table public.free_regs enable row level security;
+drop policy if exists free_regs_admin_select on public.free_regs;
+drop policy if exists free_regs_admin_update on public.free_regs;
+drop policy if exists free_regs_admin_delete on public.free_regs;
+create policy free_regs_admin_select on public.free_regs for select using ((select public.tn_is_admin()));
+create policy free_regs_admin_update on public.free_regs for update using ((select public.tn_is_admin())) with check ((select public.tn_is_admin()));
+create policy free_regs_admin_delete on public.free_regs for delete using ((select public.tn_is_admin()));
+
+create or replace function public.tn_free_reg(p jsonb) returns text
+language plpgsql security definer set search_path = '' as $$
+declare
+  ph text := regexp_replace(coalesce(p->>'phone', ''), '\D', '', 'g');
+  em text := trim(coalesce(p->>'email', ''));
+  lg text := coalesce(p->>'logo', '');
+  k  text := coalesce(p->>'contest', '');
+begin
+  if k !~ '^[a-z]{2}$' then return 'contest'; end if;
+  if length(trim(coalesce(p->>'org', ''))) < 2 then return 'org'; end if;
+  if length(trim(coalesce(p->>'person', ''))) < 2 then return 'person'; end if;
+  if ph !~ '^[0-9]{8,15}$' then return 'phone'; end if;
+  if em <> '' and em !~ '^[^@[:space:]]+@[^@[:space:]]+\.[^@[:space:]]+$' then return 'email'; end if;
+  if lg !~ '^data:image/(png|jpeg|webp);base64,' or length(lg) > 400000 then return 'logo'; end if;
+  if (select count(*) from public.free_regs where phone = ph and at > now() - interval '1 day') >= 3 then return 'limit'; end if;
+  if (select count(*) from public.free_regs where at > now() - interval '1 hour') >= 30 then return 'busy'; end if;
+  insert into public.free_regs (contest, org, person, phone, email, logo, c1, c2)
+  values (k, left(trim(p->>'org'), 80), left(trim(p->>'person'), 80), ph, nullif(left(em, 120), ''), lg,
+    case when p->>'c1' ~ '^#[0-9a-fA-F]{6}$' then p->>'c1' end,
+    case when p->>'c2' ~ '^#[0-9a-fA-F]{6}$' then p->>'c2' end);
+  return 'ok';
+end $$;
+revoke all on function public.tn_free_reg(jsonb) from public;
+grant execute on function public.tn_free_reg(jsonb) to anon, authenticated;
