@@ -71,7 +71,7 @@ def main():
     (out / "join" / "index.html").write_text('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
         '<title>تنافس · دخول اللاعبين</title><script>location.replace("../#join" + (location.hash ? "=" + location.hash.replace(/\\D/g, "") : ""))</script>'
         '<a href="../#join">دخول اللاعبين</a>', encoding="utf-8")
-    for extra in ("_headers",):
+    for extra in ("_headers", "404.html"):
         p = HERE / extra
         if p.exists():
             (out / extra).write_text(p.read_text(encoding="utf-8"), encoding="utf-8")
