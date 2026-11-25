@@ -117,6 +117,9 @@
     async login(u, pw){ const { data, error } = await sb.rpc("tn_login", { p_user: u, p_pw: pw }); if (error) throw error; return data || null; },
     async pinLogin(pin){ const { data, error } = await sb.rpc("tn_pin_login", { p_pin: pin }); if (error) throw error; return data || null; },
     async setPin(u, pw, pin){ const { data, error } = await sb.rpc("tn_set_pin", { p_user: u, p_pw: pw, p_pin: pin }); if (error) throw error; return data; },
+    /* organisation's own questions (TN-ORGQ): token from TN.login / TN.pinLogin */
+    async orgqGet(tok){ const { data, error } = await sb.rpc("tn_orgq_get", { p_tok: tok }); if (error) throw error; return data; },
+    async orgqSave(tok, items){ const { data, error } = await sb.rpc("tn_orgq_save", { p_tok: tok, p_items: items }); if (error) throw error; return data; },
     /* counters and play log (TN-ID) */
     async visit(vid){ await sb.rpc("tn_visit", { p_vid: vid }); },
     async play(acct, contest){ await sb.rpc("tn_play", { p_acct: acct || "", p_contest: contest }); },
