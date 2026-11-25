@@ -1497,11 +1497,14 @@ html.tn-motion .rv.in{opacity:1;transform:none}
 html.tn-motion .contest.live.rv.in:hover{transform:translateY(-3px)}
 @media (prefers-reduced-motion:reduce){.tn-mq-track{animation:none}html.tn-motion .rv{opacity:1;transform:none}}
 /* TN-ODO */
-.tn-odo{display:inline-flex;direction:ltr;unicode-bidi:isolate;vertical-align:top;line-height:inherit;font-variant-numeric:tabular-nums}
+.tn-odo{display:inline-flex;transform-origin:center;direction:ltr;unicode-bidi:isolate;vertical-align:top;line-height:inherit;font-variant-numeric:tabular-nums}
 .tn-od{display:inline-block;height:1lh;overflow:hidden}
 .tn-odr{display:flex;flex-direction:column;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
 .tn-odr span{display:block;height:1lh;text-align:center}
 .tn-odc{line-height:inherit}
+/* games style their own spans (e.g. .b4-ts span): keep the odometer immune */
+.tn-odo,.tn-odo span{font-size:inherit!important;font-weight:inherit!important;color:inherit!important;letter-spacing:inherit!important;line-height:inherit!important;margin:0!important;padding:0!important;border:0!important;background:none!important;min-width:0!important;width:auto!important;opacity:1!important;position:static!important;box-shadow:none!important}
+.tn-odo{display:inline-flex!important}.tn-od{display:inline-block!important}.tn-odr{display:flex!important}.tn-odr span{display:block!important}.tn-odc{display:inline!important}
 @media (prefers-reduced-motion:reduce){.tn-odr{transition:none}}
 /* TN-HERO */
 .tn-hero{position:relative;overflow:hidden;isolation:isolate}
@@ -5245,18 +5248,18 @@ const TNM = { sig: "", nums: new Map(), qs: new Map(), io: null, raf: 0,
   EASE: "cubic-bezier(.2,.8,.2,1)",
   Q: ".qtext,.b4-qt,.mf-qt,.er-q,.tk-qb,.ss-q,.sj-q",
   NOBUMP: /clock|timer|time|count|cd|code|pin|qr|-tick|mq/i };
-function tnmIn(el, d){ try { el.animate([{opacity:0, transform:"translateY(14px) scale(.98)"}, {opacity:1, transform:"none"}], {duration:460, delay:d, easing:TNM.EASE, fill:"backwards"}); } catch(e){} }
+function tnmIn(el, d){ try { el.animate([{opacity:0, transform:"translateY(26px) scale(.96)"}, {opacity:1, transform:"none"}], {duration:620, delay:d, easing:TNM.EASE, fill:"backwards"}); } catch(e){} }
 function tnmVisible(el){ const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight && r.width > 0; }
 function tnmEnter(view){
   if (!TNM.io) TNM.io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting){ tnmIn(x.target, +x.target.dataset.tnd || 0); delete x.target.dataset.tnd; TNM.io.unobserve(x.target); } }), {threshold:0.08});
   const blocks = []; view.querySelectorAll(".wrap").forEach(w => { if (w.closest(".gnav")) return; [...w.children].forEach(c => blocks.push(c)); });
   const queue = (el, d) => { if (tnmVisible(el)) tnmIn(el, d); else { el.dataset.tnd = String(Math.min(d, 120)); TNM.io.observe(el); } };
-  blocks.slice(0, 30).forEach((b, i) => queue(b, Math.min(i * 60, 360)));
+  blocks.slice(0, 30).forEach((b, i) => queue(b, Math.min(i * 90, 540)));
   let grids = 0;
   view.querySelectorAll("div,ul,ol,section").forEach(g => {
     if (grids > 24 || g.children.length < 3 || g.children.length > 140 || g.querySelector("canvas")) return;
     const cs = getComputedStyle(g); if (cs.display !== "grid" && cs.display !== "inline-grid") return;
-    grids++; [...g.children].forEach((c, i) => { if (c.offsetParent !== null) queue(c, 140 + Math.min(i * 28, 520)); });
+    grids++; [...g.children].forEach((c, i) => { if (c.offsetParent !== null) queue(c, 160 + Math.min(i * 45, 700)); });
   });
 }
 function tnmQuestions(view){
@@ -5277,7 +5280,9 @@ function tnOdo(el, from, to, up, col){
   el.offsetWidth; di = 0;
   const tds = to.replace(/[^\d]/g, "").split("");
   el.querySelectorAll(".tn-odr").forEach((r, i) => { r.style.transitionDelay = (i * 60) + "ms"; r.style.transform = `translateY(-${(+tds[i]) * 10}%)`; });
-  try { const c = col || (up ? "var(--good)" : "var(--bad)"); el.animate([{color: c}, {color: c, offset:.6}, {}], {duration:1200, easing:"ease-out"}); } catch(e){}
+  try { const c = col || (up ? "#1FBF6A" : "#E5484D"), box = el.firstElementChild;
+    el.animate([{color: c}, {color: c, offset:.6}, {}], {duration:1300, easing:"ease-out"});
+    if (!col && box) box.animate([{transform:"scale(1)", textShadow:"none"}, {transform:"scale(1.4)", textShadow:`0 0 14px ${c}, 0 0 28px ${c}`, offset:.25}, {transform:"scale(1)", textShadow:`0 0 10px ${c}`, offset:.7}, {transform:"scale(1)", textShadow:"none"}], {duration:1100, easing:"cubic-bezier(.3,1.4,.5,1)"}); } catch(e){}
   clearTimeout(el._tnodoT); el._tnodoT = setTimeout(() => { if (el.dataset.tnodo === to){ delete el.dataset.tnodo; el.textContent = to; } }, 1400);
 }
 function tnmNumbers(view, fresh){
