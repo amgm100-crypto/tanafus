@@ -96,7 +96,7 @@ declare
   lg text := coalesce(p->>'logo', '');
   k  text := coalesce(p->>'contest', '');
 begin
-  if k !~ '^[a-z]{2}$' then return 'contest'; end if;
+  if k !~ '^[a-z][a-z0-9]$' then return 'contest'; end if;  -- b4 has a digit (fix migration tanafus_free_regs_contest_key)
   if length(trim(coalesce(p->>'org', ''))) < 2 then return 'org'; end if;
   if length(trim(coalesce(p->>'person', ''))) < 2 then return 'person'; end if;
   if ph !~ '^[0-9]{8,15}$' then return 'phone'; end if;
