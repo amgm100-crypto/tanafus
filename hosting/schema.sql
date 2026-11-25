@@ -64,3 +64,5 @@ grant execute on function public.tn_profile(text) to anon, authenticated;
 
 -- 2026-11-25 migration tanafus_org_questions: org_tokens (60-day session tokens from tn_login / tn_pin_login),
 -- org_questions(acct, items); RPCs tn_orgq_get (org or presenter token) and tn_orgq_save (org token only).
+
+-- 2026-11-25 migration tanafus_org_games: tn_login, tn_pin_login and tn_profile also return the account's `games` (null = all contests).

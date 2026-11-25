@@ -1767,6 +1767,18 @@ body[data-ct] .subnav{background:color-mix(in srgb,var(--ctbg) 86%,transparent)}
 .tn-free-row input[type=date]{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--hair);border-radius:10px;background:var(--bg);color:var(--ink)}
 /* TN-FREE */
 .tn-cards .c-badge.free{display:inline-block;justify-self:start;align-self:flex-start;width:fit-content;color:#fff;background:var(--blue);font-size:13px;font-weight:600;padding:4px 12px;border-radius:999px;margin-bottom:4px}
+/* TN-GAMES */
+.tn-plans-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+@media (max-width:1100px){.tn-plans-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width:620px){.tn-plans-grid{grid-template-columns:1fr!important}}
+.tn-cards .c-badge.lock{display:inline-block;align-self:flex-start;width:fit-content;font-size:13px;font-weight:600;padding:4px 12px;border-radius:999px;margin-bottom:4px;color:var(--muted);background:color-mix(in srgb,var(--muted) 14%,transparent)}
+.ac-games{border:1px solid var(--hair);border-radius:14px;padding:10px 14px 14px;margin:6px 0 10px}
+.ac-games legend{padding:0 6px;font-weight:600;font-size:15px}
+.ac-games .seg{margin-bottom:10px}
+.ac-glist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.ac-glist label{display:flex;align-items:center;gap:8px;font-size:15px;padding:8px 10px;border-radius:10px;background:var(--bg-alt)}
+.ac-glist svg{width:18px;height:18px;color:var(--blue)}
+.ac-row-tx .ac-gsum{display:block;color:var(--blue-link);font-size:12px}
 </style>
 
 <div dir="rtl" lang="ar">
@@ -4593,7 +4605,7 @@ function route(){
     renderLinks(""); return acGate(); }
   orgqLeave();
   if (h === "accounts"){ game = null; renderLinks("accounts"); return acAdmin().then(tnFreeBox).then(tnReport); }
-  if (!acHas() && !freeOn(tnCt(h)) && /^(sj|sjgame|b4|b4game|b4host|ss|ssgame|tk|tkplay|er|erhost|erplay|em|emplay|mf|mfplay)$/.test(h)){ game = null; renderLinks(""); return acGate(); }
+  if (!gameOk(tnCt(h)) && /^(sj|sjgame|b4|b4game|b4host|ss|ssgame|tk|tkplay|er|erhost|erplay|em|emplay|mf|mfplay)$/.test(h)){ game = null; renderLinks(""); return SESSION ? acNoGame(tnCt(h)) : acGate(); }
   if (h.startsWith("join")){ game = null; renderLinks(""); return joinPage(); }
   if (h === "em" || h === "emplay" || h.startsWith("emjoin")){ game = null; renderLinks("");
     if (h.startsWith("emjoin")) return emJoin();
@@ -4697,6 +4709,8 @@ function acPvBar(){
 }
 const AC_BASE = {c1:"#0B7D65", c2:"#D1B871"};
 const acHas = () => CAN_EDIT || !!SESSION;
+/* TN-GAMES: may this visitor play contest k? owner: all; org: its games (none listed = all); anyone: free window */
+const gameOk = k => CAN_EDIT || freeOn(k) || !!(SESSION && (!Array.isArray(SESSION.games) || SESSION.games.includes(k)));
 const acKey = u => String(u || "").trim().toLowerCase();
 const acValidUser = u => /^[a-z0-9._-]{3,24}$/.test(u);
 async function acHash(salt, pw){
@@ -4759,7 +4773,7 @@ async function acRefresh(){
   if (!SESSION) return;
   const a = await acGet(SESSION.user);
   if (!a || a.active === false){ SESSION = null; store.set("tn-session", null); acBrand(); return; }
-  SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, pin:a.pin || SESSION.pin || "", host:!!SESSION.host, tok:SESSION.tok || ""}; store.set("tn-session", SESSION); acBrand();
+  SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, pin:a.pin || SESSION.pin || "", host:!!SESSION.host, tok:SESSION.tok || "", games:a.games || null}; store.set("tn-session", SESSION); acBrand();
 }
 function acLogout(){ if (REAL_ADMIN && acPv()) return acPreview("guest"); SESSION = null; store.set("tn-session", null); acBrand(); renderLinks("start"); nav("start"); }
 /* login form, used on the landing page and as the gate in front of the contests */
@@ -4790,7 +4804,7 @@ function acBindLogin(after){
     try { const a = await acPinLogin(pin);
       if (!a){ err.textContent = "رمز المقدّم غير صحيح."; return; }
       if (a.active === false){ err.textContent = "حساب الجهة موقوف. تواصل مع إدارة تنافس."; return; }
-      SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, host:true, tok:a.tok || ""}; store.set("tn-session", SESSION); acBrand();
+      SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, host:true, tok:a.tok || "", games:a.games || null}; store.set("tn-session", SESSION); acBrand();
       after ? after() : route();
     } catch(x){ err.textContent = "تعذّر الدخول الآن. حاول مرة ثانية."; }
     finally { if (go.isConnected) go.disabled = false; } };
@@ -4803,11 +4817,19 @@ function acBindLogin(after){
       const a = window.TN ? await TN.login(u, pw) : await acGet(u);
       if (!a || (!window.TN && await acHash(a.salt, pw) !== a.hash)){ err.textContent = "اسم المستخدم أو كلمة المرور غير صحيحة."; return; }
       if (a.active === false){ err.textContent = "هذا الحساب موقوف. تواصل مع إدارة تنافس."; return; }
-      SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, pin:a.pin || "", tok:a.tok || ""}; store.set("tn-session", SESSION); acBrand();
+      SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, pin:a.pin || "", tok:a.tok || "", games:a.games || null}; store.set("tn-session", SESSION); acBrand();
       after ? after() : route();
     } catch(x){ err.textContent = "تعذّر تسجيل الدخول الآن. حاول مرة ثانية."; }
     finally { if (go.isConnected) go.disabled = false; }
   };
+}
+function acNoGame(k){
+  const c = CONTESTS.find(x => x.go === k) || {name:"هذه المسابقة"};
+  $app.innerHTML = `<section class="section gut view"><div class="wrap" style="max-width:640px;text-align:center">
+    <p class="eyebrow">${esc(SESSION.org || "")}</p><h1>«${esc(c.name)}» غير مشمولة في اشتراككم</h1>
+    <p class="lead">اشتراك جهتكم يشمل مسابقات محددة. لإضافة هذه المسابقة تواصلوا مع إدارة تنافس.</p>
+    <p><button type="button" class="btn" data-nav="start">الرجوع للرئيسية</button></p></div></section>`;
+  $app.querySelectorAll("[data-nav]").forEach(b => b.onclick = () => nav(b.dataset.nav));
 }
 function acGate(){
   window.scrollTo({top:0});
@@ -4823,7 +4845,7 @@ async function acAdmin(){
   window.scrollTo({top:0});
   $app.innerHTML = `<section class="section gut view"><div class="wrap"><h1>حسابات الجهات</h1><p class="lead">جاري التحميل…</p></div></section>`;
   const list = (await acList()).sort((a,b) => String(b.created || "").localeCompare(String(a.created || "")));
-  if (!acEdit) acEdit = {user:"", org:"", pw:acGenPw(), pin:acGenPin(), logo:"", c1:AC_BASE.c1, c2:AC_BASE.c2, active:true, isNew:true};
+  if (!acEdit) acEdit = {user:"", org:"", pw:acGenPw(), pin:acGenPin(), logo:"", c1:AC_BASE.c1, c2:AC_BASE.c2, active:true, games:null, isNew:true};
   const e = acEdit, on1 = ssOn(e.c1), on2 = ssOn(e.c2);
   $app.innerHTML = `<section class="section gut view"><div class="wrap ac-admin">
     <p class="eyebrow">لوحة التحكم</p><h1>حسابات الجهات</h1>
@@ -4849,6 +4871,10 @@ async function acAdmin(){
           <div class="ac-prev-nav">${e.logo ? `<img src="${e.logo}" alt="">` : ""}<b>${esc(e.org || "اسم الجهة")}</b><i></i><i></i></div>
           <div class="ac-prev-body"><small>معاينة الواجهة</small><span class="ac-prev-btn">العب الآن</span><span class="ac-prev-tag">مسابقة</span></div>
         </div>
+        <fieldset class="ac-games"><legend>المسابقات المتاحة للجهة</legend>
+          <div class="seg small" role="radiogroup"><label><input type="radio" name="aeGAll" value="1" ${!Array.isArray(e.games) ? "checked" : ""}> كل المسابقات</label><label><input type="radio" name="aeGAll" value="0" ${Array.isArray(e.games) ? "checked" : ""}> مسابقات محددة</label></div>
+          <div class="ac-glist"${Array.isArray(e.games) ? "" : " hidden"}>${CONTESTS.filter(c => c.go).map(c => `<label><input type="checkbox" data-aeg="${c.go}" ${Array.isArray(e.games) && e.games.includes(c.go) ? "checked" : ""}>${I(P[c.icon])}${c.name}</label>`).join("")}</div>
+        </fieldset>
         <label class="ac-act"><input type="checkbox" id="aeAct" ${e.active !== false ? "checked" : ""}> الحساب مفعّل</label>
         <p class="ac-err" id="aeErr" role="alert"></p>
         <div class="ac-btns"><button type="submit" class="btn lg">${e.isNew ? "إنشاء الحساب" : "حفظ التعديلات"}</button>${e.isNew ? "" : `<button type="button" class="mini" id="aeCancel">إلغاء</button>`}</div>
@@ -4857,7 +4883,7 @@ async function acAdmin(){
         <h3>الحسابات <small>${n(list.length)}</small></h3>
         ${list.length ? list.map(a => `<div class="ac-row${a.active === false ? " off" : ""}" style="--p1:${a.c1 || AC_BASE.c1};--p2:${a.c2 || AC_BASE.c2}">
           <span class="ac-row-logo">${a.logo ? `<img src="${a.logo}" alt="">` : esc((a.org || a.user || "?").trim().charAt(0))}</span>
-          <span class="ac-row-tx"><b>${esc(a.org || "")}</b><small dir="ltr">${esc(a.user)}${a.pin ? ` · رمز المقدّم ${esc(a.pin)}` : ""}</small>${a.active === false ? `<em>موقوف</em>` : ""}</span>
+          <span class="ac-row-tx"><b>${esc(a.org || "")}</b><small dir="ltr">${esc(a.user)}${a.pin ? ` · رمز المقدّم ${esc(a.pin)}` : ""}</small><small class="ac-gsum">${Array.isArray(a.games) ? a.games.map(g => (CONTESTS.find(c => c.go === g) || {}).name || g).join("، ") : "كل المسابقات"}</small>${a.active === false ? `<em>موقوف</em>` : ""}</span>
           <span class="ac-row-sw"><i></i><i></i></span>
           <span class="ac-row-btns"><button type="button" class="mini" data-acedit="${esc(a.user)}">تعديل</button><button type="button" class="mini" data-actog="${esc(a.user)}">${a.active === false ? "تفعيل" : "إيقاف"}</button><button type="button" class="mini" data-acpv="${esc(a.user)}">معاينة كجهة</button><button type="button" class="mini danger" data-acdel="${esc(a.user)}">حذف</button></span>
         </div>`).join("") : `<p class="sj-sub">لا توجد حسابات بعد. أنشئ أول حساب من النموذج.</p>`}
@@ -4866,7 +4892,9 @@ async function acAdmin(){
     <div class="ac-note" id="acNote"></div>
     <p class="sj-sub">ملاحظة: الحسابات محفوظة الآن داخل الموقع التجريبي وكلمات المرور مشفّرة. مع الاستضافة النهائية تنتقل إلى قاعدة بيانات وخادم تسجيل دخول آمن.</p>
   </div></section>`;
-  const $ = id => document.getElementById(id), keep = () => { e.org = $("aeOrg").value; e.user = $("aeUser").value; e.pw = $("aePw").value; e.pin = $("aePin").value.trim(); e.active = $("aeAct").checked; };
+  const $ = id => document.getElementById(id), keep = () => { e.org = $("aeOrg").value; e.user = $("aeUser").value; e.pw = $("aePw").value; e.pin = $("aePin").value.trim(); e.active = $("aeAct").checked;
+    e.games = $app.querySelector('input[name="aeGAll"]:checked').value === "1" ? null : [...$app.querySelectorAll("[data-aeg]:checked")].map(x => x.dataset.aeg); };
+  $app.querySelectorAll('input[name="aeGAll"]').forEach(r => r.onchange = () => { $app.querySelector(".ac-glist").hidden = r.value === "1" && r.checked; });
   const re = () => { const y = scrollY; keep(); acAdmin().then(() => scrollTo({top:y})); };
   $("aeGen").onclick = () => { $("aePw").value = acGenPw(); };
   $("aePinGen").onclick = () => { let x; do { x = acGenPin(); } while (list.some(a => a.pin === x)); $("aePin").value = x; };
@@ -4884,11 +4912,12 @@ async function acAdmin(){
     if (e.isNew && pw.length < 6) return err.textContent = "كلمة المرور 6 أحرف على الأقل.";
     if (!e.isNew && pw && pw.length < 6) return err.textContent = "كلمة المرور 6 أحرف على الأقل.";
     if (!acValidPin(e.pin)) return err.textContent = "رمز المقدّم 6 أرقام.";
+    if (Array.isArray(e.games) && !e.games.length) return err.textContent = "اختر مسابقة واحدة على الأقل، أو «كل المسابقات».";
     if (list.some(a => a.pin === e.pin && acKey(a.user) !== u)) return err.textContent = "رمز المقدّم مستخدم لجهة ثانية، اختر رمزًا آخر.";
     try {
       const old = await acGet(u);
       if (e.isNew && old) return err.textContent = "اسم المستخدم مستخدم من قبل، اختر اسمًا آخر.";
-      const rec = {user:u, org:e.org.trim(), logo:e.logo || "", c1:e.c1, c2:e.c2, active:e.active !== false, pin:e.pin, created:(old && old.created) || new Date().toISOString()};
+      const rec = {user:u, org:e.org.trim(), logo:e.logo || "", c1:e.c1, c2:e.c2, active:e.active !== false, pin:e.pin, games:Array.isArray(e.games) ? e.games : null, created:(old && old.created) || new Date().toISOString()};
       if (pw){ rec.salt = acSalt(); rec.hash = await acHash(rec.salt, pw); } else { rec.salt = old.salt; rec.hash = old.hash; }
       await acPut(rec);
       const shown = pw ? {u, pw, org:rec.org, pin:rec.pin} : null;
@@ -4902,7 +4931,7 @@ async function acAdmin(){
     } catch(x){ err.textContent = "تعذّر الحفظ: " + (x && x.message || x); }
   };
   $app.querySelectorAll("[data-acedit]").forEach(b => b.onclick = async () => { const a = await acGet(b.dataset.acedit); if (!a) return;
-    acEdit = {user:a.user, org:a.org || "", pw:"", pin:a.pin || acGenPin(), logo:a.logo || "", c1:a.c1 || AC_BASE.c1, c2:a.c2 || AC_BASE.c2, active:a.active !== false, isNew:false}; await acAdmin(); scrollTo({top:0}); });
+    acEdit = {user:a.user, org:a.org || "", pw:"", pin:a.pin || acGenPin(), logo:a.logo || "", c1:a.c1 || AC_BASE.c1, c2:a.c2 || AC_BASE.c2, active:a.active !== false, games:Array.isArray(a.games) ? a.games : null, isNew:false}; await acAdmin(); scrollTo({top:0}); });
   $app.querySelectorAll("[data-acpv]").forEach(b => b.onclick = () => acPreview("org:" + b.dataset.acpv));
   $app.querySelectorAll("[data-actog]").forEach(b => b.onclick = async () => { const a = await acGet(b.dataset.actog); if (!a) return; a.active = a.active === false; await acPut(a); const y = scrollY; await acAdmin(); scrollTo({top:y}); });
   $app.querySelectorAll("[data-acdel]").forEach(b => b.onclick = async () => {
@@ -5037,10 +5066,11 @@ function tnHeroBind(){
 function tnPlans(){
   const P = [
     {n:"الموسوعة", who:"للجميع، بدون تسجيل", price:"مجانًا", f:[`${n(BANK.length)} سؤال في ${n(allCats().length)} مجالًا`, "ثلاث مستويات وثلاثة أنواع أسئلة", "من فريقين إلى 50 فريقًا"], cta:"ادخل الموسوعة", go:"cats"},
-    {n:"اشتراك جهة", who:"للمدارس والأندية الشبابية", price:"قريبًا", hot:1, f:["كل المسابقات الحالية والقادمة", "شعار الجهة وألوانها على الشاشة", "رمز مقدّم لإدارة المسابقات", "دخول اللاعبين بالجوال عبر الباركود"], cta:"دخول الجهات"},
-    {n:"مؤسسات", who:"للجهات متعددة الفروع", price:"حسب الطلب", f:["حسابات لكل فرع", "أسئلة خاصة بالجهة", "دعم وأولوية في المسابقات الجديدة"], cta:"دخول الجهات"}];
-  return `<section class="tn-plans" aria-labelledby="tnPlH"><h2 class="tn-how-h" id="tnPlH">الاشتراكات</h2><p class="tn-how-sub">الموسوعة مجانية دائمًا، والمسابقات للجهات المشتركة.</p>
-    <div class="tn-plans-grid">${P.map(p => `<article class="tn-plan${p.hot ? " hot" : ""}">${p.hot ? `<span class="tag">الأنسب</span>` : ""}<h3>${p.n}</h3><p class="who">${p.who}</p>
+    {n:"مسابقة واحدة", who:"اختر المسابقة اللي تناسبك", price:`39 <small>ريال · دفعة واحدة</small>`, f:["غرفة الهروب: 99 ريال", "تبقى لجهتك دائمًا", "شعار الجهة وألوانها وأسئلتها الخاصة", "رمز مقدّم ودخول اللاعبين بالباركود"], cta:"دخول الجهات"},
+    {n:"خمس مسابقات", who:"تختارها الجهة", price:`149 <small>ريال · دفعة واحدة</small>`, f:["199 ريال إذا كانت غرفة الهروب منها", "توفّر 24% عن الشراء بالمفرد", "تبقى لجهتك دائمًا", "شعار الجهة وألوانها وأسئلتها الخاصة"], cta:"دخول الجهات"},
+    {n:"كل المسابقات", who:"العشر كاملة مع غرفة الهروب", price:`299 <small>ريال · دفعة واحدة</small>`, hot:1, f:["كل المسابقات الحالية والقادمة", "توفّر 34% عن الشراء بالمفرد", "تبقى لجهتك دائمًا", "شعار الجهة وألوانها وأسئلتها الخاصة"], cta:"دخول الجهات"}];
+  return `<section class="tn-plans" aria-labelledby="tnPlH"><h2 class="tn-how-h" id="tnPlH">الاشتراكات</h2><p class="tn-how-sub">الموسوعة مجانية دائمًا. المسابقات تشتريها الجهة مرة واحدة وتبقى لها.</p>
+    <div class="tn-plans-grid">${P.map(p => `<article class="tn-plan${p.hot ? " hot" : ""}">${p.hot ? `<span class="tag">الأوفر</span>` : ""}<h3>${p.n}</h3><p class="who">${p.who}</p>
       <div class="price">${p.price}</div><ul>${p.f.map(x => `<li>${x}</li>`).join("")}</ul>
       ${p.go ? `<a class="btn${p.hot ? "" : " sec"}" href="#${p.go}">${p.cta}</a>` : `<button type="button" class="btn${p.hot ? "" : " sec"}" data-tnplan>${p.cta}</button>`}</article>`).join("")}</div></section>`;
 }
@@ -5097,8 +5127,8 @@ function landing(){
           const duo = ["tk", "em", "er"].includes(c.go), img = (f, a, wd, ht) => `<img src="shots/${f}.webp" alt="${a}" width="${wd}" height="${ht}" loading="lazy" decoding="async">`;
           const shot = `<span class="c-shot${duo ? " duo" : ""}"><span class="c-scr">${img(c.go, `شاشة العرض في مسابقة ${c.name}`, 960, 600)}</span>${duo ? `<span class="c-ph">${img(c.go + "-p", `جوال المتسابق في مسابقة ${c.name}`, 360, 780)}</span>` : ""}</span>`;
           const views = `<span class="c-views"><span>${I(P.tnscreen)}شاشة العرض</span>${duo ? `<span>${I(P.tnphone)}جوال المتسابق</span>` : `<span class="muted">بدون جوالات</span>`}</span>`;
-          const free = freeOn(c.go), live = ok || free;
-          const body = `${c.go === "er" ? `<span class="c-badge">جديد · غرف ثلاثية الأبعاد</span>` : free ? `<span class="c-badge free">مجانية للجميع حتى ${freeDate(c.go)}</span>` : ""}<span class="c-head">${I(P[c.icon])}<b>${c.name}</b></span>${views}<small>${c.how || c.desc}</small>${c.meta ? `<span class="c-meta">${c.meta}</span>` : ""}`;
+          const free = freeOn(c.go) && !(ok && gameOk(c.go) && !CAN_EDIT && SESSION && !Array.isArray(SESSION.games)), live = gameOk(c.go), locked = ok && !live;
+          const body = `${c.go === "er" ? `<span class="c-badge">جديد · غرف ثلاثية الأبعاد</span>` : free ? `<span class="c-badge free">مجانية للجميع حتى ${freeDate(c.go)}</span>` : locked ? `<span class="c-badge lock">غير مشمولة في اشتراككم</span>` : ""}<span class="c-head">${I(P[c.icon])}<b>${c.name}</b></span>${views}<small>${c.how || c.desc}</small>${c.meta ? `<span class="c-meta">${c.meta}</span>` : ""}`;
           return live ? `<button type="button" class="contest live${c.go === "er" ? " feat" : ""}" data-go="${c.go}">${shot}<span class="c-body">${body}<span class="go">العب الآن</span></span></button>`
                     : `<article class="contest info${c.go === "er" ? " feat" : ""}">${shot}<span class="c-body">${body}</span></article>`; }).join("")}
       </div>
@@ -5147,7 +5177,7 @@ function landing(){
   tkInvite();
   emInvite();
   $app.querySelectorAll("[data-go]").forEach(b => b.onclick = () => {
-    if (acHas() || freeOn(b.dataset.go)) return nav(b.dataset.go);
+    if (gameOk(b.dataset.go)) return nav(b.dataset.go);
     const f = document.getElementById("acLogin"); if (f){ f.scrollIntoView({behavior:"smooth", block:"center"}); setTimeout(() => { const u = document.getElementById("acU"); if (u) u.focus({preventScroll:true}); }, 400); }
   });
 }
