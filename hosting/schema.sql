@@ -58,3 +58,6 @@ grant execute on function public.tn_profile(text) to anon, authenticated;
 -- tn_set_pin lets the org change its PIN after confirming its password.
 -- (functions tn_pin_login(p_pin), tn_set_pin(p_user,p_pw,p_pin) and the updated tn_login are in the
 --  migration of the same name in Supabase; see list_migrations for the exact SQL)
+
+-- 2026-11-25 migration tanafus_stats: tables plays(acct, contest, at) and visitors(vid); RPCs tn_play, tn_visit,
+-- tn_counts (public numbers for the home page) and tn_play_report (owner only: plays per account per contest).
