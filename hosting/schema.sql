@@ -61,3 +61,6 @@ grant execute on function public.tn_profile(text) to anon, authenticated;
 
 -- 2026-11-25 migration tanafus_stats: tables plays(acct, contest, at) and visitors(vid); RPCs tn_play, tn_visit,
 -- tn_counts (public numbers for the home page) and tn_play_report (owner only: plays per account per contest).
+
+-- 2026-11-25 migration tanafus_org_questions: org_tokens (60-day session tokens from tn_login / tn_pin_login),
+-- org_questions(acct, items); RPCs tn_orgq_get (org or presenter token) and tn_orgq_save (org token only).

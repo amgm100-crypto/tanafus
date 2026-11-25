@@ -3993,6 +3993,7 @@ function normalize(q){
     category:q.category||"معلومات عامة", difficulty:q.difficulty||"", explanation:q.explanation||"", source:q.source||"" };
 }
 /* ---------- Bank storage: site db (artifact) or this browser (standalone) ---------- */
+let ORGQ = [], ORGM = false, RAW_MAIN = null, ORGQ_KEY = "";
 let BANK = [], RAW = [], CHUNKS = {}, DB = null, SOURCE = "json", CAN_EDIT = false;
 const CHUNK_MAX = 200;
 const KIND_TYPE = {mcq:"اختيار من متعدد", tf:"صح وخطأ", open:"سؤال وجواب"};
@@ -4000,8 +4001,36 @@ async function useCap(name){
   try { if (!window.claude || !window.claude.use) return null;
     return await Promise.race([window.claude.use(name), new Promise(r => setTimeout(() => r(null), 10000))]); } catch(e){ return null; }
 }
+/* TN-ORGQ: each organisation's own questions. Stored on the server per org (hosted) or in this browser (standalone). */
+const orgOn = () => !!(typeof SESSION !== "undefined" && SESSION && SESSION.user && !CAN_EDIT);
+const orgCanEdit = () => orgOn() && !SESSION.host;
+async function orgqFetch(){
+  if (window.TN && TN.orgqGet){ if (!SESSION.tok) return []; const r = await TN.orgqGet(SESSION.tok); return Array.isArray(r) ? r : []; }
+  return store.get("orgq-" + SESSION.user, []);
+}
+async function orgqSync(){
+  const key = orgOn() ? SESSION.user + ":" + (SESSION.tok || "") : "";
+  if (key === ORGQ_KEY) return; ORGQ_KEY = key;
+  if (!key){ ORGQ = []; if (!ORGM) rebuild(); return; }
+  try { const items = await orgqFetch(); if (ORGQ_KEY !== key) return; ORGQ = items; } catch(e){ ORGQ = []; }
+  rebuild();
+  if (ORGM){ RAW = ORGQ.slice(); if (location.hash === "#admin") admin(); }
+}
+async function orgqPersist(){
+  const items = RAW.slice();
+  if (window.TN && TN.orgqSave){
+    if (!SESSION.tok) return "سجّل خروج ثم ادخل من جديد باسم الجهة وكلمة المرور، عشان تقدر تحفظ أسئلتك.";
+    let r; try { r = await TN.orgqSave(SESSION.tok, items); } catch(e){ return "تعذّر الحفظ الآن. حاول مرة ثانية."; }
+    if (r === "auth") return "انتهت جلسة الدخول. سجّل خروج ثم ادخل من جديد.";
+    if (r === "big") return "وصلت الحد الأعلى (3,000 سؤال).";
+    if (r !== "ok") return "تعذّر الحفظ.";
+  } else store.set("orgq-" + SESSION.user, items);
+  ORGQ = items; return "";
+}
+function orgqEnter(){ if (!ORGM){ RAW_MAIN = RAW; RAW = ORGQ.slice(); ORGM = true; } }
+function orgqLeave(){ if (ORGM){ RAW = RAW_MAIN; RAW_MAIN = null; ORGM = false; rebuild(); } }
 function rebuild(){
-  BANK = RAW.filter(q => q && q.question).map(normalize);
+  BANK = (ORGM ? RAW_MAIN : RAW).concat(orgOn() ? ORGQ : []).filter(q => q && q.question).map(normalize);
   document.getElementById("foot").textContent = `${n(BANK.length)} سؤال في البنك`;
 }
 async function load(){
@@ -4023,7 +4052,8 @@ async function load(){
     } catch(e){ DB = null; }
   }
   if (DB){ try { CAN_EDIT = user ? await user.canEdit() : false; } catch(e){ CAN_EDIT = false; } }
-  else CAN_EDIT = true; // standalone copy: edits stay in this browser and are exported as a file
+  // standalone file only (no claude.ai, no hosted backend): edits stay in this browser. A backend that is down never grants editing.
+  else CAN_EDIT = !(window.claude && window.claude.use) && !window.TN_CONFIG;
   REAL_ADMIN = CAN_EDIT;
   const pv = acPv();
   if (REAL_ADMIN && pv){ CAN_EDIT = false; if (pv === "guest") SESSION = null; else if (pv.startsWith("org:")) SESSION = {user:pv.slice(4)}; }
@@ -4054,6 +4084,7 @@ async function saveAll(){
 }
 /* Persist one change (or everything). Returns an error message or "" */
 async function persist(changed){
+  if (ORGM) return orgqPersist();
   rebuild();
   if (!DB){ store.set("bank-local", RAW); SOURCE = "local"; return ""; }
   try {
@@ -4066,21 +4097,21 @@ async function persist(changed){
     await writeChunk(k); return "";
   } catch(e){ return e && e.code === "quota_exceeded" ? "امتلأت مساحة البنك." : "تعذّر الحفظ. تحقق من الاتصال ثم أعد المحاولة."; }
 }
-function nextId(){ let m = 0; RAW.forEach(q => { const x = /^Q(\d+)$/.exec(q.id||""); if (x) m = Math.max(m, +x[1]); }); return "Q" + String(m + 1).padStart(4,"0"); }
+function nextId(){ const P0 = ORGM ? "J" : "Q", re = ORGM ? /^J(\d+)$/ : /^Q(\d+)$/; let m = 0; RAW.forEach(q => { const x = re.exec(q.id||""); if (x) m = Math.max(m, +x[1]); }); return P0 + String(m + 1).padStart(4,"0"); }
 
 /* ---------- Admin page ---------- */
 const adm = { q:"", kind:"", cat:"", lvl:"", shown:50, editing:null, confirm:null, msg:"" };
 function admin(){
   renderLinks("admin");
   const cats = [...new Set(RAW.map(q => q.category).filter(Boolean))].sort();
-  const status = SOURCE === "db" ? `<span class="badge ok">محفوظ في بنك الموقع</span>`
+  const status = ORGM ? `<span class="badge ok">خاصة بـ${esc(SESSION.org || SESSION.user)}</span>` : SOURCE === "db" ? `<span class="badge ok">محفوظ في بنك الموقع</span>`
     : DB ? `<span class="badge">لم يُنقل للبنك بعد</span>` : `<span class="badge">التعديلات في هذا المتصفح فقط</span>`;
   $app.innerHTML = `<section class="view">
-    <div class="subnav gut"><div class="wrap"><h2>إدارة الأسئلة</h2>${status}</div></div>
+    <div class="subnav gut"><div class="wrap"><h2>${ORGM ? "أسئلة الجهة" : "إدارة الأسئلة"}</h2>${status}</div></div>
     <div class="section gut" style="padding-top:24px"><div class="wrap">
-      ${!CAN_EDIT ? `<p class="notice">يمكنك تصفح الأسئلة فقط. التعديل متاح لمالك الموقع ومن لديه صلاحية التحرير.</p>` : ""}
-      ${DB && SOURCE !== "db" && CAN_EDIT ? `<p class="notice">الأسئلة الحالية مقروءة من ملف questions.json. أول تعديل تحفظه ينقلها كلها إلى بنك الموقع.</p>` : ""}
-      ${!DB ? `<p class="notice">هذه نسخة محلية من الموقع: التعديلات تُحفظ في هذا المتصفح. اضغط «تصدير» لتحصل على ملف questions.json المحدّث.</p>` : ""}
+      ${ORGM ? `<p class="notice">هذه أسئلة جهتك الخاصة: تظهر في مسابقاتك أنت فقط مع أسئلة تنافس، ولا يراها غيرك. اختر لها مجالًا من مجالات تنافس أو اكتب مجالًا جديدًا باسمك.${window.TN && !SESSION.tok ? " <b>للحفظ: سجّل خروج ثم ادخل من جديد باسم الجهة وكلمة المرور.</b>" : ""}</p>` : !CAN_EDIT ? `<p class="notice">يمكنك تصفح الأسئلة فقط. التعديل متاح لمالك الموقع ومن لديه صلاحية التحرير.</p>` : ""}
+      ${!ORGM && DB && SOURCE !== "db" && CAN_EDIT ? `<p class="notice">الأسئلة الحالية مقروءة من ملف questions.json. أول تعديل تحفظه ينقلها كلها إلى بنك الموقع.</p>` : ""}
+      ${!DB && !ORGM ? `<p class="notice">هذه نسخة محلية من الموقع: التعديلات تُحفظ في هذا المتصفح. اضغط «تصدير» لتحصل على ملف questions.json المحدّث.</p>` : ""}
       <div class="toolbar">
         <input id="aq" type="search" placeholder="ابحث في الأسئلة والإجابات" value="${esc(adm.q)}" aria-label="بحث">
         <select id="ak" aria-label="النوع"><option value="">كل الأنواع</option>${Object.entries(KIND_TYPE).map(([k,v]) => `<option value="${k}" ${adm.kind===k?"selected":""}>${v}</option>`).join("")}</select>
@@ -4088,7 +4119,7 @@ function admin(){
         <select id="al" aria-label="المستوى"><option value="">كل المستويات</option>${LEVELS.map(l => `<option ${adm.lvl===l?"selected":""}>${l}</option>`).join("")}</select>
       </div>
       <div class="toolbar acts">
-        ${CAN_EDIT ? `<button class="btn" type="button" id="addQ">+ سؤال جديد</button>
+        ${CAN_EDIT || ORGM ? `<button class="btn" type="button" id="addQ">+ سؤال جديد</button>
           <label class="btn sec file">استيراد ملف<input type="file" id="imp" accept=".json,application/json" hidden></label>` : ""}
         <button class="btn sec" type="button" id="exp">تصدير</button>
         <span class="amsg" id="amsg" role="status">${esc(adm.msg)}</span>
@@ -4102,7 +4133,7 @@ function admin(){
   document.getElementById("ac").onchange = e => { adm.cat = e.target.value; re(); };
   document.getElementById("al").onchange = e => { adm.lvl = e.target.value; re(); };
   document.getElementById("exp").onclick = exportBank;
-  if (CAN_EDIT){ document.getElementById("addQ").onclick = () => editor(null); document.getElementById("imp").onchange = importBank; }
+  if (CAN_EDIT || ORGM){ document.getElementById("addQ").onclick = () => editor(null); document.getElementById("imp").onchange = importBank; }
   drawList();
 }
 function filtered(){
@@ -4115,11 +4146,11 @@ function drawList(){
   const all = filtered(), list = all.slice(0, adm.shown);
   const box = document.getElementById("alist");
   box.innerHTML = `<p class="acount">${n(all.length)} سؤال${all.length !== RAW.length ? ` من ${n(RAW.length)}` : ""}</p>
-    ${list.length ? `<div class="qlist">${list.map(([r,q]) => `<div class="qrow" data-id="${esc(r.id)}">
+    ${!RAW.length && ORGM ? `<p class="empty" style="padding:40px 0">ما أضفت أسئلة بعد. اضغط «+ سؤال جديد» أو استورد ملفًا بصيغة questions.json.</p>` : list.length ? `<div class="qlist">${list.map(([r,q]) => `<div class="qrow" data-id="${esc(r.id)}">
       <div class="qmain"><p>${esc(q.question)}</p>
         <span class="qans">${esc(q.answerText || "—")}</span>
         <span class="qmeta">${esc(r.id||"")} · ${KIND_TYPE[q.kind]} · ${esc(q.category)}${q.difficulty?" · "+esc(q.difficulty):""}${q.letter?" · حرف "+esc(q.letter):""}${q.source?" · "+esc(q.source):""}</span></div>
-      ${CAN_EDIT ? (adm.confirm === r.id
+      ${CAN_EDIT || ORGM ? (adm.confirm === r.id
         ? `<div class="qbtns"><span class="warn">حذف نهائي؟</span><button class="mini danger" type="button" data-yes="${esc(r.id)}">حذف</button><button class="mini" type="button" data-no>إلغاء</button></div>`
         : `<div class="qbtns"><button class="mini" type="button" data-edit="${esc(r.id)}">تعديل</button><button class="mini danger" type="button" data-del="${esc(r.id)}">حذف</button></div>`) : ""}
     </div>`).join("")}</div>` : `<p class="empty" style="padding:40px 0">لا توجد أسئلة مطابقة.</p>`}
@@ -4139,7 +4170,7 @@ function flash(t){ const m = document.getElementById("amsg"); if (m){ m.textCont
 function editor(rec){
   const q = rec ? normalize(rec) : null;
   let kind = q ? q.kind : "mcq";
-  const cats = [...new Set(RAW.map(r => r.category).filter(Boolean).concat(["دين","السيرة النبوية","تاريخ","جغرافيا","علوم","لغة عربية وأدب","رياضة","تقنية","صحة","معلومات عامة"]))];
+  const cats = [...new Set((ORGM ? RAW.concat(RAW_MAIN || []) : RAW).map(r => r.category).filter(Boolean).concat(["دين","السيرة النبوية","تاريخ","جغرافيا","علوم","لغة عربية وأدب","رياضة","تقنية","صحة","معلومات عامة"]))];
   const opts = q && q.kind === "mcq" ? rec.options.slice() : ["","","",""];
   while (opts.length < 4) opts.push("");
   const ov = document.createElement("div"); ov.className = "overlay"; ov.dir = "rtl";
@@ -4182,7 +4213,7 @@ function editor(rec){
     const err = t => { $("ferr").textContent = t; };
     const question = $("fq").value.trim(); if (!question) return err("اكتب نص السؤال.");
     const base = { ...(rec || {}), id: rec ? rec.id : nextId(), question,
-      category: $("fcat").value.trim() || "معلومات عامة", difficulty: $("fd").value, age_group: $("fage").value,
+      category: $("fcat").value.trim() || (ORGM ? "أسئلة " + (SESSION.org || "الجهة") : "معلومات عامة"), difficulty: $("fd").value, age_group: $("fage").value,
       explanation: $("fx").value.trim(), source: $("fs").value.trim(), type: KIND_TYPE[kind] };
     delete base.answer; delete base.letter; delete base.start_letter;
     if (kind === "mcq"){
@@ -4206,11 +4237,11 @@ function editor(rec){
   };
 }
 async function exportBank(){
-  const text = JSON.stringify({version:1, questions: RAW}, null, 2);
+  const text = JSON.stringify({version:1, questions: RAW}, null, 2), fname = ORGM ? "my-questions.json" : "questions.json";
   const dl = await useCap("downloads");
-  if (dl){ try { await dl.save({filename:"questions.json", data:text}); flash("تم التصدير."); } catch(e){ flash(e && e.code === "declined" ? "أُلغي التصدير." : "تعذّر التصدير."); } return; }
+  if (dl){ try { await dl.save({filename:fname, data:text}); flash("تم التصدير."); } catch(e){ flash(e && e.code === "declined" ? "أُلغي التصدير." : "تعذّر التصدير."); } return; }
   if (window.claude && window.claude.use){ flash("التصدير غير متاح هنا."); return; }
-  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text],{type:"application/json"})); a.download = "questions.json"; a.click();
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text],{type:"application/json"})); a.download = fname; a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 2000); flash("تم التصدير.");
 }
 async function importBank(e){
@@ -4328,6 +4359,7 @@ const TNS_START = {sjgame:"sj", b4game:"b4", ssgame:"ss", mfplay:"mf", tkplay:"t
 const TNS_NAMES = [["enc","الموسوعة"],["sj","سين جيم"],["b4","بالأربع تربح"],["ss","6×6"],["mf","حقل الألغام"],["tk","تكبيس"],["em","إعمار"],["er","غرفة الهروب"]];
 function tnCt(h){ if (/^(cats|level|type|teams|play)$/.test(h)) return "enc"; const m = /^(sj|b4|ss|mf|tk|em|er)/.exec(h); return m ? m[1] : ""; }
 function tnTrack(h){
+  if (!TNS.seen){ TNS.seen = true; tnVisit(); }
   const ct = tnCt(h); if (ct) document.body.dataset.ct = ct; else delete document.body.dataset.ct;
   const started = TNS_START[h], from = TNS_SETUP[TNS.prev];
   if (started && from === started && window.TN && TN.play){
@@ -4343,14 +4375,20 @@ function tnVisit(){
   if (!v){ v = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now()); try { localStorage.setItem("tn-vid", v); } catch(e){} }
   return TN.visit(v).catch(() => {});
 }
+function tnCntSet(c){
+  const p = document.querySelector("#tnCntP b"), v = document.querySelector("#tnCntV b");
+  if (p) p.textContent = `${n(c.plays || 0)} مسابقة لُعبت`; if (v) v.textContent = `${n(c.visitors || 0)} زائر`;
+}
+setInterval(() => { if (document.getElementById("tnCntP") && !document.hidden) tnCounts(); }, 20000);
 async function tnCounts(){
   if (!window.TN || !TN.counts) return;
   try {
     await tnVisit();
-    if (!TNS.cnt || Date.now() - TNS.cntAt > 60000){ TNS.cnt = await TN.counts(); TNS.cntAt = Date.now(); }
-    const c = TNS.cnt, el = document.getElementById("tnAud"); if (!c || !el) return;
-    el.outerHTML = `<span class="tn-cnt">${I(P.trophy)}<b>${n(c.plays || 0)} مسابقة لُعبت</b><small>منذ إطلاق تنافس</small></span>`
-                 + `<span class="tn-cnt">${I(P.tnvisit)}<b>${n(c.visitors || 0)} زائر</b><small>زاروا المنصة حتى الآن</small></span>`;
+    TNS.cnt = await TN.counts(); TNS.cntAt = Date.now();
+    const c = TNS.cnt, el = document.getElementById("tnAud") || document.getElementById("tnCntP"); if (!c || !el) return;
+    if (el.id === "tnCntP"){ tnCntSet(c); }
+    else el.outerHTML = `<span class="tn-cnt" id="tnCntP">${I(P.trophy)}<b>${n(c.plays || 0)} مسابقة لُعبت</b><small>منذ إطلاق تنافس</small></span>`
+                 + `<span class="tn-cnt" id="tnCntV">${I(P.tnvisit)}<b>${n(c.visitors || 0)} زائر</b><small>زاروا المنصة حتى الآن</small></span>`;
   } catch(e){}
 }
 async function tnReport(){
@@ -4384,7 +4422,11 @@ function route(){
   if (!h.startsWith("tkjoin")) tkCamStop();
   if (!/^er(play|join)/.test(h)) erStop();
   if (h !== "erhost") erHostStop();
-  if (h === "admin"){ game = null; renderLinks("admin"); return admin(); }
+  if (h === "admin"){ game = null;
+    if (CAN_EDIT){ orgqLeave(); renderLinks("admin"); return admin(); }
+    if (orgCanEdit()){ orgqEnter(); renderLinks("admin"); return admin(); }
+    renderLinks(""); return acGate(); }
+  orgqLeave();
   if (h === "accounts"){ game = null; renderLinks("accounts"); return acAdmin().then(tnReport); }
   if (!acHas() && /^(sj|sjgame|b4|b4game|b4host|ss|ssgame|tk|tkplay|er|erhost|erplay|em|emplay|mf|mfplay)$/.test(h)){ game = null; renderLinks(""); return acGate(); }
   if (h.startsWith("join")){ game = null; renderLinks(""); return joinPage(); }
@@ -4426,10 +4468,11 @@ function route(){
 }
 function renderLinks(cur){
   document.getElementById("links").innerHTML = `<button type="button" data-nav="start" aria-current="${cur==="start"}">الرئيسية</button><button type="button" data-nav="cats" aria-current="${cur==="cats"}">موسوعة الأسئلة</button>`
-    + (CAN_EDIT ? `<button type="button" data-nav="admin" aria-current="${cur==="admin"}">إدارة الأسئلة</button><button type="button" data-nav="accounts" aria-current="${cur==="accounts"}">حسابات الجهات</button>` : "")
+    + (CAN_EDIT ? `<button type="button" data-nav="admin" aria-current="${cur==="admin"}">إدارة الأسئلة</button><button type="button" data-nav="accounts" aria-current="${cur==="accounts"}">حسابات الجهات</button>`
+       : orgCanEdit() ? `<button type="button" data-nav="admin" aria-current="${cur==="admin"}">إدارة الأسئلة</button>` : "")
     + (SESSION ? `<button type="button" id="acNavOut">خروج</button>` : "");
   const o = document.getElementById("acNavOut"); if (o) o.onclick = acLogout;
-  document.querySelectorAll(".flink").forEach(x => x.hidden = !CAN_EDIT);
+  document.querySelectorAll(".flink").forEach(x => x.hidden = !(CAN_EDIT || orgCanEdit()));
   document.querySelectorAll("[data-nav]").forEach(b => b.onclick = () => nav(b.dataset.nav));
 }
 document.getElementById("logo").onclick = () => { game = null; nav("start"); };
@@ -4522,6 +4565,7 @@ async function acDel(u){
 }
 /* brand: the logged-in organisation's colours and logo */
 function acBrand(){
+  orgqSync();
   let st = document.getElementById("acBrandCss");
   if (!st){ st = document.createElement("style"); st.id = "acBrandCss"; document.body.appendChild(st); }
   const s = SESSION;
@@ -4539,7 +4583,7 @@ async function acRefresh(){
   if (!SESSION) return;
   const a = await acGet(SESSION.user);
   if (!a || a.active === false){ SESSION = null; store.set("tn-session", null); acBrand(); return; }
-  SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, pin:a.pin || SESSION.pin || "", host:!!SESSION.host}; store.set("tn-session", SESSION); acBrand();
+  SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, pin:a.pin || SESSION.pin || "", host:!!SESSION.host, tok:SESSION.tok || ""}; store.set("tn-session", SESSION); acBrand();
 }
 function acLogout(){ if (REAL_ADMIN && acPv()) return acPreview("guest"); SESSION = null; store.set("tn-session", null); acBrand(); renderLinks("start"); nav("start"); }
 /* login form, used on the landing page and as the gate in front of the contests */
@@ -4570,7 +4614,7 @@ function acBindLogin(after){
     try { const a = await acPinLogin(pin);
       if (!a){ err.textContent = "رمز المقدّم غير صحيح."; return; }
       if (a.active === false){ err.textContent = "حساب الجهة موقوف. تواصل مع إدارة تنافس."; return; }
-      SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, host:true}; store.set("tn-session", SESSION); acBrand();
+      SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, host:true, tok:a.tok || ""}; store.set("tn-session", SESSION); acBrand();
       after ? after() : route();
     } catch(x){ err.textContent = "تعذّر الدخول الآن. حاول مرة ثانية."; }
     finally { if (go.isConnected) go.disabled = false; } };
@@ -4582,7 +4626,7 @@ function acBindLogin(after){
       const a = await acGet(u);
       if (!a || await acHash(a.salt, pw) !== a.hash){ err.textContent = "اسم المستخدم أو كلمة المرور غير صحيحة."; return; }
       if (a.active === false){ err.textContent = "هذا الحساب موقوف. تواصل مع إدارة تنافس."; return; }
-      SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, pin:a.pin || ""}; store.set("tn-session", SESSION); acBrand();
+      SESSION = {user:a.user, org:a.org, logo:a.logo || "", c1:a.c1, c2:a.c2, pin:a.pin || "", tok:a.tok || ""}; store.set("tn-session", SESSION); acBrand();
       after ? after() : route();
     } catch(x){ err.textContent = "تعذّر تسجيل الدخول الآن. حاول مرة ثانية."; }
     finally { if (go.isConnected) go.disabled = false; }
