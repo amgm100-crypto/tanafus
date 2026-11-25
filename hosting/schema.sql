@@ -67,3 +67,4 @@ grant execute on function public.tn_profile(text) to anon, authenticated;
 
 -- 2026-11-25 migration tanafus_org_games: tn_login, tn_pin_login and tn_profile also return the account's `games` (null = all contests).
 -- tanafus_orders_contact (2026-11-25): orders + messages tables (admin RLS), tn_order(p jsonb) / tn_contact(p jsonb) RPCs for anon, returning ok or an error code.
+-- 2026-11-25 hosting/sql/free_regs.sql: free_regs table + tn_free_reg RPC (free-contest presenter registration).

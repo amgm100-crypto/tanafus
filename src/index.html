@@ -710,6 +710,9 @@ footer a,.flink{color:var(--blue-link);text-decoration:none}
 .ac-hello b{color:var(--blue)}
 .ac-navorg{display:inline-flex;align-items:center;gap:6px;padding-inline-start:10px;margin-inline-start:4px;border-inline-start:1px solid var(--hair);font-size:13px;font-weight:600;max-width:40vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .ac-navorg img{height:26px;width:auto;max-width:60px;object-fit:contain}
+.ac-navorg:has(.ac-navedit){overflow:visible;max-width:none;min-width:0}.ac-navorg:has(.ac-navedit)>span{overflow:hidden;text-overflow:ellipsis;min-width:0;max-width:34vw}.ac-navedit{flex:none}
+.org-mark{display:inline-flex;align-items:center;gap:10px;margin:0 auto 10px;padding:6px 14px 6px 6px;border-radius:999px;background:var(--bg);box-shadow:inset 0 0 0 1.5px var(--hair);font-weight:700;font-size:15px}.org-mark img{height:38px;width:38px;object-fit:contain}
+.b4-title .org-mark{margin:0;padding:3px 10px 3px 3px;font-size:13px}.b4-title .org-mark img{height:28px;width:28px}
 .ac-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:start;margin-top:18px}
 .ac-edit{display:grid;gap:14px}
 .ac-edit small{font-size:12px;color:var(--muted);font-weight:400}
@@ -1838,6 +1841,12 @@ body[data-ct] .subnav{background:color-mix(in srgb,var(--ctbg) 86%,transparent)}
 @media (max-width:620px){.ord-form .g2{grid-template-columns:1fr}}
 .ord-logo{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.ord-logo>span{width:100%}
 .ord-done{max-width:640px;text-align:center}
+.fr-form{max-width:760px}.fr-set{display:grid;gap:14px;border:0;margin:0;min-width:0}
+.fr-set legend{float:right;width:100%;font-weight:700;font-size:17px;margin-bottom:4px;padding:0}
+.fr-form .ac-cols input[type=color]{width:56px;height:40px;padding:2px;flex:none}
+.fr-form .ac-cols label>span{margin:0}
+.tn-freereg .ab-head{margin-bottom:22px}
+.ac-navedit{font:inherit;font-size:12px;font-weight:600;border:0;background:var(--tile);color:var(--blue);border-radius:999px;padding:3px 10px;cursor:pointer;margin-inline-start:4px}
 .ord-done .ord-steps{justify-content:center}
 .ord-wa{display:inline-grid;place-items:center;width:96px;height:96px;border-radius:50%;background:#25A35A;color:#fff;margin:10px auto 6px;box-shadow:0 16px 34px -12px rgba(37,163,90,.6)}
 .ord-wa svg{width:52px;height:52px}
@@ -4532,6 +4541,79 @@ function tnAbout(k){
   document.getElementById("abBack").onclick = back; document.getElementById("abBack2").onclick = back;
   const pl = document.getElementById("abPlay"); if (pl) pl.onclick = () => nav(k);
 }
+/* ---------- TN-FREEREG: a visitor playing a free contest registers the presenter and the organisation first,
+   then the contest shows in that organisation's logo and colours (kept in this browser, sent to the owner). ---------- */
+let FREEG = store.get("tn-freeg", null), FREEG_ON = false;
+const FR_ROUTES = /^(sj|sjgame|b4|b4game|ss|ssgame|tk|tkplay|er|erhost|erplay|em|emplay|mf|mfplay)$/;
+const frOk = () => !!(FREEG && FREEG.org && FREEG.person && FREEG.phone && FREEG.logo);
+const frGuest = h => !SESSION && !CAN_EDIT && FR_ROUTES.test(h) && freeOn(tnCt(h));
+const orgMark = () => { const s = SESSION || (FREEG_ON ? FREEG : null); return s && s.logo ? `<span class="org-mark"><img src="${s.logo}" alt="">${esc(s.org || "")}</span>` : ""; };
+function frBrand(on){ on = !!(on && frOk()); if (on === FREEG_ON) return; FREEG_ON = on; acBrand(); }
+let FR = null;
+function tnFreeReg(k, edit){
+  const c = CONTESTS.find(x => x.go === k);
+  if (!c || !freeOn(k) || SESSION || CAN_EDIT) return nav(c ? k : "start");
+  frBrand(false); window.scrollTo({top:0}); document.body.dataset.ct = k;
+  if (!FR || FR.k !== k) FR = Object.assign({k, org:"", person:"", phone:"", email:"", logo:"", c1:AC_BASE.c1, c2:AC_BASE.c2}, FREEG || {}, {k});
+  const f = FR, on1 = ssOn(f.c1);
+  $app.innerHTML = `<section class="section gut view tn-order tn-freereg"><div class="wrap">
+    <div class="ab-head"><span class="ab-ic">${I(P[c.icon])}</span><div><p class="eyebrow">مجانية حتى ${freeDate(k)}</p>
+      <h1>${edit ? "تعديل بيانات جهتك" : `قبل ما تبدأ «${c.name}»`}</h1>
+      <p class="lead">سجّل بياناتك وبيانات جهتك، وتظهر لك المسابقة بشعار جهتك وألوانها.</p></div></div>
+    <form class="ord-form fr-form" id="frF" novalidate>
+      <fieldset class="sj-box fr-set"><legend>بيانات مقدّم المسابقة</legend>
+        <label><span>الاسم</span><input id="frPerson" maxlength="80" autocomplete="name" value="${esc(f.person)}" required></label>
+        <div class="g2"><label><span>رقم الجوال (واتساب)</span><input id="frPhone" dir="ltr" inputmode="tel" autocomplete="tel" maxlength="20" value="${esc(f.phone)}" placeholder="05xxxxxxxx" required></label>
+          <label><span>البريد الإلكتروني <small>اختياري</small></span><input id="frEmail" dir="ltr" type="email" autocomplete="email" maxlength="120" value="${esc(f.email)}" placeholder="name@example.com"></label></div>
+      </fieldset>
+      <fieldset class="sj-box fr-set"><legend>بيانات الجهة</legend>
+        <label><span>اسم الجهة</span><input id="frOrg" maxlength="80" autocomplete="organization" value="${esc(f.org)}" placeholder="مثال: مدرسة الرواد" required></label>
+        <div class="ac-brand">
+          <label class="ss-logo ac-logo">${f.logo ? `<img src="${f.logo}" alt="شعار الجهة">` : `${I(P.ssimg)}<span>ارفع شعار الجهة</span>`}<input type="file" accept="image/*" id="frLogo" hidden></label>
+          <div class="ac-cols">
+            <label><span>اللون الأساسي</span><input type="color" id="frC1" value="${esc(f.c1)}"></label>
+            <label><span>اللون الثاني</span><input type="color" id="frC2" value="${esc(f.c2)}"></label>
+            ${f.logo ? `<button type="button" class="mini" id="frNoLogo">تغيير الشعار</button>` : `<small class="sj-sub">الألوان تُقترح تلقائيًا من الشعار، وتقدر تغيّرها.</small>`}
+          </div>
+        </div>
+        <div class="ac-prev" style="--p1:${esc(f.c1)};--p2:${esc(f.c2)};--p1on:${on1}">
+          <div class="ac-prev-nav">${f.logo ? `<img src="${f.logo}" alt="">` : ""}<b>${esc(f.org || "اسم الجهة")}</b><i></i><i></i></div>
+          <div class="ac-prev-body"><small>هكذا تظهر المسابقة</small><span class="ac-prev-btn">ابدأ المسابقة</span><span class="ac-prev-tag">${c.name}</span></div>
+        </div>
+      </fieldset>
+      <p class="sj-sub">بياناتك تصل لإدارة تنافس فقط، ونتواصل معك عبر الواتساب إذا احتجت مساعدة.</p>
+      <p class="ac-err" id="frErr" role="alert"></p>
+      <div class="ord-acts"><button type="button" class="btn sec lg" id="frBack">رجوع</button><button type="submit" class="btn lg" id="frGo">${edit ? "حفظ والرجوع للمسابقة" : "ابدأ المسابقة"}</button></div>
+    </form></div></section>`;
+  const $ = id => document.getElementById(id);
+  const keep = () => { f.person = $("frPerson").value; f.phone = $("frPhone").value; f.email = $("frEmail").value; f.org = $("frOrg").value; };
+  const re = () => { keep(); const y = scrollY; tnFreeReg(k, edit); scrollTo({top:y}); };
+  $("frBack").onclick = () => { keep(); if (edit && frOk()) return nav(k); nav("about-" + k); };
+  $("frLogo").onchange = async ev => { const file = ev.target.files && ev.target.files[0]; if (!file) return;
+    try { const {url, canvas} = await ssShrink(file, 320, "image/png"); const cc = ssColors(canvas); f.logo = url; if (cc.c1) f.c1 = cc.c1; if (cc.c2) f.c2 = cc.c2; } catch(x){} re(); };
+  const nl = $("frNoLogo"); if (nl) nl.onclick = () => $("frLogo").click();
+  $("frC1").onchange = ev => { f.c1 = ev.target.value; re(); };
+  $("frC2").onchange = ev => { f.c2 = ev.target.value; re(); };
+  $("frOrg").oninput = ev => { const b = $app.querySelector(".ac-prev-nav b"); if (b) b.textContent = ev.target.value.trim() || "اسم الجهة"; };
+  $("frF").onsubmit = async ev => { ev.preventDefault(); keep(); const err = $("frErr"); err.textContent = "";
+    const phone = normPhone(f.phone), email = f.email.trim();
+    if (f.person.trim().length < 2) return err.textContent = "اكتب اسم مقدّم المسابقة.";
+    if (!/^\d{8,15}$/.test(phone)) return err.textContent = "رقم الجوال غير صحيح. مثال: 0512345678";
+    if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return err.textContent = "البريد الإلكتروني غير صحيح.";
+    if (f.org.trim().length < 2) return err.textContent = "اكتب اسم الجهة.";
+    if (!f.logo) return err.textContent = "ارفع شعار الجهة.";
+    const go = $("frGo"); go.disabled = true; go.textContent = "جارٍ الحفظ…";
+    const payload = {contest:k, org:f.org.trim(), person:f.person.trim(), phone, email, logo:f.logo, c1:f.c1, c2:f.c2};
+    try { let r = "ok";
+      if (window.TN && TN.freeReg) r = await TN.freeReg(payload);
+      else { const all = store.get("tn-freeregs", []); all.unshift(Object.assign({id:Date.now(), at:new Date().toISOString(), status:"new"}, payload)); store.set("tn-freeregs", all.slice(0, 300)); }
+      if (r !== "ok"){ go.disabled = false; go.textContent = edit ? "حفظ والرجوع للمسابقة" : "ابدأ المسابقة";
+        return err.textContent = r === "phone" ? "رقم الجوال غير صحيح." : r === "email" ? "البريد الإلكتروني غير صحيح." : r === "logo" ? "الشعار كبير، جرّب صورة أصغر." : "تأكد من البيانات وحاول مرة ثانية."; }
+    } catch(x){ /* the owner copy failed (offline or backend not ready): still let them play */ }
+    FREEG = Object.assign({}, payload, {at:new Date().toISOString()}); store.set("tn-freeg", FREEG); FR = null;
+    if (location.hash === "#" + k) route(); else nav(k);
+  };
+}
 /* ordering */
 const ORD = {plan:"", games:[], step:1, f:{org:"", person:"", phone:"", email:"", logo:""}, sent:false};
 const ORD_PLANS = {one:{n:"مسابقة واحدة", max:1}, five:{n:"خمس مسابقات", max:5}, all:{n:"كل المسابقات", max:99}};
@@ -4659,6 +4741,8 @@ async function tnInbox(){
   if (!CAN_EDIT) return; const host = document.querySelector(".ac-admin"); if (!host) return;
   let orders = [], msgs = [];
   try { if (window.TN && TN.inbox){ [orders, msgs] = await Promise.all([TN.inbox("orders"), TN.inbox("messages")]); } else { orders = store.get("tn-orders", []); msgs = store.get("tn-msgs", []); } } catch(e){}
+  let regs = [];
+  try { regs = window.TN && TN.inbox ? await TN.inbox("free_regs") : store.get("tn-freeregs", []); } catch(e){}
   if (!document.body.contains(host)) return;
   const sec = document.createElement("section"); sec.className = "tn-rep tn-inbox"; sec.id = "tnInbox";
   const day = t => { const d = new Date(t); return isNaN(d) ? "" : d.toLocaleString("en-GB", {timeZone:"Asia/Riyadh", day:"2-digit", month:"2-digit", hour:"2-digit", minute:"2-digit"}); };
@@ -4676,12 +4760,19 @@ async function tnInbox(){
         <label class="inb-done"><input type="checkbox" data-mst="${m.id}" ${m.status === "done" ? "checked" : ""}> تم الرد</label></div>
       <p class="inb-body">${esc(m.body)}</p>
       <div class="inb-acts">${m.phone ? `<a class="mini" href="${waLink(m.phone)}" target="_blank" rel="noopener">${I(P.tnwa)}<span dir="ltr">${esc(m.phone)}</span></a>` : ""}${m.email ? `<a class="mini" href="mailto:${esc(m.email)}">${I(P.tnmail)}<span dir="ltr">${esc(m.email)}</span></a>` : ""}</div>
-    </article>`).join("")}</div>` : `<p class="lead">لا توجد رسائل بعد.</p>`}`;
+    </article>`).join("")}</div>` : `<p class="lead">لا توجد رسائل بعد.</p>`}
+    <h2 style="margin-top:28px">مسجّلو المسابقات المجانية <small>${n(regs.filter(r => r.status === "new").length)} جديد</small></h2>
+    ${regs.length ? `<div class="inb-list">${regs.map(r => `<article class="inb-card st-${esc(r.status)}">
+      <div class="inb-top">${r.logo ? `<img src="${r.logo}" alt="">` : ""}<div><b>${esc(r.org)}</b><small>${esc(r.person)} · ${nm(r.contest)} · ${day(r.at)}</small></div>
+        <label class="inb-done"><input type="checkbox" data-rst="${r.id}" ${r.status === "done" ? "checked" : ""}> تم التواصل</label></div>
+      <div class="inb-acts"><a class="mini" href="${waLink(r.phone)}" target="_blank" rel="noopener">${I(P.tnwa)}<span dir="ltr">${esc(r.phone)}</span></a>${r.email ? `<a class="mini" href="mailto:${esc(r.email)}">${I(P.tnmail)}<span dir="ltr">${esc(r.email)}</span></a>` : ""}</div>
+    </article>`).join("")}</div>` : `<p class="lead">لا يوجد مسجّلون بعد.</p>`}`;
   host.appendChild(sec);
   const setSt = async (table, id, st, localKey) => {
     if (window.TN && TN.setStatus) await TN.setStatus(table, id, st);
     else { const all = store.get(localKey, []); const x = all.find(r => String(r.id) === String(id)); if (x) x.status = st; store.set(localKey, all); } };
   sec.querySelectorAll("[data-ost]").forEach(sel => sel.onchange = async () => { try { await setSt("orders", sel.dataset.ost, sel.value, "tn-orders"); sel.closest(".inb-card").className = "inb-card st-" + sel.value; } catch(e){ flash("تعذّر الحفظ."); } });
+  sec.querySelectorAll("[data-rst]").forEach(cb => cb.onchange = async () => { const st = cb.checked ? "done" : "new"; try { await setSt("free_regs", cb.dataset.rst, st, "tn-freeregs"); cb.closest(".inb-card").className = "inb-card st-" + st; } catch(e){ cb.checked = !cb.checked; } });
   sec.querySelectorAll("[data-mst]").forEach(cb => cb.onchange = async () => { const st = cb.checked ? "done" : "new"; try { await setSt("messages", cb.dataset.mst, st, "tn-msgs"); cb.closest(".inb-card").className = "inb-card st-" + st; } catch(e){ cb.checked = !cb.checked; } });
 }
 async function tnFreeBox(){
@@ -4739,6 +4830,9 @@ function route(){
     renderLinks(""); return acGate(); }
   orgqLeave();
   if (h === "accounts"){ game = null; renderLinks("accounts"); return acAdmin().then(tnFreeBox).then(tnInbox).then(tnReport); }
+  frBrand(frGuest(h));
+  if (frGuest(h) && !frOk()){ game = null; renderLinks(""); return tnFreeReg(tnCt(h)); }
+  if (h.startsWith("freereg-")){ game = null; renderLinks(""); return tnFreeReg(h.slice(8), true); }
   if (!gameOk(tnCt(h)) && /^(sj|sjgame|b4|b4game|b4host|ss|ssgame|tk|tkplay|er|erhost|erplay|em|emplay|mf|mfplay)$/.test(h)){ game = null; renderLinks(""); return SESSION ? acNoGame(tnCt(h)) : acGate(); }
   if (h.startsWith("join")){ game = null; renderLinks(""); return joinPage(); }
   if (h === "em" || h === "emplay" || h.startsWith("emjoin")){ game = null; renderLinks("");
@@ -4896,15 +4990,16 @@ function acBrand(){
   orgqSync();
   let st = document.getElementById("acBrandCss");
   if (!st){ st = document.createElement("style"); st.id = "acBrandCss"; document.body.appendChild(st); }
-  const s = SESSION;
+  const s = SESSION || (FREEG_ON ? FREEG : null);
   st.textContent = s && s.c1 ? `:root:not(#ac-brand){--blue:${s.c1};--blue-link:${s.c1};--on-blue:${ssOn(s.c1)};--red2:${s.c2 || s.c1}}` : "";
   const b = document.getElementById("acNavOrg");
   if (b) b.remove();
   if (s){
     const logo = document.getElementById("logo"), el = document.createElement("span");
     el.id = "acNavOrg"; el.className = "ac-navorg";
-    el.innerHTML = `${s.logo ? `<img src="${s.logo}" alt="">` : ""}<span>${esc(s.org || s.user)}</span>`;
+    el.innerHTML = `${s.logo ? `<img src="${s.logo}" alt="">` : ""}<span>${esc(s.org || s.user)}</span>${s === FREEG ? `<button type="button" class="ac-navedit" id="frEdit">تعديل</button>` : ""}`;
     logo.after(el);
+    const fe = document.getElementById("frEdit"); if (fe) fe.onclick = () => nav("freereg-" + (tnCt((location.hash || "").slice(1)) || FREEG.contest || "b4"));
   }
 }
 async function acRefresh(){
@@ -5809,7 +5904,7 @@ function b4Setup(keepScroll){
   const y = window.scrollY, T = b4Cfg.teams;
   $app.innerHTML = `<section class="view">
     <div class="hero gut" style="padding-block:40px 22px"><div class="wrap">
-      <p class="eyebrow">مسابقة فرق</p><h1>بالأربع تربح.</h1>
+      ${orgMark()}<p class="eyebrow">مسابقة فرق</p><h1>بالأربع تربح.</h1>
       <p>لوحة حروف، وكل إجابة صحيحة ترسم ضلعًا. من يقفل المربع يأخذ نقاطه.</p>
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
@@ -5962,7 +6057,7 @@ function b4Render(){
     prompt = `فك مربع: <b style="color:${col}">${esc(g.names[me])}</b> يختار ضلعًا مرسومًا لحذفه`;
   }
   $app.innerHTML = `<section class="b4 gut view"><div class="wrap">
-    <div class="b4-top"><div class="b4-title"><b>بالأربع تربح</b><span>الجولة ${n(g.round)}</span></div>
+    <div class="b4-top"><div class="b4-title">${orgMark()}<b>بالأربع تربح</b><span>الجولة ${n(g.round)}</span></div>
       <div class="b4-acts"><button class="mini" type="button" id="b4Undo" ${g.hist.length ? "" : "disabled"}>${I(P.sjundo)}تراجع</button>
         <button class="mini" type="button" id="b4Host">${I(P.sjhost)}ورقة الملقي</button>
         <button class="mini" type="button" id="b4Full">${I(P.sjfull)}ملء الشاشة</button>
