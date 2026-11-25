@@ -66,3 +66,4 @@ grant execute on function public.tn_profile(text) to anon, authenticated;
 -- org_questions(acct, items); RPCs tn_orgq_get (org or presenter token) and tn_orgq_save (org token only).
 
 -- 2026-11-25 migration tanafus_org_games: tn_login, tn_pin_login and tn_profile also return the account's `games` (null = all contests).
+-- tanafus_orders_contact (2026-11-25): orders + messages tables (admin RLS), tn_order(p jsonb) / tn_contact(p jsonb) RPCs for anon, returning ok or an error code.
