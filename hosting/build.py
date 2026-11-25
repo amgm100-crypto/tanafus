@@ -76,6 +76,10 @@ def main():
         (out / "shots").mkdir(parents=True, exist_ok=True)
         for f in shots.glob("*.webp"):
             (out / "shots" / f.name).write_bytes(f.read_bytes())
+    for extra in ("og.jpg", "apple-touch-icon.png"):   # share preview + home-screen icon
+        p = HERE / extra
+        if p.exists():
+            (out / extra).write_bytes(p.read_bytes())
     for extra in ("_headers", "404.html"):
         p = HERE / extra
         if p.exists():

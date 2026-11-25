@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"></head><body>
 <title>تنافس</title>
+<meta name="description" content="تنافس: مسابقات ثقافية جماعية للمدارس والأندية والجهات، وموسوعة أكثر من 6,700 سؤال مجانية.">
+<meta name="theme-color" content="#1E2F4D">
+<meta property="og:type" content="website"><meta property="og:locale" content="ar_SA"><meta property="og:site_name" content="تنافس">
+<meta property="og:title" content="تنافس · مسابقات ثقافية للجهات"><meta property="og:description" content="تنافس: مسابقات ثقافية جماعية للمدارس والأندية والجهات، وموسوعة أكثر من 6,700 سؤال مجانية.">
+<meta property="og:image" content="https://amgm100-crypto.github.io/tanafus/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='28' fill='%231E2F4D'/%3E%3Cg fill='%23fff'%3E%3Crect x='28' y='74' width='64' height='12'/%3E%3Crect x='80' y='50' width='12' height='36'/%3E%3Crect x='28' y='50' width='12' height='36'/%3E%3C/g%3E%3Crect x='44' y='30' width='12' height='12' fill='%233D95FF'/%3E%3Crect x='64' y='30' width='12' height='12' fill='%23FF6B61'/%3E%3C/svg%3E">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -312,14 +319,14 @@ footer a,.flink{color:var(--blue-link);text-decoration:none}
 /* سين جيم */
 .sj-setup{max-width:780px;margin:0 auto;display:grid;gap:16px}
 .sj-box{background:var(--bg-alt);border-radius:var(--r);padding:20px clamp(16px,3vw,24px);display:grid;gap:12px}
-.sj-box h3{margin:0;font-size:19px;font-weight:600;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
-.sj-box h3 small{font-size:13px;color:var(--muted);font-weight:400}
+.sj-box :is(h2,h3):not(.h4){margin:0;font-size:19px;font-weight:600;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sj-box :is(h2,h3):not(.h4) small{font-size:13px;color:var(--muted);font-weight:400}
 .sj-box .seg{background:color-mix(in srgb,var(--hair) 60%,transparent)}
 .sj-box .seg button{font-size:16px;padding:10px}
 .sj-sub{font-size:13px;color:var(--muted);margin:-4px 0 0}
 .sj-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .sj-two>div{display:grid;gap:10px;align-content:start}
-.sj-two h4{margin:0;font-size:15px;font-weight:600}
+.sj-two h2.h4{margin:0;font-size:15px;font-weight:600}
 .sj-names{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .sj-names input{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--tile);border:1px solid var(--hair);border-inline-start:5px solid var(--tc);border-radius:12px;padding:10px 14px;min-height:46px}
 .sj-names input:focus{outline:2px solid var(--blue);outline-offset:1px}
@@ -1083,7 +1090,7 @@ button.em-cell:not(.on):hover{box-shadow:inset 0 0 0 2px var(--tc,var(--blue))}
 .em-st.st-need{background:color-mix(in srgb,var(--c3) 16%,var(--tile));color:var(--c3)}
 .em-side{display:grid;gap:12px;position:sticky;top:60px}
 .em-box{background:var(--tile);border-radius:18px;padding:14px;box-shadow:var(--shadow);display:grid;gap:8px}
-.em-box h4{margin:0;font-size:15px}
+.em-box h2.h4{margin:0;font-size:15px}
 .em-pj{display:grid;gap:4px}
 .em-pj>div:first-child{display:flex;justify-content:space-between;font-size:14px}
 .em-pj>div:first-child span{color:var(--muted);font-variant-numeric:tabular-nums}
@@ -1174,7 +1181,7 @@ button.em-cell:not(.on):hover{box-shadow:inset 0 0 0 2px var(--tc,var(--blue))}
 .em-tos button{border:1.5px solid var(--hair);background:var(--tile);border-radius:980px;padding:6px 12px;font-size:14px}
 .em-tos button.on{border-color:var(--tc);background:color-mix(in srgb,var(--tc) 14%,var(--tile));color:var(--tc);font-weight:600}
 .em-two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.em-two h4{margin:0 0 6px;font-size:14px}
+.em-two h2.h4{margin:0 0 6px;font-size:14px}
 .em-two1{display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .em-amt{display:flex;align-items:center;gap:4px;background:var(--bg-alt);border-radius:10px;padding:4px;margin-bottom:4px}
 .em-amt i{font-style:normal;width:24px;text-align:center}
@@ -1614,6 +1621,18 @@ a.btn{text-decoration:none}
 .er-board:has(.er-live){grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));gap:18px}
 .er-board.coop:has(.er-live){max-width:900px;margin-inline:auto}
 @media (max-width:900px){.er-board:has(.er-live){grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}}
+/* TN-QA: former h4 sub-labels keep the h4 look */
+h2.h4{font-size:1em;font-weight:700;margin-block:1.33em}
+/* TN-QA: touch targets on touch screens */
+@media (pointer:coarse){
+  .cat .info{width:34px;height:34px}
+  .cat .info::after{content:"";position:absolute;inset:-6px}
+  #selAll,button.link{min-height:40px;padding-block:8px}
+  footer a,.flink{display:inline-block;padding-block:11px}
+  .logo{min-height:40px}
+  .mini{min-height:40px}
+  .seg button{min-width:42px;flex:1 0 auto}
+}
 </style>
 
 <div dir="rtl" lang="ar">
@@ -3890,7 +3909,7 @@ async function load(){
     const local = DB ? null : store.get("bank-local", null);
     if (Array.isArray(local)){ RAW = local; SOURCE = "local"; }
     else for (const u of ["questions.json","../question-bank/questions.json"]){
-      try { const r = await fetch(u,{cache:"no-store"}); if (!r.ok) continue;
+      try { const r = await fetch(u,{cache:"no-cache"}); if (!r.ok) continue;
         const d = await r.json(); RAW = (Array.isArray(d) ? d : (d.questions||[])).filter(q => q && q.question); break; } catch(e){}
     }
   }
@@ -4125,9 +4144,9 @@ function dispSeg(k, side, cur){
 }
 function dispBox(k){
   const d = dispGet(k);
-  return `<div class="sj-box disp-box"><h3>خيارات العرض</h3><div class="sj-two">
-    <div><h4>شاشة العرض</h4>${dispSeg(k, "host", d.host)}<p class="sj-sub">اختر «طولي» إذا كانت الشاشة أو التلفزيون مثبّتًا بشكل عمودي، فتترتّب لوحة المسابقة في عمود واحد.</p></div>
-    <div><h4>شاشة المتسابقين</h4>${dispSeg(k, "player", d.player)}<p class="sj-sub">${DISP_DEV[k] ? "يصل الخيار إلى جوالات المتسابقين من غرفة المسابقة، وتترتّب صفحتهم على حسبه." : "هذه المسابقة تُلعب على شاشة العرض وحدها بدون جوالات، فيُحفظ هذا الخيار ولا يغيّر شيئًا فيها الآن."}</p></div>
+  return `<div class="sj-box disp-box"><h2 class="sjh">خيارات العرض</h2><div class="sj-two">
+    <div><h2 class="h4">شاشة العرض</h2>${dispSeg(k, "host", d.host)}<p class="sj-sub">اختر «طولي» إذا كانت الشاشة أو التلفزيون مثبّتًا بشكل عمودي، فتترتّب لوحة المسابقة في عمود واحد.</p></div>
+    <div><h2 class="h4">شاشة المتسابقين</h2>${dispSeg(k, "player", d.player)}<p class="sj-sub">${DISP_DEV[k] ? "يصل الخيار إلى جوالات المتسابقين من غرفة المسابقة، وتترتّب صفحتهم على حسبه." : "هذه المسابقة تُلعب على شاشة العرض وحدها بدون جوالات، فيُحفظ هذا الخيار ولا يغيّر شيئًا فيها الآن."}</p></div>
   </div></div>`;
 }
 document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-dv]"); if (!b) return;
@@ -5001,7 +5020,7 @@ function sjSetup(keepScroll){
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${SJ ? `<div class="sj-resume"><span>عندك لعبة جارية (${SJ.teams.map((t,i) => esc(t) + " " + n(SJ.scores[i])).join(" · ")}).</span><button class="btn" type="button" id="sjResume">متابعة اللعبة</button></div>` : ""}
-      <div class="sj-box"><h3>طريقة اللعب</h3>
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
           <li>يختار كل فريق مجالاته (مجالًا أو اثنين أو ثلاثة)، وتظهر كلها على لوحة واحدة، ولكل مجال 3 أو 6 أسئلة.</li>
           <li>في كل دور يختار الفريق صاحب الدور مجالًا وقيمة السؤال من اللوحة.</li>
@@ -5012,20 +5031,20 @@ function sjSetup(keepScroll){
         <div class="b4-pts"><span><b>200</b>سؤال سهل</span><span><b>400</b>سؤال متوسط</span><span class="g"><b>600</b>سؤال صعب</span></div>
         <p class="sj-sub" style="margin:0">لكل فريق ثلاث وسائل مساعدة تختارونها من الإعدادات، ويستخدم كل وسيلة مرة واحدة في دوره قبل إظهار الإجابة.</p>
       </div>
-      <div class="sj-box"><h3>الفرق<small>من 2 إلى 4</small></h3>
+      <div class="sj-box"><h2 class="sjh">الفرق<small>من 2 إلى 4</small></h2>
         ${sjSeg("data-sjt", T, [[2,"فريقان"],[3,"3 فرق"],[4,"4 فرق"]])}
         <div class="sj-names">${Array.from({length:T}, (_,i) => `<input type="text" maxlength="24" data-sjn="${i}" style="--tc:var(--c${i+1})" value="${esc(sjCfg.names[i])}" placeholder="${sjDefName(i)}" aria-label="اسم ${sjDefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>عدد المجالات لكل فريق</h4>${sjSeg("data-sjp", sjCfg.perTeam, [[1,"مجال"],[2,"مجالان"],[3,"3 مجالات"]])}</div>
-        <div><h4>عدد الأسئلة في كل مجال</h4>${sjSeg("data-sjq", sjCfg.perCat, [[3,"3 أسئلة"],[6,"6 أسئلة"]])}
+        <div><h2 class="h4">عدد المجالات لكل فريق</h2>${sjSeg("data-sjp", sjCfg.perTeam, [[1,"مجال"],[2,"مجالان"],[3,"3 مجالات"]])}</div>
+        <div><h2 class="h4">عدد الأسئلة في كل مجال</h2>${sjSeg("data-sjq", sjCfg.perCat, [[3,"3 أسئلة"],[6,"6 أسئلة"]])}
           <p class="sj-sub">${sjCfg.perCat === 3 ? "سؤال واحد بكل قيمة: 200 و400 و600." : "سؤالان بكل قيمة: 200 و400 و600."}</p></div>
       </div>
-      <div class="sj-box"><h3>الوسائل المساعدة<small>اختر ثلاثًا، ولكل فريق استخدام واحد لكل وسيلة · ${n(sjCfg.helpers.length)}/3</small></h3>
+      <div class="sj-box"><h2 class="sjh">الوسائل المساعدة<small>اختر ثلاثًا، ولكل فريق استخدام واحد لكل وسيلة · ${n(sjCfg.helpers.length)}/3</small></h2>
         <div class="sj-helps">${SJ_HELPERS.map(h => { const on = sjCfg.helpers.includes(h.id);
           return `<button type="button" class="sj-help" data-sjh="${h.id}" aria-pressed="${on}"><b>${h.name}</b><small>${h.desc}</small></button>`; }).join("")}</div>
       </div>
-      <div class="sj-box"><h3>مجالات الفرق<small>اختر الفريق ثم مجالاته، والمجال لا يتكرر بين فريقين</small></h3>
+      <div class="sj-box"><h2 class="sjh">مجالات الفرق<small>اختر الفريق ثم مجالاته، والمجال لا يتكرر بين فريقين</small></h2>
         <div class="sj-tabs" role="tablist">${Array.from({length:T}, (_,i) => `<button type="button" role="tab" class="sj-tab ${sjCfg.cats[i].length === sjCfg.perTeam ? "full" : ""}" data-sjtab="${i}" aria-selected="${i === tab}" style="--tc:var(--c${i+1})"><i></i><b>${esc(sjName(i))}</b><span>${n(sjCfg.cats[i].length)}/${n(sjCfg.perTeam)}</span></button>`).join("")}</div>
         <div class="sj-cats" style="--tc:var(--c${tab+1})">${cats.map((c,i) => { const o = owner[c], ok = sjAvail(c), m = catMeta(c);
           if (o != null && o !== tab) return `<button type="button" class="sj-cat taken" style="--tc:var(--c${o+1})" aria-disabled="true" data-sjc="${i}">${I(P[m.icon] || P.general)}<span><b>${esc(c)}</b><small>${esc(sjName(o))}</small></span></button>`;
@@ -5225,16 +5244,16 @@ function b4Setup(keepScroll){
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${B4 ? `<div class="sj-resume"><span>عندك مسابقة جارية: الجولة ${n(B4.round)} (${B4.names.map((t,i) => esc(t) + " " + n(B4.scores[i])).join(" · ")}).</span><button class="btn" type="button" id="b4Resume">متابعة المسابقة</button></div>` : ""}
-      <div class="sj-box"><h3>الفرق<small>من 2 إلى 4</small></h3>
+      <div class="sj-box"><h2 class="sjh">الفرق<small>من 2 إلى 4</small></h2>
         ${sjSeg("data-b4t", T, [[2,"فريقان"],[3,"3 فرق"],[4,"4 فرق"]])}
         <div class="sj-names">${Array.from({length:T}, (_,i) => `<input type="text" maxlength="24" data-b4n="${i}" style="--tc:${B4_COL[i]}" value="${esc(b4Cfg.names[i])}" placeholder="${b4DefName(i)}" aria-label="اسم ${b4DefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>حجم اللوحة</h4>${sjSeg("data-b4s", b4Cfg.n, [[3,"3×3"],[4,"4×4"],[5,"5×5"]])}
+        <div><h2 class="h4">حجم اللوحة</h2>${sjSeg("data-b4s", b4Cfg.n, [[3,"3×3"],[4,"4×4"],[5,"5×5"]])}
           <p class="sj-sub">${n(b4Cfg.n * b4Cfg.n)} مربعًا، منها ${n(b4Gold(b4Cfg.n))} ${b4Gold(b4Cfg.n) === 1 ? "ذهبي" : "ذهبية"}.</p></div>
-        <div><h4>وقت الإجابة</h4>${sjSeg("data-b4time", b4Cfg.time, B4_TIMES.map(t => [t, t + " ث"]))}</div>
+        <div><h2 class="h4">وقت الإجابة</h2>${sjSeg("data-b4time", b4Cfg.time, B4_TIMES.map(t => [t, t + " ث"]))}</div>
       </div>
-      <div class="sj-box"><h3>طريقة اللعب</h3>
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
           <li>يختار الفريق صاحب الدور مربعًا من اللوحة.</li>
           <li>يُطرح سؤال تبدأ إجابته بحرف المربع، ويُحتسب الحرف بعد «ال».</li>
@@ -5608,7 +5627,7 @@ async function ssSetup(keepScroll){
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${SS ? `<div class="sj-resume"><span>عندك مسابقة جارية (${SS.names.map((t,i) => esc(t) + " " + n(SS.t[i].score)).join(" · ")}).</span><button class="btn" type="button" id="ssResume">متابعة المسابقة</button></div>` : ""}
-      <div class="sj-box"><h3>طريقة اللعب</h3>
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
           <li>تختار كل مجموعة صورًا لأدوات أو جمادات، ويخمّنها الفريق المنافس.</li>
           <li>كل إجابة صحيحة تخفّف التغبيش 10%، والإجابة الخاطئة تنقل الدور.</li>
@@ -5617,11 +5636,11 @@ async function ssSetup(keepScroll){
         <p class="ss-warn">جهّزوا الصور قبل عرض الشاشة على البروجكتر، حتى لا يراها المتسابقون.</p>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>عدد الفرق</h4>${sjSeg("data-sst", T, [[2,"فريقان"],[3,"3 فرق"],[4,"4 فرق"]])}</div>
-        <div><h4>عدد الصور لكل فريق</h4>${sjSeg("data-ssp", ssCfg.per, [1,2,3,4,5,6].map(k => [k, n(k)]))}</div>
-        <div><h4>متى يُفتح التخمين</h4>${sjSeg("data-ssk", ssCfg.k, [[1,"كل إجابة"],[2,"كل إجابتين"],[3,"كل 3 إجابات"]])}
+        <div><h2 class="h4">عدد الفرق</h2>${sjSeg("data-sst", T, [[2,"فريقان"],[3,"3 فرق"],[4,"4 فرق"]])}</div>
+        <div><h2 class="h4">عدد الصور لكل فريق</h2>${sjSeg("data-ssp", ssCfg.per, [1,2,3,4,5,6].map(k => [k, n(k)]))}</div>
+        <div><h2 class="h4">متى يُفتح التخمين</h2>${sjSeg("data-ssk", ssCfg.k, [[1,"كل إجابة"],[2,"كل إجابتين"],[3,"كل 3 إجابات"]])}
           <p class="sj-sub">عدد الإجابات الصحيحة على الصورة قبل أن يُسمح بالتخمين.</p></div>
-        <div><h4>التخمين الخاطئ</h4>${sjSeg("data-sspen", ssCfg.pen ? 1 : 0, [[1,"خصم 10 نقاط"],[0,"بلا خصم"]])}</div>
+        <div><h2 class="h4">التخمين الخاطئ</h2>${sjSeg("data-sspen", ssCfg.pen ? 1 : 0, [[1,"خصم 10 نقاط"],[0,"بلا خصم"]])}</div>
       </div>
       ${Array.from({length:T}, (_,t) => `<div class="sj-box ss-team" style="--tc:${SS_COL[t]}">
         <h3><span class="ss-tdot"></span><input type="text" maxlength="24" data-ssn="${t}" value="${esc(ssCfg.names[t])}" placeholder="${ssDefName(t)}" aria-label="اسم ${ssDefName(t)}"><small>صوره يخمّنها ${esc(ssName((t + 1) % T))}</small></h3>
@@ -5631,7 +5650,7 @@ async function ssSetup(keepScroll){
             ${x.src ? `<button type="button" class="ss-x" data-ssdel="${t}-${i}" aria-label="حذف الصورة">×</button>` : ""}
             <input type="text" maxlength="40" data-ssname="${t}-${i}" value="${esc(x.name || "")}" placeholder="اسم الأداة" aria-label="اسم الأداة في الصورة ${n(i+1)}"></div>`; }).join("")}</div>
       </div>`).join("")}
-      <div class="sj-box"><h3>هوية النادي<small>اختياري</small></h3>
+      <div class="sj-box"><h2 class="sjh">هوية النادي<small>اختياري</small></h2>
         <div class="ss-brand">
           <label class="ss-logo">${ssBrand.logo ? `<img src="${ssBrand.logo}" alt="شعار النادي">` : `${I(P.ssimg)}<span>ارفع شعار النادي</span>`}<input type="file" accept="image/*" id="ssLogo" hidden></label>
           <div class="ss-bf">
@@ -5856,7 +5875,7 @@ async function tkSetup(keepScroll){
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${TK ? `<div class="sj-resume"><span>عندك مسابقة جارية: الجولة ${n(TK.round)} (${TK.names.map((t,i) => esc(t) + " " + TK.scores[i]).join(" · ")}).</span><button class="btn" type="button" id="tkResume">متابعة</button></div>` : ""}
-      <div class="sj-box"><h3>طريقة اللعب</h3>
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
           <li>عند فتح الغرفة يظهر رمز دخول من ست أرقام وباركود. يصوّر اللاعبون الباركود أو يكتبون الرمز، ثم يختار كل لاعب فريقه، ولا يرى في جواله إلا ما يخص فريقه.</li>
           <li>في دور الفريق تظهر على جوالات أعضائه صفحة تكبيس لمدة ${n(tkCfg.dur)} ثوانٍ، ومجموع كبساتهم هو قيمة سؤالهم.</li>
@@ -5864,19 +5883,19 @@ async function tkSetup(keepScroll){
           <li>بعد أن يأخذ كل فريق دوره يُفتح التكبيس لجميع الفرق معًا، والفريق الأكثر كبسًا يأخذ السؤال بنفس الطريقة. وعند التعادل يُعاد التكبيس للجميع.</li>
         </ol>
       </div>
-      <div class="sj-box"><h3>الفرق<small>من 2 إلى 6</small></h3>
+      <div class="sj-box"><h2 class="sjh">الفرق<small>من 2 إلى 6</small></h2>
         ${sjSeg("data-tkt", T, [2,3,4,5,6].map(k => [k, n(k)]))}
         <div class="sj-names">${Array.from({length:T}, (_,i) => `<input type="text" maxlength="24" data-tkn="${i}" style="--tc:${TK_COL[i]}" value="${esc(tkCfg.names[i])}" placeholder="${tkDefName(i)}" aria-label="اسم ${tkDefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>عدد الأجهزة لكل فريق</h4>
+        <div><h2 class="h4">عدد الأجهزة لكل فريق</h2>
           <div class="stepper ss-step"><button type="button" id="tkDevPlus" aria-label="زيادة">+</button><output>${n(tkCfg.dev)}</output><button type="button" id="tkDevMinus" aria-label="إنقاص">−</button></div>
           <p class="sj-sub">تُحسب كبسات أول ${n(tkCfg.dev)} أجهزة تنضم لكل فريق فقط، حتى تكون المنافسة عادلة.</p></div>
-        <div><h4>مدة التكبيس</h4>${sjSeg("data-tkd", tkCfg.dur, [3,5,7,10].map(k => [k, n(k) + " ث"]))}</div>
-        <div><h4>عدد الجولات</h4>${sjSeg("data-tkr", tkCfg.rounds, [[3,"3"],[5,"5"],[10,"10"],[0,"مفتوح"]])}</div>
-        <div><h4>مستوى الأسئلة</h4>${sjSeg("data-tkl", tkCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"],["*","مختلط"]])}</div>
+        <div><h2 class="h4">مدة التكبيس</h2>${sjSeg("data-tkd", tkCfg.dur, [3,5,7,10].map(k => [k, n(k) + " ث"]))}</div>
+        <div><h2 class="h4">عدد الجولات</h2>${sjSeg("data-tkr", tkCfg.rounds, [[3,"3"],[5,"5"],[10,"10"],[0,"مفتوح"]])}</div>
+        <div><h2 class="h4">مستوى الأسئلة</h2>${sjSeg("data-tkl", tkCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"],["*","مختلط"]])}</div>
       </div>
-      <div class="sj-box"><h3>المجالات<small>${tkCfg.cats.length ? n(tkCfg.cats.length) + " مختارة" : "كل المجالات"} · ${n(pool)} سؤال</small></h3>
+      <div class="sj-box"><h2 class="sjh">المجالات<small>${tkCfg.cats.length ? n(tkCfg.cats.length) + " مختارة" : "كل المجالات"} · ${n(pool)} سؤال</small></h2>
         <div class="sj-cats" style="--tc:var(--blue)">${cats.map((c,i) => { const m = catMeta(c), on = tkCfg.cats.includes(c);
           return `<button type="button" class="sj-cat" data-tkc="${i}" aria-pressed="${on}">${I(P[m.icon] || P.general)}<span><b>${esc(c)}</b></span></button>`; }).join("")}</div>
       </div>
@@ -7393,7 +7412,7 @@ function erSetup(keepScroll){
       ${ERH && ERH.phase !== "end" ? `<div class="sj-resume"><span>عندك مسابقة جارية (${n(ERH.names.length)} فرق، رمز الدخول ${ERH.code}).</span><button class="btn" type="button" id="erResume">متابعة</button></div>` : ""}
       ${local && local.startAt ? `<div class="sj-resume"><span>عندك تجربة جارية على هذا الجهاز.</span><button class="btn" type="button" id="erResumeL">متابعة التجربة</button></div>` : ""}
       <div class="er-stories">${ER_ROOMS.map((r, i) => `<article class="er-story r${i}" ${i >= c.rooms ? 'data-off="1"' : ""}><span class="er-snum">${n(i + 1)}</span><small>${r.tag} · ${["الأسهل","أصعب","الأصعب"][i]}</small><b>${r.name}</b><p>${r.intro[0]}</p></article>`).join("")}</div>
-      <div class="sj-box"><h3>طريقة اللعب</h3>
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
           <li>يفتح المقدّم الغرفة فيظهر رمز دخول وباركود. يدخل كل لاعب من جواله أو جهازه ويختار فريقه (من ${n(5)} إلى ${n(10)} لاعبين في الفريق)، أو يلعب الفريق كله على جهاز واحد.</li>
           <li>يرى كل لاعب الغرفة مجسّمة ويمشي فيها بنفسه: يضغط على أي ركن فتمشي شخصيته إليه، ويظهر لغز يحتاج تفكيرًا: منطق، وشيفرات، وأنماط، واستنتاج.</li>
@@ -7402,22 +7421,22 @@ function erSetup(keepScroll){
           <li>عند فتح الصندوق تنتقل الرحلة إلى القصة التالية. ${c.mode === "race" ? "الفائز من يهرب من أكثر الغرف في أقل وقت، وشاشة العرض تتابع تقدّم الفرق." : "في وضع التعاون تعمل كل الفرق معًا على الرحلة نفسها وبوقت واحد."}</li>
         </ol>
       </div>
-      <div class="sj-box"><h3>نوع اللعب</h3>${sjSeg("data-erm", c.mode, [["race","سباق بين الفرق"],["coop","تعاون: كل الفرق فريق واحد"]])}</div>
-      <div class="sj-box"><h3>الفرق<small>من 2 إلى 10</small></h3>
+      <div class="sj-box"><h2 class="sjh">نوع اللعب</h2>${sjSeg("data-erm", c.mode, [["race","سباق بين الفرق"],["coop","تعاون: كل الفرق فريق واحد"]])}</div>
+      <div class="sj-box"><h2 class="sjh">الفرق<small>من 2 إلى 10</small></h2>
         ${sjSeg("data-ert", T, [2,3,4,5,6,7,8,9,10].map(k => [k, n(k)]))}
         <div class="sj-names er-names">${Array.from({length:T}, (_, i) => `<input type="text" maxlength="24" data-ern="${i}" style="--tc:${ER_COL[i]}" value="${esc(c.names[i])}" placeholder="${erDefName(i)}" aria-label="اسم ${erDefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>مستوى الألغاز</h4>${sjSeg("data-erl", c.base, [[0,"سهل"],[1,"متوسط"],[2,"صعب"]])}<p class="sj-sub">${["مناسب للمرحلة المتوسطة: ألغاز مباشرة وأرقام صغيرة.","مناسب للمرحلة الثانوية: خطوات أكثر ورموز بدل أرقام الخانات.","مناسب للجامعة: استنتاج متعدد الخطوات وشيفرات مركّبة."][c.base]} والصعوبة تزيد من غرفة إلى أخرى.</p></div>
-        <div><h4>اللاعبون في كل فريق</h4>${sjSeg("data-erd", c.dev, [5,6,7,8,9,10].map(k => [k, n(k)]))}<p class="sj-sub">تُحسب أول ${n(c.dev)} أجهزة تنضم لكل فريق، والأجهزة الزائدة تشاهد فقط.</p></div>
-        <div><h4>وقت كل غرفة</h4>${sjSeg("data-ermin", c.mins, [10,15,20,30,45].map(k => [k, n(k) + " د"]))}</div>
-        <div><h4>عدد الغرف (القصص)</h4>${sjSeg("data-err", c.rooms, [[1,"الأولى فقط"],[2,"غرفتان"],[3,"الثلاث"]])}</div>
-        <div><h4>التلميحات لكل فريق</h4>${sjSeg("data-erh", c.hints, [0,1,2,3,4,5].map(k => [k, n(k)]))}</div>
-        <div><h4>خصم التلميح</h4>${sjSeg("data-erhc", c.hc, [[30,"30 ث"],[60,"دقيقة"],[120,"دقيقتان"]])}</div>
-        <div><h4>خصم الإجابة الخاطئة</h4>${sjSeg("data-erp", c.pen, [[0,"بدون"],[15,"15 ث"],[30,"30 ث"],[60,"دقيقة"]])}</div>
-        <div><h4>صناديق المعرفة</h4>${sjSeg("data-erk", c.know ? 1 : 0, [[1,"مفعّلة"],[0,"بدون"]])}<p class="sj-sub">صندوقان ذهبيان في كل غرفة بأسئلة اختيار من الموسوعة.</p></div>
+        <div><h2 class="h4">مستوى الألغاز</h2>${sjSeg("data-erl", c.base, [[0,"سهل"],[1,"متوسط"],[2,"صعب"]])}<p class="sj-sub">${["مناسب للمرحلة المتوسطة: ألغاز مباشرة وأرقام صغيرة.","مناسب للمرحلة الثانوية: خطوات أكثر ورموز بدل أرقام الخانات.","مناسب للجامعة: استنتاج متعدد الخطوات وشيفرات مركّبة."][c.base]} والصعوبة تزيد من غرفة إلى أخرى.</p></div>
+        <div><h2 class="h4">اللاعبون في كل فريق</h2>${sjSeg("data-erd", c.dev, [5,6,7,8,9,10].map(k => [k, n(k)]))}<p class="sj-sub">تُحسب أول ${n(c.dev)} أجهزة تنضم لكل فريق، والأجهزة الزائدة تشاهد فقط.</p></div>
+        <div><h2 class="h4">وقت كل غرفة</h2>${sjSeg("data-ermin", c.mins, [10,15,20,30,45].map(k => [k, n(k) + " د"]))}</div>
+        <div><h2 class="h4">عدد الغرف (القصص)</h2>${sjSeg("data-err", c.rooms, [[1,"الأولى فقط"],[2,"غرفتان"],[3,"الثلاث"]])}</div>
+        <div><h2 class="h4">التلميحات لكل فريق</h2>${sjSeg("data-erh", c.hints, [0,1,2,3,4,5].map(k => [k, n(k)]))}</div>
+        <div><h2 class="h4">خصم التلميح</h2>${sjSeg("data-erhc", c.hc, [[30,"30 ث"],[60,"دقيقة"],[120,"دقيقتان"]])}</div>
+        <div><h2 class="h4">خصم الإجابة الخاطئة</h2>${sjSeg("data-erp", c.pen, [[0,"بدون"],[15,"15 ث"],[30,"30 ث"],[60,"دقيقة"]])}</div>
+        <div><h2 class="h4">صناديق المعرفة</h2>${sjSeg("data-erk", c.know ? 1 : 0, [[1,"مفعّلة"],[0,"بدون"]])}<p class="sj-sub">صندوقان ذهبيان في كل غرفة بأسئلة اختيار من الموسوعة.</p></div>
       </div>
-      ${c.know ? `<div class="sj-box"><h3>مجالات أسئلة الصناديق<small>${c.cats.length ? n(c.cats.length) + " مختارة" : "كل المجالات"}</small></h3>
+      ${c.know ? `<div class="sj-box"><h2 class="sjh">مجالات أسئلة الصناديق<small>${c.cats.length ? n(c.cats.length) + " مختارة" : "كل المجالات"}</small></h2>
         <div class="sj-cats" style="--tc:var(--blue)">${cats.map((x, i) => { const mm = catMeta(x), on = c.cats.includes(x); return `<button type="button" class="sj-cat" data-erc="${i}" aria-pressed="${on}">${I(P[mm.icon] || P.general)}<span><b>${esc(x)}</b></span></button>`; }).join("")}</div></div>` : ""}
       ${dispBox("er")}
     </div></div>
@@ -7908,7 +7927,7 @@ function emSetup(keepScroll){
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${EM ? `<div class="sj-resume"><span>عندك مسابقة جارية: الجولة ${n(EM.round)} من ${n(EM.rounds)}.</span><button class="btn" type="button" id="emResume">متابعة</button></div>` : ""}
-      <div class="sj-box"><h3>طريقة اللعب</h3>
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
           <li>كل فريق يبدأ بأرض مختلفة: ساحلية أو صحراوية أو جبلية أو واحة تجارية. ولكل أرض مورد وفير ومورد قليل، فتحتاج المدن بعضها.</li>
           <li><b>مرحلة العمل:</b> كل لاعب يختار من جواله تحديًا قصيرًا: الأنابيب تعطي ماء، ولوحة الكهرباء طاقة، والسوق ذهبًا، والبنّاء حجارة، والخريطة من كل مورد. كل تحدٍّ ينجح يضيف للمخزن مباشرة.</li>
@@ -7918,17 +7937,17 @@ function emSetup(keepScroll){
           <li>في النهاية تُحسب نقاط الازدهار من السكان ورضاهم والمباني والمعالم والمشاريع.</li>
         </ol>
       </div>
-      <div class="sj-box"><h3>المدن<small>من 2 إلى 10 فرق</small></h3>
+      <div class="sj-box"><h2 class="sjh">المدن<small>من 2 إلى 10 فرق</small></h2>
         <div class="stepper ss-step"><button type="button" id="emTPlus" aria-label="زيادة" ${N >= 10 ? "disabled" : ""}>+</button><output>${n(N)}</output><button type="button" id="emTMinus" aria-label="إنقاص" ${N <= 2 ? "disabled" : ""}>−</button></div>
         <div class="sj-names">${Array.from({length:N}, (_,i) => `<input type="text" maxlength="24" data-emn="${i}" style="--tc:${EM_COL[i]}" value="${esc(emCfg.names[i])}" placeholder="${emDefName(i)}" aria-label="اسم ${emDefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>عدد الجولات</h4>${sjSeg("data-emr", emCfg.rounds, [[5,"5"],[7,"7"],[10,"10"]])}</div>
-        <div><h4>المستوى</h4>${sjSeg("data-eml", emCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"]])}</div>
-        <div><h4>وقت العمل</h4>${sjSeg("data-emw", emCfg.work, [[90,"1.5 د"],[150,"2.5 د"],[180,"3 د"],[240,"4 د"]])}</div>
-        <div><h4>وقت البناء</h4>${sjSeg("data-emb", emCfg.build, [[45,"45 ث"],[60,"1 د"],[90,"1.5 د"]])}</div>
-        <div><h4>الأزمات</h4>${sjSeg("data-emc", emCfg.crises ? 1 : 0, [[1,"مفعّلة"],[0,"أحداث حلوة فقط"]])}</div>
-        <div><h4>الانسحاب من المشاريع</h4>${sjSeg("data-emx", emCfg.betray ? 1 : 0, [[0,"ممنوع"],[1,"مسموح مع خسارة سمعة"]])}</div>
+        <div><h2 class="h4">عدد الجولات</h2>${sjSeg("data-emr", emCfg.rounds, [[5,"5"],[7,"7"],[10,"10"]])}</div>
+        <div><h2 class="h4">المستوى</h2>${sjSeg("data-eml", emCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"]])}</div>
+        <div><h2 class="h4">وقت العمل</h2>${sjSeg("data-emw", emCfg.work, [[90,"1.5 د"],[150,"2.5 د"],[180,"3 د"],[240,"4 د"]])}</div>
+        <div><h2 class="h4">وقت البناء</h2>${sjSeg("data-emb", emCfg.build, [[45,"45 ث"],[60,"1 د"],[90,"1.5 د"]])}</div>
+        <div><h2 class="h4">الأزمات</h2>${sjSeg("data-emc", emCfg.crises ? 1 : 0, [[1,"مفعّلة"],[0,"أحداث حلوة فقط"]])}</div>
+        <div><h2 class="h4">الانسحاب من المشاريع</h2>${sjSeg("data-emx", emCfg.betray ? 1 : 0, [[0,"ممنوع"],[1,"مسموح مع خسارة سمعة"]])}</div>
       </div>
       <p class="sj-sub" style="text-align:center">المستوى يكبّر حجم التحديات ويقلّل وقتها. والمنافسة تناسب المتوسط والثانوي والجامعة.</p>
       ${dispBox("em")}
@@ -8005,11 +8024,11 @@ async function emRender(){
         ${st && (ph === "rescue" || ph === "result" || ph === "spin") ? `<div class="em-st st-${st}">${{safe:"✓ محمية", need:"⏳ تحاول الإنقاذ", saved:"✓ أنقذت نفسها", lost:"✗ تضررت", good:"✓"}[st]} ${esc(EM.ev.note[t] || "")}</div>` : ""}
       </button>`; }).join("")}</div>
       <aside class="em-side">
-        <div class="em-box"><h4>المشاريع المشتركة</h4>${EM_PK.map(p => { const P = EM.proj[p], D = EM_PJ[p], tot = EM_RK.reduce((s, r) => s + (D.need[r] || 0), 0), have = EM_RK.reduce((s, r) => s + Math.min(D.need[r] || 0, P.have[r] || 0), 0);
+        <div class="em-box"><h2 class="h4">المشاريع المشتركة</h2>${EM_PK.map(p => { const P = EM.proj[p], D = EM_PJ[p], tot = EM_RK.reduce((s, r) => s + (D.need[r] || 0), 0), have = EM_RK.reduce((s, r) => s + Math.min(D.need[r] || 0, P.have[r] || 0), 0);
           return `<div class="em-pj${P.done ? " done" : ""}"><div><b>${D.e} ${D.n}</b><span>${P.done ? "اكتمل" : n(Math.round(have / tot * 100)) + "%"}</span></div><i style="--w:${have / tot * 100}%"></i>
             <div class="em-pjm">${Object.keys(P.by).map(t => `<span style="--tc:${EM_COL[t]}">${esc(EM.names[t])}</span>`).join("") || "<small>بلا شركاء بعد</small>"}</div></div>`; }).join("")}</div>
-        <div class="em-box"><h4>آخر الأخبار</h4><ul class="em-log">${EM.log.slice(0, 7).map(l => `<li>${esc(l.s)}</li>`).join("") || "<li>تبدأ الأخبار مع أول جولة.</li>"}</ul></div>
-        <div class="em-box em-rank"><h4>الترتيب</h4><ol>${EM.names.map((nm, t) => ({nm, t, s: emScore(t).total})).sort((a, b) => b.s - a.s).map(r => `<li style="--tc:${EM_COL[r.t]}"><b>${esc(r.nm)}</b><span>${n(r.s)}</span></li>`).join("")}</ol></div>
+        <div class="em-box"><h2 class="h4">آخر الأخبار</h2><ul class="em-log">${EM.log.slice(0, 7).map(l => `<li>${esc(l.s)}</li>`).join("") || "<li>تبدأ الأخبار مع أول جولة.</li>"}</ul></div>
+        <div class="em-box em-rank"><h2 class="h4">الترتيب</h2><ol>${EM.names.map((nm, t) => ({nm, t, s: emScore(t).total})).sort((a, b) => b.s - a.s).map(r => `<li style="--tc:${EM_COL[r.t]}"><b>${esc(r.nm)}</b><span>${n(r.s)}</span></li>`).join("")}</ol></div>
       </aside></div>
   </div></section>`;
   const $ = id => document.getElementById(id), on = (id, f) => { const e = $(id); if (e) e.onclick = f; };
@@ -8136,8 +8155,8 @@ function emTradeHTML(ctx){
   return `${emOffersHTML(ctx, true)}
     <div class="em-card em-new"><h3>عرض جديد</h3>
       <div class="em-tos">${tos.map(i => `<button type="button" class="${emUI.to === i ? "on" : ""}" data-emto="${i}" style="--tc:${EM_COL[i]}">${esc(g.names[i])} <small>${EM_TERR[g.terr[i]].e}</small></button>`).join("")}</div>
-      <div class="em-two"><div><h4>نعطيهم</h4>${EM_RK.map(r => emStepper("tr", "give", r, emUI.give[r])).join("")}</div>
-      <div><h4>ونأخذ منهم</h4>${EM_RK.map(r => emStepper("tr", "get", r, emUI.get[r])).join("")}</div></div>
+      <div class="em-two"><div><h2 class="h4">نعطيهم</h2>${EM_RK.map(r => emStepper("tr", "give", r, emUI.give[r])).join("")}</div>
+      <div><h2 class="h4">ونأخذ منهم</h2>${EM_RK.map(r => emStepper("tr", "get", r, emUI.get[r])).join("")}</div></div>
       <button type="button" class="btn" id="emSendOf">أرسل العرض</button></div>`;
 }
 function emOffersHTML(ctx, act){
@@ -8481,7 +8500,7 @@ function mfSetup(keepScroll){
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${MF && MF.phase !== "over" ? `<div class="sj-resume"><span>عندك مسابقة جارية (${MF.phase === "plant" ? "مرحلة الزرع" : MF.teams.map((t,i) => esc(t) + " " + n(MF.scores[i])).join(" · ")}).</span><button class="btn" type="button" id="mfResume">متابعة المسابقة</button></div>` : ""}
-      <div class="sj-box"><h3>طريقة اللعب<small>شاشة عرض واحدة، بدون جوالات</small></h3>
+      <div class="sj-box"><h2 class="sjh">طريقة اللعب<small>شاشة عرض واحدة، بدون جوالات</small></h2>
         <ol class="b4-rules">
           <li><b>الزرع بالسر:</b> يتقدّم كل فريق بدوره إلى جهاز المقدّم، فتظهر له اللوحة كاملة ويختار مربعات ألغامه، ثم تختفي قبل أن يأتي الفريق التالي.</li>
           <li>إذا اختار فريقان أو أكثر نفس المربع صار <b>لغمًا مشتركًا</b>، وإذا انفجر يأخذ كل أصحابه النقاط.</li>
@@ -8492,32 +8511,32 @@ function mfSetup(keepScroll){
         <div class="b4-pts mf-pts"><span><b>+${MF_PTS.safe}</b>مربع آمن</span><span class="bad"><b>−${MF_PTS.boom}</b>لغم فريق ثاني</span><span class="bad"><b>−${MF_PTS.own}</b>لغم الفريق نفسه</span><span><b>+${MF_PTS.owner}</b>لصاحب اللغم المنفجر</span></div>
         <p class="sj-sub" style="margin:0">وفي النهاية يأخذ «أخطر زارع» (الفريق الذي أوقعت ألغامه أكثر الفرق) ${n(MF_PTS.bonus)} نقطة إضافية.</p>
       </div>
-      <div class="sj-box"><h3>الفرق<small>من 2 إلى 8</small></h3>
+      <div class="sj-box"><h2 class="sjh">الفرق<small>من 2 إلى 8</small></h2>
         ${sjSeg("data-mft", T, [2,3,4,5,6,7,8].map(k => [k, k === 2 ? "فريقان" : n(k)]))}
         <div class="sj-names">${Array.from({length:T}, (_,i) => `<input type="text" maxlength="24" data-mfn="${i}" style="--tc:var(--c${i+1})" value="${esc(mfCfg.names[i])}" placeholder="${mfDefName(i)}" aria-label="اسم ${mfDefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>حجم اللوحة</h4>${sjSeg("data-mfs", mfCfg.size, [["4x5","5×4"],["5x5","5×5"],["6x6","6×6"]])}
+        <div><h2 class="h4">حجم اللوحة</h2>${sjSeg("data-mfs", mfCfg.size, [["4x5","5×4"],["5x5","5×5"],["6x6","6×6"]])}
           <p class="sj-sub">${n(cells)} مربعًا مرقّمة.</p></div>
-        <div><h4>ألغام كل فريق</h4><div class="seg" role="radiogroup">${[1,2,3,4,5].map(k => `<button type="button" role="radio" data-mfm="${k}" aria-checked="${k === mfCfg.mines}" ${k > max ? "disabled" : ""}>${n(k)}</button>`).join("")}</div>
+        <div><h2 class="h4">ألغام كل فريق</h2><div class="seg" role="radiogroup">${[1,2,3,4,5].map(k => `<button type="button" role="radio" data-mfm="${k}" aria-checked="${k === mfCfg.mines}" ${k > max ? "disabled" : ""}>${n(k)}</button>`).join("")}</div>
           <p class="sj-sub">${max < 5 ? `الحد الأعلى ${n(max)} مع ${n(T)} فرق على هذه اللوحة، حتى تبقى مربعات آمنة كافية.` : "كل فريق يزرع هذا العدد بالضبط."}</p></div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>نوع الأسئلة</h4>${sjSeg("data-mfk", mfCfg.kind, MF_KINDS)}</div>
-        <div><h4>الصعوبة</h4>${sjSeg("data-mfl", mfCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"],["مختلط","مختلط"]])}</div>
+        <div><h2 class="h4">نوع الأسئلة</h2>${sjSeg("data-mfk", mfCfg.kind, MF_KINDS)}</div>
+        <div><h2 class="h4">الصعوبة</h2>${sjSeg("data-mfl", mfCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"],["مختلط","مختلط"]])}</div>
       </div>
-      <div class="sj-box"><h3>مجالات الأسئلة<small>${n(mfCfg.cats.length)} مختارة · ${n(mfPoolOf(mfCfg).length)} سؤالًا</small></h3>
+      <div class="sj-box"><h2 class="sjh">مجالات الأسئلة<small>${n(mfCfg.cats.length)} مختارة · ${n(mfPoolOf(mfCfg).length)} سؤالًا</small></h2>
         <div><button type="button" class="mini" id="mfAll">${all ? "إلغاء الكل" : "تحديد الكل"}</button></div>
         <div class="sj-cats" style="--tc:var(--blue)">${cats.map((c,i) => { const m = catMeta(c), k = cnt(c), on = mfCfg.cats.includes(c);
           return `<button type="button" class="sj-cat ${k ? "" : "na"}" data-mfc="${i}" aria-pressed="${on}" ${k ? "" : "disabled"}>${I(P[m.icon] || P.general)}<span><b>${esc(c)}</b><small>${k ? n(k) + " سؤالًا" : "لا توجد أسئلة بهذا النوع"}</small></span></button>`; }).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>وقت الإجابة</h4>${sjSeg("data-mfq", mfCfg.time, [[0,"بدون"],[15,"15ث"],[30,"30ث"],[45,"45ث"],[60,"60ث"]])}
+        <div><h2 class="h4">وقت الإجابة</h2>${sjSeg("data-mfq", mfCfg.time, [[0,"بدون"],[15,"15ث"],[30,"30ث"],[45,"45ث"],[60,"60ث"]])}
           <p class="sj-sub">عدّاد يظهر مع كل سؤال، والمقدّم يحكم على الإجابة.</p></div>
-        <div><h4>مدة المسابقة</h4>${sjSeg("data-mfd", mfCfg.dur, [[0,"مفتوحة"],[10,"10د"],[15,"15د"],[20,"20د"],[30,"30د"]])}
+        <div><h2 class="h4">مدة المسابقة</h2>${sjSeg("data-mfd", mfCfg.dur, [[0,"مفتوحة"],[10,"10د"],[15,"15د"],[20,"20د"],[30,"30د"]])}
           <p class="sj-sub">${mfCfg.dur ? "عند انتهاء الوقت تنتهي المسابقة بعد السؤال الحالي." : "تنتهي بكشف كل المربعات الآمنة أو بزر الإنهاء."}</p></div>
       </div>
-      <div class="sj-box"><h3>أدوات خاصة<small>اختيارية، ولكل فريق مرة واحدة</small></h3>
+      <div class="sj-box"><h2 class="sjh">أدوات خاصة<small>اختيارية، ولكل فريق مرة واحدة</small></h2>
         <div class="sj-helps mf-tools">
           <button type="button" class="sj-help" data-mftool="det" aria-pressed="${!!mfCfg.det}"><b>الكاشف</b><small>في دوره يسأل الفريق: هل هذا المربع فيه لغم؟ فتجيب اللوحة، ثم يكمل دوره.</small></button>
           <button type="button" class="sj-help" data-mftool="shield" aria-pressed="${!!mfCfg.shield}"><b>الدرع</b><small>يحمي الفريق من خسارة أول انفجار يدوسه، ويبقى لصاحب اللغم نقاطه.</small></button>
