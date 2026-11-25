@@ -4461,6 +4461,7 @@ const TNS_START = {sjgame:"sj", b4game:"b4", ssgame:"ss", mfplay:"mf", tkplay:"t
 const TNS_NAMES = [["enc","الموسوعة"],["sj","سين جيم"],["b4","بالأربع تربح"],["ss","6×6"],["mf","حقل الألغام"],["tk","تكبيس"],["em","إعمار"],["er","غرفة الهروب"]];
 function tnCt(h){ if (/^(cats|level|type|teams|play)$/.test(h)) return "enc"; const m = /^(sj|b4|ss|mf|tk|em|er)/.exec(h); return m ? m[1] : ""; }
 function tnTrack(h){
+  if (!TNS.seen){ TNS.seen = true; tnVisit(); }
   const ct = tnCt(h); if (ct) document.body.dataset.ct = ct; else delete document.body.dataset.ct;
   const started = TNS_START[h], from = TNS_SETUP[TNS.prev];
   if (started && from === started && window.TN && TN.play){
@@ -4476,14 +4477,20 @@ function tnVisit(){
   if (!v){ v = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now()); try { localStorage.setItem("tn-vid", v); } catch(e){} }
   return TN.visit(v).catch(() => {});
 }
+function tnCntSet(c){
+  const p = document.querySelector("#tnCntP b"), v = document.querySelector("#tnCntV b");
+  if (p) p.textContent = `${n(c.plays || 0)} مسابقة لُعبت`; if (v) v.textContent = `${n(c.visitors || 0)} زائر`;
+}
+setInterval(() => { if (document.getElementById("tnCntP") && !document.hidden) tnCounts(); }, 20000);
 async function tnCounts(){
   if (!window.TN || !TN.counts) return;
   try {
     await tnVisit();
-    if (!TNS.cnt || Date.now() - TNS.cntAt > 60000){ TNS.cnt = await TN.counts(); TNS.cntAt = Date.now(); }
-    const c = TNS.cnt, el = document.getElementById("tnAud"); if (!c || !el) return;
-    el.outerHTML = `<span class="tn-cnt">${I(P.trophy)}<b>${n(c.plays || 0)} مسابقة لُعبت</b><small>منذ إطلاق تنافس</small></span>`
-                 + `<span class="tn-cnt">${I(P.tnvisit)}<b>${n(c.visitors || 0)} زائر</b><small>زاروا المنصة حتى الآن</small></span>`;
+    TNS.cnt = await TN.counts(); TNS.cntAt = Date.now();
+    const c = TNS.cnt, el = document.getElementById("tnAud") || document.getElementById("tnCntP"); if (!c || !el) return;
+    if (el.id === "tnCntP"){ tnCntSet(c); }
+    else el.outerHTML = `<span class="tn-cnt" id="tnCntP">${I(P.trophy)}<b>${n(c.plays || 0)} مسابقة لُعبت</b><small>منذ إطلاق تنافس</small></span>`
+                 + `<span class="tn-cnt" id="tnCntV">${I(P.tnvisit)}<b>${n(c.visitors || 0)} زائر</b><small>زاروا المنصة حتى الآن</small></span>`;
   } catch(e){}
 }
 async function tnReport(){
