@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"></head><body>
 <title>تنافس</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='28' fill='%231E2F4D'/%3E%3Cg fill='%23fff'%3E%3Crect x='28' y='74' width='64' height='12'/%3E%3Crect x='80' y='50' width='12' height='36'/%3E%3Crect x='28' y='50' width='12' height='36'/%3E%3C/g%3E%3Crect x='44' y='30' width='12' height='12' fill='%233D95FF'/%3E%3Crect x='64' y='30' width='12' height='12' fill='%23FF6B61'/%3E%3C/svg%3E">
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -511,7 +511,7 @@ footer a,.flink{color:var(--blue-link);text-decoration:none}
 @media (max-width:520px){.b4-sq{margin:3px;border-radius:10px}.b4-board{grid-template-columns:10px repeat(var(--n),minmax(0,1fr) 10px);grid-template-rows:10px repeat(var(--n),minmax(0,1fr) 10px);padding:8px}.b4-dot{width:7px;height:7px}.b4-ts strong{font-size:26px}.b4-qh{flex-wrap:wrap}.b4-hq{grid-template-columns:36px 1fr}.b4-hq b{grid-column:2}}
 @media print{.gnav,footer,.b4-top .b4-acts,.b4-host .toolbar,.b4-cur{display:none!important}.b4-hq{break-inside:avoid}}
 
-/* ٦×٦ */
+/* 6×6 */
 .ss-hero .wrap{position:relative}
 .ss-hero h1{font-size:clamp(56px,10vw,104px)!important;letter-spacing:.02em}
 .ss-tag{font-size:22px;font-weight:600;color:var(--ss1)!important;margin:4px 0 8px!important}
@@ -1434,6 +1434,121 @@ html[data-orole=host][data-orient=port] .mf-mini{max-width:300px;margin-inline:a
 .mf-done .mf-mine{width:58%;height:58%;margin:0;color:inherit}
 .mf-done svg.mf-mine{color:inherit}
 /*MF-CSS-END*/
+/* UI/UX pass */
+.contest.live{box-shadow:var(--shadow),inset 0 0 0 1px color-mix(in srgb,var(--hair) 70%,transparent);transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+.contest.live:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(30,47,77,.14),inset 0 0 0 1px color-mix(in srgb,var(--blue) 40%,transparent)}
+.contest.live:active{transform:scale(.98);transition-duration:.1s}
+.contest.live:focus-visible{outline-offset:3px}
+.contest .c-meta{margin-top:auto}
+.contest .go{margin-top:auto;min-height:32px;display:inline-flex;align-items:center;padding:4px 18px;font-weight:500}
+.contest .c-meta + .go{margin-top:12px}
+.contest.info .c-meta{margin-top:auto}
+.contest small{text-wrap:pretty}
+.ency{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+.ency:active{transform:scale(.99)}
+.band-h,.hero h1,.step-h{text-wrap:balance}
+.hero p{text-wrap:pretty}
+.contests{gap:14px}
+button,a,[role="button"],label{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.links button{min-height:36px;border-radius:10px;transition:background-color .15s,opacity .15s}
+.links button:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.links button[aria-current="true"]{color:var(--blue-link)}
+@media (max-width:734px){
+  .links{display:flex}
+  .links button{padding:6px 8px;font-size:13px;min-height:44px}
+  .intro-pts{display:grid;grid-template-columns:1fr;max-width:360px;margin-inline:auto}
+  .intro-pts>span{min-width:0}
+}
+@media (max-width:420px){.gnav .logo .wm{height:20px}.links button{padding:6px 6px;font-size:12.5px}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+/* Scroll motion: marquee, how-it-works, reveal */
+.tn-mq{overflow:hidden;padding-block:14px;border-block:1px solid color-mix(in srgb,var(--hair) 70%,transparent);background:var(--bg);-webkit-mask-image:linear-gradient(90deg,transparent,#fff 8%,#fff 92%,transparent);mask-image:linear-gradient(90deg,transparent,#fff 8%,#fff 92%,transparent)}
+.tn-mq-track{display:flex;width:max-content;animation:tnMq 60s linear infinite}
+.tn-mq:hover .tn-mq-track{animation-play-state:paused}
+.tn-mq-track span{display:inline-flex;align-items:center;gap:22px;padding-inline-end:22px;white-space:nowrap;font-size:15px;font-weight:500;color:var(--muted)}
+.tn-mq-track span::after{content:"";width:6px;height:6px;border-radius:2px;background:var(--blue);box-shadow:9px 0 0 var(--red2);margin-inline-end:9px}
+.tn-mq-track span:nth-child(3n) {color:var(--ink)}
+@keyframes tnMq{from{transform:translateX(0)}to{transform:translateX(50%)}}
+.tn-how{margin:56px 0 8px}
+.tn-how-h{text-align:center;font-size:clamp(24px,3.6vw,32px);font-weight:700;margin:0 0 6px}
+.tn-how-sub{text-align:center;color:var(--muted);margin:0 0 26px}
+.tn-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:st;list-style:none;padding:0;margin:0}
+.tn-steps li{position:relative;background:var(--tile);border-radius:24px;padding:26px 24px 24px;box-shadow:var(--shadow),inset 0 0 0 1px color-mix(in srgb,var(--hair) 70%,transparent);overflow:hidden}
+.tn-steps .num{display:block;font-size:56px;font-weight:700;line-height:1;letter-spacing:-.02em;color:transparent;background:linear-gradient(135deg,var(--blue),color-mix(in srgb,var(--blue) 55%,var(--ink)));-webkit-background-clip:text;background-clip:text;margin-bottom:14px;font-variant-numeric:tabular-nums}
+.tn-steps .num small{font-size:15px;font-weight:600;color:var(--muted);-webkit-text-fill-color:var(--muted);margin-inline-start:6px}
+.tn-steps b{display:block;font-size:20px;margin-bottom:6px}
+.tn-steps p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+.tn-steps li::after{content:"";position:absolute;inset:auto 24px 0;height:3px;border-radius:3px 3px 0 0;background:linear-gradient(90deg,var(--blue),var(--red2));transform:scaleX(0);transform-origin:right;transition:transform .9s cubic-bezier(.2,.8,.2,1) calc(var(--d,0ms) + 250ms)}
+.tn-steps li.in::after{transform:scaleX(1)}
+@media (max-width:734px){.tn-steps{grid-template-columns:1fr}.tn-steps .num{font-size:44px}}
+html.tn-motion .rv{opacity:0;transform:translateY(22px) scale(.985);transition:opacity .7s cubic-bezier(.2,.8,.2,1) var(--d,0ms),transform .7s cubic-bezier(.2,.8,.2,1) var(--d,0ms)}
+html.tn-motion .rv.in{opacity:1;transform:none}
+html.tn-motion .contest.live.rv.in:hover{transform:translateY(-3px)}
+@media (prefers-reduced-motion:reduce){.tn-mq-track{animation:none}html.tn-motion .rv{opacity:1;transform:none}}
+/* TN-ODO */
+.tn-odo{display:inline-flex;direction:ltr;unicode-bidi:isolate;vertical-align:top;line-height:inherit;font-variant-numeric:tabular-nums}
+.tn-od{display:inline-block;height:1lh;overflow:hidden}
+.tn-odr{display:flex;flex-direction:column;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.tn-odr span{display:block;height:1lh;text-align:center}
+.tn-odc{line-height:inherit}
+@media (prefers-reduced-motion:reduce){.tn-odr{transition:none}}
+/* TN-HERO */
+.tn-hero{position:relative;overflow:hidden;isolation:isolate}
+.tn-hero>.wrap{position:relative;z-index:1}
+.tn-fl{position:absolute;inset:0;z-index:0;pointer-events:none}
+.tn-fl i{position:absolute;left:var(--x);top:var(--y);font-style:normal;display:grid;place-items:center;width:var(--s);height:var(--s);border-radius:calc(var(--s) * .28);font-size:calc(var(--s) * .5);font-weight:700;line-height:1;
+  background:var(--tile);color:var(--ink);box-shadow:0 6px 22px rgba(30,47,77,.10),inset 0 0 0 1px color-mix(in srgb,var(--hair) 80%,transparent);
+  transform:translate3d(calc(var(--px,0) * var(--z) * 1px),calc(var(--py,0) * var(--z) * 1px),0) rotate(var(--r));transition:transform .5s cubic-bezier(.2,.8,.2,1);opacity:.95}
+.tn-fl i>b{display:block;animation:tnBob var(--t) ease-in-out var(--dl) infinite alternate}
+.tn-fl i.b{background:var(--blue);color:var(--on-blue);box-shadow:0 8px 24px color-mix(in srgb,var(--blue) 35%,transparent)}
+.tn-fl i.r{background:var(--red2);color:#FFFFFF;box-shadow:0 8px 24px color-mix(in srgb,var(--red2) 30%,transparent)}
+.tn-fl i.g{background:color-mix(in srgb,var(--blue) 10%,var(--tile));color:var(--blue)}
+@keyframes tnBob{from{transform:translateY(-5px)}to{transform:translateY(5px)}}
+.tn-fl i{animation:tnPop .7s cubic-bezier(.2,.8,.2,1) var(--dl) backwards}
+@keyframes tnPop{from{opacity:0;scale:.6}}
+@media (max-width:734px){.tn-fl i:not(.m){display:none}.tn-fl i.m{left:var(--mx);top:var(--my);--s:38px!important}}
+@media (prefers-reduced-motion:reduce){.tn-fl i,.tn-fl i>b{animation:none;transition:none}}
+/* TN-404 + TN-PLANS */
+.tn404{padding-block:48px 64px;text-align:center}
+.tn404-big{display:flex;justify-content:center;gap:clamp(8px,2vw,16px);margin:0 auto 22px;direction:ltr}
+.tn404-big button{width:clamp(72px,16vw,128px);aspect-ratio:1;border:0;border-radius:28%;font-size:clamp(44px,10vw,84px);font-weight:700;line-height:1;background:var(--tile);color:var(--ink);box-shadow:0 10px 30px rgba(30,47,77,.12),inset 0 0 0 1px var(--hair);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.tn404-big button:nth-child(2){background:var(--blue);color:var(--on-blue)}
+.tn404-big button:hover{transform:translateY(-4px) rotate(-4deg)}
+.tn404-big button.spin{animation:tnFlip .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes tnFlip{50%{transform:rotateY(90deg) scale(.9)}}
+.tn404 h1{font-size:clamp(26px,4.4vw,40px);margin:0 0 6px}
+.tn404 .lead{color:var(--muted);margin:0 auto 26px;max-width:36ch}
+.tn404-q{max-width:620px;margin:0 auto;background:var(--tile);border-radius:24px;padding:24px;box-shadow:var(--shadow),inset 0 0 0 1px color-mix(in srgb,var(--hair) 70%,transparent);text-align:start}
+.tn404-q small{color:var(--muted);font-size:13px;font-weight:600}
+.tn404-q h2{font-size:clamp(19px,2.6vw,23px);line-height:1.45;margin:6px 0 16px}
+.tn404-opts{display:grid;gap:8px}
+.tn404-opts button{min-height:48px;text-align:start;border:0;border-radius:14px;padding:10px 16px;background:var(--bg-alt);font-size:16px;transition:background-color .2s,transform .15s}
+.tn404-opts button:hover:not([disabled]){background:color-mix(in srgb,var(--blue) 10%,var(--bg-alt))}
+.tn404-opts button:active:not([disabled]){transform:scale(.98)}
+.tn404-opts button.ok{background:var(--good-soft);color:var(--good);font-weight:600}
+.tn404-opts button.no{background:var(--bad-soft);color:var(--bad)}
+.tn404-opts button[disabled]{cursor:default}
+.tn404-fb{min-height:24px;margin:12px 0 0;font-weight:600}
+.tn404-acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.tn-plans{margin:56px 0 8px}
+.tn-plans-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch}
+.tn-plan{position:relative;display:flex;flex-direction:column;gap:10px;background:var(--tile);border-radius:24px;padding:26px 22px 22px;box-shadow:var(--shadow),inset 0 0 0 1px color-mix(in srgb,var(--hair) 70%,transparent)}
+.tn-plan.hot{box-shadow:0 16px 40px color-mix(in srgb,var(--blue) 22%,transparent),inset 0 0 0 2px var(--blue)}
+.tn-plan .tag{position:absolute;top:-12px;inset-inline-start:22px;background:var(--blue);color:var(--on-blue);font-size:12.5px;font-weight:600;border-radius:980px;padding:3px 12px}
+.tn-plan h3{margin:0;font-size:20px}
+.tn-plan .who{margin:0;color:var(--muted);font-size:14.5px}
+.tn-plan .price{font-size:32px;font-weight:700;line-height:1.1;margin:4px 0}
+.tn-plan .price small{font-size:14px;font-weight:500;color:var(--muted)}
+.tn-plan ul{list-style:none;padding:0;margin:4px 0 8px;display:grid;gap:8px;font-size:15px}
+.tn-plan li{display:flex;gap:8px;align-items:flex-start}
+.tn-plan li::before{content:"";flex:none;width:18px;height:18px;margin-top:3px;border-radius:50%;background:color-mix(in srgb,var(--blue) 14%,transparent) no-repeat center/11px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2l2.3 2.3 4.7-5' fill='none' stroke='%230071E3' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.tn-plan .btn{margin-top:auto;justify-content:center}
+a.btn{text-decoration:none}
+.tn-plans-note{text-align:center;color:var(--muted);font-size:14px;margin:16px 0 0}
+@media (max-width:860px){.tn-plans-grid{grid-template-columns:1fr;max-width:460px;margin-inline:auto}}
 </style>
 
 <div dir="rtl" lang="ar">
@@ -4165,6 +4280,7 @@ function route(){
     if (!BANK.length){ $app.innerHTML = `<div class="empty gut">لا توجد أسئلة بعد.</div>`; return; }
     return h === "sjgame" && SJ ? (SJ.cur ? sjQuestion() : sjBoard()) : sjSetup(); }
   if (h === "" || h === "home" || h === "start"){ game = null; renderLinks("start"); return landing(); }
+  if (!/^(cats|level|type|teams|play)$/.test(h)){ game = null; renderLinks(""); return tn404(); }
   renderLinks("cats");
   if (!BANK.length){ $app.innerHTML = `<div class="empty gut">لا توجد أسئلة بعد. أضفها من <a href="#admin">إدارة الأسئلة</a>.</div>`; return; }
   if (h === "play" && game) return play();
@@ -4199,14 +4315,14 @@ $app.addEventListener("click", e => { const b = e.target.closest("[data-prev]");
 
 /* Landing: the encyclopedia on top, then the competitions */
 const CONTESTS = [
-  {name:"سين جيم", icon:"sj", go:"sj", desc:"لوحة مجالات وأسئلة بقيم ٢٠٠ و٤٠٠ و٦٠٠", how:"كل فريق يختار مجالاته، وفي دوره يختار سؤالًا بقيمة ٢٠٠ أو ٤٠٠ أو ٦٠٠. الإجابة الصحيحة تكسب النقاط، ومع كل فريق وسائل مساعدة.", meta:"٢–٤ فرق"},
-  {name:"بالأربع تربح", icon:"four", go:"b4", desc:"لوحة حروف، وكل إجابة صحيحة ترسم ضلعًا", how:"لوحة مربعات بالحروف. كل إجابة صحيحة ترسم ضلعًا، ومن يغلق المربع يكسب نقاطه، ومعها بطاقات حظ.", meta:"٢–٤ فرق"},
+  {name:"سين جيم", icon:"sj", go:"sj", desc:"لوحة مجالات وأسئلة بقيم 200 و400 و600", how:"كل فريق يختار مجالاته، وفي دوره يختار سؤالًا بقيمة 200 أو 400 أو 600. الإجابة الصحيحة تكسب النقاط، ومع كل فريق وسائل مساعدة.", meta:"⁦2–4⁩ فرق"},
+  {name:"بالأربع تربح", icon:"four", go:"b4", desc:"لوحة حروف، وكل إجابة صحيحة ترسم ضلعًا", how:"لوحة مربعات بالحروف. كل إجابة صحيحة ترسم ضلعًا، ومن يغلق المربع يكسب نقاطه، ومعها بطاقات حظ.", meta:"⁦2–4⁩ فرق"},
   {name:"خماسيات", icon:"five"},
-  {name:"مسابقة ٦×٦", icon:"six", go:"ss", desc:"صورة مغبّشة تتضح مع كل إجابة صحيحة", how:"كل فريق يرفع صورًا والفريق المنافس يخمّنها. كل إجابة صحيحة تزيل ١٠٪ من التغبيش، ومن يخمّن مبكرًا يكسب أكثر.", meta:"٢–٤ فرق"},
-  {name:"غرفة الهروب", icon:"erdoor", go:"er", desc:"غرفة مجسّمة يمشي فيها الفريق ويحل الألغاز ليفتح الصندوق", how:"ثلاث غرف وثلاث قصص. يتجوّل الفريق في الغرفة ويحل ألغاز المنطق والشيفرات ليجمع رمز الصندوق السداسي قبل انتهاء الوقت.", meta:"٢–١٠ فرق · ٥–١٠ لاعبين"},
-  {name:"تكبيس", icon:"tkphone", go:"tk", desc:"أسرع فريق يكبس من جواله يكسب السؤال", how:"اللاعبون يكبسون من جوالاتهم خلال ثوانٍ، وعدد الكبسات قيمة السؤال: الصحيحة تضيفها والخاطئة تخصمها.", meta:"٢–٦ فرق · جوالات"},
-  {name:"إعمار", icon:"emcity", go:"em", desc:"كل فريق يبني مدينته وينافس على أزهى مدينة", how:"اللاعبون يحلّون تحديات قصيرة من جوالاتهم ليجمعوا الموارد، ثم يبنون مدينتهم ويتاجرون ويواجهون الأزمات. الأذكى تخطيطًا يبني أزهى مدينة.", meta:"٢–١٠ فرق · جوالات"},
-  {name:"حقل الألغام", icon:"mine", go:"mf", desc:"كل فريق يزرع ألغامه بالسر، ومن يدوس لغمًا ينفجر عليه", how:"كل فريق يزرع ألغامه بالسر في لوحة المربعات، ثم تتناوب الفرق على كشف المربعات بالأسئلة. المربع الآمن يكشف كم لغمًا حوله، واللغم ينفجر على من يدوسه ويكسب صاحبه.", meta:"٢–٨ فرق · شاشة واحدة"},
+  {name:"مسابقة 6×6", icon:"six", go:"ss", desc:"صورة مغبّشة تتضح مع كل إجابة صحيحة", how:"كل فريق يرفع صورًا والفريق المنافس يخمّنها. كل إجابة صحيحة تزيل 10% من التغبيش، ومن يخمّن مبكرًا يكسب أكثر.", meta:"⁦2–4⁩ فرق"},
+  {name:"غرفة الهروب", icon:"erdoor", go:"er", desc:"غرفة مجسّمة يمشي فيها الفريق ويحل الألغاز ليفتح الصندوق", how:"ثلاث غرف وثلاث قصص. يتجوّل الفريق في الغرفة ويحل ألغاز المنطق والشيفرات ليجمع رمز الصندوق السداسي قبل انتهاء الوقت.", meta:"⁦2–10⁩ فرق · ⁦5–10⁩ لاعبين"},
+  {name:"تكبيس", icon:"tkphone", go:"tk", desc:"أسرع فريق يكبس من جواله يكسب السؤال", how:"اللاعبون يكبسون من جوالاتهم خلال ثوانٍ، وعدد الكبسات قيمة السؤال: الصحيحة تضيفها والخاطئة تخصمها.", meta:"⁦2–6⁩ فرق · جوالات"},
+  {name:"إعمار", icon:"emcity", go:"em", desc:"كل فريق يبني مدينته وينافس على أزهى مدينة", how:"اللاعبون يحلّون تحديات قصيرة من جوالاتهم ليجمعوا الموارد، ثم يبنون مدينتهم ويتاجرون ويواجهون الأزمات. الأذكى تخطيطًا يبني أزهى مدينة.", meta:"⁦2–10⁩ فرق · جوالات"},
+  {name:"حقل الألغام", icon:"mine", go:"mf", desc:"كل فريق يزرع ألغامه بالسر، ومن يدوس لغمًا ينفجر عليه", how:"كل فريق يزرع ألغامه بالسر في لوحة المربعات، ثم تتناوب الفرق على كشف المربعات بالأسئلة. المربع الآمن يكشف كم لغمًا حوله، واللغم ينفجر على من يدوسه ويكسب صاحبه.", meta:"⁦2–8⁩ فرق · شاشة واحدة"},
 ];
 /* ---------- subscriber accounts (organisations) ----------
    Admin (site owner) creates accounts: username, organisation, password, logo, two colours.
@@ -4306,7 +4422,7 @@ function acLoginHTML(gate){
       <button class="btn lg" type="submit" id="acGo">دخول</button>
     </form>
     <form class="ac-form ac-pinf" id="acPinF" autocomplete="off">
-      <p class="ac-pin-h"><b>مقدّم المسابقة؟</b> ادخل برمز المقدّم اللي أعطتك إياه الجهة (٦ أرقام).</p>
+      <p class="ac-pin-h"><b>مقدّم المسابقة؟</b> ادخل برمز المقدّم اللي أعطتك إياه الجهة (6 أرقام).</p>
       <label><span>رمز المقدّم</span><input id="acPin" dir="ltr" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="••••••" required></label>
       <p class="ac-err" id="acPinErr" role="alert"></p>
       <button class="btn lg sec" type="submit" id="acPinGo">دخول المقدّم</button>
@@ -4317,7 +4433,7 @@ function acBindLogin(after){
   if (pf) pf.onsubmit = async e => { e.preventDefault();
     const err = document.getElementById("acPinErr"), go = document.getElementById("acPinGo"), inp = document.getElementById("acPin");
     const pin = inp.value.replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/\D/g, ""); err.textContent = "";
-    if (!acValidPin(pin)){ err.textContent = "رمز المقدّم ٦ أرقام."; return; }
+    if (!acValidPin(pin)){ err.textContent = "رمز المقدّم 6 أرقام."; return; }
     go.disabled = true;
     try { const a = await acPinLogin(pin);
       if (!a){ err.textContent = "رمز المقدّم غير صحيح."; return; }
@@ -4364,10 +4480,10 @@ async function acAdmin(){
       <form class="sj-box ac-edit" id="acEditF">
         <h3>${e.isNew ? "حساب جديد" : "تعديل حساب " + esc(e.user)}</h3>
         <label><span>اسم الجهة</span><input id="aeOrg" maxlength="60" value="${esc(e.org)}" placeholder="مثال: نادي الحي الثقافي" required></label>
-        <label><span>اسم المستخدم <small>حروف إنجليزية وأرقام، من ٣ إلى ٢٤</small></span><input id="aeUser" dir="ltr" maxlength="24" autocapitalize="none" spellcheck="false" value="${esc(e.user)}" ${e.isNew ? "" : "readonly"} required></label>
+        <label><span>اسم المستخدم <small>حروف إنجليزية وأرقام، من 3 إلى 24</small></span><input id="aeUser" dir="ltr" maxlength="24" autocapitalize="none" spellcheck="false" value="${esc(e.user)}" ${e.isNew ? "" : "readonly"} required></label>
         <label><span>${e.isNew ? "كلمة المرور" : "كلمة مرور جديدة <small>اتركها فارغة لإبقاء القديمة</small>"}</span>
           <div class="ac-pw"><input id="aePw" dir="ltr" maxlength="40" value="${esc(e.pw || "")}" ${e.isNew ? "required" : ""}><button type="button" class="mini" id="aeGen">توليد</button></div></label>
-        <label><span>رمز المقدّم <small>٦ أرقام، يدخل به المقدّم للإعدادات والبدء</small></span>
+        <label><span>رمز المقدّم <small>6 أرقام، يدخل به المقدّم للإعدادات والبدء</small></span>
           <div class="ac-pw"><input id="aePin" dir="ltr" inputmode="numeric" maxlength="6" value="${esc(e.pin || "")}" required><button type="button" class="mini" id="aePinGen">توليد</button></div></label>
         <div class="ac-brand">
           <label class="ss-logo ac-logo">${e.logo ? `<img src="${e.logo}" alt="شعار الجهة">` : `${I(P.ssimg)}<span>ارفع شعار الجهة</span>`}<input type="file" accept="image/*" id="aeLogo" hidden></label>
@@ -4412,10 +4528,10 @@ async function acAdmin(){
   $("acEditF").onsubmit = async ev => { ev.preventDefault(); keep();
     const err = $("aeErr"), u = acKey(e.user), pw = (e.pw || "").trim(); err.textContent = "";
     if (!e.org.trim()) return err.textContent = "اكتب اسم الجهة.";
-    if (!acValidUser(u)) return err.textContent = "اسم المستخدم: حروف إنجليزية صغيرة وأرقام و . _ - فقط، من ٣ إلى ٢٤.";
-    if (e.isNew && pw.length < 6) return err.textContent = "كلمة المرور ٦ أحرف على الأقل.";
-    if (!e.isNew && pw && pw.length < 6) return err.textContent = "كلمة المرور ٦ أحرف على الأقل.";
-    if (!acValidPin(e.pin)) return err.textContent = "رمز المقدّم ٦ أرقام.";
+    if (!acValidUser(u)) return err.textContent = "اسم المستخدم: حروف إنجليزية صغيرة وأرقام و . _ - فقط، من 3 إلى 24.";
+    if (e.isNew && pw.length < 6) return err.textContent = "كلمة المرور 6 أحرف على الأقل.";
+    if (!e.isNew && pw && pw.length < 6) return err.textContent = "كلمة المرور 6 أحرف على الأقل.";
+    if (!acValidPin(e.pin)) return err.textContent = "رمز المقدّم 6 أرقام.";
     if (list.some(a => a.pin === e.pin && acKey(a.user) !== u)) return err.textContent = "رمز المقدّم مستخدم لجهة ثانية، اختر رمزًا آخر.";
     try {
       const old = await acGet(u);
@@ -4443,13 +4559,168 @@ async function acAdmin(){
 }
 
 const WM_SVG = `<svg class="wm" viewBox="16 6 358 160" role="img" aria-label="تنافس"><g fill="currentColor"><rect x="248" y="110" width="112" height="16"/><rect x="344" y="78" width="16" height="48"/><rect x="296" y="62" width="16" height="64"/><rect x="248" y="14" width="16" height="112"/><path d="M168 62h48v64h-48z M184 78h16v32h-16z" fill-rule="evenodd"/><rect x="72" y="110" width="100" height="16"/><rect x="136" y="86" width="16" height="40"/><rect x="104" y="86" width="16" height="40"/><rect x="72" y="86" width="16" height="72"/><rect x="24" y="142" width="64" height="16"/><rect x="24" y="102" width="16" height="56"/><rect x="296" y="30" width="16" height="16"/><rect x="184" y="30" width="16" height="16"/></g><rect x="326" y="46" width="16" height="16" fill="var(--blue)"/><rect x="350" y="46" width="16" height="16" fill="var(--red2)"/></svg>`;
+function tnMarquee(){
+  const cats = allCats(); if (!cats.length) return "";
+  const row = cats.map(c => `<span>${esc(c)}</span>`).join("");
+  return `<div class="tn-mq" aria-hidden="true"><div class="tn-mq-track">${row}${row}</div></div>`;
+}
+function tnHow(){
+  const st = [["اختر المسابقة","من الموسوعة أو من المسابقات، وحدّد الفرق والمجالات والصعوبة."],
+              ["اعرضها على الشاشة","شاشة واحدة يشوفها الجميع، وفي بعض المسابقات يدخل اللاعبون بجوالاتهم عبر الباركود."],
+              ["تنافسوا","المقدّم يدير الأسئلة والدور، والنتيجة تظهر للجميع أول بأول."]];
+  return `<section class="tn-how" aria-labelledby="tnHowH"><h2 class="tn-how-h" id="tnHowH">كيف تلعب؟</h2><p class="tn-how-sub">ثلاث خطوات وتبدأ المنافسة.</p>
+    <ol class="tn-steps">${st.map(([b,p],i) => `<li class="rv" style="--d:${i*120}ms"><span class="num">0${i+1}<small>/ 03</small></span><b>${b}</b><p>${p}</p></li>`).join("")}</ol></section>`;
+}
+function tnReveal(){
+  const els = [...document.querySelectorAll("#app .contest, #app .ency, #app .tn-steps li")];
+  const still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (still || !("IntersectionObserver" in window)){ els.forEach(e => e.classList.add("in")); return; }
+  document.documentElement.classList.add("tn-motion");
+  document.querySelectorAll("#app .contest").forEach((e, i) => e.style.setProperty("--d", (i % 5) * 70 + "ms"));
+  els.forEach(e => e.classList.add("rv"));
+  const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting){ x.target.classList.add("in"); io.unobserve(x.target); } }), {rootMargin:"0px 0px -8% 0px", threshold:0.12});
+  els.forEach(e => io.observe(e));
+}
+/* TN-MOTION: entrance stagger, scroll reveal, question pop, score bump (all screens except landing) */
+const TNM = { sig: "", nums: new Map(), qs: new Map(), io: null, raf: 0,
+  still: () => !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches),
+  EASE: "cubic-bezier(.2,.8,.2,1)",
+  Q: ".qtext,.b4-qt,.mf-qt,.er-q,.tk-qb,.ss-q,.sj-q",
+  NOBUMP: /clock|timer|time|count|cd|code|pin|qr|-tick|mq/i };
+function tnmIn(el, d){ try { el.animate([{opacity:0, transform:"translateY(14px) scale(.98)"}, {opacity:1, transform:"none"}], {duration:460, delay:d, easing:TNM.EASE, fill:"backwards"}); } catch(e){} }
+function tnmVisible(el){ const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight && r.width > 0; }
+function tnmEnter(view){
+  if (!TNM.io) TNM.io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting){ tnmIn(x.target, +x.target.dataset.tnd || 0); delete x.target.dataset.tnd; TNM.io.unobserve(x.target); } }), {threshold:0.08});
+  const blocks = []; view.querySelectorAll(".wrap").forEach(w => { if (w.closest(".gnav")) return; [...w.children].forEach(c => blocks.push(c)); });
+  const queue = (el, d) => { if (tnmVisible(el)) tnmIn(el, d); else { el.dataset.tnd = String(Math.min(d, 120)); TNM.io.observe(el); } };
+  blocks.slice(0, 30).forEach((b, i) => queue(b, Math.min(i * 60, 360)));
+  let grids = 0;
+  view.querySelectorAll("div,ul,ol,section").forEach(g => {
+    if (grids > 24 || g.children.length < 3 || g.children.length > 140 || g.querySelector("canvas")) return;
+    const cs = getComputedStyle(g); if (cs.display !== "grid" && cs.display !== "inline-grid") return;
+    grids++; [...g.children].forEach((c, i) => { if (c.offsetParent !== null) queue(c, 140 + Math.min(i * 28, 520)); });
+  });
+}
+function tnmQuestions(view){
+  view.querySelectorAll(TNM.Q).forEach((q, i) => {
+    const k = (q.className || "") + i, t = q.textContent.trim();
+    if (t && TNM.qs.get(k) !== t){ const had = TNM.qs.has(k); TNM.qs.set(k, t);
+      if (had){ const box = q.closest(".card,.b4-q,.mf-qwrap,.er-panel,.sj-q") || q;
+        try { box.animate([{opacity:0, transform:"translateY(10px) scale(.97)"}, {opacity:1, transform:"none"}], {duration:420, easing:TNM.EASE}); } catch(e){} } }
+  });
+}
+function tnmKey(el){ const p = []; for (let e = el; e && e.id !== "app" && p.length < 12; e = e.parentElement){ const par = e.parentElement; p.push(e.tagName + (par ? [...par.children].indexOf(e) : 0)); } return p.join("/"); }
+function tnOdo(el, from, to, up, col){
+  // rolling odometer: each digit is a ⁦0–9⁩ column that slides to its new value
+  const f = String(from).replace(/[^\d]/g, ""), pad = to.replace(/[^\d]/g, "").length;
+  const fd = f.padStart(pad, "0").slice(-pad).split(""); let di = 0;
+  el.dataset.tnodo = to;
+  el.innerHTML = `<span class="tn-odo">` + [...to].map(ch => /\d/.test(ch) ? `<span class="tn-od"><span class="tn-odr" style="transform:translateY(-${(+fd[di++] || 0) * 10}%)">${"0123456789".split("").map(d => `<span>${d}</span>`).join("")}</span></span>` : `<span class="tn-odc">${ch}</span>`).join("") + `</span>`;
+  el.offsetWidth; di = 0;
+  const tds = to.replace(/[^\d]/g, "").split("");
+  el.querySelectorAll(".tn-odr").forEach((r, i) => { r.style.transitionDelay = (i * 60) + "ms"; r.style.transform = `translateY(-${(+tds[i]) * 10}%)`; });
+  try { const c = col || (up ? "var(--good)" : "var(--bad)"); el.animate([{color: c}, {color: c, offset:.6}, {}], {duration:1200, easing:"ease-out"}); } catch(e){}
+  clearTimeout(el._tnodoT); el._tnodoT = setTimeout(() => { if (el.dataset.tnodo === to){ delete el.dataset.tnodo; el.textContent = to; } }, 1400);
+}
+function tnmNumbers(view, fresh){
+  const seen = new Map();
+  view.querySelectorAll("b,strong,span,div,em,output").forEach(el => {
+    if (el.closest(".tn-odo") && !el.dataset.tnodo) return;
+    if (el.childElementCount && !el.dataset.tnodo) return;
+    const t = el.dataset.tnodo || el.textContent.trim();
+    if (!/^[+−-]?\d[\d,]{0,6}$/.test(t)) return;
+    for (let e = el, n = 0; e && n < 4; e = e.parentElement, n++) if (TNM.NOBUMP.test(e.className || "") || (e.id && TNM.NOBUMP.test(e.id))) return;
+    const k = tnmKey(el); seen.set(k, t);
+    const old = (TNM.nums.get(TNM.sig) || new Map()).get(k);
+    if (old !== undefined && old !== t && !el.dataset.tnodo){
+      const up = parseInt(t.replace(/[^\d-]/g, "")) > parseInt(old.replace(/[^\d-]/g, ""));
+      tnOdo(el, old, t, up);
+    }
+  });
+  TNM.nums.set(TNM.sig, seen);
+}
+function tnCountUp(root){
+  // landing stats: numbers roll up from zero when first shown
+  if (TNM.still()) return;
+  root.querySelectorAll(".intro-pts b").forEach(b => {
+    const tn = [...b.childNodes].find(x => x.nodeType === 3 && /\d/.test(x.textContent)); if (!tn) return;
+    const m = tn.textContent.match(/^(\s*)([\d,]+)(.*)$/s); if (!m) return;
+    const sp = document.createElement("span"); sp.textContent = m[2];
+    tn.textContent = m[3]; b.insertBefore(sp, tn); if (m[1]) b.insertBefore(document.createTextNode(m[1]), sp);
+    setTimeout(() => tnOdo(sp, "0", m[2], true, "var(--blue)"), 350);
+  });
+}
+function tnmRun(){
+  TNM.raf = 0; const app = document.getElementById("app"); if (!app) return;
+  const view = app.querySelector(".view") || app; if (view.querySelector(".tn-how")) { TNM.sig = "landing"; return; }
+  if (TNM.still()) return;
+  const sig = location.hash.replace(/=.*/, "") + "|" + [...view.children].map(c => c.className).join(",").slice(0, 200);
+  const fresh = sig !== TNM.sig; TNM.sig = sig;
+  if (fresh){ TNM.qs.clear(); tnmEnter(view); }
+  tnmQuestions(view); tnmNumbers(view, fresh);
+}
+function tnMotionInit(){
+  const app = document.getElementById("app"); if (!app || !("MutationObserver" in window)) return;
+  new MutationObserver(() => { if (!TNM.raf) TNM.raf = requestAnimationFrame(tnmRun); }).observe(app, {childList:true, subtree:true, characterData:true});
+}
+tnMotionInit();
+function tnFloat(){
+  // [x%, y%, size px, depth, rotate deg, char, style, large-only]
+  // [x%, y%, size px, depth, rotate deg, char, style, mobile x%, mobile y%]
+  const T = [[6,12,58,18,-8,"ت","b",3,22],[14,58,46,10,6,"؟","g",8,6],[4,82,40,6,-4,"ع","",0,0],[22,30,36,8,10,"200","",0,0],
+             [88,10,52,16,7,"ن","r",86,22],[92,52,44,12,-6,"س","",0,0],[80,78,58,20,-10,"؟","b",0,0],[72,30,34,7,5,"أ","g",83,6],
+             [30,86,34,9,-6,"✓","g",0,0],[64,88,38,11,8,"600","",0,0],[46,6,30,5,-3,"ف","g",0,0],[96,92,30,6,4,"ب","",0,0]];
+  return `<div class="tn-fl" aria-hidden="true">${T.map(([x,y,s,z,r,c,k,mx,my],i) =>
+    `<i class="${k}${mx ? " m" : ""}" style="--x:${x}%;--y:${y}%;--mx:${mx}%;--my:${my}%;--s:${s}px;--z:${z};--r:${r}deg;--t:${2.6 + (i % 4) * .7}s;--dl:${(i * 90) % 900}ms"><b>${c}</b></i>`).join("")}</div>`;
+}
+function tnHeroBind(){
+  const h = document.querySelector(".tn-hero"); if (!h || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
+  const fl = h.querySelector(".tn-fl"); let raf = 0, px = 0, py = 0;
+  const set = () => { raf = 0; fl.style.setProperty("--px", px.toFixed(3)); fl.style.setProperty("--py", py.toFixed(3)); };
+  h.addEventListener("pointermove", e => { const r = h.getBoundingClientRect(); px = ((e.clientX - r.left) / r.width - .5) * 2; py = ((e.clientY - r.top) / r.height - .5) * 2; if (!raf) raf = requestAnimationFrame(set); });
+  h.addEventListener("pointerleave", () => { px = py = 0; if (!raf) raf = requestAnimationFrame(set); });
+  const onScroll = () => { if (!document.body.contains(h)) return removeEventListener("scroll", onScroll); py = Math.min(scrollY / 200, 2.5); if (!raf) raf = requestAnimationFrame(set); };
+  addEventListener("scroll", onScroll, {passive:true});
+}
+function tnPlans(){
+  const P = [
+    {n:"الموسوعة", who:"للجميع، بدون تسجيل", price:"مجانًا", f:[`${n(BANK.length)} سؤال في ${n(allCats().length)} مجالًا`, "ثلاث مستويات وثلاثة أنواع أسئلة", "من فريقين إلى 50 فريقًا"], cta:"ادخل الموسوعة", go:"cats"},
+    {n:"اشتراك جهة", who:"للمدارس والأندية الشبابية", price:"قريبًا", hot:1, f:["كل المسابقات الحالية والقادمة", "شعار الجهة وألوانها على الشاشة", "رمز مقدّم لإدارة المسابقات", "دخول اللاعبين بالجوال عبر الباركود"], cta:"دخول الجهات"},
+    {n:"مؤسسات", who:"للجهات متعددة الفروع", price:"حسب الطلب", f:["حسابات لكل فرع", "أسئلة خاصة بالجهة", "دعم وأولوية في المسابقات الجديدة"], cta:"دخول الجهات"}];
+  return `<section class="tn-plans" aria-labelledby="tnPlH"><h2 class="tn-how-h" id="tnPlH">الاشتراكات</h2><p class="tn-how-sub">الموسوعة مجانية دائمًا، والمسابقات للجهات المشتركة.</p>
+    <div class="tn-plans-grid">${P.map(p => `<article class="tn-plan${p.hot ? " hot" : ""}">${p.hot ? `<span class="tag">الأنسب</span>` : ""}<h3>${p.n}</h3><p class="who">${p.who}</p>
+      <div class="price">${p.price}</div><ul>${p.f.map(x => `<li>${x}</li>`).join("")}</ul>
+      ${p.go ? `<a class="btn${p.hot ? "" : " sec"}" href="#${p.go}">${p.cta}</a>` : `<button type="button" class="btn${p.hot ? "" : " sec"}" data-tnplan>${p.cta}</button>`}</article>`).join("")}</div></section>`;
+}
+function tn404(){
+  const pool = BANK.filter(q => (q.kind === "mcq" || q.kind === "tf") && q.options && q.options.length >= 2 && q.ai >= 0);
+  const draw = () => {
+    const q = pool.length ? pool[Math.floor(Math.random() * pool.length)] : null; const box = document.getElementById("tn404q"); if (!box) return;
+    if (!q){ box.hidden = true; return; }
+    box.innerHTML = `<small>${esc(q.category)} · ${esc(q.difficulty || "")}</small><h2>${esc(q.question)}</h2>
+      <div class="tn404-opts">${q.options.map((o, i) => `<button type="button" data-i="${i}">${esc(o)}</button>`).join("")}</div><p class="tn404-fb" role="status"></p>`;
+    box.querySelectorAll("[data-i]").forEach(b => b.onclick = () => {
+      const i = +b.dataset.i, ok = i === q.ai; box.querySelectorAll("[data-i]").forEach(x => { x.disabled = true; if (+x.dataset.i === q.ai) x.classList.add("ok"); });
+      if (!ok) b.classList.add("no");
+      const fb = box.querySelector(".tn404-fb"); fb.textContent = ok ? "صح! يمكن الصفحة ضاعت، بس معلوماتك ما ضاعت." : `ما ضبطت! الجواب الصحيح: ${q.options[q.ai]}`; fb.style.color = ok ? "var(--good)" : "var(--bad)";
+    });
+  };
+  $app.innerHTML = `<section class="view tn404 gut"><div class="wrap">
+    <div class="tn404-big" aria-hidden="true"><button type="button" tabindex="-1">4</button><button type="button" tabindex="-1">؟</button><button type="button" tabindex="-1">4</button></div>
+    <h1>الصفحة هذي ما لقيناها</h1><p class="lead">يمكن الرابط فيه خطأ أو الصفحة انتقلت. وما دامك هنا، جرّب هالسؤال:</p>
+    <div class="tn404-q" id="tn404q"></div>
+    <div class="tn404-acts"><button type="button" class="btn sec" id="tn404n">سؤال ثاني</button><a class="btn" href="#home">رجوع للرئيسية</a></div>
+  </div></section>`;
+  document.querySelectorAll(".tn404-big button").forEach(b => b.onclick = () => { b.classList.remove("spin"); void b.offsetWidth; b.classList.add("spin"); });
+  document.getElementById("tn404n").onclick = draw; draw();
+}
 function landing(){
   window.scrollTo({top:0});
   const cats = allCats().length, ok = acHas(), s = SESSION;
   const soon = Array.from({length: 10 - CONTESTS.length});
   const live = CONTESTS.filter(c => c.go).length;
   $app.innerHTML = `<section class="view">
-    <div class="hero gut" style="padding-block:44px 26px"><div class="wrap">
+    <div class="hero gut tn-hero" style="padding-block:44px 26px">${tnFloat()}<div class="wrap">
       ${s ? `<p class="ac-hello">${s.logo ? `<img src="${s.logo}" alt="">` : ""}<span>أهلًا بـ<b>${esc(s.org || s.user)}</b></span></p>` : `<p class="eyebrow">للأندية الشبابية والتعليمية</p>`}
       <h1 class="hero-wm">${WM_SVG}</h1>
       <p>منصة مسابقات ثقافية للفرق: تعرض المسابقة على شاشة واحدة، ويتنافس الحضور بأسئلة جاهزة من موسوعة كبيرة.</p>
@@ -4459,7 +4730,8 @@ function landing(){
         <span>${I(P.tkphone)}<b>للفرق والجمهور</b><small>شاشة عرض، وجوالات اللاعبين عند الحاجة</small></span>
       </div>
     </div></div>
-    <div class="tiles-band gut" style="padding-block:12px 40px"><div class="wrap">
+    ${tnMarquee()}
+    <div class="tiles-band gut" style="padding-block:28px 40px"><div class="wrap">
       <button type="button" class="ency" id="ency">
         <span class="ency-ic">${I(P.ency)}</span>
         <span class="ency-tx"><small>الموسوعة · مجانية للجميع</small><b>موسوعة أسئلة ثقافية</b>
@@ -4474,6 +4746,8 @@ function landing(){
           : `<article class="contest">${I(P[c.icon])}<b>${c.name}</b><span class="soon">قيد التجهيز</span></article>`).join("")}
         ${soon.map(() => `<article class="contest ghost" aria-label="مسابقة قادمة">${I(P.plus)}<b>مسابقة جديدة</b><span class="soon">قريبًا</span></article>`).join("")}
       </div>
+      ${tnHow()}
+      ${tnPlans()}
       ${CAN_EDIT ? `<div class="ac-owner"><div><b>لوحة التحكم</b><span>أنشئ حسابات الجهات المشتركة، وحدد شعار كل جهة وألوانها.</span></div><div class="ac-btns">${window.TN ? `<button type="button" class="mini" id="acOwnerOut">خروج المالك</button>` : ""}<button type="button" class="mini" id="acPvGuest">معاينة كزائر</button><button type="button" class="btn" id="acPanel">حسابات الجهات</button></div></div>` : ""}
       ${s ? `<div class="ac-owner"><div><b>${esc(s.org || s.user)}</b><span>${s.host ? "دخلت كمقدّم للمسابقات برمز المقدّم." : `أنت مسجّل الدخول باسم <span dir="ltr">${esc(s.user)}</span>.`}</span></div><button type="button" class="mini" id="acOut">تسجيل الخروج</button></div>
         ${s.host ? "" : `<div class="ac-owner ac-pinbox" id="acPinBox"><div><b>رمز المقدّم</b><span>أعطه لمقدّم المسابقة: يدخل به من صفحة الدخول فتظهر له الإعدادات والبدء، بدون كلمة مرور الجهة.</span>
@@ -4482,6 +4756,8 @@ function landing(){
       ${!s && !CAN_EDIT ? acLoginHTML(false) : ""}
     </div></div></section>`;
   document.getElementById("ency").onclick = () => nav("cats");
+  tnReveal(); tnHeroBind(); tnCountUp($app);
+  document.querySelectorAll("[data-tnplan]").forEach(b => b.onclick = () => { const f = document.getElementById("acLogin"); if (f){ f.scrollIntoView({behavior:"smooth", block:"center"}); } else nav("cats"); });
   const pn = document.getElementById("acPanel"); if (pn) pn.onclick = () => nav("accounts");
   const pg = document.getElementById("acPvGuest"); if (pg) pg.onclick = () => acPreview("guest");
   const oo = document.getElementById("acOwnerOut"); if (oo) oo.onclick = () => TN.ownerLogout().then(() => location.reload());
@@ -4490,7 +4766,7 @@ function landing(){
   const pc = document.getElementById("acPinChg"); if (pc) pc.onclick = () => {
     const box = document.getElementById("acPinBox");
     box.innerHTML = `<form class="ac-form ac-pinset" id="acPinSet"><b>رمز مقدّم جديد</b>
-      <label><span>الرمز الجديد (٦ أرقام)</span><div class="ac-pw"><input id="apNew" dir="ltr" inputmode="numeric" maxlength="6" value="${acGenPin()}" required><button type="button" class="mini" id="apGen">توليد</button></div></label>
+      <label><span>الرمز الجديد (6 أرقام)</span><div class="ac-pw"><input id="apNew" dir="ltr" inputmode="numeric" maxlength="6" value="${acGenPin()}" required><button type="button" class="mini" id="apGen">توليد</button></div></label>
       <label><span>كلمة مرور الجهة للتأكيد</span><input id="apPw" type="password" dir="ltr" autocomplete="current-password" required></label>
       <p class="ac-err" id="apErr" role="alert"></p>
       <div class="ac-btns"><button type="submit" class="btn">حفظ الرمز</button><button type="button" class="mini" id="apCancel">إلغاء</button></div></form>`;
@@ -4498,7 +4774,7 @@ function landing(){
     document.getElementById("apCancel").onclick = () => landing();
     document.getElementById("acPinSet").onsubmit = async ev => { ev.preventDefault();
       const err = document.getElementById("apErr"), pin = document.getElementById("apNew").value.trim(), pw = document.getElementById("apPw").value; err.textContent = "";
-      if (!acValidPin(pin)) return err.textContent = "الرمز ٦ أرقام.";
+      if (!acValidPin(pin)) return err.textContent = "الرمز 6 أرقام.";
       try { const r = await acSetPin(s.user, pw, pin);
         if (r === "badpw") return err.textContent = "كلمة المرور غير صحيحة.";
         if (r === "taken") return err.textContent = "هذا الرمز مستخدم لجهة ثانية، اختر رمزًا آخر.";
@@ -4727,7 +5003,7 @@ function finished(all){
   window.scrollTo({top:0});
 }
 /* ================= Contest: سين جيم =================
-   Teams (2–4) each bring 1–3 categories to a shared board. Each category holds
+   Teams (⁦2–4⁩) each bring ⁦1–3⁩ categories to a shared board. Each category holds
    3 or 6 questions worth 200 / 400 / 600 by difficulty. Teams take turns picking
    a category and a value; the picking team answers first, then the others in
    order. After the answer is shown, the host gives the points to the team that
@@ -4780,13 +5056,13 @@ function sjSetup(keepScroll){
   $app.innerHTML = `<section class="view">
     <div class="hero gut" style="padding-block:40px 22px"><div class="wrap">
       <p class="eyebrow">مسابقة</p><h1>سين جيم.</h1>
-      <p>لكل فريق مجالاته على اللوحة، وتتناوب الفرق على اختيار المجال وقيمة السؤال: ٢٠٠ للسهل، ٤٠٠ للمتوسط، ٦٠٠ للصعب.</p>
+      <p>لكل فريق مجالاته على اللوحة، وتتناوب الفرق على اختيار المجال وقيمة السؤال: 200 للسهل، 400 للمتوسط، 600 للصعب.</p>
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${SJ ? `<div class="sj-resume"><span>عندك لعبة جارية (${SJ.teams.map((t,i) => esc(t) + " " + n(SJ.scores[i])).join(" · ")}).</span><button class="btn" type="button" id="sjResume">متابعة اللعبة</button></div>` : ""}
       <div class="sj-box"><h3>طريقة اللعب</h3>
         <ol class="b4-rules">
-          <li>يختار كل فريق مجالاته (مجالًا أو اثنين أو ثلاثة)، وتظهر كلها على لوحة واحدة، ولكل مجال ٣ أو ٦ أسئلة.</li>
+          <li>يختار كل فريق مجالاته (مجالًا أو اثنين أو ثلاثة)، وتظهر كلها على لوحة واحدة، ولكل مجال 3 أو 6 أسئلة.</li>
           <li>في كل دور يختار الفريق صاحب الدور مجالًا وقيمة السؤال من اللوحة.</li>
           <li>يُعرض السؤال بلا خيارات، فيجيب الفريق صاحب الدور أولًا، ثم الفريق الذي بعده بالترتيب.</li>
           <li>بعد «إظهار الإجابة» يضغط المقدّم على الفريق الذي أجاب صحيحًا فيأخذ نقاط السؤال، أو «لا أحد».</li>
@@ -4795,16 +5071,16 @@ function sjSetup(keepScroll){
         <div class="b4-pts"><span><b>200</b>سؤال سهل</span><span><b>400</b>سؤال متوسط</span><span class="g"><b>600</b>سؤال صعب</span></div>
         <p class="sj-sub" style="margin:0">لكل فريق ثلاث وسائل مساعدة تختارونها من الإعدادات، ويستخدم كل وسيلة مرة واحدة في دوره قبل إظهار الإجابة.</p>
       </div>
-      <div class="sj-box"><h3>الفرق<small>من ٢ إلى ٤</small></h3>
-        ${sjSeg("data-sjt", T, [[2,"فريقان"],[3,"٣ فرق"],[4,"٤ فرق"]])}
+      <div class="sj-box"><h3>الفرق<small>من 2 إلى 4</small></h3>
+        ${sjSeg("data-sjt", T, [[2,"فريقان"],[3,"3 فرق"],[4,"4 فرق"]])}
         <div class="sj-names">${Array.from({length:T}, (_,i) => `<input type="text" maxlength="24" data-sjn="${i}" style="--tc:var(--c${i+1})" value="${esc(sjCfg.names[i])}" placeholder="${sjDefName(i)}" aria-label="اسم ${sjDefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>عدد المجالات لكل فريق</h4>${sjSeg("data-sjp", sjCfg.perTeam, [[1,"مجال"],[2,"مجالان"],[3,"٣ مجالات"]])}</div>
-        <div><h4>عدد الأسئلة في كل مجال</h4>${sjSeg("data-sjq", sjCfg.perCat, [[3,"٣ أسئلة"],[6,"٦ أسئلة"]])}
-          <p class="sj-sub">${sjCfg.perCat === 3 ? "سؤال واحد بكل قيمة: ٢٠٠ و٤٠٠ و٦٠٠." : "سؤالان بكل قيمة: ٢٠٠ و٤٠٠ و٦٠٠."}</p></div>
+        <div><h4>عدد المجالات لكل فريق</h4>${sjSeg("data-sjp", sjCfg.perTeam, [[1,"مجال"],[2,"مجالان"],[3,"3 مجالات"]])}</div>
+        <div><h4>عدد الأسئلة في كل مجال</h4>${sjSeg("data-sjq", sjCfg.perCat, [[3,"3 أسئلة"],[6,"6 أسئلة"]])}
+          <p class="sj-sub">${sjCfg.perCat === 3 ? "سؤال واحد بكل قيمة: 200 و400 و600." : "سؤالان بكل قيمة: 200 و400 و600."}</p></div>
       </div>
-      <div class="sj-box"><h3>الوسائل المساعدة<small>اختر ثلاثًا، ولكل فريق استخدام واحد لكل وسيلة · ${n(sjCfg.helpers.length)}/٣</small></h3>
+      <div class="sj-box"><h3>الوسائل المساعدة<small>اختر ثلاثًا، ولكل فريق استخدام واحد لكل وسيلة · ${n(sjCfg.helpers.length)}/3</small></h3>
         <div class="sj-helps">${SJ_HELPERS.map(h => { const on = sjCfg.helpers.includes(h.id);
           return `<button type="button" class="sj-help" data-sjh="${h.id}" aria-pressed="${on}"><b>${h.name}</b><small>${h.desc}</small></button>`; }).join("")}</div>
       </div>
@@ -4962,7 +5238,7 @@ const B4_CARDS = {
   unlock:{name:"فك مربع", desc:"احذف ضلعًا مرسومًا. وإذا كان مربعه مقفلًا يعود مفتوحًا ويخسر صاحبه نقاط إقفاله."},
   free:  {name:"ضلع مجاني", desc:"ارسم أي ضلع في اللوحة بلا سؤال، ثم أكمل دورك."},
   extra: {name:"دور إضافي", desc:"تلعب مرة ثانية بعد انتهاء دورك."},
-  minus: {name:"اخصم ٢٠ نقطة", desc:"اختر فريقًا وتُخصم منه 20 نقطة."},
+  minus: {name:"اخصم 20 نقطة", desc:"اختر فريقًا وتُخصم منه 20 نقطة."},
 };
 const b4DefName = i => "الفريق " + ["الأول","الثاني","الثالث","الرابع"][i];
 let b4Cfg = Object.assign({teams:4, names:["","","",""], n:4, time:30}, store.get("b4-cfg", {}));
@@ -5008,8 +5284,8 @@ function b4Setup(keepScroll){
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${B4 ? `<div class="sj-resume"><span>عندك مسابقة جارية: الجولة ${n(B4.round)} (${B4.names.map((t,i) => esc(t) + " " + n(B4.scores[i])).join(" · ")}).</span><button class="btn" type="button" id="b4Resume">متابعة المسابقة</button></div>` : ""}
-      <div class="sj-box"><h3>الفرق<small>من ٢ إلى ٤</small></h3>
-        ${sjSeg("data-b4t", T, [[2,"فريقان"],[3,"٣ فرق"],[4,"٤ فرق"]])}
+      <div class="sj-box"><h3>الفرق<small>من 2 إلى 4</small></h3>
+        ${sjSeg("data-b4t", T, [[2,"فريقان"],[3,"3 فرق"],[4,"4 فرق"]])}
         <div class="sj-names">${Array.from({length:T}, (_,i) => `<input type="text" maxlength="24" data-b4n="${i}" style="--tc:${B4_COL[i]}" value="${esc(b4Cfg.names[i])}" placeholder="${b4DefName(i)}" aria-label="اسم ${b4DefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
@@ -5320,7 +5596,7 @@ function b4HostCur(){
 }
 window.addEventListener("storage", e => { if (e.key === "b4-cur" && location.hash === "#b4host") b4HostCur(); });
 
-/* ================= Contest: ٦×٦ =================
+/* ================= Contest: 6×6 =================
    Each team uploads photos of tools or objects; the next team guesses them.
    A photo starts fully blurred; every correct answer to the host's spoken
    question clears 10%. Guessing opens after every k correct answers; a correct
@@ -5385,8 +5661,8 @@ async function ssSetup(keepScroll){
   const y = window.scrollY, T = ssCfg.teams, miss = ssMissing();
   $app.innerHTML = `<section class="view" style="${ssVars()}">
     <div class="hero gut ss-hero" style="padding-block:36px 22px"><div class="wrap">${ssEye}
-      <p class="eyebrow">مسابقة</p><h1>٦×٦</h1>
-      <p class="ss-tag">هل نظركم ٦ على ٦؟</p>
+      <p class="eyebrow">مسابقة</p><h1>6×6</h1>
+      <p class="ss-tag">هل نظركم 6 على 6؟</p>
       <p>صورة مغبّشة تتضح مع كل إجابة صحيحة. كلما عرفتموها أبكر كسبتم نقاطًا أكثر.</p>
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
@@ -5394,17 +5670,17 @@ async function ssSetup(keepScroll){
       <div class="sj-box"><h3>طريقة اللعب</h3>
         <ol class="b4-rules">
           <li>تختار كل مجموعة صورًا لأدوات أو جمادات، ويخمّنها الفريق المنافس.</li>
-          <li>كل إجابة صحيحة تخفّف التغبيش ١٠٪، والإجابة الخاطئة تنقل الدور.</li>
+          <li>كل إجابة صحيحة تخفّف التغبيش 10%، والإجابة الخاطئة تنقل الدور.</li>
           <li>يُفتح التخمين بعد عدد محدد من الإجابات الصحيحة، ونقاطه بقدر التغبيش المتبقي.</li>
         </ol>
         <p class="ss-warn">جهّزوا الصور قبل عرض الشاشة على البروجكتر، حتى لا يراها المتسابقون.</p>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>عدد الفرق</h4>${sjSeg("data-sst", T, [[2,"فريقان"],[3,"٣ فرق"],[4,"٤ فرق"]])}</div>
+        <div><h4>عدد الفرق</h4>${sjSeg("data-sst", T, [[2,"فريقان"],[3,"3 فرق"],[4,"4 فرق"]])}</div>
         <div><h4>عدد الصور لكل فريق</h4>${sjSeg("data-ssp", ssCfg.per, [1,2,3,4,5,6].map(k => [k, n(k)]))}</div>
-        <div><h4>متى يُفتح التخمين</h4>${sjSeg("data-ssk", ssCfg.k, [[1,"كل إجابة"],[2,"كل إجابتين"],[3,"كل ٣ إجابات"]])}
+        <div><h4>متى يُفتح التخمين</h4>${sjSeg("data-ssk", ssCfg.k, [[1,"كل إجابة"],[2,"كل إجابتين"],[3,"كل 3 إجابات"]])}
           <p class="sj-sub">عدد الإجابات الصحيحة على الصورة قبل أن يُسمح بالتخمين.</p></div>
-        <div><h4>التخمين الخاطئ</h4>${sjSeg("data-sspen", ssCfg.pen ? 1 : 0, [[1,"خصم ١٠ نقاط"],[0,"بلا خصم"]])}</div>
+        <div><h4>التخمين الخاطئ</h4>${sjSeg("data-sspen", ssCfg.pen ? 1 : 0, [[1,"خصم 10 نقاط"],[0,"بلا خصم"]])}</div>
       </div>
       ${Array.from({length:T}, (_,t) => `<div class="sj-box ss-team" style="--tc:${SS_COL[t]}">
         <h3><span class="ss-tdot"></span><input type="text" maxlength="24" data-ssn="${t}" value="${esc(ssCfg.names[t])}" placeholder="${ssDefName(t)}" aria-label="اسم ${ssDefName(t)}"><small>صوره يخمّنها ${esc(ssName((t + 1) % T))}</small></h3>
@@ -5517,7 +5793,7 @@ async function ssRender(){
       <div class="ss-ch"><b>${esc(nm)}</b><span>${x.score}</span></div>
       <div class="ss-img">${img.src ? `<img src="${img.src}" alt="" style="filter:blur(${(blur * 0.32).toFixed(1)}px);transform:scale(${blur ? 1.12 : 1})">` : ""}
         ${sh ? `<button type="button" class="ss-name" data-ssskip>${esc(img.name || "")}<small>${sh.how === "guess" ? "+" + sh.pts : "انكشفت كاملة · 0"}</small></button>`
-          : x.done ? `<div class="ss-fin">انتهت صوره</div>` : `<span class="ss-blur">التغبيش ${100 - x.rev}٪</span>`}</div>
+          : x.done ? `<div class="ss-fin">انتهت صوره</div>` : `<span class="ss-blur">التغبيش ${100 - x.rev}%</span>`}</div>
       <div class="ss-cf"><span>صور ${esc(g.names[src])}</span><span class="ss-dots">${dots}</span></div>
     </div>`; }).join("");
   const ctrl = g.over ? `<div class="ss-ctl"><span>انتهت صور جميع الفرق</span><button class="btn" type="button" id="ssEnd">النتيجة النهائية</button></div>`
@@ -5528,7 +5804,7 @@ async function ssRender(){
   $app.innerHTML = `<section class="ss-wrap gut view" style="${ssVars()}"><div class="wrap">
     <div class="ss-stage"><div class="ss-slide">
       <header class="ss-top">
-        <div class="ss-id">${ssBrand.logo ? `<img src="${ssBrand.logo}" alt="">` : ""}<div><b>٦×٦</b><small>${esc(ssBrand.club || "هل نظركم ٦ على ٦؟")}</small></div></div>
+        <div class="ss-id">${ssBrand.logo ? `<img src="${ssBrand.logo}" alt="">` : ""}<div><b>6×6</b><small>${esc(ssBrand.club || "هل نظركم 6 على 6؟")}</small></div></div>
         <div class="ss-acts"><button class="mini" type="button" id="ssUndo" ${g.hist.length ? "" : "disabled"}>${I(P.sjundo)}تراجع</button>
           <button class="mini" type="button" id="ssFull">${I(P.sjfull)}ملء الشاشة</button>
           <button class="mini" type="button" id="ssMenu">${I(P.sjgear)}الإعدادات</button></div>
@@ -5555,7 +5831,7 @@ function ssFinal(){
   ssStop(); const g = SS;
   const rank = g.names.map((t,i) => ({t, i, s:g.t[i].score})).sort((a,b) => b.s - a.s), top = rank.filter(r => r.s === rank[0].s);
   $app.innerHTML = `<section class="done gut view" style="${ssVars()}"><div class="wrap">${I(P.trophy)}
-    <h1>${top.length > 1 ? "تعادل في الصدارة" : `${esc(rank[0].t)} يفوز`}</h1><p>نظرهم ٦ على ٦</p>
+    <h1>${top.length > 1 ? "تعادل في الصدارة" : `${esc(rank[0].t)} يفوز`}</h1><p>نظرهم 6 على 6</p>
     <ol class="sj-rank">${rank.map((r,k) => `<li style="--tc:${SS_COL[r.i]}"><i>${k+1}</i><b>${esc(r.t)}</b><span>${r.s}</span></li>`).join("")}</ol>
     <div class="cta" style="margin-top:28px"><button class="btn sec" type="button" id="ssUndo2">تراجع</button><button class="btn" type="button" id="ssAgain">مسابقة جديدة</button><button class="btn sec" type="button" id="ssHome">الرئيسية</button></div></div></section>`;
   document.getElementById("ssUndo2").onclick = ssUndo;
@@ -5647,7 +5923,7 @@ async function tkSetup(keepScroll){
           <li>بعد أن يأخذ كل فريق دوره يُفتح التكبيس لجميع الفرق معًا، والفريق الأكثر كبسًا يأخذ السؤال بنفس الطريقة. وعند التعادل يُعاد التكبيس للجميع.</li>
         </ol>
       </div>
-      <div class="sj-box"><h3>الفرق<small>من ٢ إلى ٦</small></h3>
+      <div class="sj-box"><h3>الفرق<small>من 2 إلى 6</small></h3>
         ${sjSeg("data-tkt", T, [2,3,4,5,6].map(k => [k, n(k)]))}
         <div class="sj-names">${Array.from({length:T}, (_,i) => `<input type="text" maxlength="24" data-tkn="${i}" style="--tc:${TK_COL[i]}" value="${esc(tkCfg.names[i])}" placeholder="${tkDefName(i)}" aria-label="اسم ${tkDefName(i)}">`).join("")}</div>
       </div>
@@ -5656,7 +5932,7 @@ async function tkSetup(keepScroll){
           <div class="stepper ss-step"><button type="button" id="tkDevPlus" aria-label="زيادة">+</button><output>${n(tkCfg.dev)}</output><button type="button" id="tkDevMinus" aria-label="إنقاص">−</button></div>
           <p class="sj-sub">تُحسب كبسات أول ${n(tkCfg.dev)} أجهزة تنضم لكل فريق فقط، حتى تكون المنافسة عادلة.</p></div>
         <div><h4>مدة التكبيس</h4>${sjSeg("data-tkd", tkCfg.dur, [3,5,7,10].map(k => [k, n(k) + " ث"]))}</div>
-        <div><h4>عدد الجولات</h4>${sjSeg("data-tkr", tkCfg.rounds, [[3,"٣"],[5,"٥"],[10,"١٠"],[0,"مفتوح"]])}</div>
+        <div><h4>عدد الجولات</h4>${sjSeg("data-tkr", tkCfg.rounds, [[3,"3"],[5,"5"],[10,"10"],[0,"مفتوح"]])}</div>
         <div><h4>مستوى الأسئلة</h4>${sjSeg("data-tkl", tkCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"],["*","مختلط"]])}</div>
       </div>
       <div class="sj-box"><h3>المجالات<small>${tkCfg.cats.length ? n(tkCfg.cats.length) + " مختارة" : "كل المجالات"} · ${n(pool)} سؤال</small></h3>
@@ -5979,7 +6255,7 @@ const JOIN_INFO = {
     steps:["اختر فريقك من القائمة.",
       "تمشي داخل الغرفة على جوالك، وتلمس الأغراض المضيئة عشان تفتح ألغازها.",
       "كل لغز تحله يعطيك رقمًا أو أداة. <b>تعاونوا</b> وتكلموا مع بعض، لأن الألغاز مقسومة بينكم.",
-      "اجمعوا الأرقام لرمز الصندوق (٦ أرقام) وافتحوه عشان تنتقلون للغرفة اللي بعدها.",
+      "اجمعوا الأرقام لرمز الصندوق (6 أرقام) وافتحوه عشان تنتقلون للغرفة اللي بعدها.",
       "<b>الإجابة الخاطئة تخصم من وقتكم</b> وتقفل اللغز لحظات، والتلميح له ثمن من الوقت. والفائز أسرع فريق يطلع."],
     note:"ثلاث غرف بالترتيب من الأسهل للأصعب. الوقت يظهر فوق الشاشة دائمًا." },
   em: { name:"إعمار", go:"emjoin", icon:"emcity", tag:"بناء مدن وتحديات وتجارة",
@@ -6017,7 +6293,7 @@ async function joinPage(){
     const waiting = joinMe.tried && code.length === 6, late = waiting && Date.now() - joinMe.at > 6000;
     $app.innerHTML = `<section class="section gut view"><div class="wrap sheet tk-join">
       <p class="eyebrow">تنافس · صفحة اللاعبين</p><h1>ادخل المسابقة</h1>
-      <p class="lead">امسح الباركود الظاهر على شاشة المقدّم، أو اكتب رمز الغرفة (٦ أرقام). ما تحتاج حساب ولا تسجيل دخول.</p>
+      <p class="lead">امسح الباركود الظاهر على شاشة المقدّم، أو اكتب رمز الغرفة (6 أرقام). ما تحتاج حساب ولا تسجيل دخول.</p>
       <button type="button" class="btn lg tk-scan" id="joinScan">${I(P.tkcam)} مسح الباركود</button>
       <div class="tk-or"><span>أو</span></div>
       <form class="tk-form" id="joinForm"><input id="joinIn" class="tk-in" dir="ltr" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" maxlength="6" placeholder="••••••" value="${esc(code)}" aria-label="رمز الغرفة">
@@ -6109,14 +6385,14 @@ const ER_GEN = {
     const t = lv <= 0 ? erPick(R,[0,1]) : lv === 1 ? erPick(R,[1,2,4]) : lv === 2 ? erPick(R,[2,3,4,5]) : lv === 3 ? erPick(R,[3,5,6,7]) : erPick(R,[5,6,7,8]);
     let terms = [], next, h2, why;
     if (t === 0){ const a = erRi(R,2,15), d = erRi(R,3,9); for (let i = 0; i < 5; i++) terms.push(a + i*d); next = a + 5*d; h2 = `الفرق بين كل عددين متتاليين ثابت ويساوي ${d}.`; why = `نضيف ${d} في كل خطوة.`; }
-    else if (t === 1){ const a = erRi(R,1,9), d = erRi(R,1,4); let v = a, k = d; for (let i = 0; i < 5; i++){ terms.push(v); v += k; k++; } next = v; h2 = "الفرق يزيد بمقدار ١ في كل خطوة."; why = `الفروق ${d}، ${d+1}، ${d+2}… والفرق التالي ${k-1}.`; }
+    else if (t === 1){ const a = erRi(R,1,9), d = erRi(R,1,4); let v = a, k = d; for (let i = 0; i < 5; i++){ terms.push(v); v += k; k++; } next = v; h2 = "الفرق يزيد بمقدار 1 في كل خطوة."; why = `الفروق ${d}، ${d+1}، ${d+2}… والفرق التالي ${k-1}.`; }
     else if (t === 2){ const r = erPick(R,[2,3]), a = erRi(R,1,r === 2 ? 6 : 3); for (let i = 0; i < 5; i++) terms.push(a * r**i); next = a * r**5; h2 = `كل عدد = العدد الذي قبله × ${r}.`; why = h2; }
     else if (t === 3){ const a = erRi(R,2,9), b = erRi(R,30,60), d1 = erRi(R,2,5), d2 = erRi(R,2,6); for (let i = 0; i < 7; i++) terms.push(i % 2 === 0 ? a + (i/2)*d1 : b - ((i-1)/2)*d2); next = b - 3*d2; h2 = "هما سلسلتان متداخلتان: انظر إلى الأعداد في المواضع الزوجية وحدها."; why = `الأعداد في المواضع الزوجية تنقص ${d2} كل مرة.`; }
-    else if (t === 4){ const a = erRi(R,1,4), c = erPick(R,[1,-1,2,3]); let v = a; for (let i = 0; i < 5; i++){ terms.push(v); v = v*2 + c; } next = v; h2 = `كل عدد = السابق × ٢ ${c > 0 ? "+" : "−"} ${Math.abs(c)}.`; why = h2; }
+    else if (t === 4){ const a = erRi(R,1,4), c = erPick(R,[1,-1,2,3]); let v = a; for (let i = 0; i < 5; i++){ terms.push(v); v = v*2 + c; } next = v; h2 = `كل عدد = السابق × 2 ${c > 0 ? "+" : "−"} ${Math.abs(c)}.`; why = h2; }
     else if (t === 5){ let a = erRi(R,1,5), b = erRi(R,a,a+5); terms = [a,b]; for (let i = 0; i < 5; i++) terms.push(terms[terms.length-1] + terms[terms.length-2]); next = terms[6] + terms[5]; h2 = "كل عدد = مجموع العددين اللذين قبله مباشرة."; why = h2; }
     else if (t === 6){ const s = erRi(R,1,4), k = erPick(R,[1,2,-1,3]); for (let i = 0; i < 5; i++) terms.push((s+i)**2 + k); next = (s+5)**2 + k; h2 = `الأعداد قريبة من مربعات الأعداد: ${s*s}، ${(s+1)**2}، ${(s+2)**2}…`; why = `كل عدد = مربع عدد ${k > 0 ? "+" : "−"} ${Math.abs(k)}.`; }
     else if (t === 7){ const pr = erPick(R,[[1,4,9,16,25,36],[2,3,5,7,11,13],[1,2,4,8,16,32]]), a = erRi(R,1,10); let v = a; for (let i = 0; i < 5; i++){ terms.push(v); v += pr[i]; } next = v; h2 = "الفروق بين الأعداد المتتالية تكوّن سلسلة مشهورة."; why = `الفروق: ${pr.slice(0,5).join("، ")}.`; }
-    else { const a = erRi(R,2,5); let v = a; for (let i = 0; i < 5; i++){ terms.push(v); v = v * (i+2); } next = v; h2 = "نضرب في ٢ ثم في ٣ ثم في ٤…"; why = h2; }
+    else { const a = erRi(R,2,5); let v = a; for (let i = 0; i < 5; i++){ terms.push(v); v = v * (i+2); } next = v; h2 = "نضرب في 2 ثم في 3 ثم في 4…"; why = h2; }
     return { title:"أكمل السلسلة", html:`<p>ما العدد الذي يكمل السلسلة؟ (تُقرأ من اليمين)</p>${erTiles(terms, true)}`, ans:{type:"num", v:next},
       hints:["قارن كل عدد بالعدد الذي قبله: هل الفرق ثابت؟ هل يكبر؟ هل هو ضرب؟", h2], why };
   },
@@ -6146,18 +6422,18 @@ const ER_GEN = {
       return `<svg class="er-clock${mirror ? " mirror" : ""}" viewBox="0 0 120 120"><circle cx="60" cy="60" r="56" fill="#FBF7EF" stroke="#8B6B43" stroke-width="5"/>${Array.from({length:12},(_,i) => `<line x1="60" y1="${i%3?10:8}" x2="60" y2="${i%3?16:20}" stroke="#5F6D85" stroke-width="${i%3?2:4}" transform="rotate(${i*30} 60 60)"/>`).join("")}${mirror ? "" : [12,3,6,9].map((k,i) => `<text x="${[60,98,60,22][i]}" y="${[33,64,96,64][i]}" font-size="12" text-anchor="middle" fill="#1E2F4D" font-family="sans-serif">${k}</text>`).join("")}<line x1="60" y1="60" x2="60" y2="30" stroke="#1E2F4D" stroke-width="6" stroke-linecap="round" transform="rotate(${ha} 60 60)"/><line x1="60" y1="60" x2="60" y2="16" stroke="#C93400" stroke-width="3.5" stroke-linecap="round" transform="rotate(${ma} 60 60)"/><circle cx="60" cy="60" r="4.5" fill="#1E2F4D"/></svg>`; };
     const hm = (h, m) => `${h}:${String(m).padStart(2,"0")}`;
     if (lv <= 0){ const add = erPick(R,[45,75,90,105,135,150,200]), tot = (H%12)*60 + M + add, nh = Math.floor(tot/60) % 12 || 12;
-      return { title:"ساعة السفينة", html:`<div class="er-center">${face(H, M)}</div><p>تبحر السفينة بعد <b>${add}</b> دقيقة من الوقت الظاهر على الساعة. عند أي ساعة تبحر؟ (اكتب رقم الساعة من ١ إلى ١٢)</p>`,
+      return { title:"ساعة السفينة", html:`<div class="er-center">${face(H, M)}</div><p>تبحر السفينة بعد <b>${add}</b> دقيقة من الوقت الظاهر على الساعة. عند أي ساعة تبحر؟ (اكتب رقم الساعة من 1 إلى 12)</p>`,
         ans:{type:"num", v:nh}, hints:["اقرأ الساعة أولًا: العقرب القصير للساعات والطويل للدقائق.", `الساعة الآن ${hm(H,M)}، و${add} دقيقة = ${Math.floor(add/60)} ساعة و${add%60} دقيقة.`], why:`${hm(H,M)} + ${add} دقيقة = ${hm(nh, tot % 60)}.` }; }
     if (lv === 1){ const rm = M, rh = H;
-      return { title:"الساعة في المرآة", html:`<div class="er-center">${face(H, M, true)}</div><p>هذه الساعة تظهر في <b>مرآة</b> معلّقة على الجدار المقابل، وليس عليها أرقام. كم الساعة الحقيقية؟ (اكتب رقم الساعة فقط من ١ إلى ١٢)</p>`,
-        ans:{type:"num", v:rh}, hints:["المرآة تعكس اليمين واليسار: العقرب الذي يبدو عند ٢ هو في الحقيقة عند ١٠.", `الوقت الحقيقي = ١٢:٠٠ − الوقت الظاهر في المرآة.`], why:`الوقت الحقيقي ${hm(rh, rm)}.` }; }
+      return { title:"الساعة في المرآة", html:`<div class="er-center">${face(H, M, true)}</div><p>هذه الساعة تظهر في <b>مرآة</b> معلّقة على الجدار المقابل، وليس عليها أرقام. كم الساعة الحقيقية؟ (اكتب رقم الساعة فقط من 1 إلى 12)</p>`,
+        ans:{type:"num", v:rh}, hints:["المرآة تعكس اليمين واليسار: العقرب الذي يبدو عند 2 هو في الحقيقة عند 10.", `الوقت الحقيقي = 12:00 − الوقت الظاهر في المرآة.`], why:`الوقت الحقيقي ${hm(rh, rm)}.` }; }
     let h = H, m = M, extra = 0;
     if (lv >= 4){ extra = erPick(R,[25,35,50,70]); }
     const tot = (h%12)*60 + m + extra, h2 = Math.floor(tot/60) % 12, m2 = tot % 60;
     let ang = Math.abs(30*h2 - 5.5*m2); if (ang > 180) ang = 360 - ang;
     if (ang !== Math.round(ang)){ m = (m + 1) % 60; return ER_GEN.clock(R, lv); }
     return { title:"زاوية العقربين", html:`<div class="er-center">${face(h, m)}</div><p>${extra ? `بعد <b>${extra}</b> دقيقة من الوقت الظاهر،` : `في الوقت الظاهر (${hm(h, m)})،`} كم درجة الزاوية <b>الصغرى</b> بين عقرب الساعات وعقرب الدقائق؟</p>`,
-      ans:{type:"num", v:ang}, hints:["عقرب الدقائق يقطع ٦ درجات كل دقيقة، وعقرب الساعات ٣٠ درجة كل ساعة.", "لا تنسَ أن عقرب الساعات يتحرك أيضًا: نصف درجة في كل دقيقة."],
+      ans:{type:"num", v:ang}, hints:["عقرب الدقائق يقطع 6 درجات كل دقيقة، وعقرب الساعات 30 درجة كل ساعة.", "لا تنسَ أن عقرب الساعات يتحرك أيضًا: نصف درجة في كل دقيقة."],
       why:`عند ${hm(h2 || 12, m2)}: الدقائق ${m2*6}°، الساعات ${(h2*30 + m2*0.5)}°، والفرق ${ang}°.` };
   },
 
@@ -6196,12 +6472,12 @@ const ER_GEN = {
 
   compass(R, lv){
     const cnt = [2,3,4,5,6][Math.min(lv,4)], start = lv <= 1 ? 0 : erPick(R,[0,2,4,6]);
-    const opts = lv <= 0 ? [[2,"يمينًا ٩٠°"],[-2,"يسارًا ٩٠°"]] : lv === 1 ? [[2,"يمينًا ٩٠°"],[-2,"يسارًا ٩٠°"],[4,"للخلف ١٨٠°"]] : [[2,"يمينًا ٩٠°"],[-2,"يسارًا ٩٠°"],[4,"للخلف ١٨٠°"],[1,"يمينًا ٤٥°"],[-1,"يسارًا ٤٥°"],[3,"يمينًا ١٣٥°"],[-3,"يسارًا ١٣٥°"]];
+    const opts = lv <= 0 ? [[2,"يمينًا 90°"],[-2,"يسارًا 90°"]] : lv === 1 ? [[2,"يمينًا 90°"],[-2,"يسارًا 90°"],[4,"للخلف 180°"]] : [[2,"يمينًا 90°"],[-2,"يسارًا 90°"],[4,"للخلف 180°"],[1,"يمينًا 45°"],[-1,"يسارًا 45°"],[3,"يمينًا 135°"],[-3,"يسارًا 135°"]];
     let d = start; const steps = [];
     for (let i = 0; i < cnt; i++){ const o = erPick(R, opts); d = ((d + o[0]) % 8 + 8) % 8; steps.push(`استدر ${o[1]}`); }
     if (lv >= 4){ steps.push("ثم استدر نحو الاتجاه المعاكس لاتجاهك"); d = (d + 4) % 8; }
     return { title:"البوصلة", html:`<p>تقف ووجهك نحو <b>${ER_DIRS[start]}</b>، ثم:</p><ol class="er-steps">${steps.map(s => `<li>${s}</li>`).join("")}</ol><p>إلى أي اتجاه تنظر الآن؟</p>`,
-      ans:{type:"compass", v:d}, hints:["كل ٩٠° = ربع دورة، وكل ٤٥° = ثُمن دورة.", "اجمعوا كل الدوران: اليمين موجب واليسار سالب، ثم ابدأوا من الاتجاه الأول."], why:`الاتجاه النهائي: ${ER_DIRS[d]}.` };
+      ans:{type:"compass", v:d}, hints:["كل 90° = ربع دورة، وكل 45° = ثُمن دورة.", "اجمعوا كل الدوران: اليمين موجب واليسار سالب، ثم ابدأوا من الاتجاه الأول."], why:`الاتجاه النهائي: ${ER_DIRS[d]}.` };
   },
 
   liars(R, lv){
@@ -6213,7 +6489,7 @@ const ER_GEN = {
 
   matrix(R, lv){
     const rule = Math.min(lv, 4), f = [(a,b) => a + b, (a,b) => a * b, (a,b) => (a + b) * 2, (a,b) => a*a + b, (a,b) => a*b - (a + b)][rule];
-    const names = ["جمع العددين","ضرب العددين","جمع العددين ثم الضرب في ٢","تربيع العدد الأول ثم إضافة الثاني","ضرب العددين ثم طرح مجموعهما"];
+    const names = ["جمع العددين","ضرب العددين","جمع العددين ثم الضرب في 2","تربيع العدد الأول ثم إضافة الثاني","ضرب العددين ثم طرح مجموعهما"];
     const rows = []; for (let i = 0; i < 3; i++){ const a = erRi(R,2,rule >= 3 ? 7 : 9), b = erRi(R,2,9); rows.push([a, b, f(a,b)]); }
     const v = rows[2][2];
     return { title:"لوحة الأبراج", html:`<p>في كل صف علاقة واحدة تربط العدد الثالث بالعددين الأولين (الصفوف تُقرأ من اليمين). ما العدد المفقود؟</p><div class="er-grid3">${rows.flat().map((x,i) => `<span${i === 8 ? ' class="q"' : ""}>${i === 8 ? "؟" : x}</span>`).join("")}</div>`,
@@ -6229,7 +6505,7 @@ const ER_GEN = {
     let txt;
     if (lv <= 1) txt = `كل حرف في الرسالة أُزيح <b>${k}</b> ${k === 1 ? "حرفًا" : "أحرف"} إلى الأمام في الأبجدية الهجائية (بعد الياء نعود إلى الألف).`;
     else if (lv === 2) txt = `لا نعرف مقدار الإزاحة، لكننا نعرف أن كلمة «بحر» تُكتب بهذه الشيفرة «${crib}».`;
-    else if (lv === 3) txt = `أُزيحت الحروف بمقدار مجهول. نعرف فقط أن الرسالة اسم عدد من ١ إلى ٩.`;
+    else if (lv === 3) txt = `أُزيحت الحروف بمقدار مجهول. نعرف فقط أن الرسالة اسم عدد من 1 إلى 9.`;
     else txt = `استُبدل كل حرف بالحرف الذي يقابله من آخر الأبجدية (الألف ↔ الياء، الباء ↔ الواو…)، ثم أُزيح الناتج <b>${k}</b> إلى الأمام.`;
     return { title:"المخطوطة المشفّرة", html:`<p>${txt}</p><div class="er-code-word">${coded}</div><div class="er-alpha" dir="rtl">${ER_ALPHA.map((c,i) => `<span><b>${c}</b><small>${i+1}</small></span>`).join("")}</div><p>فكّ الشيفرة ثم اكتب <b>العدد</b> الذي تدل عليه الكلمة.</p>`,
       ans:{type:"num", v:d}, hints:["الحروف مرتّبة ترتيبًا هجائيًا: ا ب ت ث ج ح خ …", lv === 2 ? `الباء صارت «${enc("ب")}»: احسب كم حرفًا بينهما.` : `الحرف الأول من الكلمة الأصلية هو «${word[0]}».`], why:`الكلمة: «${ER_NUMW[d]}» = ${d}.` };
@@ -6238,14 +6514,14 @@ const ER_GEN = {
   calendar(R, lv){
     let today, q, ans, h2;
     const off = {"أمس":-1,"الغد":1,"بعد غد":2,"قبل أمس":-2};
-    if (lv <= 1){ today = erRi(R,0,6); const k = lv <= 0 ? erRi(R,8,20) : erRi(R,25,75); ans = (today + k) % 7; q = `اليوم <b>${ER_DAYS[today]}</b>. ما اليوم بعد <b>${k}</b> يومًا؟`; h2 = `كل ٧ أيام يعود اليوم نفسه: ${k} = ${Math.floor(k/7)} أسابيع و${k%7} أيام.`; }
+    if (lv <= 1){ today = erRi(R,0,6); const k = lv <= 0 ? erRi(R,8,20) : erRi(R,25,75); ans = (today + k) % 7; q = `اليوم <b>${ER_DAYS[today]}</b>. ما اليوم بعد <b>${k}</b> يومًا؟`; h2 = `كل 7 أيام يعود اليوم نفسه: ${k} = ${Math.floor(k/7)} أسابيع و${k%7} أيام.`; }
     else if (lv === 2){ const first = erRi(R,0,6), d = erRi(R,18,31); ans = (first + d - 1) % 7; q = `في شهر ما كان اليوم الأول منه <b>${ER_DAYS[first]}</b>. ما اليوم الموافق لليوم <b>${d}</b> من الشهر نفسه؟`; h2 = `اليوم ${d} يأتي بعد اليوم الأول بـ${d-1} يومًا.`; }
     else if (lv === 3){ const x = erRi(R,0,6), k = erRi(R,10,40); today = (x - 2 + 70) % 7; ans = ((today - 1 - k) % 7 + 7) % 7; q = `إذا كان <b>بعد غد</b> هو يوم <b>${ER_DAYS[x]}</b>، فما اليوم الذي كان قبل <b>${k}</b> يومًا من <b>أمس</b>؟`; h2 = `اليوم هو ${ER_DAYS[today]}.`; }
     else { const keys = Object.keys(off), a = erPick(R,keys); let b = erPick(R,keys); while (b === a) b = erPick(R,keys); const x = erRi(R,0,6);
       ans = ((x - off[a] + off[b]) % 7 + 14) % 7; q = `لو كان <b>${a}</b> هو <b>${b}</b>، لكان اليوم <b>${ER_DAYS[x]}</b>. فما اليوم الحقيقي؟`; h2 = `لو صار ${a} في مكان ${b} لتحرّك «اليوم» ${Math.abs(off[a]-off[b])} أيام ${off[a] > off[b] ? "إلى الخلف" : "إلى الأمام"}.`; }
     const opts = ER_DAYS.map((d,i) => i), order = erShuf(R, opts).slice(0, 5); if (!order.includes(ans)) order[erRi(R,0,4)] = ans;
     return { title:"تقويم النجوم", html:`<p>${q}</p>`, ans:{type:"choice", opts:order.map(i => ER_DAYS[i]), v:order.indexOf(ans)},
-      hints:["أيام الأسبوع تتكرر كل ٧ أيام، فاقسم على ٧ وخذ الباقي.", h2], why:`الإجابة: ${ER_DAYS[ans]}.` };
+      hints:["أيام الأسبوع تتكرر كل 7 أيام، فاقسم على 7 وخذ الباقي.", h2], why:`الإجابة: ${ER_DAYS[ans]}.` };
   },
 
   binary(R, lv){
@@ -6258,7 +6534,7 @@ const ER_GEN = {
         ans:{type:"num", v}, hints:["اجمع قيم المصابيح المضاءة فقط.", `قيم المصابيح من اليمين: ${Array.from({length:nb},(_,i) => 2**i).join("، ")}.`], why:`${bits.map((b,i) => b ? 2**(nb-1-i) : 0).filter(Boolean).join(" + ")} = ${v}.` };
     }
     const a = erRi(R,3,9), b = Math.floor(v / a), c = v - a*b;
-    return { title:"لوحة المفاتيح الضوئية", html:`<p>شغّل المفاتيح حتى تعرض اللوحة العدد <b dir="ltr">${a} × ${b}${c ? " + " + c : ""}</b>. قيمة كل مفتاح ضعف قيمة المفتاح الذي على يمينه، وقيمة المفتاح الأيمن ١.</p>`,
+    return { title:"لوحة المفاتيح الضوئية", html:`<p>شغّل المفاتيح حتى تعرض اللوحة العدد <b dir="ltr">${a} × ${b}${c ? " + " + c : ""}</b>. قيمة كل مفتاح ضعف قيمة المفتاح الذي على يمينه، وقيمة المفتاح الأيمن 1.</p>`,
       ans:{type:"bits", n:nb, v}, hints:["احسب العدد أولًا، ثم ابدأ من أكبر قيمة لا تتجاوزه.", `العدد المطلوب ${v}.`], why:`${v} = ${bits.map((b,i) => b ? 2**(nb-1-i) : 0).filter(Boolean).join(" + ")}.` };
   },
 
@@ -6287,10 +6563,10 @@ const ER_GEN = {
     let e, cnt;
     for (let t = 0; t < 300; t++){ e = mk(lv <= 2 ? 2 : 3); if (!e.op || e.op === "not") continue; const s = size(e); if (s < (lv <= 2 ? 2 : lv === 3 ? 3 : 4) || s > (lv <= 2 ? 3 : 5) || vars(e) !== 7) continue;
       cnt = 0; for (let s2 = 0; s2 < 8; s2++) if (ev(e, s2)) cnt++; if (cnt > 1 && cnt < 7) break; }
-    const ex = []; for (let s2 = 0; s2 < 8; s2++) if (ev(e, s2)) ex.push(V.map((x,i) => (s2 >> i & 1) ? "١" : "٠").join(""));
-    return { title:"لوحة الدوائر", html:`<p>لكل مفتاح من المفاتيح الثلاثة <b>أ</b> و<b>ب</b> و<b>ج</b> حالتان: مُطفأ أو مُشغَّل، فهناك ٨ حالات ممكنة. يضيء المصباح عندما يتحقق الشرط:</p><div class="er-expr">${show(e, true)}</div>
+    const ex = []; for (let s2 = 0; s2 < 8; s2++) if (ev(e, s2)) ex.push(V.map((x,i) => (s2 >> i & 1) ? "1" : "0").join(""));
+    return { title:"لوحة الدوائر", html:`<p>لكل مفتاح من المفاتيح الثلاثة <b>أ</b> و<b>ب</b> و<b>ج</b> حالتان: مُطفأ أو مُشغَّل، فهناك 8 حالات ممكنة. يضيء المصباح عندما يتحقق الشرط:</p><div class="er-expr">${show(e, true)}</div>
       <p class="er-small">كل إطار يُحسب أولًا مثل الأقواس. «و»: يجب أن يتحقق الطرفان · «أو»: يكفي أحدهما · «ليس»: العكس${lv >= 4 ? " · «أو الحصرية»: أحدهما فقط لا كلاهما" : ""}</p><p>في كم حالة من الحالات الثماني يضيء المصباح؟</p>`,
-      ans:{type:"num", v:cnt}, hints:["اكتبوا جدولًا بالحالات الثماني: ٠٠٠، ٠٠١، ٠١٠… وجرّبوا الشرط على كل حالة.", `قسّموا الحالات حسب المفتاح «ج»: مُشغَّل في ٤ حالات ومُطفأ في ٤.`],
+      ans:{type:"num", v:cnt}, hints:["اكتبوا جدولًا بالحالات الثماني: 000، 001، 010… وجرّبوا الشرط على كل حالة.", `قسّموا الحالات حسب المفتاح «ج»: مُشغَّل في 4 حالات ومُطفأ في 4.`],
       why:`يضيء في ${cnt} حالات (أ ب ج): ${ex.join("، ")}.` };
   },
 
@@ -6316,9 +6592,9 @@ const ER_GEN = {
     const given = new Set(clues.filter(c => c.pos != null).map(c => c.pos));
     let ask = erRi(R,0,N-1); for (let k = 0; k < N && given.has(ask); k++) ask = (ask + 1) % N;
     const v = posOf(sol, ask) + 1;
-    return { title:"خزائن العيّنات", html:`<p>${N === 4 ? "أربع" : "خمس"} عيّنات ملوّنة موزّعة على ${N === 4 ? "أربع" : "خمس"} خزائن مرقّمة من ١ إلى ${N}، في كل خزانة عيّنة واحدة.</p><ol class="er-steps">${erShuf(R, clues).map(c => `<li>${c.s}</li>`).join("")}</ol>
+    return { title:"خزائن العيّنات", html:`<p>${N === 4 ? "أربع" : "خمس"} عيّنات ملوّنة موزّعة على ${N === 4 ? "أربع" : "خمس"} خزائن مرقّمة من 1 إلى ${N}، في كل خزانة عيّنة واحدة.</p><ol class="er-steps">${erShuf(R, clues).map(c => `<li>${c.s}</li>`).join("")}</ol>
       <div class="er-lockers">${Array.from({length:N},(_,i) => `<span>${i+1}</span>`).join("")}</div><p>في أي خزانة العيّنة <b style="color:${COLS[ask]}">${NAMES[ask]}</b>؟</p>`,
-      ans:{type:"num", v}, hints:["ابدأ بالمعلومة الأكثر تحديدًا، واستبعد الاحتمالات خطوة خطوة.", `العيّنة ${NAMES[sol[0]]} في الخزانة ١.`], why:`الترتيب: ${sol.map((it,i) => `${i+1}: ${NAMES[it]}`).join("، ")}.` };
+      ans:{type:"num", v}, hints:["ابدأ بالمعلومة الأكثر تحديدًا، واستبعد الاحتمالات خطوة خطوة.", `العيّنة ${NAMES[sol[0]]} في الخزانة 1.`], why:`الترتيب: ${sol.map((it,i) => `${i+1}: ${NAMES[it]}`).join("، ")}.` };
   },
 
   paths(R, lv){
@@ -6334,7 +6610,7 @@ const ER_GEN = {
     blocked.forEach(k => { const [x,y] = k.split(",").map(Number); svg += `<g stroke="#D70015" stroke-width="4" stroke-linecap="round"><line x1="${X(x)-9}" y1="${Y(y)-9}" x2="${X(x)+9}" y2="${Y(y)+9}"/><line x1="${X(x)+9}" y1="${Y(y)-9}" x2="${X(x)-9}" y2="${Y(y)+9}"/></g>`; });
     svg += `<circle cx="${X(0)}" cy="${Y(0)}" r="10" fill="#248A3D"/><circle cx="${X(W)}" cy="${Y(H)}" r="10" fill="#0071E3"/></svg>`;
     return { title:"مسارات الخادم", html:`<p>تنتقل الإشارة على الخطوط من النقطة <b style="color:#248A3D">الخضراء</b> إلى النقطة <b style="color:#0071E3">الزرقاء</b>، وتتحرك فقط إلى <b>اليمين</b> أو إلى <b>الأعلى</b>${nb ? "، ولا تمر بالتقاطعات المعطّلة ✕" : ""}. كم مسارًا مختلفًا يمكن أن تسلكه؟</p><div class="er-center">${svg}</div>`,
-      ans:{type:"num", v}, hints:["اكتبوا عند كل تقاطع عدد الطرق التي توصل إليه، بدءًا من النقطة الخضراء.", "عدد الطرق إلى أي تقاطع = طرق التقاطع الذي تحته + طرق التقاطع الذي على يساره (والمعطّل = ٠)."], why:`عدد المسارات ${v}.` };
+      ans:{type:"num", v}, hints:["اكتبوا عند كل تقاطع عدد الطرق التي توصل إليه، بدءًا من النقطة الخضراء.", "عدد الطرق إلى أي تقاطع = طرق التقاطع الذي تحته + طرق التقاطع الذي على يساره (والمعطّل = 0)."], why:`عدد المسارات ${v}.` };
   },
 
   magic(R, lv){
@@ -6364,12 +6640,12 @@ const ER_LIARS = [
     opts:["جاسم","علي","باسم","لا يمكن التحديد"], h:["افترض أن كل واحد هو الكاسر، ثم عُدّ الصادقين.","لو كسرها علي لصدق باسم وجاسم معًا."], w:"لو كسرها جاسم: علي كاذب، باسم صادق، جاسم كاذب، أي صادق واحد."},
   {b:1, t:"الحارسان", q:`<p>أمامك بابان: أحدهما للخروج والآخر مغلق للأبد، وعندهما حارسان: أحدهما يصدق دائمًا والآخر يكذب دائمًا، ولا تعرف من هو. لك سؤال واحد لحارس واحد. أي سؤال يضمن الخروج؟</p>`,
     opts:["«ماذا سيقول الحارس الآخر إن سألته عن باب الخروج؟» ثم أختار الباب الآخر","«أي باب هو الخروج؟» ثم أختار ما يقوله","«هل أنت الصادق؟» ثم أختار الباب الأيمن","«أي باب هو الخروج؟» ثم أختار الباب الآخر"], h:["ابحث عن سؤال يمر جوابه على الحارسين معًا.","الصادق ينقل كذب زميله، والكاذب يكذب عن صدق زميله: النتيجة دائمًا خاطئة."], w:"الجواب عن «ماذا سيقول الآخر؟» يشير دائمًا إلى الباب الخطأ، فنختار الباب الآخر."},
-  {b:1, t:"أعمار الإخوة", q:`<p>ثلاثة إخوة: مجموع أعمارهم ٣٠ سنة. الأكبر عمره ضعف الأصغر، والأوسط أكبر من الأصغر بسنتين. كم عمر الأكبر؟</p>`,
-    opts:["١٤","١٢","١٦","١٠"], h:["سمِّ عمر الأصغر «س»، واكتب عمري الآخرين بدلالته.","س + (س+٢) + ٢س = ٣٠."], w:"٤س + ٢ = ٣٠ فالأصغر ٧ والأكبر ١٤."},
+  {b:1, t:"أعمار الإخوة", q:`<p>ثلاثة إخوة: مجموع أعمارهم 30 سنة. الأكبر عمره ضعف الأصغر، والأوسط أكبر من الأصغر بسنتين. كم عمر الأكبر؟</p>`,
+    opts:["14","12","16","10"], h:["سمِّ عمر الأصغر «س»، واكتب عمري الآخرين بدلالته.","س + (س+2) + 2س = 30."], w:"4س + 2 = 30 فالأصغر 7 والأكبر 14."},
   {b:2, t:"الصادق والكاذب", q:`<p>في الجزيرة نوعان: صادق يقول الحق دائمًا، وكاذب يكذب دائمًا. قال «أ»: «أنا و"ب" كلانا كاذبان». ما نوع كل منهما؟</p>`,
     opts:["«أ» كاذب و«ب» صادق","«أ» صادق و«ب» كاذب","كلاهما كاذب","كلاهما صادق"], h:["هل يمكن لصادق أن يقول عن نفسه إنه كاذب؟","«أ» كاذب، إذن عبارته خاطئة: ليس كلاهما كاذبًا."], w:"«أ» لا يمكن أن يكون صادقًا، فهو كاذب وعبارته خاطئة، إذن «ب» صادق."},
-  {b:2, t:"الروبوتات الثلاثة", q:`<p>ثلاثة روبوتات، كل واحد إما يصدق دائمًا أو يكذب دائمًا:</p><ul class="er-steps"><li>الروبوت ١: «الروبوت ٢ كاذب».</li><li>الروبوت ٢: «الروبوت ٣ كاذب».</li><li>الروبوت ٣: «الروبوت ١ والروبوت ٢ كاذبان».</li></ul><p>من الصادق؟</p>`,
-    opts:["الروبوت ٢ وحده","الروبوت ١ وحده","الروبوت ٣ وحده","الروبوتان ١ و٣"], h:["افترض أن الروبوت ٣ صادق وتتبع النتيجة.","إذا كان ٣ صادقًا فإن ١ كاذب، فيكون ٢ صادقًا… وهذا يناقض كلام ٣."], w:"٣ كاذب، فعبارة ٢ صادقة، فـ٢ صادق، وعبارة ١ خاطئة فهو كاذب."},
+  {b:2, t:"الروبوتات الثلاثة", q:`<p>ثلاثة روبوتات، كل واحد إما يصدق دائمًا أو يكذب دائمًا:</p><ul class="er-steps"><li>الروبوت 1: «الروبوت 2 كاذب».</li><li>الروبوت 2: «الروبوت 3 كاذب».</li><li>الروبوت 3: «الروبوت 1 والروبوت 2 كاذبان».</li></ul><p>من الصادق؟</p>`,
+    opts:["الروبوت 2 وحده","الروبوت 1 وحده","الروبوت 3 وحده","الروبوتان 1 و3"], h:["افترض أن الروبوت 3 صادق وتتبع النتيجة.","إذا كان 3 صادقًا فإن 1 كاذب، فيكون 2 صادقًا… وهذا يناقض كلام 3."], w:"3 كاذب، فعبارة 2 صادقة، فـ2 صادق، وعبارة 1 خاطئة فهو كاذب."},
   {b:2, t:"النوع الثالث", q:`<p>صادقون يقولون الحق دائمًا، وكاذبون يكذبون دائمًا. قال «أ»: «"ب" كاذب». وقال «ب»: «"أ" و"ج" من النوع نفسه». ما نوع «ج»؟</p>`,
     opts:["كاذب حتمًا","صادق حتمًا","لا يمكن التحديد","نصف صادق"], h:["جرّب حالتين: «أ» صادق، ثم «أ» كاذب.","في الحالتين يكون «أ» و«ب» من نوعين مختلفين."], w:"إن كان «أ» صادقًا فـ«ب» كاذب و«ج» يخالف «أ» فهو كاذب؛ وإن كان «أ» كاذبًا فـ«ب» صادق و«ج» مثل «أ» كاذب."}
 ];
@@ -7078,7 +7354,7 @@ function erSubmit(sid, P1, simonOk){
     return; }
   X.me.p[X.room] += X.G.pen; X.cool[sid] = Date.now() + 10000; erSave(); erPublish(); ERA.sfx("bad");
   if (p){ p.classList.remove("shake"); void p.offsetWidth; p.classList.add("shake"); }
-  erToast(X.G.pen ? `إجابة خاطئة: خُصمت ${n(X.G.pen)} ثانية، واللغز مقفل ١٠ ثوانٍ` : "إجابة خاطئة: اللغز مقفل ١٠ ثوانٍ", "bad");
+  erToast(X.G.pen ? `إجابة خاطئة: خُصمت ${n(X.G.pen)} ثانية، واللغز مقفل 10 ثوانٍ` : "إجابة خاطئة: اللغز مقفل 10 ثوانٍ", "bad");
   erTick(); setTimeout(() => erPanelRefresh(), a.type === "simon" ? 500 : 0);
 }
 /* chest: six dials */
@@ -7087,7 +7363,7 @@ function erChestPanel(p, close){
   X.dials = X.dials && X.dials.room === X.room ? X.dials : {room:X.room, v:[0,0,0,0,0,0]};
   const name = X.room === 2 ? "خزنة المختبر" : X.room === 1 ? "الصندوق النحاسي" : "صندوق النوخذة";
   p.innerHTML = `<div class="er-ph"><span class="er-pic">${I(P.erchest)}</span><div><small>${d.room.name} · الهدف الأخير</small><h3>${name}</h3></div>${close}</div>
-    <div class="er-pb"><p>${all ? "جمعتم كل أرقام الرمز. ضعوا كل رقم في خانته ثم افتحوا الصندوق." : `يُفتح برمز من ست خانات. كل لغز تحلّونه يكشف رقمًا واحدًا (${n(d.room.st.filter(s => m.solved.has(s.id)).length)} من ٦ حتى الآن).`}
+    <div class="er-pb"><p>${all ? "جمعتم كل أرقام الرمز. ضعوا كل رقم في خانته ثم افتحوا الصندوق." : `يُفتح برمز من ست خانات. كل لغز تحلّونه يكشف رقمًا واحدًا (${n(d.room.st.filter(s => m.solved.has(s.id)).length)} من 6 حتى الآن).`}
       ${symMode ? " كل رقم في الحقيبة عليه رمز، وترتيب الرموز محفور فوق الأقفال." : ""}</p>
       <div class="er-dials" dir="ltr">${X.dials.v.map((v, k) => `<div class="er-dial"><small>${symMode ? d.sym[k] : n(k + 1)}</small><button type="button" data-up="${k}" aria-label="زيادة">▲</button><b>${v}</b><button type="button" data-dn="${k}" aria-label="إنقاص">▼</button></div>`).join("")}</div></div>
     <div class="er-pf"><button type="button" class="btn lg" id="erOpen" ${X.spec ? "disabled" : ""}>${I(P.erkey)} افتح</button></div>`;
@@ -7181,12 +7457,12 @@ function erSetup(keepScroll){
           <li>يفتح المقدّم الغرفة فيظهر رمز دخول وباركود. يدخل كل لاعب من جواله أو جهازه ويختار فريقه (من ${n(5)} إلى ${n(10)} لاعبين في الفريق)، أو يلعب الفريق كله على جهاز واحد.</li>
           <li>يرى كل لاعب الغرفة مجسّمة ويمشي فيها بنفسه: يضغط على أي ركن فتمشي شخصيته إليه، ويظهر لغز يحتاج تفكيرًا: منطق، وشيفرات، وأنماط، واستنتاج.</li>
           <li>كل لغز محلول يكشف رقمًا من رمز الصندوق المكوّن من ست خانات، وبعض الأركان مقفلة تحتاج مفتاحًا أو أداة من ركن آخر. ما يحلّه أي لاعب يظهر فورًا عند زملائه.</li>
-          <li>الإجابة الخاطئة تخصم ${n(c.pen)} ثانية وتقفل اللغز ١٠ ثوانٍ. لكل فريق ${n(c.hints)} تلميحات، وكل تلميح يخصم ${c.hc >= 60 ? n(c.hc / 60) + " دقيقة" : n(c.hc) + " ثانية"}.${c.know ? " وصناديق المعرفة الذهبية تسأل من الموسوعة وتمنح تلميحًا إضافيًا." : ""}</li>
+          <li>الإجابة الخاطئة تخصم ${n(c.pen)} ثانية وتقفل اللغز 10 ثوانٍ. لكل فريق ${n(c.hints)} تلميحات، وكل تلميح يخصم ${c.hc >= 60 ? n(c.hc / 60) + " دقيقة" : n(c.hc) + " ثانية"}.${c.know ? " وصناديق المعرفة الذهبية تسأل من الموسوعة وتمنح تلميحًا إضافيًا." : ""}</li>
           <li>عند فتح الصندوق تنتقل الرحلة إلى القصة التالية. ${c.mode === "race" ? "الفائز من يهرب من أكثر الغرف في أقل وقت، وشاشة العرض تتابع تقدّم الفرق." : "في وضع التعاون تعمل كل الفرق معًا على الرحلة نفسها وبوقت واحد."}</li>
         </ol>
       </div>
       <div class="sj-box"><h3>نوع اللعب</h3>${sjSeg("data-erm", c.mode, [["race","سباق بين الفرق"],["coop","تعاون: كل الفرق فريق واحد"]])}</div>
-      <div class="sj-box"><h3>الفرق<small>من ٢ إلى ١٠</small></h3>
+      <div class="sj-box"><h3>الفرق<small>من 2 إلى 10</small></h3>
         ${sjSeg("data-ert", T, [2,3,4,5,6,7,8,9,10].map(k => [k, n(k)]))}
         <div class="sj-names er-names">${Array.from({length:T}, (_, i) => `<input type="text" maxlength="24" data-ern="${i}" style="--tc:${ER_COL[i]}" value="${esc(c.names[i])}" placeholder="${erDefName(i)}" aria-label="اسم ${erDefName(i)}">`).join("")}</div>
       </div>
@@ -7196,8 +7472,8 @@ function erSetup(keepScroll){
         <div><h4>وقت كل غرفة</h4>${sjSeg("data-ermin", c.mins, [10,15,20,30,45].map(k => [k, n(k) + " د"]))}</div>
         <div><h4>عدد الغرف (القصص)</h4>${sjSeg("data-err", c.rooms, [[1,"الأولى فقط"],[2,"غرفتان"],[3,"الثلاث"]])}</div>
         <div><h4>التلميحات لكل فريق</h4>${sjSeg("data-erh", c.hints, [0,1,2,3,4,5].map(k => [k, n(k)]))}</div>
-        <div><h4>خصم التلميح</h4>${sjSeg("data-erhc", c.hc, [[30,"٣٠ ث"],[60,"دقيقة"],[120,"دقيقتان"]])}</div>
-        <div><h4>خصم الإجابة الخاطئة</h4>${sjSeg("data-erp", c.pen, [[0,"بدون"],[15,"١٥ ث"],[30,"٣٠ ث"],[60,"دقيقة"]])}</div>
+        <div><h4>خصم التلميح</h4>${sjSeg("data-erhc", c.hc, [[30,"30 ث"],[60,"دقيقة"],[120,"دقيقتان"]])}</div>
+        <div><h4>خصم الإجابة الخاطئة</h4>${sjSeg("data-erp", c.pen, [[0,"بدون"],[15,"15 ث"],[30,"30 ث"],[60,"دقيقة"]])}</div>
         <div><h4>صناديق المعرفة</h4>${sjSeg("data-erk", c.know ? 1 : 0, [[1,"مفعّلة"],[0,"بدون"]])}<p class="sj-sub">صندوقان ذهبيان في كل غرفة بأسئلة اختيار من الموسوعة.</p></div>
       </div>
       ${c.know ? `<div class="sj-box"><h3>مجالات أسئلة الصناديق<small>${c.cats.length ? n(c.cats.length) + " مختارة" : "كل المجالات"}</small></h3>
@@ -7367,36 +7643,36 @@ const EM_TERR = {
 };
 const EM_TK = ["coast","desert","mount","oasis"];
 const EM_B = {
-  h:{n:"مساكن", e:"🏠", cost:{s:8,g:4}, d:"+١٠ سكان، والزحام يقلل الرضا قليلًا."},
-  p:{n:"حديقة", e:"🌳", cost:{w:8,s:4}, d:"رضا +٤، و+٣ لكل مسكن مجاور."},
-  k:{n:"مدرسة", e:"🏫", cost:{s:12,g:10,e:4}, d:"موارد التحديات +٢٠٪، ورضا +٣."},
-  o:{n:"مستشفى", e:"🏥", cost:{s:12,g:8,w:6}, d:"يحمي من الوباء، ورضا +٥.", pr:"plague"},
-  f:{n:"مصنع", e:"🏭", cost:{s:10,e:10}, d:"+١٢ ذهب كل جولة، ويقلل رضا المساكن المجاورة."},
-  d:{n:"محطة تحلية", e:"🚰", cost:{s:10,e:8}, d:"+٨ ماء كل جولة، وتحمي من الجفاف.", pr:"drought"},
-  x:{n:"محطة كهرباء", e:"🔌", cost:{s:10,g:6}, d:"+٨ طاقة كل جولة، وتحمي من الانقطاع.", pr:"blackout"},
+  h:{n:"مساكن", e:"🏠", cost:{s:8,g:4}, d:"+10 سكان، والزحام يقلل الرضا قليلًا."},
+  p:{n:"حديقة", e:"🌳", cost:{w:8,s:4}, d:"رضا +4، و+3 لكل مسكن مجاور."},
+  k:{n:"مدرسة", e:"🏫", cost:{s:12,g:10,e:4}, d:"موارد التحديات +20%، ورضا +3."},
+  o:{n:"مستشفى", e:"🏥", cost:{s:12,g:8,w:6}, d:"يحمي من الوباء، ورضا +5.", pr:"plague"},
+  f:{n:"مصنع", e:"🏭", cost:{s:10,e:10}, d:"+12 ذهب كل جولة، ويقلل رضا المساكن المجاورة."},
+  d:{n:"محطة تحلية", e:"🚰", cost:{s:10,e:8}, d:"+8 ماء كل جولة، وتحمي من الجفاف.", pr:"drought"},
+  x:{n:"محطة كهرباء", e:"🔌", cost:{s:10,g:6}, d:"+8 طاقة كل جولة، وتحمي من الانقطاع.", pr:"blackout"},
   r:{n:"دفاع مدني", e:"🚒", cost:{s:8,g:8,e:4}, d:"يحمي من الزلزال.", pr:"quake"},
-  t:{n:"محطة مواصلات", e:"🚌", cost:{s:8,e:6,g:4}, d:"تحمي من الازدحام، ورضا +٢.", pr:"traffic"},
-  m:{n:"معلم حضاري", e:"🕌", cost:{s:40,g:40,w:20,e:20}, d:"+٦٠ نقطة ازدهار، ورضا +١٠."}
+  t:{n:"محطة مواصلات", e:"🚌", cost:{s:8,e:6,g:4}, d:"تحمي من الازدحام، ورضا +2.", pr:"traffic"},
+  m:{n:"معلم حضاري", e:"🕌", cost:{s:40,g:40,w:20,e:20}, d:"+60 نقطة ازدهار، ورضا +10."}
 };
 const EM_BK = Object.keys(EM_B);
 const EM_PJ = {
-  bridge:{n:"جسر", e:"🌉", need:{s:40,g:20}, pts:30, d:"+٦ ذهب كل جولة لكل شريك."},
-  port:{n:"ميناء", e:"⚓", need:{s:30,w:20,g:20}, pts:30, d:"+٨ ماء و+٤ ذهب كل جولة لكل شريك."},
-  rail:{n:"سكة قطار", e:"🚆", need:{s:40,e:30}, pts:30, d:"+٨ حجارة كل جولة، وتحمي من الازدحام."},
-  uni:{n:"جامعة", e:"🎓", need:{s:30,g:30,e:20}, pts:40, d:"موارد التحديات +٥٠٪ لكل شريك."}
+  bridge:{n:"جسر", e:"🌉", need:{s:40,g:20}, pts:30, d:"+6 ذهب كل جولة لكل شريك."},
+  port:{n:"ميناء", e:"⚓", need:{s:30,w:20,g:20}, pts:30, d:"+8 ماء و+4 ذهب كل جولة لكل شريك."},
+  rail:{n:"سكة قطار", e:"🚆", need:{s:40,e:30}, pts:30, d:"+8 حجارة كل جولة، وتحمي من الازدحام."},
+  uni:{n:"جامعة", e:"🎓", need:{s:30,g:30,e:20}, pts:40, d:"موارد التحديات +50% لكل شريك."}
 };
 const EM_PK = Object.keys(EM_PJ);
 const EM_EV = {
   drought:{n:"جفاف", e:"☀️", bad:true, by:"d", d:"المدن بلا محطة تحلية تخسر نصف مائها.", lose:"نصف الماء"},
   blackout:{n:"انقطاع الكهرباء", e:"🔌", bad:true, by:"x", d:"المدن بلا محطة كهرباء تخسر نصف طاقتها.", lose:"نصف الطاقة"},
-  plague:{n:"وباء", e:"🦠", bad:true, by:"o", d:"المدن بلا مستشفى يقل رضا سكانها ١٢.", lose:"رضا −١٢"},
+  plague:{n:"وباء", e:"🦠", bad:true, by:"o", d:"المدن بلا مستشفى يقل رضا سكانها 12.", lose:"رضا −12"},
   quake:{n:"زلزال", e:"🌋", bad:true, by:"r", d:"المدن بلا دفاع مدني تخسر مبنى.", lose:"مبنى"},
   traffic:{n:"ازدحام خانق", e:"🚗", bad:true, by:"t", d:"المدن بلا مواصلات ولا سكة قطار تخسر ثلث ذهبها.", lose:"ثلث الذهب"},
-  tourism:{n:"موسم سياحي", e:"🎉", d:"المدن التي فيها معلم حضاري تكسب ٤٠ ذهبًا، والباقي ١٠."},
-  rain:{n:"أمطار الخير", e:"🌧️", d:"كل المدن تكسب ١٥ ماء، والساحلية ٢٥."},
-  mine:{n:"اكتشاف منجم", e:"⛏️", d:"كل المدن تكسب ١٥ حجارة، والجبلية ٣٠."},
-  festival:{n:"مهرجان المدينة", e:"🎊", d:"كل حديقة ترفع الرضا ٣، وكل مدينة تكسب ٥ ذهب."},
-  sun:{n:"صيف مشمس", e:"🔆", d:"المدن الصحراوية والتي فيها محطة كهرباء تكسب ١٥ طاقة، والباقي ٦."}
+  tourism:{n:"موسم سياحي", e:"🎉", d:"المدن التي فيها معلم حضاري تكسب 40 ذهبًا، والباقي 10."},
+  rain:{n:"أمطار الخير", e:"🌧️", d:"كل المدن تكسب 15 ماء، والساحلية 25."},
+  mine:{n:"اكتشاف منجم", e:"⛏️", d:"كل المدن تكسب 15 حجارة، والجبلية 30."},
+  festival:{n:"مهرجان المدينة", e:"🎊", d:"كل حديقة ترفع الرضا 3، وكل مدينة تكسب 5 ذهب."},
+  sun:{n:"صيف مشمس", e:"🔆", d:"المدن الصحراوية والتي فيها محطة كهرباء تكسب 15 طاقة، والباقي 6."}
 };
 const EM_EK = Object.keys(EM_EV);
 const EM_CH = {
@@ -7523,7 +7799,7 @@ function emPenalty(t){
   const k = EM.ev.k, T = EM.teams[t]; let note = "";
   if (k === "drought"){ const v = Math.floor(T.res.w / 2); T.res.w -= v; note = `−${v} 💧`; }
   else if (k === "blackout"){ const v = Math.floor(T.res.e / 2); T.res.e -= v; note = `−${v} ⚡`; }
-  else if (k === "plague"){ T.hapMod -= 12; note = "رضا −١٢"; }
+  else if (k === "plague"){ T.hapMod -= 12; note = "رضا −12"; }
   else if (k === "traffic"){ const v = Math.floor(T.res.g / 3); T.res.g -= v; note = `−${v} 🪙`; }
   else if (k === "quake"){ const idx = T.map.map((b, i) => b && b !== "#" && b !== "m" ? i : -1).filter(i => i >= 0);
     if (idx.length){ const i = idx[Math.floor(Math.random() * idx.length)]; note = `تهدّم ${EM_B[T.map[i]].n}`; T.map[i] = ""; }
@@ -7642,7 +7918,7 @@ function emMapHTML(map, terr, opts = {}){
 }
 function emResHTML(res, big){ return `<div class="em-res${big ? " big" : ""}">${EM_RK.map(r => `<span title="${EM_RES[r].n}"><i>${EM_RES[r].e}</i><b>${n(res[r] || 0)}</b></span>`).join("")}</div>`; }
 const emTerrTag = k => { const T = EM_TERR[k]; return `<span class="em-terr">${T.e} ${T.n}</span>`; };
-const emRichTxt = k => { const T = EM_TERR[k]; return `${EM_RES[T.rich].e} ${EM_RES[T.rich].n} ×١٫٥ · ${EM_RES[T.poor].e} ${EM_RES[T.poor].n} ×½`; };
+const emRichTxt = k => { const T = EM_TERR[k]; return `${EM_RES[T.rich].e} ${EM_RES[T.rich].n} ×1.5 · ${EM_RES[T.poor].e} ${EM_RES[T.poor].n} ×½`; };
 const EM_PHN = {lobby:"الاستعداد", work:"مرحلة العمل", build:"مرحلة البناء", event:"عجلة الأحداث", spin:"عجلة الأحداث", rescue:"الإنقاذ", result:"نتيجة الجولة", end:"النهاية"};
 
 /* ---------- setup ---------- */
@@ -7664,20 +7940,20 @@ function emSetup(keepScroll){
           <li>كل فريق يبدأ بأرض مختلفة: ساحلية أو صحراوية أو جبلية أو واحة تجارية. ولكل أرض مورد وفير ومورد قليل، فتحتاج المدن بعضها.</li>
           <li><b>مرحلة العمل:</b> كل لاعب يختار من جواله تحديًا قصيرًا: الأنابيب تعطي ماء، ولوحة الكهرباء طاقة، والسوق ذهبًا، والبنّاء حجارة، والخريطة من كل مورد. كل تحدٍّ ينجح يضيف للمخزن مباشرة.</li>
           <li><b>مرحلة البناء:</b> قائد الفريق يضع المباني على خريطة مدينته، والباقون يقترحون. المكان مهم: الحديقة بجانب المساكن ترفع الرضا، والمصنع بجانبها يقلله.</li>
-          <li><b>عجلة الأحداث:</b> جفاف أو زلزال أو وباء أو ازدحام أو انقطاع كهرباء. المدينة التي عندها المبنى المناسب تنجو، والباقي يحاول إنقاذ نفسه بتحدٍّ خلال ٦٠ ثانية. وفيه أحداث حلوة أيضًا.</li>
+          <li><b>عجلة الأحداث:</b> جفاف أو زلزال أو وباء أو ازدحام أو انقطاع كهرباء. المدينة التي عندها المبنى المناسب تنجو، والباقي يحاول إنقاذ نفسه بتحدٍّ خلال 60 ثانية. وفيه أحداث حلوة أيضًا.</li>
           <li>القادة يتبادلون الموارد بعروض من جوالاتهم، ويشتركون في مشاريع كبيرة مثل الجسر والميناء والجامعة.</li>
           <li>في النهاية تُحسب نقاط الازدهار من السكان ورضاهم والمباني والمعالم والمشاريع.</li>
         </ol>
       </div>
-      <div class="sj-box"><h3>المدن<small>من ٢ إلى ١٠ فرق</small></h3>
+      <div class="sj-box"><h3>المدن<small>من 2 إلى 10 فرق</small></h3>
         <div class="stepper ss-step"><button type="button" id="emTPlus" aria-label="زيادة" ${N >= 10 ? "disabled" : ""}>+</button><output>${n(N)}</output><button type="button" id="emTMinus" aria-label="إنقاص" ${N <= 2 ? "disabled" : ""}>−</button></div>
         <div class="sj-names">${Array.from({length:N}, (_,i) => `<input type="text" maxlength="24" data-emn="${i}" style="--tc:${EM_COL[i]}" value="${esc(emCfg.names[i])}" placeholder="${emDefName(i)}" aria-label="اسم ${emDefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>عدد الجولات</h4>${sjSeg("data-emr", emCfg.rounds, [[5,"٥"],[7,"٧"],[10,"١٠"]])}</div>
+        <div><h4>عدد الجولات</h4>${sjSeg("data-emr", emCfg.rounds, [[5,"5"],[7,"7"],[10,"10"]])}</div>
         <div><h4>المستوى</h4>${sjSeg("data-eml", emCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"]])}</div>
-        <div><h4>وقت العمل</h4>${sjSeg("data-emw", emCfg.work, [[90,"١٫٥ د"],[150,"٢٫٥ د"],[180,"٣ د"],[240,"٤ د"]])}</div>
-        <div><h4>وقت البناء</h4>${sjSeg("data-emb", emCfg.build, [[45,"٤٥ ث"],[60,"١ د"],[90,"١٫٥ د"]])}</div>
+        <div><h4>وقت العمل</h4>${sjSeg("data-emw", emCfg.work, [[90,"1.5 د"],[150,"2.5 د"],[180,"3 د"],[240,"4 د"]])}</div>
+        <div><h4>وقت البناء</h4>${sjSeg("data-emb", emCfg.build, [[45,"45 ث"],[60,"1 د"],[90,"1.5 د"]])}</div>
         <div><h4>الأزمات</h4>${sjSeg("data-emc", emCfg.crises ? 1 : 0, [[1,"مفعّلة"],[0,"أحداث حلوة فقط"]])}</div>
         <div><h4>الانسحاب من المشاريع</h4>${sjSeg("data-emx", emCfg.betray ? 1 : 0, [[0,"ممنوع"],[1,"مسموح مع خسارة سمعة"]])}</div>
       </div>
@@ -7739,7 +8015,7 @@ async function emRender(){
   } else if (ph === "event" || ph === "spin" || ph === "rescue" || ph === "result"){
     panel = emEventPanel();
   }
-  const ctl = ph === "work" || ph === "build" ? `<button class="mini" type="button" id="emMore">+٣٠ ث</button><button class="btn" type="button" id="emSkip">${ph === "work" ? "إلى البناء" : "إلى الأحداث"}</button>`
+  const ctl = ph === "work" || ph === "build" ? `<button class="mini" type="button" id="emMore">+30 ث</button><button class="btn" type="button" id="emSkip">${ph === "work" ? "إلى البناء" : "إلى الأحداث"}</button>`
     : ph === "rescue" ? `<button class="btn" type="button" id="emSkip">إنهاء الإنقاذ</button>` : "";
   $app.innerHTML = `<section class="em gut view"><div class="wrap em-wrap">
     <div class="b4-top"><div class="b4-title"><b>إعمار</b><span class="tk-room">الغرفة ${tkCodeHTML(EM.code)}</span><span>الجولة ${n(Math.max(1, EM.round))} من ${n(EM.rounds)}</span></div>
@@ -7752,12 +8028,12 @@ async function emRender(){
         <div class="em-ch"><b>${esc(nm)}</b>${emTerrTag(EM.terr[t])}<span class="em-dev">${I(P.tkphone)}<span data-emdev="${t}">${n((by[t] || []).length)}</span></span></div>
         ${emMapHTML(T.map, EM.terr[t])}
         ${emResHTML(T.res)}
-        <div class="em-stats"><span>👥 ${n(sc.pop)}</span><span>😊 ${n(sc.hap)}٪</span><span class="em-score">⭐ ${n(sc.total)}</span></div>
+        <div class="em-stats"><span>👥 ${n(sc.pop)}</span><span>😊 ${n(sc.hap)}%</span><span class="em-score">⭐ ${n(sc.total)}</span></div>
         ${st && (ph === "rescue" || ph === "result" || ph === "spin") ? `<div class="em-st st-${st}">${{safe:"✓ محمية", need:"⏳ تحاول الإنقاذ", saved:"✓ أنقذت نفسها", lost:"✗ تضررت", good:"✓"}[st]} ${esc(EM.ev.note[t] || "")}</div>` : ""}
       </button>`; }).join("")}</div>
       <aside class="em-side">
         <div class="em-box"><h4>المشاريع المشتركة</h4>${EM_PK.map(p => { const P = EM.proj[p], D = EM_PJ[p], tot = EM_RK.reduce((s, r) => s + (D.need[r] || 0), 0), have = EM_RK.reduce((s, r) => s + Math.min(D.need[r] || 0, P.have[r] || 0), 0);
-          return `<div class="em-pj${P.done ? " done" : ""}"><div><b>${D.e} ${D.n}</b><span>${P.done ? "اكتمل" : n(Math.round(have / tot * 100)) + "٪"}</span></div><i style="--w:${have / tot * 100}%"></i>
+          return `<div class="em-pj${P.done ? " done" : ""}"><div><b>${D.e} ${D.n}</b><span>${P.done ? "اكتمل" : n(Math.round(have / tot * 100)) + "%"}</span></div><i style="--w:${have / tot * 100}%"></i>
             <div class="em-pjm">${Object.keys(P.by).map(t => `<span style="--tc:${EM_COL[t]}">${esc(EM.names[t])}</span>`).join("") || "<small>بلا شركاء بعد</small>"}</div></div>`; }).join("")}</div>
         <div class="em-box"><h4>آخر الأخبار</h4><ul class="em-log">${EM.log.slice(0, 7).map(l => `<li>${esc(l.s)}</li>`).join("") || "<li>تبدأ الأخبار مع أول جولة.</li>"}</ul></div>
         <div class="em-box em-rank"><h4>الترتيب</h4><ol>${EM.names.map((nm, t) => ({nm, t, s: emScore(t).total})).sort((a, b) => b.s - a.s).map(r => `<li style="--tc:${EM_COL[r.t]}"><b>${esc(r.nm)}</b><span>${n(r.s)}</span></li>`).join("")}</ol></div>
@@ -7862,7 +8138,7 @@ function emConsole(el, ctx){
     <div class="em-ch2"><div><small>${ctx.host ? "تتحكم من الشاشة في" : ctx.lead ? "أنت قائد" : "فريقك"}</small><b>${esc(g.names[t])}</b>${emTerrTag(g.terr[t])}</div>
       <div class="em-ph"><small>${EM_PHN[ph]}${g.round ? ` · الجولة ${n(g.round)}/${n(g.rounds)}` : ""}</small><strong class="em-pclk" data-emclk>${(ph === "work" || ph === "build" || ph === "rescue") ? emFmt(ctx.left != null ? ctx.left : g.left / 1000) : ""}</strong></div></div>
     ${emResHTML(tv.res, true)}
-    <div class="em-stats"><span>👥 ${n(tv.pop)}</span><span>😊 ${n(tv.hap)}٪</span><span>⭐ ${n(tv.score)}</span><span>المركز ${n(others)}</span></div>
+    <div class="em-stats"><span>👥 ${n(tv.pop)}</span><span>😊 ${n(tv.hap)}%</span><span>⭐ ${n(tv.score)}</span><span>المركز ${n(others)}</span></div>
     ${tabs.length > 1 ? `<div class="seg em-tabs">${tabs.map(([k, l]) => `<button type="button" role="radio" aria-checked="${emUI.tab === k}" data-emtab="${k}">${l}${k === "tr" && inOffers ? ` <em class="em-dot">${n(inOffers)}</em>` : ""}</button>`).join("")}</div>` : ""}
     ${body}
   </div>`;
@@ -7914,7 +8190,7 @@ function emTradeBind(el, ctx){
 }
 function emProjHTML(ctx){
   const {g, tv, t} = ctx;
-  return `<p class="em-small">مشاريع كبيرة لا تبنيها مدينة وحدها: يشترك فيها ٢ إلى ٣ مدن، ولا يزيد نصيب المدينة الواحدة عن ٦٠٪. عند اكتماله يأخذ كل شريك فائدته ونقاطه.${g.betray ? " يمكن الانسحاب قبل الاكتمال واسترداد الموارد، لكن تنخصم ١٥ نقطة من السمعة." : ""}</p>
+  return `<p class="em-small">مشاريع كبيرة لا تبنيها مدينة وحدها: يشترك فيها 2 إلى 3 مدن، ولا يزيد نصيب المدينة الواحدة عن 60%. عند اكتماله يأخذ كل شريك فائدته ونقاطه.${g.betray ? " يمكن الانسحاب قبل الاكتمال واسترداد الموارد، لكن تنخصم 15 نقطة من السمعة." : ""}</p>
     <div class="em-pjs">${EM_PK.map(p => { const P = g.proj[p], D = EM_PJ[p], mem = Object.keys(P.by).map(Number), isM = mem.includes(t), full = !isM && mem.length >= 3;
       const open = emUI.pj === p && ctx.lead && !P.done && !full;
       return `<div class="em-card em-pjc${P.done ? " done" : ""}"><div class="em-ofh"><b>${D.e} ${D.n}</b><span>${P.done ? (isM ? "اكتمل ✓ وأنتم شركاء" : "اكتمل") : full ? "مكتمل الشركاء" : `${n(D.pts)} نقطة`}</span></div>
@@ -8243,12 +8519,12 @@ function mfSetup(keepScroll){
         <div class="b4-pts mf-pts"><span><b>+${MF_PTS.safe}</b>مربع آمن</span><span class="bad"><b>−${MF_PTS.boom}</b>لغم فريق ثاني</span><span class="bad"><b>−${MF_PTS.own}</b>لغم الفريق نفسه</span><span><b>+${MF_PTS.owner}</b>لصاحب اللغم المنفجر</span></div>
         <p class="sj-sub" style="margin:0">وفي النهاية يأخذ «أخطر زارع» (الفريق الذي أوقعت ألغامه أكثر الفرق) ${n(MF_PTS.bonus)} نقطة إضافية.</p>
       </div>
-      <div class="sj-box"><h3>الفرق<small>من ٢ إلى ٨</small></h3>
+      <div class="sj-box"><h3>الفرق<small>من 2 إلى 8</small></h3>
         ${sjSeg("data-mft", T, [2,3,4,5,6,7,8].map(k => [k, k === 2 ? "فريقان" : n(k)]))}
         <div class="sj-names">${Array.from({length:T}, (_,i) => `<input type="text" maxlength="24" data-mfn="${i}" style="--tc:var(--c${i+1})" value="${esc(mfCfg.names[i])}" placeholder="${mfDefName(i)}" aria-label="اسم ${mfDefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>حجم اللوحة</h4>${sjSeg("data-mfs", mfCfg.size, [["4x5","٥×٤"],["5x5","٥×٥"],["6x6","٦×٦"]])}
+        <div><h4>حجم اللوحة</h4>${sjSeg("data-mfs", mfCfg.size, [["4x5","5×4"],["5x5","5×5"],["6x6","6×6"]])}
           <p class="sj-sub">${n(cells)} مربعًا مرقّمة.</p></div>
         <div><h4>ألغام كل فريق</h4><div class="seg" role="radiogroup">${[1,2,3,4,5].map(k => `<button type="button" role="radio" data-mfm="${k}" aria-checked="${k === mfCfg.mines}" ${k > max ? "disabled" : ""}>${n(k)}</button>`).join("")}</div>
           <p class="sj-sub">${max < 5 ? `الحد الأعلى ${n(max)} مع ${n(T)} فرق على هذه اللوحة، حتى تبقى مربعات آمنة كافية.` : "كل فريق يزرع هذا العدد بالضبط."}</p></div>
@@ -8263,9 +8539,9 @@ function mfSetup(keepScroll){
           return `<button type="button" class="sj-cat ${k ? "" : "na"}" data-mfc="${i}" aria-pressed="${on}" ${k ? "" : "disabled"}>${I(P[m.icon] || P.general)}<span><b>${esc(c)}</b><small>${k ? n(k) + " سؤالًا" : "لا توجد أسئلة بهذا النوع"}</small></span></button>`; }).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h4>وقت الإجابة</h4>${sjSeg("data-mfq", mfCfg.time, [[0,"بدون"],[15,"١٥ث"],[30,"٣٠ث"],[45,"٤٥ث"],[60,"٦٠ث"]])}
+        <div><h4>وقت الإجابة</h4>${sjSeg("data-mfq", mfCfg.time, [[0,"بدون"],[15,"15ث"],[30,"30ث"],[45,"45ث"],[60,"60ث"]])}
           <p class="sj-sub">عدّاد يظهر مع كل سؤال، والمقدّم يحكم على الإجابة.</p></div>
-        <div><h4>مدة المسابقة</h4>${sjSeg("data-mfd", mfCfg.dur, [[0,"مفتوحة"],[10,"١٠د"],[15,"١٥د"],[20,"٢٠د"],[30,"٣٠د"]])}
+        <div><h4>مدة المسابقة</h4>${sjSeg("data-mfd", mfCfg.dur, [[0,"مفتوحة"],[10,"10د"],[15,"15د"],[20,"20د"],[30,"30د"]])}
           <p class="sj-sub">${mfCfg.dur ? "عند انتهاء الوقت تنتهي المسابقة بعد السؤال الحالي." : "تنتهي بكشف كل المربعات الآمنة أو بزر الإنهاء."}</p></div>
       </div>
       <div class="sj-box"><h3>أدوات خاصة<small>اختيارية، ولكل فريق مرة واحدة</small></h3>
