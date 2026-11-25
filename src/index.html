@@ -776,6 +776,10 @@ body.er-lock{overflow:hidden}
 .er-story.r1{background:linear-gradient(160deg,#2F4775,#14213A 75%)}
 .er-story.r2{background:linear-gradient(160deg,#1FA7B8,#22355A 80%)}
 .er-story[data-off]{opacity:.45;filter:saturate(.4)}
+button.er-story{font:inherit;text-align:start;border:0;cursor:pointer;width:100%}
+.er-story .er-stick{position:absolute;top:14px;inset-inline-end:14px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.22);box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
+.er-story .er-stick svg{width:16px;height:16px;opacity:0}
+.er-story[aria-checked="true"] .er-stick{background:#fff;color:#1d2b3a}.er-story[aria-checked="true"] .er-stick svg{opacity:1}
 .er-story small{font-size:12.5px;opacity:.85;font-weight:600}
 .er-story b{font-size:24px;line-height:1.2}
 .er-story p{margin:6px 0 0;font-size:13.5px;line-height:1.55;opacity:.92;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
@@ -1042,6 +1046,7 @@ body.er-lock{overflow:hidden}
 .er-rdone{margin:0;color:var(--good);font-weight:700}
 .er-qrpop{margin-top:10px}
 .er-pick .btn{color:#FFFFFF}
+.er-tnames{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:4px}.er-tnames li{font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--tc) 14%,var(--tile));color:var(--tc)}
 .er-grp{display:inline-block;border:2px solid rgba(127,227,238,.55);border-radius:12px;padding:0 6px;margin:3px 2px;line-height:2.2}
 .er-grp .er-grp{border-color:rgba(255,214,10,.55)}
 /*EM-CSS-START*/
@@ -7735,13 +7740,18 @@ const erName = i => (erCfg.names[i] || "").trim() || erDefName(i);
 function erTidy(){
   const c = erCfg; c.mode = c.mode === "coop" ? "coop" : "race"; c.teams = Math.min(10, Math.max(2, +c.teams || 4)); c.dev = Math.min(10, Math.max(5, +c.dev || 6));
   c.base = [0,1,2].includes(+c.base) ? +c.base : 1; c.mins = [10,15,20,30,45].includes(+c.mins) ? +c.mins : 20; c.hints = Math.min(5, Math.max(0, +c.hints)); if (isNaN(c.hints)) c.hints = 3;
-  c.hc = [30,60,120].includes(+c.hc) ? +c.hc : 60; c.pen = [0,15,30,60].includes(+c.pen) ? +c.pen : 30; c.rooms = [1,2,3].includes(+c.rooms) ? +c.rooms : 3; c.know = c.know !== false;
+  c.hc = [30,60,120].includes(+c.hc) ? +c.hc : 60; c.pen = [0,15,30,60].includes(+c.pen) ? +c.pen : 30; c.pick = erPickOf(c); c.rooms = c.pick.length; c.know = c.know !== false;
   const cats = allCats(); c.cats = (c.cats || []).filter(x => cats.includes(x)); while (c.names.length < 10) c.names.push("");
 }
+/* TN-ERPICK: the host picks which rooms to play (any of the three, played in story order).
+   G.pick lists room ids; open/fail/pen stay indexed by room id. Older games without pick play rooms 0..rooms-1. */
+const erPickOf = G => { const p = Array.isArray(G.pick) ? [...new Set(G.pick.map(Number))].filter(i => i === 0 || i === 1 || i === 2).sort() : [];
+  return p.length ? p : [0, 1, 2].slice(0, [1, 2, 3].includes(+G.rooms) ? +G.rooms : 3); };
+const erPrev = (G, r) => { const pk = erPickOf(G), i = pk.indexOf(r); return i > 0 ? pk[i - 1] : -1; };
 const ER_LVN = ["سهل","متوسط","صعب"];
 const erKnowPool = G => { const lv = ER_LVN[G.base]; let p = BANK.filter(q => q.kind === "mcq" && (!G.cats || !G.cats.length || G.cats.includes(q.category))); const p2 = p.filter(q => q.difficulty === lv); return p2.length >= 6 ? p2 : p; };
 const erClock = s => { s = Math.max(0, Math.ceil(s)); return `${Math.floor(s/60)}:${String(s % 60).padStart(2,"0")}`; };
-const erFromCfg = () => ({ id: Math.random().toString(36).slice(2, 10), seed: Math.random().toString(36).slice(2, 12), mode:erCfg.mode, base:erCfg.base, mins:erCfg.mins, hints:erCfg.hints, hc:erCfg.hc, pen:erCfg.pen, rooms:erCfg.rooms, know:erCfg.know, cats:erCfg.cats.slice(), dev:erCfg.dev });
+const erFromCfg = () => ({ id: Math.random().toString(36).slice(2, 10), seed: Math.random().toString(36).slice(2, 12), mode:erCfg.mode, base:erCfg.base, mins:erCfg.mins, hints:erCfg.hints, hc:erCfg.hc, pen:erCfg.pen, rooms:erCfg.pick.length, pick:erCfg.pick.slice(), know:erCfg.know, cats:erCfg.cats.slice(), dev:erCfg.dev });
 
 /* ---------- team state: every device keeps its own record; a team's state is the union of its devices ---------- */
 function erMerge(list, G){
@@ -7752,13 +7762,14 @@ function erMerge(list, G){
   return m;
 }
 function erProgress(G, m, now){
-  const rooms = G.rooms || 3; let r = 0; while (r < rooms && (m.open[r] || m.fail[r])) r++;
-  const done = r >= rooms, start = r === 0 ? G.startAt : (m.open[r-1] || m.fail[r-1]) + 15000;
+  const pk = erPickOf(G), rooms = pk.length; let pos = 0; while (pos < rooms && (m.open[pk[pos]] || m.fail[pk[pos]])) pos++;
+  const done = pos >= rooms, r = pk[Math.min(pos, rooms - 1)];
+  const stOf = k => k === 0 ? G.startAt : (m.open[pk[k-1]] || m.fail[pk[k-1]]) + 15000, start = done ? 0 : stOf(pos);
   const left = done || !G.startAt ? 0 : G.mins * 60 - (now - start) / 1000 - m.pen[r];
-  const escaped = [0,1,2].filter(i => i < rooms && m.open[i] && !(m.fail[i] && m.fail[i] < m.open[i])).length;
-  let used = 0; for (let i = 0; i < Math.min(r, rooms); i++){ const st = i === 0 ? G.startAt : (m.open[i-1] || m.fail[i-1]) + 15000; used += ((m.open[i] || m.fail[i]) - st) / 1000 + m.pen[i]; }
+  const escaped = pk.filter(i => m.open[i] && !(m.fail[i] && m.fail[i] < m.open[i])).length;
+  let used = 0; for (let k = 0; k < pos; k++){ const i = pk[k]; used += ((m.open[i] || m.fail[i]) - stOf(k)) / 1000 + m.pen[i]; }
   const solvedNow = done ? 6 : ER_ROOMS[r].st.filter(s => m.solved.has(s.id)).length;
-  return {r, done, start, left, escaped, used, solvedNow, hintsLeft: (G.hints * (G.mode === "coop" ? (G.names || []).length || 1 : 1)) + m.bonus - m.hints.length};
+  return {r, pos, done, start, left, escaped, used, solvedNow, hintsLeft: (G.hints * (G.mode === "coop" ? (G.names || []).length || 1 : 1)) + m.bonus - m.hints.length};
 }
 
 /* ---------- the running game on this device ---------- */
@@ -7773,7 +7784,7 @@ function erTeamStates(){
   return list;
 }
 function erPublish(){ const X = ERX; if (!X || !X.net || !ROOM || X.spec) return; clearTimeout(X.pubT);
-  X.pubT = setTimeout(() => { const m = X.me; ROOM.presence({er:{g:X.G.id, t:X.team, s:Object.keys(m.s), k:m.k, p:m.p, h:m.h, b:m.b, o:m.o, f:m.f, x:+(m.x||0).toFixed(2), z:+(m.z||0).toFixed(2), j:m.j, spec:X.spec || undefined}}).catch(() => {}); }, 250); }
+  X.pubT = setTimeout(() => { const m = X.me; ROOM.presence({er:{g:X.G.id, t:X.team, s:Object.keys(m.s), k:m.k, p:m.p, h:m.h, b:m.b, o:m.o, f:m.f, x:+(m.x||0).toFixed(2), z:+(m.z||0).toFixed(2), j:m.j, n:X.pname || undefined, spec:X.spec || undefined}}).catch(() => {}); }, 250); }
 function erSave(){ if (ERX) store.set(erMeKey, ERX.me); }
 
 async function erStart(G, team, net){
@@ -7855,7 +7866,7 @@ function erHud(){
   const warn = pr.left < 60 ? " hot" : pr.left < 180 ? " warm" : "";
   const team = G.mode === "coop" ? "كل الفرق معًا" : esc((G.names || [])[X.team] || "فريقك");
   h.innerHTML = `<div class="er-hud-l"><span class="er-chip team"><i></i>${team}${pr && X.merged && X.merged.devs > 1 ? ` · ${n(X.merged.devs)} أجهزة` : ""}</span>
-      <span class="er-chip ttl"><small>${room.tag} · ${n(X.room + 1)} من ${n(G.rooms)}</small><b>${room.name}</b></span></div>
+      <span class="er-chip ttl"><small>${room.tag} · ${n(erPickOf(G).indexOf(X.room) + 1)} من ${n(erPickOf(G).length)}</small><b>${room.name}</b></span></div>
     <div class="er-hud-c"><span class="er-time${warn}" role="timer"><small>الوقت المتبقي</small><b>${G.startAt ? erClock(pr.left) : erClock(G.mins * 60)}</b></span></div>
     <div class="er-hud-r"><span class="er-chip hint" title="التلميحات المتبقية">${I(P.erbulb)}<b>${n(Math.max(0, pr.hintsLeft))}</b></span>
       <span class="er-chip" title="ألغاز محلولة">${I(P.check)}<b>${n(pr.solvedNow)}/6</b></span>
@@ -8004,7 +8015,7 @@ function erModal(html, cls){ const m = document.getElementById("erModal"); if (!
 function erHideModal(){ const m = document.getElementById("erModal"); if (m){ m.hidden = true; m.innerHTML = ""; } }
 function erIntro(r, again){
   const X = ERX, room = ER_ROOMS[r], G = X.G;
-  const m = erModal(`<p class="er-eyebrow">${room.tag} · الغرفة ${n(r + 1)} من ${n(G.rooms)}</p><h2>${room.name}</h2>${room.intro.map(t => `<p>${t}</p>`).join("")}
+  const m = erModal(`<p class="er-eyebrow">${room.tag} · الغرفة ${n(erPickOf(G).indexOf(r) + 1)} من ${n(erPickOf(G).length)}</p><h2>${room.name}</h2>${room.intro.map(t => `<p>${t}</p>`).join("")}
     <div class="er-facts"><span><b>${n(G.mins)}</b><small>دقيقة ${room.time}</small></span><span><b>6</b><small>ألغاز وصندوق</small></span><span><b>${n(Math.max(0, X.pr ? X.pr.hintsLeft : G.hints))}</b><small>تلميحات للفريق</small></span></div>
     <p class="er-small">اضغطوا على أي ركن أو على اسمه ليمشي إليه اللاعب. اسحبوا لتدوير الغرفة، وكبّروا بإصبعين أو بعجلة الفأرة.</p>
     <button type="button" class="btn lg" id="erGo">${again ? "متابعة" : G.startAt || X.net ? "ادخلوا الغرفة" : "ابدأ العدّ التنازلي"}</button>`, "story");
@@ -8013,7 +8024,7 @@ function erIntro(r, again){
     if (!G.startAt && !X.net){ G.startAt = Date.now(); store.set("er-local", G); } erTick(); };
 }
 function erOutro(r, mine){
-  const X = ERX, room = ER_ROOMS[r], G = X.G, m = X.merged, last = r + 1 >= G.rooms;
+  const X = ERX, room = ER_ROOMS[r], G = X.G, m = X.merged, last = erPickOf(G).indexOf(r) + 1 >= erPickOf(G).length;
   const st = r === 0 ? G.startAt : (m.open[r-1] || m.fail[r-1]) + 15000, used = ((m.open[r] || erNow()) - st) / 1000 + m.pen[r];
   erModal(`<div class="er-burst">${I(P.erchest)}</div><p class="er-eyebrow">نجحتم في الهروب</p><h2>انفتح ${r === 2 ? "الخزنة" : "الصندوق"}!</h2><p>${room.outro}</p>
     <div class="er-facts"><span><b>${erClock(used)}</b><small>الوقت المستغرق</small></span><span><b>${n(m.hints.length)}</b><small>تلميحات مستخدمة</small></span><span><b dir="ltr">${erRoomData(r).code.join("")}</b><small>الرمز</small></span></div>
@@ -8022,16 +8033,16 @@ function erOutro(r, mine){
 }
 function erTransition(prev){ const X = ERX, m = X.merged; X.modalFor = prev; if (X.scene && m.open[prev]){ X.scene.openChest(); ERA.sfx("chest"); setTimeout(() => erOutro(prev), 1500); } else erTimeUp(prev); }
 function erTimeUp(r){
-  const X = ERX, G = X.G, last = r + 1 >= G.rooms; X.modalFor = r; erClosePanel(true);
+  const X = ERX, G = X.G, last = erPickOf(G).indexOf(r) + 1 >= erPickOf(G).length; X.modalFor = r; erClosePanel(true);
   erModal(`<p class="er-eyebrow">انتهى الوقت</p><h2>لم ينفتح ${r === 2 ? "الخزنة" : "الصندوق"} هذه المرة</h2><p>كان الرمز <b dir="ltr">${erRoomData(r).code.join("")}</b>. لا بأس، الرحلة مستمرة والقصة لم تنتهِ بعد.</p>
     <button type="button" class="btn lg" id="erNext">${last ? "النتيجة النهائية" : "إلى الغرفة التالية ‹"}</button>`, "lose");
   document.getElementById("erNext").onclick = () => { X.ended[r] = true; X.modalFor = null; erHideModal(); erTick(); };
 }
 function erFinal(byHost){
   const X = ERX, G = X.G, m = X.merged, pr = erProgress(G, m, erNow()); X.room = -2; erClosePanel(true); ERA.stopAmb(); ERA.level = 0;
-  const rows = Array.from({length:G.rooms}, (_, i) => { const ok = m.open[i] && !(m.fail[i] && m.fail[i] < m.open[i]); const st = i === 0 ? G.startAt : (m.open[i-1] || m.fail[i-1]) + 15000; const end = m.open[i] || m.fail[i];
+  const rows = erPickOf(G).map(i => { const ok = m.open[i] && !(m.fail[i] && m.fail[i] < m.open[i]), pv = erPrev(G, i); const st = pv < 0 ? G.startAt : (m.open[pv] || m.fail[pv]) + 15000; const end = m.open[i] || m.fail[i];
     return `<li class="${ok ? "ok" : end ? "no" : ""}"><b>${ER_ROOMS[i].name}</b><span>${ok ? "هربتم" : end ? "انتهى الوقت" : "لم تُلعب"}</span><em>${end ? erClock((end - st)/1000 + m.pen[i]) : "—"}</em></li>`; }).join("");
-  erModal(`<div class="er-burst">${I(P.trophy)}</div><p class="er-eyebrow">${byHost ? "أنهى المقدّم المسابقة" : "انتهت الرحلة"}</p><h2>${pr.escaped === G.rooms ? "هربتم من كل الغرف!" : pr.escaped ? `هربتم من ${n(pr.escaped)} من ${n(G.rooms)} غرف` : "لم تتمكنوا من الهروب هذه المرة"}</h2>
+  erModal(`<div class="er-burst">${I(P.trophy)}</div><p class="er-eyebrow">${byHost ? "أنهى المقدّم المسابقة" : "انتهت الرحلة"}</p><h2>${pr.escaped === erPickOf(G).length ? (erPickOf(G).length > 1 ? "هربتم من كل الغرف!" : "هربتم من الغرفة!") : pr.escaped ? `هربتم من ${n(pr.escaped)} من ${n(erPickOf(G).length)} غرف` : "لم تتمكنوا من الهروب هذه المرة"}</h2>
     <ul class="er-res">${rows}</ul><p class="er-small">مجموع الوقت مع العقوبات: <b>${erClock(pr.used)}</b></p>
     <button type="button" class="btn lg" id="erDone">${X.net ? "العودة" : "العودة إلى الإعدادات"}</button>`, "win");
   if (!byHost) ERA.sfx("chest");
@@ -8061,10 +8072,10 @@ function erSetup(keepScroll){
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${ERH && ERH.phase !== "end" ? `<div class="sj-resume"><span>عندك مسابقة جارية (${n(ERH.names.length)} فرق، رمز الدخول ${ERH.code}).</span><button class="btn" type="button" id="erResume">متابعة</button></div>` : ""}
       ${local && local.startAt ? `<div class="sj-resume"><span>عندك تجربة جارية على هذا الجهاز.</span><button class="btn" type="button" id="erResumeL">متابعة التجربة</button></div>` : ""}
-      <div class="er-stories">${ER_ROOMS.map((r, i) => `<article class="er-story r${i}" ${i >= c.rooms ? 'data-off="1"' : ""}><span class="er-snum">${n(i + 1)}</span><small>${r.tag} · ${["الأسهل","أصعب","الأصعب"][i]}</small><b>${r.name}</b><p>${r.intro[0]}</p></article>`).join("")}</div>
+      <div class="er-stories">${ER_ROOMS.map((r, i) => `<button type="button" class="er-story r${i}" data-erpk="${i}" role="checkbox" aria-checked="${c.pick.includes(i)}" ${c.pick.includes(i) ? "" : 'data-off="1"'}><span class="er-snum">${n(i + 1)}</span><i class="er-stick">${I(P.check)}</i><small>${r.tag} · ${["الأسهل","أصعب","الأصعب"][i]}</small><b>${r.name}</b><p>${r.intro[0]}</p></button>`).join("")}</div>
       <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
-          <li>يفتح المقدّم الغرفة فيظهر رمز دخول وباركود. يدخل كل لاعب من جواله أو جهازه ويختار فريقه (من ${n(5)} إلى ${n(10)} لاعبين في الفريق)، أو يلعب الفريق كله على جهاز واحد.</li>
+          <li>يفتح المقدّم الغرفة فيظهر رمز دخول وباركود. يدخل كل لاعب من جواله أو جهازه ويكتب اسمه ويختار فريقه (من ${n(5)} إلى ${n(10)} لاعبين في الفريق)، أو يلعب الفريق كله على جهاز واحد.</li>
           <li>يرى كل لاعب الغرفة مجسّمة ويمشي فيها بنفسه: يضغط على أي ركن فتمشي شخصيته إليه، ويظهر لغز يحتاج تفكيرًا: منطق، وشيفرات، وأنماط، واستنتاج.</li>
           <li>كل لغز محلول يكشف رقمًا من رمز الصندوق المكوّن من ست خانات، وبعض الأركان مقفلة تحتاج مفتاحًا أو أداة من ركن آخر. ما يحلّه أي لاعب يظهر فورًا عند زملائه.</li>
           <li>الإجابة الخاطئة تخصم ${n(c.pen)} ثانية وتقفل اللغز 10 ثوانٍ. لكل فريق ${n(c.hints)} تلميحات، وكل تلميح يخصم ${c.hc >= 60 ? n(c.hc / 60) + " دقيقة" : n(c.hc) + " ثانية"}.${c.know ? " وصناديق المعرفة الذهبية تسأل من الموسوعة وتمنح تلميحًا إضافيًا." : ""}</li>
@@ -8080,7 +8091,7 @@ function erSetup(keepScroll){
         <div><h2 class="h4">مستوى الألغاز</h2>${sjSeg("data-erl", c.base, [[0,"سهل"],[1,"متوسط"],[2,"صعب"]])}<p class="sj-sub">${["مناسب للمرحلة المتوسطة: ألغاز مباشرة وأرقام صغيرة.","مناسب للمرحلة الثانوية: خطوات أكثر ورموز بدل أرقام الخانات.","مناسب للجامعة: استنتاج متعدد الخطوات وشيفرات مركّبة."][c.base]} والصعوبة تزيد من غرفة إلى أخرى.</p></div>
         <div><h2 class="h4">اللاعبون في كل فريق</h2>${sjSeg("data-erd", c.dev, [5,6,7,8,9,10].map(k => [k, n(k)]))}<p class="sj-sub">تُحسب أول ${n(c.dev)} أجهزة تنضم لكل فريق، والأجهزة الزائدة تشاهد فقط.</p></div>
         <div><h2 class="h4">وقت كل غرفة</h2>${sjSeg("data-ermin", c.mins, [10,15,20,30,45].map(k => [k, n(k) + " د"]))}</div>
-        <div><h2 class="h4">عدد الغرف (القصص)</h2>${sjSeg("data-err", c.rooms, [[1,"الأولى فقط"],[2,"غرفتان"],[3,"الثلاث"]])}</div>
+        <div><h2 class="h4">الغرف (القصص)</h2><div class="seg" role="group" aria-label="الغرف">${["الأولى","الثانية","الثالثة"].map((t, i) => `<button type="button" role="checkbox" data-erpk="${i}" aria-checked="${c.pick.includes(i)}">${t}</button>`).join("")}</div><p class="sj-sub">اختر غرفة وحدة أو أكثر. تُلعب بالترتيب، ولازم تبقى غرفة وحدة على الأقل.</p></div>
         <div><h2 class="h4">التلميحات لكل فريق</h2>${sjSeg("data-erh", c.hints, [0,1,2,3,4,5].map(k => [k, n(k)]))}</div>
         <div><h2 class="h4">خصم التلميح</h2>${sjSeg("data-erhc", c.hc, [[30,"30 ث"],[60,"دقيقة"],[120,"دقيقتان"]])}</div>
         <div><h2 class="h4">خصم الإجابة الخاطئة</h2>${sjSeg("data-erp", c.pen, [[0,"بدون"],[15,"15 ث"],[30,"30 ث"],[60,"دقيقة"]])}</div>
@@ -8090,12 +8101,15 @@ function erSetup(keepScroll){
         <div class="sj-cats" style="--tc:var(--blue)">${cats.map((x, i) => { const mm = catMeta(x), on = c.cats.includes(x); return `<button type="button" class="sj-cat" data-erc="${i}" aria-pressed="${on}">${I(P[mm.icon] || P.general)}<span><b>${esc(x)}</b></span></button>`; }).join("")}</div></div>` : ""}
       ${dispBox("er")}
     </div></div>
-    ${bar(`${n(T)} فرق · ${["سهل","متوسط","صعب"][c.base]} · ${n(c.mins)} د`, ERH && ERH.phase !== "end" ? "مسابقة جديدة" : "افتح غرفة المسابقة", "erGo", false, "start")}</section>`;
+    ${bar(`${n(T)} فرق · ${c.pick.length === 3 ? n(3) + " غرف" : c.pick.length === 1 ? "الغرفة " + n(c.pick[0] + 1) : "الغرف " + c.pick.map(i => n(i + 1)).join(" و")} · ${n(c.mins)} د`, ERH && ERH.phase !== "end" ? "مسابقة جديدة" : "افتح غرفة المسابقة", "erGo", false, "start")}</section>`;
   window.scrollTo({top: keepScroll ? y : 0});
   const re = () => { erSaveCfg(); erSetup(true); };
   const seg = (attr, key, num = true) => $app.querySelectorAll(`[${attr}]`).forEach(b => b.onclick = () => { const v = b.getAttribute(attr); c[key] = num ? +v : v; re(); });
-  seg("data-erm", "mode", false); seg("data-ert", "teams"); seg("data-erl", "base"); seg("data-erd", "dev"); seg("data-ermin", "mins"); seg("data-err", "rooms"); seg("data-erh", "hints"); seg("data-erhc", "hc"); seg("data-erp", "pen");
+  seg("data-erm", "mode", false); seg("data-ert", "teams"); seg("data-erl", "base"); seg("data-erd", "dev"); seg("data-ermin", "mins"); seg("data-erh", "hints"); seg("data-erhc", "hc"); seg("data-erp", "pen");
   $app.querySelectorAll("[data-erk]").forEach(b => b.onclick = () => { c.know = b.dataset.erk === "1"; re(); });
+  $app.querySelectorAll("[data-erpk]").forEach(b => b.onclick = () => { const i = +b.dataset.erpk;
+    if (c.pick.includes(i)){ if (c.pick.length === 1) return; c.pick = c.pick.filter(x => x !== i); } else c.pick = c.pick.concat(i).sort();
+    c.rooms = c.pick.length; re(); });
   $app.querySelectorAll("[data-erc]").forEach(b => b.onclick = () => { const x = cats[+b.dataset.erc], a = c.cats; a.includes(x) ? a.splice(a.indexOf(x), 1) : a.push(x); re(); });
   $app.querySelectorAll("[data-ern]").forEach(inp => inp.oninput = () => { c.names[+inp.dataset.ern] = inp.value; erSaveCfg(); });
   document.getElementById("erTry").onclick = () => { ERA.init(); const G = Object.assign(erFromCfg(), {names:[erName(0)], mode:"race", startAt:null, local:true}); store.set("er-local", G); store.set(erMeKey, null); nav("erplay"); };
@@ -8112,7 +8126,7 @@ function erPractice(){ const G = store.get("er-local", null); if (!G) return nav
 let erHostTimer = null;
 function erHostStop(){ if (erHostTimer){ clearInterval(erHostTimer); erHostTimer = null; } ervStop(); }
 function erHostEmit(){ if (!ROOM || !ERH) return; const H = ERH;
-  ROOM.emit("er.state", {g:H.id, seed:H.seed, code:H.code, names:H.names, mode:H.mode, base:H.base, mins:H.mins, hints:H.hints, hc:H.hc, pen:H.pen, rooms:H.rooms, know:H.know, cats:H.cats, dev:H.dev, phase:H.phase, startAt:H.startAt, orient:dispGet("er").player, now:Date.now()}).catch(() => {}); }
+  ROOM.emit("er.state", {g:H.id, seed:H.seed, code:H.code, names:H.names, mode:H.mode, base:H.base, mins:H.mins, hints:H.hints, hc:H.hc, pen:H.pen, rooms:H.rooms, pick:erPickOf(H), know:H.know, cats:H.cats, dev:H.dev, phase:H.phase, startAt:H.startAt, orient:dispGet("er").player, now:Date.now()}).catch(() => {}); }
 function erHostTeams(){
   const H = ERH, by = H.names.map(() => []), devs = H.names.map(() => 0);
   if (ROOM){ const peers = ROOM.peers().map(p => ({p, s:p.presence && p.presence.er})).filter(x => x.s && x.s.g === H.id && Number.isInteger(x.s.t) && x.s.t >= 0 && x.s.t < H.names.length && !x.s.spec);
@@ -8142,7 +8156,7 @@ function ervDraw(H, rows){
   if (!window.THREE){ if (!ERV.busy){ ERV.busy = true; erThree().catch(() => {}).then(() => { ERV.busy = false; }); } return; }
   const now = Date.now(); if (now - ERV.last < 700) return; ERV.last = now;
   rows.forEach(x => { const cv = ERV.cv[x.i]; if (!cv) return;
-    const r = Math.min(x.pr.r, H.rooms - 1); let sc; try { sc = ervScene(r); } catch(e){ return; }
+    const r = x.pr.r; let sc; try { sc = ervScene(r); } catch(e){ return; }
     const want = new Set();
     (x.list || []).forEach(m => { if (m.x == null || m.z == null) return; const id = (m.t || 0) + ":" + (m.j || 0); want.add(id);
       const p = sc.peerAvatar(id, ER_COL[(m.t || 0) % 10], m.x, m.z); p.g.position.set(m.x, 0, m.z); p.g.visible = true; });
@@ -8160,13 +8174,13 @@ async function erHost(){
     const {by, devs} = erHostTeams(), now = Date.now(), link = (window.claude && window.claude.use ? TK_ART : location.href.split("#")[0]) + "#join=" + H.code;
     const set = (id, html) => { const el = document.getElementById(id); if (el && el.dataset.h !== html){ el.dataset.h = html; el.innerHTML = html; } };
     if (H.phase === "lobby"){
-      const teams = H.names.map((t, i) => `<div class="er-tcard" style="--tc:${ER_COL[i]}"><b>${esc(t)}</b><span>${n(devs[i])} / ${n(H.dev)} أجهزة</span><div class="er-pips">${Array.from({length:H.dev}, (_, k) => `<i class="${k < devs[i] ? "on" : ""}"></i>`).join("")}</div></div>`).join("");
+      const teams = H.names.map((t, i) => `<div class="er-tcard" style="--tc:${ER_COL[i]}"><b>${esc(t)}</b><span>${n(devs[i])} / ${n(H.dev)} لاعبين</span><div class="er-pips">${Array.from({length:H.dev}, (_, k) => `<i class="${k < devs[i] ? "on" : ""}"></i>`).join("")}</div>${by[i].length ? `<ul class="er-tnames">${by[i].map(x => `<li>${esc(x.n || "لاعب")}</li>`).join("")}</ul>` : ""}</div>`).join("");
       if (draw.shell !== "lobby"){ draw.shell = "lobby";
         $app.innerHTML = `<section class="er-host view gut"><div class="wrap">
         <div class="er-hh"><div><p class="eyebrow">غرفة الهروب · ${H.mode === "race" ? "سباق" : "تعاون"} · ${["سهل","متوسط","صعب"][H.base]}</p><h1>ادخلوا الغرفة</h1></div>
           <div class="er-hb"><button type="button" class="mini" id="erHBack">الإعدادات</button></div></div>
         ${ROOM ? "" : `<p class="ss-warn">لا يمكن ربط الأجهزة من هنا. افتح الموقع المنشور وأنت مسجّل الدخول، أو جرّب الغرفة على جهاز واحد من صفحة الإعدادات.</p>`}
-        <div class="er-join"><div class="er-qr">${tkQR(link)}</div><div class="er-jt"><small>رمز الدخول</small>${tkCodeHTML(H.code)}<p>صوّروا الباركود أو افتحوا الموقع واختاروا «دخول الفرق» ثم اكتبوا الرمز، واختاروا فريقكم.</p></div></div>
+        <div class="er-join"><div class="er-qr">${tkQR(link)}</div><div class="er-jt"><small>رمز الدخول</small>${tkCodeHTML(H.code)}<p>صوّروا الباركود أو افتحوا الموقع واختاروا «دخول الفرق» ثم اكتبوا الرمز واسمكم، واختاروا فريقكم.</p></div></div>
         <div class="er-teams" id="erHTeams"></div>
         <div class="er-hfoot"><span id="erHCount"></span><button type="button" class="btn lg" id="erHStart">ابدأ الرحلة</button></div>
       </div></section>`;
@@ -8175,21 +8189,21 @@ async function erHost(){
       set("erHTeams", teams); set("erHCount", `${n(devs.reduce((a, b) => a + b, 0))} أجهزة متصلة`);
       return; }
     const rows = H.names.map((t, i) => { const list = H.mode === "coop" ? by.flat() : by[i], m = erMerge(list, H), pr = erProgress(H, m, now); return {i, t, m, pr, devs:devs[i], list}; });
-    const rank = rows.slice().sort((a, b) => b.pr.escaped - a.pr.escaped || (b.pr.done - a.pr.done) || (b.pr.r - a.pr.r) || (b.pr.solvedNow - a.pr.solvedNow) || (a.pr.used - b.pr.used));
+    const rank = rows.slice().sort((a, b) => b.pr.escaped - a.pr.escaped || (b.pr.done - a.pr.done) || (b.pr.pos - a.pr.pos) || (b.pr.solvedNow - a.pr.solvedNow) || (a.pr.used - b.pr.used));
     const pre = H.startAt > now;
     if (H.phase === "end" || rows.every(x => x.pr.done) && H.phase === "play"){
       if (H.phase !== "end"){ H.phase = "end"; erHostSave(); erHostEmit(); ERA.stopAmb(); ERA.sfx("chest"); }
       const list = H.mode === "coop" ? [rank[0]] : rank;
       if (draw.shell === "end") return; draw.shell = "end";
-      $app.innerHTML = `<section class="er-host view gut"><div class="wrap"><div class="done" style="padding-block:28px 10px">${I(P.trophy)}<h1>${H.mode === "coop" ? (list[0].pr.escaped === H.rooms ? "هربتم جميعًا!" : `هربتم من ${n(list[0].pr.escaped)} من ${n(H.rooms)} غرف`) : `الفائز: ${esc(list[0].t)}`}</h1><p>نتيجة رحلة غرفة الهروب</p></div>
+      $app.innerHTML = `<section class="er-host view gut"><div class="wrap"><div class="done" style="padding-block:28px 10px">${I(P.trophy)}<h1>${H.mode === "coop" ? (list[0].pr.escaped === erPickOf(H).length ? "هربتم جميعًا!" : `هربتم من ${n(list[0].pr.escaped)} من ${n(erPickOf(H).length)} غرف`) : `الفائز: ${esc(list[0].t)}`}</h1><p>نتيجة رحلة غرفة الهروب</p></div>
         <ol class="sj-rank">${list.map((x, k) => `<li style="--tc:${ER_COL[x.i]}"><i>${n(k + 1)}</i><b>${H.mode === "coop" ? "كل الفرق" : esc(x.t)}</b><small>${n(x.pr.escaped)} غرف · ${erClock(x.pr.used)}</small></li>`).join("")}</ol>
         <div class="cta"><button type="button" class="btn" id="erHNew">مسابقة جديدة</button></div></div></section>`;
       document.getElementById("erHNew").onclick = () => { ERH = null; erHostSave(); nav("er"); }; return; }
-    const card = x => { const pr = x.pr, r = Math.min(pr.r, H.rooms - 1), hot = pr.left < 60 ? " hot" : pr.left < 180 ? " warm" : "";
+    const card = x => { const pr = x.pr, r = pr.r, hot = pr.left < 60 ? " hot" : pr.left < 180 ? " warm" : "";
       return `<div class="er-race er-live${pr.done ? " done" : ""}" style="--tc:${H.mode === "coop" ? "var(--blue)" : ER_COL[x.i]}">
         <div class="er-view"><span class="er-vslot" data-erv="${x.i}"></span>
-          <div class="er-vtop"><b>${H.mode === "coop" ? "كل الفرق معًا" : esc(x.t)}</b><span class="er-vrooms">${Array.from({length:H.rooms}, (_, k) => `<i class="${x.m.open[k] ? "ok" : x.m.fail[k] ? "no" : k === pr.r ? "now" : ""}"></i>`).join("")}</span></div>
-          ${pr.done ? `<div class="er-vdone">${pr.escaped === H.rooms ? "هرب!" : `${n(pr.escaped)} / ${n(H.rooms)}`}<small>${erClock(pr.used)}</small></div>`
+          <div class="er-vtop"><b>${H.mode === "coop" ? "كل الفرق معًا" : esc(x.t)}</b><span class="er-vrooms">${erPickOf(H).map(k => `<i class="${x.m.open[k] ? "ok" : x.m.fail[k] ? "no" : !pr.done && k === pr.r ? "now" : ""}"></i>`).join("")}</span></div>
+          ${pr.done ? `<div class="er-vdone">${pr.escaped === erPickOf(H).length ? "هرب!" : `${n(pr.escaped)} / ${n(erPickOf(H).length)}`}<small>${erClock(pr.used)}</small></div>`
             : `</div><div class="er-vbot"><div class="er-stp">${ER_ROOMS[r].st.map(s => `<i class="${x.m.solved.has(s.id) ? "on" : ""}"></i>`).join("")}<i class="chest${x.m.open[r] ? " on" : ""}"></i></div><span class="er-left${hot}">${pre ? Math.ceil((H.startAt - now) / 1000) : erClock(pr.left)}</span></div><div hidden>`}
         </div></div>`; };
     const title = pre ? "تبدأ الرحلة بعد " + n(Math.ceil((H.startAt - now) / 1000)) + " ثانية" : "الرحلة جارية";
@@ -8214,7 +8228,7 @@ async function erHost(){
 }
 
 /* ---------- players: join with the code, pick a team, then play on this device ---------- */
-const erMe2 = {code: store.get("er-code", ""), team: store.get("er-team", null), typed:"", tried:false, state:null};
+const erMe2 = {code: store.get("er-code", ""), team: store.get("er-team", null), name: store.get("er-pname", ""), named:false, typed:"", tried:false, state:null};
 const erHashCode = () => { const m = decodeURIComponent(location.hash).match(/^#erjoin\D?(\d{6})/); return m ? m[1] : ""; };
 async function erJoin(){
   erStop(); tkStop(); await tkRoom();
@@ -8238,14 +8252,26 @@ async function erJoin(){
       document.getElementById("erScan").onclick = () => tkScan(c => { erMe2.typed = c; erMe2.tried = true; draw(); });
       return; }
     const names = s.names || [];
+    /* TN-ERNAME: every player writes their name, then picks a team; the host's lobby lists the names under each team */
+    if (!erMe2.named && (erMe2.team == null || erMe2.team >= names.length || !erMe2.name)){
+      if (document.getElementById("erNameF")) return;            // keep what the player is typing across live updates
+      $app.innerHTML = `<section class="section gut view"><div class="wrap sheet tk-join"><p class="eyebrow">دخلت الغرفة ${tkCodeHTML(s.code)}</p><h1>ما اسمك؟</h1>
+        <p class="lead">يظهر اسمك على شاشة المسابقة تحت فريقك.</p>
+        <form class="tk-form" id="erNameF"><input id="erNameIn" class="tk-in tk-name-in" maxlength="20" autocomplete="nickname" placeholder="اكتب اسمك" value="${esc(erMe2.name)}" aria-label="اسمك" required>
+          <button type="submit" class="btn lg">التالي</button></form><p class="ac-err" id="erNameErr" role="alert"></p></div></section>`;
+      const ni = document.getElementById("erNameIn"); setTimeout(() => { try { ni.focus({preventScroll:true}); } catch(e){} }, 50);
+      document.getElementById("erNameF").onsubmit = e => { e.preventDefault(); const v = ni.value.trim().replace(/\s+/g, " ").slice(0, 20);
+        if (v.length < 2){ document.getElementById("erNameErr").textContent = "اكتب اسمك."; ni.focus(); return; }
+        erMe2.name = v; erMe2.named = true; store.set("er-pname", v); if (ERX) ERX.pname = v; draw(); };
+      return; }
     if (erMe2.team == null || erMe2.team >= names.length){
-      $app.innerHTML = `<section class="section gut view"><div class="wrap sheet tk-join"><p class="eyebrow">دخلت الغرفة ${tkCodeHTML(s.code)}</p><h1>اختر فريقك</h1><div class="tk-pick er-pick">${names.map((t, i) => `<button type="button" class="btn lg" data-erme="${i}" style="background:${ER_COL[i]}">${esc(t)}</button>`).join("")}</div></div></section>`;
+      $app.innerHTML = `<section class="section gut view"><div class="wrap sheet tk-join"><p class="eyebrow">دخلت الغرفة ${tkCodeHTML(s.code)}</p><h1>اختر فريقك</h1><p class="lead">${esc(erMe2.name)}، اختر فريقك.</p><div class="tk-pick er-pick">${names.map((t, i) => `<button type="button" class="btn lg" data-erme="${i}" style="background:${ER_COL[i]}">${esc(t)}</button>`).join("")}</div></div></section>`;
       $app.querySelectorAll("[data-erme]").forEach(b => b.onclick = () => { erMe2.team = +b.dataset.erme; store.set("er-team", erMe2.team); draw(); });
       return; }
     const team = erMe2.team;
     if (ERX && ERX.G.id === s.g) return;
-    const G = {id:s.g, seed:s.seed, names, mode:s.mode, base:s.base, mins:s.mins, hints:s.hints, hc:s.hc, pen:s.pen, rooms:s.rooms, know:s.know, cats:s.cats, dev:s.dev, phase:s.phase, startAt:s.startAt};
-    erStart(G, team, true).then(() => { if (!ERX) return; ERX.off = s.now ? s.now - Date.now() : 0;
+    const G = {id:s.g, seed:s.seed, names, mode:s.mode, base:s.base, mins:s.mins, hints:s.hints, hc:s.hc, pen:s.pen, rooms:s.rooms, pick:s.pick, know:s.know, cats:s.cats, dev:s.dev, phase:s.phase, startAt:s.startAt};
+    erStart(G, team, true).then(() => { if (!ERX) return; ERX.off = s.now ? s.now - Date.now() : 0; ERX.pname = erMe2.name;
       const mine = ROOM.peers().filter(p => { const e = p.presence && p.presence.er; return e && !p.sameTab && e.g === G.id && (G.mode === "coop" || e.t === team) && !e.spec; });
       if (G.mode !== "coop" && mine.filter(p => (p.presence.er.j || 0) < ERX.me.j).length >= G.dev){ ERX.spec = true; }
       erPublish(); });
