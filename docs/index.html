@@ -1049,6 +1049,63 @@ button.er-story{font:inherit;text-align:start;border:0;cursor:pointer;width:100%
 .er-tnames{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:4px}.er-tnames li{font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--tc) 14%,var(--tile));color:var(--tc)}
 .er-grp{display:inline-block;border:2px solid rgba(127,227,238,.55);border-radius:12px;padding:0 6px;margin:3px 2px;line-height:2.2}
 .er-grp .er-grp{border-color:rgba(255,214,10,.55)}
+/* quick quiz on the home page: a dark rounded panel with a glass card */
+.qz-band{padding-block:34px 6px}
+.qz-panel{--qa:#FF8A5B;--qb:#FFC857;--qc:#F0648C;position:relative;overflow:hidden;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,500px);gap:44px;align-items:center;
+  padding:clamp(26px,4vw,52px);border-radius:34px;color:#fff;
+  background:radial-gradient(60% 80% at 85% 10%,rgba(255,138,91,.28),transparent 60%),radial-gradient(50% 70% at 10% 100%,rgba(240,100,140,.22),transparent 60%),linear-gradient(160deg,#1F2833,#17191F 70%);
+  box-shadow:0 30px 60px -30px rgba(23,25,31,.55)}
+.qz-panel::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:34px 34px;mask-image:radial-gradient(70% 70% at 50% 40%,#000,transparent)}
+.qz-eye{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#FFD2BF;border:1px solid rgba(255,138,91,.45);background:rgba(255,138,91,.1);border-radius:980px;padding:6px 14px;margin:0 0 16px}
+.qz-eye i{width:7px;height:7px;border-radius:50%;background:var(--qa);box-shadow:0 0 0 4px rgba(255,138,91,.22)}
+.qz-intro h2{font-size:clamp(34px,4.6vw,60px);line-height:1.15;margin:0 0 16px;color:#fff}
+.qz-intro h2 span{background:linear-gradient(90deg,var(--qb),var(--qa) 50%,var(--qc));-webkit-background-clip:text;background-clip:text;color:transparent}
+.qz-intro>p{color:rgba(255,255,255,.66);font-size:17px;line-height:1.8;margin:0;max-width:440px}
+.qz-facts{display:flex;gap:0;margin-top:26px;flex-wrap:wrap}
+.qz-facts span{display:grid;padding-inline:18px;border-inline-start:1px solid rgba(255,255,255,.14)}
+.qz-facts span:first-child{padding-inline-start:0;border:0}
+.qz-facts b{font-size:22px}.qz-facts small{font-size:13px;color:rgba(255,255,255,.55)}
+.qz-stage{position:relative;padding-top:14px}
+.qz-tag{position:absolute;top:0;inset-inline-end:22px;z-index:2;font-size:13px;font-weight:700;color:#2B1B12;background:linear-gradient(90deg,var(--qb),var(--qa));border-radius:980px;padding:6px 14px;box-shadow:0 8px 20px -6px rgba(255,138,91,.6);transform:rotate(-3deg)}
+.qz-card{position:relative;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:26px;padding:26px 22px 20px;display:grid;gap:14px;box-shadow:0 24px 50px -24px rgba(0,0,0,.6)}
+.qz-top{display:flex;align-items:center;gap:10px}
+.qz-cat{font-size:13px;font-weight:600;color:#FFB59A;border:1px solid rgba(255,138,91,.45);background:rgba(255,138,91,.1);border-radius:10px;padding:4px 11px}
+.qz-num{flex:1;text-align:center;font-size:13px;color:rgba(255,255,255,.6)}
+.qz-ring{--p:1;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--qa) calc(var(--p) * 360deg),rgba(255,255,255,.12) 0);position:relative}
+.qz-ring::before{content:"";position:absolute;inset:4px;border-radius:50%;background:#1E2229}
+.qz-ring b{position:relative;font-size:16px;color:#fff}
+.qz-ring.low{background:conic-gradient(#FF5470 calc(var(--p) * 360deg),rgba(255,255,255,.12) 0)}.qz-ring.low b{color:#FF7A8E}
+.qz-bar{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.qz-bar i{height:5px;border-radius:9px;background:rgba(255,255,255,.13)}
+.qz-bar i.cur{background:linear-gradient(90deg,var(--qb),var(--qa))}.qz-bar i.ok{background:#3DD68C}.qz-bar i.no{background:#FF5470}
+.qz-q{font-size:clamp(21px,2.4vw,28px);line-height:1.5;margin:6px 0 4px;color:#fff}
+.qz-opts{display:grid;gap:10px}
+.qz-o{display:flex;align-items:center;gap:12px;text-align:start;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.045);border-radius:14px;padding:11px 14px;font:inherit;font-size:16.5px;color:#fff;cursor:pointer;transition:border-color .15s,background .15s,transform .15s}
+.qz-o i{font-style:normal;font-weight:700;width:32px;height:32px;flex:none;border-radius:9px;display:grid;place-items:center;background:rgba(255,255,255,.1)}
+.qz-o:not(:disabled):hover{border-color:rgba(255,138,91,.7);background:rgba(255,138,91,.1);transform:translateY(-1px)}
+.qz-o.ok{border-color:#3DD68C;background:rgba(61,214,140,.16)}.qz-o.ok i{background:#3DD68C;color:#0F2A1D}
+.qz-o.no{border-color:#FF5470;background:rgba(255,84,112,.14)}.qz-o.no i{background:#FF5470;color:#fff}
+.qz-o.dim{opacity:.45}.qz-o:disabled{cursor:default}
+.qz-hint{margin:0;font-size:14px;color:rgba(255,255,255,.58)}
+.qz-end{text-align:center;justify-items:center;padding-block:30px 24px}
+.qz-score{position:relative;width:140px;height:140px}
+.qz-score svg{width:100%;height:100%;transform:rotate(-90deg)}
+.qz-score circle{fill:none;stroke:rgba(255,255,255,.12);stroke-width:10}
+.qz-score circle.v{stroke:var(--qa);stroke-linecap:round;stroke-dasharray:326.7;stroke-dashoffset:calc(326.7 * (1 - var(--p)));animation:qzfill 1.1s ease-out both}
+@keyframes qzfill{from{stroke-dashoffset:326.7}}
+.qz-score b{position:absolute;inset:0;display:grid;place-content:center;font-size:46px;line-height:1;color:#fff}
+.qz-score small{font-size:14px;color:rgba(255,255,255,.6);font-weight:500}
+.qz-end h3{margin:0;font-size:28px;color:#fff}.qz-end p{margin:0;color:rgba(255,255,255,.65)}
+.qz-best{font-size:14px}
+.qz-rev{width:100%;text-align:start}
+.qz-rev summary{cursor:pointer;font-weight:600;color:#FFB59A;text-align:center}
+.qz-rev ol{margin:12px 0 0;padding-inline-start:20px;display:grid;gap:9px;font-size:14px;max-height:260px;overflow:auto}
+.qz-rev li b{display:block;font-weight:600;color:#fff}.qz-rev li span{color:rgba(255,255,255,.6)}
+.qz-rev li.ok span{color:#3DD68C}.qz-rev li.no span{color:#FF7A8E}
+.qz-acts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+.qz-acts .btn{background:linear-gradient(90deg,var(--qa),var(--qc));border:0;color:#fff;box-shadow:0 10px 24px -10px rgba(255,138,91,.8)}
+.qz-acts .btn.sec{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);box-shadow:none}
+@media (max-width:860px){.qz-panel{grid-template-columns:1fr;gap:26px;border-radius:26px}.qz-intro{text-align:center}.qz-intro>p{margin-inline:auto}.qz-facts{justify-content:center}.qz-tag{inset-inline-end:14px}}
 /*EM-CSS-START*/
 /* إعمار */
 .em-wrap{max-width:1400px}
@@ -5513,6 +5570,68 @@ function tn404(){
   document.querySelectorAll(".tn404-big button").forEach(b => b.onclick = () => { b.classList.remove("spin"); void b.offsetWidth; b.classList.add("spin"); });
   document.getElementById("tn404n").onclick = draw; draw();
 }
+/* ---------- Quick quiz on the home page: 10 varied questions, then a score out of 10 ----------
+   Multiple-choice only (easy and medium), one question per category so the
+   ten feel different. 20 seconds per question from the second one on (the
+   first waits for the visitor, who may still be reading the page). */
+const QZ_N = 10, QZ_SECS = 20, QZ_SKIP = /شعارات|مطاعم|كافيهات|من القارئ|قناة المجد/;
+let QZ = null;
+const qzClean = t => String(t || "").replace(/[{}]/g, "").trim();
+function qzPool(){
+  const ok = BANK.filter(q => q.kind === "mcq" && (q.difficulty === "سهل" || q.difficulty === "متوسط") && !QZ_SKIP.test(q.category)
+    && q.question.length < 120 && q.options.length >= 2 && q.options.length <= 4 && q.options.every(o => String(o).length < 45));
+  const by = {}; shuffle(ok).forEach(q => (by[q.category] = by[q.category] || []).push(q));
+  const cats = shuffle(Object.keys(by)), out = [];
+  for (let r = 0; out.length < QZ_N && r < 5; r++) cats.forEach(c => { if (out.length < QZ_N && by[c][r]) out.push(by[c][r]); });
+  return shuffle(out).map(q => { const order = shuffle(q.options.map((_, i) => i));
+    return {q: qzClean(q.question), cat: q.category, opts: order.map(i => qzClean(q.options[i])), ai: order.indexOf(q.ai)}; });
+}
+function qzNew(){ clearInterval(QZ && QZ.timer); QZ = {qs: qzPool(), i: 0, picks: [], end: 0, timer: null, lock: false}; }
+const QZ_RATE = [[10, "عبقري! 🏆", "علامة كاملة. ثقافتك واسعة جدًا."], [8, "مثقف بامتياز 🌟", "معلوماتك قوية في أغلب المجالات."], [6, "ثقافة جيدة 👍", "مستواك طيب، وفيه مجالات تقدر تقويها."],
+  [4, "لا بأس 🙂", "بداية حلوة. جرّب جولة ثانية وشوف تتحسن."], [0, "تحتاج تقرأ أكثر 📚", "كل مثقف بدأ من هنا. جرّب مرة ثانية!"]];
+function qzHTML(){
+  if (!QZ || !QZ.qs.length) return "";
+  const done = QZ.i >= QZ.qs.length;
+  if (done){
+    const sc = QZ.picks.filter((p, i) => p === QZ.qs[i].ai).length, R = QZ_RATE.find(r => sc >= r[0]), best = Math.max(sc, +store.get("qz-best", 0) || 0);
+    store.set("qz-best", best);
+    return `<div class="qz-card qz-end"><div class="qz-score"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52"/><circle class="v" cx="60" cy="60" r="52" style="--p:${sc / QZ_N}"/></svg><b>${n(sc)}<small>من ${n(QZ_N)}</small></b></div>
+      <h3>${R[1]}</h3><p>${R[2]}</p>${best > sc ? `<p class="qz-best">أفضل نتيجة لك: ${n(best)} من ${n(QZ_N)}</p>` : ""}
+      <details class="qz-rev"><summary>راجع إجاباتك</summary><ol>${QZ.qs.map((q, i) => { const okk = QZ.picks[i] === q.ai;
+        return `<li class="${okk ? "ok" : "no"}"><b>${esc(q.q)}</b><span>${okk ? "✓" : "✗"} ${QZ.picks[i] >= 0 && !okk ? `إجابتك: ${esc(q.opts[QZ.picks[i]])} · ` : QZ.picks[i] < 0 ? "انتهى الوقت · " : ""}الصحيح: ${esc(q.opts[q.ai])}</span></li>`; }).join("")}</ol></details>
+      <div class="qz-acts"><button type="button" class="btn" id="qzAgain">جولة جديدة</button><button type="button" class="btn sec" id="qzShare">شارك نتيجتك</button></div></div>`;
+  }
+  const q = QZ.qs[QZ.i], pk = QZ.picks[QZ.i], ans = pk !== undefined, left = QZ.end ? Math.max(0, Math.ceil((QZ.end - Date.now()) / 1000)) : QZ_SECS;
+  return `<div class="qz-card"><div class="qz-top"><span class="qz-cat">${esc(q.cat)}</span><span class="qz-num">السؤال ${n(QZ.i + 1)} من ${n(QZ_N)}</span>
+      <span class="qz-ring${QZ.end ? "" : " idle"}" style="--p:${left / QZ_SECS}"><b id="qzLeft">${QZ.end ? n(left) : n(QZ.i + 1)}</b></span></div>
+    <div class="qz-bar">${QZ.qs.map((_, i) => `<i class="${i < QZ.i ? (QZ.picks[i] === QZ.qs[i].ai ? "ok" : "no") : i === QZ.i ? "cur" : ""}"></i>`).join("")}</div>
+    <h3 class="qz-q">${esc(q.q)}</h3>
+    <div class="qz-opts">${q.opts.map((o, i) => `<button type="button" class="qz-o${ans ? (i === q.ai ? " ok" : i === pk ? " no" : " dim") : ""}" data-qz="${i}" ${ans ? "disabled" : ""}><i>${"أبجد"[i]}</i><span>${esc(o)}</span></button>`).join("")}</div>
+    <p class="qz-hint">${ans ? (pk === q.ai ? "✓ إجابة صحيحة!" : pk < 0 ? "⏱ انتهى الوقت." : "✗ إجابة خاطئة.") : QZ.i === 0 ? "جرّب الآن: اختر إجابة، وبعدها لكل سؤال " + n(QZ_SECS) + " ثانية." : "اختر إجابة قبل ما ينتهي الوقت."}</p></div>`;
+}
+function qzDraw(){
+  const box = document.getElementById("qzBox"); if (!box) return clearInterval(QZ && QZ.timer);
+  box.innerHTML = qzHTML();
+  box.querySelectorAll("[data-qz]").forEach(b => b.onclick = () => qzPick(+b.dataset.qz));
+  const ag = document.getElementById("qzAgain"); if (ag) ag.onclick = () => { qzNew(); qzDraw(); };
+  const sh = document.getElementById("qzShare"); if (sh) sh.onclick = async () => {
+    const sc = QZ.picks.filter((p, i) => p === QZ.qs[i].ai).length, url = location.href.split("#")[0], txt = `جبت ${sc} من ${QZ_N} في اختبار الثقافة السريع على منصة تنافس. جرّب وشوف كم تجيب!`;
+    try { if (navigator.share) await navigator.share({title:"تنافس", text: txt, url}); else { await navigator.clipboard.writeText(txt + "\n" + url); sh.textContent = "تم نسخ النتيجة"; } } catch(e){} };
+}
+function qzPick(i){
+  if (!QZ || QZ.lock || QZ.picks[QZ.i] !== undefined) return;
+  clearInterval(QZ.timer); QZ.picks[QZ.i] = i; QZ.lock = true; qzDraw();
+  setTimeout(() => { if (!QZ) return; QZ.lock = false; QZ.i++; QZ.end = QZ.i < QZ.qs.length ? Date.now() + QZ_SECS * 1000 : 0; qzDraw(); qzTick(); }, 1300);
+}
+function qzTick(){
+  clearInterval(QZ.timer); if (!QZ.end) return;
+  QZ.timer = setInterval(() => {
+    if (!document.getElementById("qzBox")) return clearInterval(QZ.timer);
+    const l = Math.max(0, (QZ.end - Date.now()) / 1000), e = document.getElementById("qzLeft"), r = e && e.parentElement;
+    if (e){ e.textContent = n(Math.ceil(l)); r.style.setProperty("--p", l / QZ_SECS); r.classList.toggle("low", l <= 5); }
+    if (l <= 0) qzPick(-1); }, 250);
+}
+function qzMount(){ if (!document.getElementById("qzBox")) return; if (!QZ || !QZ.qs.length) qzNew(); qzDraw(); if (QZ.end) qzTick(); }
 function landing(){
   window.scrollTo({top:0});
   const cats = allCats().length, ok = acHas(), s = SESSION;
@@ -5530,6 +5649,12 @@ function landing(){
       </div>
     </div></div>
     ${tnMarquee()}
+    <div class="qz-band gut"><div class="wrap"><div class="qz-panel">
+      <div class="qz-intro"><p class="qz-eye"><i></i>اختبار سريع · مجاني</p><h2>اختبر ثقافتك،<br><span>في ${n(QZ_N)} أسئلة.</span></h2>
+        <p>عشرة أسئلة متنوعة من مجالات مختلفة، وبعدها تعرف تقييمك من عشرة. كل مرة أسئلة جديدة.</p>
+        <div class="qz-facts"><span><b>${n(QZ_N)}</b><small>أسئلة متنوعة</small></span><span><b>${n(QZ_SECS)} ث</b><small>لكل سؤال</small></span><span><b>بلا تسجيل</b><small>العب مباشرة</small></span></div></div>
+      <div class="qz-stage"><span class="qz-tag">⚡ نقطة لكل إجابة صحيحة</span><div id="qzBox" class="qz-box"></div></div>
+    </div></div></div>
     <div class="tiles-band gut" style="padding-block:28px 40px"><div class="wrap">
       <button type="button" class="ency" id="ency">
         <span class="ency-ic">${I(P.ency)}</span>
@@ -5563,6 +5688,7 @@ function landing(){
       ${!s && !CAN_EDIT ? acLoginHTML(false) : ""}
     </div></div></section>`;
   document.getElementById("ency").onclick = () => nav("cats");
+  qzMount();
   tnReveal(); tnHeroBind(); tnCountUp($app);
   document.querySelectorAll("[data-tnplan]").forEach(b => b.onclick = () => { const f = document.getElementById("acLogin"); if (f){ f.scrollIntoView({behavior:"smooth", block:"center"}); } else nav("cats"); });
   const pn = document.getElementById("acPanel"); if (pn) pn.onclick = () => nav("accounts");
