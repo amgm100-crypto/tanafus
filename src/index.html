@@ -1240,6 +1240,10 @@ button.em-cell:not(.on):hover,button.em-cell:not(.on):focus-visible{background:c
 .em-fc small{color:var(--muted);font-size:14px}
 .em-fc b{font-size:clamp(22px,2.8vw,32px);line-height:1.2}
 .em-fc p{margin:0;font-size:clamp(15px,1.6vw,19px)}
+.em-fc.em-hint{position:relative;overflow:hidden;border-color:var(--c4);background:color-mix(in srgb,var(--c4) 10%,var(--tile));animation:embump .6s cubic-bezier(.3,1.5,.5,1) both}
+.em-fc.em-hint .em-hq{font-size:clamp(24px,3.2vw,40px)}
+.em-hbar{position:absolute;inset-inline:0;bottom:0;height:6px;background:var(--c4);transform-origin:right;animation:emhbar linear forwards}
+@keyframes emhbar{to{transform:scaleX(0)}}
 .em-fc.sm{margin:0;padding:12px 14px;gap:12px}.em-fc.sm .em-fci{font-size:40px}.em-fc.sm b{font-size:20px}.em-fc.sm p{font-size:14px}
 .em-arrive{grid-template-columns:auto minmax(0,460px);justify-content:center;align-items:center;column-gap:28px;text-align:start;justify-items:start}
 .em-big{font-size:clamp(70px,10vw,120px);line-height:1;animation:embump 1s cubic-bezier(.3,1.6,.5,1) both}
@@ -8373,14 +8377,14 @@ const EM_BK = Object.keys(EM_B);
 /* every round has one forecast: a crisis (with the building that protects
    from it) or a good event */
 const EM_EV = {
-  drought:{n:"جفاف", e:"☀️", bad:true, by:"d"},
-  quake:{n:"زلزال", e:"🌋", bad:true, by:"r"},
-  plague:{n:"وباء", e:"🦠", bad:true, by:"o"},
-  rain:{n:"أمطار الخير", e:"🌧️", give:{w:8}},
-  mine:{n:"اكتشاف منجم", e:"⛏️", give:{s:8}},
-  sun:{n:"صيف مشمس", e:"🔆", give:{e:8}},
-  trade:{n:"موسم القوافل", e:"🐪", give:{g:8}},
-  harvest:{n:"حصاد وفير", e:"🌾", give:{f:8}}
+  drought:{n:"جفاف", e:"☀️", hint:"درجات الحرارة ترتفع كل يوم، ومستوى الماء في الآبار ينزل.", bad:true, by:"d"},
+  quake:{n:"زلزال", e:"🌋", hint:"الطيور تطير بفزع، وظهرت شقوق صغيرة في الجدران.", bad:true, by:"r"},
+  plague:{n:"وباء", e:"🦠", hint:"كثر العطاس والسعال في السوق، والصيدليات زحمة.", bad:true, by:"o"},
+  rain:{n:"أمطار الخير", e:"🌧️", hint:"غيوم سوداء كثيفة تتجمع فوق المدن.", give:{w:8}},
+  mine:{n:"اكتشاف منجم", e:"⛏️", hint:"العمال يقولون إنهم سمعوا رنين معادن تحت الأرض.", give:{s:8}},
+  sun:{n:"صيف مشمس", e:"🔆", hint:"السماء صافية تمامًا، والشمس قوية من الصبح.", give:{e:8}},
+  trade:{n:"موسم القوافل", e:"🐪", hint:"غبار قافلة كبيرة يقترب من بعيد.", give:{g:8}},
+  harvest:{n:"حصاد وفير", e:"🌾", hint:"السنابل امتلأت، والمزارعين يجهزون مناجلهم.", give:{f:8}}
 };
 const EM_EK = Object.keys(EM_EV), EM_BAD = EM_EK.filter(k => EM_EV[k].bad), EM_GOOD = EM_EK.filter(k => !EM_EV[k].bad);
 const emEvDesc = k => { const E = EM_EV[k]; return E.bad ? `المدن بلا ${EM_B[E.by].e} ${EM_B[E.by].n} يتهدّم آخر مبنيين بنتهم، وتحدي الإنقاذ يخففها لمبنى واحد.` : `كل مدينة تكسب ${emResTxt(E.give)}.`; };
@@ -8394,7 +8398,8 @@ const EM_CH = {
 const EM_CK = Object.keys(EM_CH);
 /* optional add-ons (off by default, the host turns them on in the settings):
    trade between cities, shared projects (with or without withdrawing), and
-   surprise events (the forecast is hidden until the end of the round) */
+   a hidden forecast: "hint" shows a clue on the big screen for EM_HINT_SECS
+   during the round, "surprise" shows nothing until the end of the round */
 const EM_PJ = {
   bridge:{n:"جسر", e:"🌉", need:{s:30, g:20}, pop:100, give:{g:5}, d:"+100 ساكن، و+5 🪙 كل جولة لكل شريك."},
   port:{n:"ميناء", e:"⚓", need:{s:20, w:20, g:10}, pop:100, give:{w:5, f:5}, d:"+100 ساكن، و+5 💧 و+5 🌾 كل جولة لكل شريك."},
@@ -8402,11 +8407,12 @@ const EM_PJ = {
   uni:{n:"جامعة", e:"🎓", need:{s:20, g:20, e:10}, pop:120, d:"+120 ساكن، وكل تحدٍّ يعطي 7 بدل 5 لكل شريك."}
 };
 const EM_PK = Object.keys(EM_PJ);
+const EM_HINT_SECS = 20;
 const EM_REP = 50;   // residents lost for each withdrawal from a project
 const EM_WIN = 5;   // every solved puzzle adds 5 of its resource
 const EM_LV = {"سهل":0, "متوسط":1, "صعب":2};
 const emDefName = i => "مدينة " + ["الأولى","الثانية","الثالثة","الرابعة","الخامسة","السادسة","السابعة","الثامنة","التاسعة","العاشرة"][i];
-let emCfg = Object.assign({teams:4, names:Array(10).fill(""), rounds:7, work:180, level:"متوسط", trade:false, proj:false, betray:false, surprise:false}, store.get("em2-cfg", {}));
+let emCfg = Object.assign({teams:4, names:Array(10).fill(""), rounds:7, work:180, level:"متوسط", trade:false, proj:false, betray:false, surprise:false, hint:false}, store.get("em2-cfg", {}));
 let EM = store.get("em2-game", null);
 if (EM && !(EM.v === 2 && EM.teams && EM.names)) EM = null;
 let emTick = null, emBeat = null, emDeb = null, emWired = false;
@@ -8423,7 +8429,7 @@ function emTidy(){
   emCfg.rounds = [5,7,10,0].includes(+emCfg.rounds) ? +emCfg.rounds : 7;
   emCfg.work = [120,180,240].includes(+emCfg.work) ? +emCfg.work : 180;
   if (!(emCfg.level in EM_LV)) emCfg.level = "متوسط";
-  ["trade","proj","betray","surprise"].forEach(k => emCfg[k] = !!emCfg[k]); if (!emCfg.proj) emCfg.betray = false;
+  ["trade","proj","betray","surprise","hint"].forEach(k => emCfg[k] = !!emCfg[k]); if (!emCfg.proj) emCfg.betray = false; if (emCfg.hint) emCfg.surprise = false;
   while (emCfg.names.length < 10) emCfg.names.push("");
 }
 function emStop(){ [emTick, emBeat].forEach(t => t && clearInterval(t)); emTick = emBeat = null; const m = document.getElementById("emModal"); if (m) m.remove(); emPlayClose(); }
@@ -8443,6 +8449,10 @@ function emScore(t){
 }
 const emHas = (t, b) => EM.teams[t].map.includes(b);
 const emOpt = k => !!(EM && EM.opts && EM.opts[k]);
+const emHidden = () => emOpt("surprise") || emOpt("hint");
+/* hint mode: the clue shows once, a quarter into the round, then goes */
+function emHintSt(){ if (!emOpt("hint") || EM.phase !== "work" || !EM.hintAt) return ""; const t = Date.now();
+  return t < EM.hintAt ? "pre" : t < EM.hintAt + EM_HINT_SECS * 1000 ? "on" : "post"; }
 const emMember = (t, p) => !!(EM.proj && EM.proj[p].done && EM.proj[p].by[t] != null);
 const emWinAmt = t => EM_WIN + (emMember(t, "uni") ? 2 : 0);
 const emAdd = (t, o, sign = 1) => { const R = EM.teams[t].res; EM_RK.forEach(r => { if (o[r]) R[r] = Math.max(0, (R[r] || 0) + sign * o[r]); }); };
@@ -8454,7 +8464,7 @@ function emNew(){
   const N = emCfg.teams, terr = shuffle(EM_TK); const tr = Array.from({length:N}, (_,i) => terr[i % 4]);
   EM = { v:2, id: Math.random().toString(36).slice(2, 10), code: tkNewCode(), names: Array.from({length:N}, (_,i) => emName(i)), terr: tr,
     lvl: emCfg.level, rounds: emCfg.rounds, tWork: emCfg.work,
-    opts: {trade: emCfg.trade, proj: emCfg.proj, betray: emCfg.betray, surprise: emCfg.surprise},
+    opts: {trade: emCfg.trade, proj: emCfg.proj, betray: emCfg.betray, surprise: emCfg.surprise, hint: emCfg.hint},
     offers: [], oseq: 0, proj: Object.fromEntries(EM_PK.map(p => [p, {have:{}, by:{}, done:false}])),
     round: 0, phase: "lobby", endsAt: 0, fc: "", teams: tr.map(k => {
       const map = Array(36).fill(""); EM_TERR[k].cells.forEach(i => map[i] = "#");
@@ -8478,7 +8488,8 @@ function emStartRound(){
     EM.teams.forEach((T, t) => { const g = {}; EM_PK.forEach(p => { if (emMember(t, p) && EM_PJ[p].give) EM_RK.forEach(r => { if (EM_PJ[p].give[r]) g[r] = (g[r] || 0) + EM_PJ[p].give[r]; }); });
       if (Object.keys(g).length){ emAdd(t, g); lines.push(`${EM.names[t]} ${emResTxt(g)}`); } });
     if (lines.length) emLog("إنتاج المشاريع: " + lines.join(" · ")); }
-  const E = EM_EV[EM.fc]; emLog(emOpt("surprise") ? `❓ حدث مفاجئ نهاية الجولة ${n(EM.round)}` : `📡 النشرة: ${E.e} ${E.n} نهاية الجولة ${n(EM.round)}`);
+  EM.hintAt = Date.now() + Math.round(EM.tWork * .25) * 1000;
+  const E = EM_EV[EM.fc]; emLog(emOpt("hint") ? `🔭 تلميح عن حدث نهاية الجولة ${n(EM.round)} يطلع على الشاشة` : emOpt("surprise") ? `❓ حدث مفاجئ نهاية الجولة ${n(EM.round)}` : `📡 النشرة: ${E.e} ${E.n} نهاية الجولة ${n(EM.round)}`);
   emPhase("work", EM.tWork);
 }
 function emEndWork(){
@@ -8597,7 +8608,7 @@ function emTV(t){
 }
 function emGV(){
   return { game: EM.id, code: EM.code, ph: EM.phase, round: EM.round, rounds: EM.rounds, left: EM.endsAt ? Math.max(0, EM.endsAt - Date.now()) : 0,
-    names: EM.names, terr: EM.terr, lvl: EM.lvl, orient: dispGet("em").player, fc: emOpt("surprise") && EM.phase === "work" ? "?" : EM.fc,
+    names: EM.names, terr: EM.terr, lvl: EM.lvl, orient: dispGet("em").player, fc: emHidden() && EM.phase === "work" ? (emOpt("hint") ? "~" : "?") : EM.fc,
     opts: EM.opts || {}, betray: emOpt("betray"),
     proj: EM.proj ? Object.fromEntries(EM_PK.map(p => [p, {have: EM.proj[p].have, by: Object.fromEntries(Object.entries(EM.proj[p].by).map(([k, v]) => [k, EM_RK.reduce((s, r) => s + (v[r] || 0), 0)])), done: EM.proj[p].done}])) : {},
     ev: EM.ev ? {k: EM.ev.k, id: EM.ev.id, st: EM.ev.st, note: EM.ev.note} : null,
@@ -8633,6 +8644,15 @@ const EM_PHN = {lobby:"الاستعداد", work:"اشتغلوا وابنوا", 
 const EM_NOW = {work:"حلّوا التحديات من جوالاتكم، والقائد يبني على الخريطة", event:"شوفوا مين نجا", rescue:"المدن غير المحمية تحل تحدي إنقاذ يخفف الضرر", result:""};
 function emFcHTML(k, compact){
   if (!k) return "";
+  if (k === "~") return `<div class="em-fc${compact ? " sm" : ""}"><span class="em-fci">🔭</span><div><small>📡 نشرة الأرصاد · نهاية الجولة</small>
+    <b>راقبوا الشاشة الكبيرة!</b><p>بيطلع عليها تلميح عن الحدث الجاي لمدة ${n(EM_HINT_SECS)} ثانية بس، ثم يختفي. استنتجوا وش الحدث واستعدوا له.</p></div></div>`;
+  if (k === "@pre") return `<div class="em-fc"><span class="em-fci">🔭</span><div><small>📡 نشرة الأرصاد · نهاية الجولة</small>
+    <b>التلميح قادم…</b><p>بعد قليل يطلع هنا تلميح عن الحدث الجاي لمدة ${n(EM_HINT_SECS)} ثانية. ركّزوا!</p></div></div>`;
+  if (k === "@post") return `<div class="em-fc"><span class="em-fci">🤔</span><div><small>📡 نشرة الأرصاد · نهاية الجولة</small>
+    <b>اختفى التلميح</b><p>وش تتوقعون الحدث؟ احموا مدينتكم على حسب استنتاجكم.</p></div></div>`;
+  if (k === "@on"){ const E = EM_EV[EM.fc], left = Math.max(0, EM.hintAt + EM_HINT_SECS * 1000 - Date.now());
+    return `<div class="em-fc em-hint"><span class="em-fci">🔭</span><div><small>📡 تلميح الأرصاد · يختفي بعد <span class="em-hcount" data-emhl>${n(Math.ceil(left / 1000))}</span> ث</small>
+    <b class="em-hq">${E.hint}</b><p>وش تتوقعون يصير نهاية الجولة؟</p></div><i class="em-hbar" style="animation-duration:${left}ms"></i></div>`; }
   if (k === "?") return `<div class="em-fc${compact ? " sm" : ""}"><span class="em-fci">❓</span><div><small>📡 نشرة الأرصاد · نهاية الجولة</small>
     <b>حدث مفاجئ</b><p>ما نعرف وش بيصير نهاية الجولة: أزمة أو خبر حلو. اللي بنى مباني الحماية كلها في أمان.</p></div></div>`;
   const E = EM_EV[k];
@@ -8667,7 +8687,7 @@ function emSetup(keepScroll){
         <h3 class="em-lh">📡 نشرة الأرصاد</h3>
         <div class="em-fcs">${EM_BAD.map(k => { const E = EM_EV[k], B = EM_B[E.by]; return `<div class="em-fcr bad"><i>${E.e}</i><b>${E.n}</b><span>يحمي منه ${B.e} ${B.n}</span><small>بدون حماية: يتهدّم آخر مبنيين (مبنى واحد مع الإنقاذ)</small></div>`; }).join("")}
           ${EM_GOOD.map(k => { const E = EM_EV[k]; return `<div class="em-fcr good"><i>${E.e}</i><b>${E.n}</b><span>كل مدينة تكسب ${emResTxt(E.give)}</span><small>خبر حلو، ما يحتاج حماية</small></div>`; }).join("")}</div>
-        <p class="em-small">الجولة الأولى دايمًا خبر حلو، وبعدها أغلب الجولات أزمات، وما تتكرر نفس الأزمة جولتين ورا بعض. المبنى يحمي المدينة طول اللعبة، فيكفي تبنونه مرة وحدة.</p>
+        <p class="em-small">${emCfg.hint ? `في هذي المسابقة النشرة <b>بالتلميح</b>: ما يُكتب اسم الحدث، بل يطلع على شاشة العرض دليل عنه لمدة ${n(EM_HINT_SECS)} ثانية ثم يختفي. ` : emCfg.surprise ? "في هذي المسابقة النشرة <b>مفاجأة</b>: الحدث ما ينعرف إلا نهاية الجولة. " : ""}الجولة الأولى دايمًا خبر حلو، وبعدها أغلب الجولات أزمات، وما تتكرر نفس الأزمة جولتين ورا بعض. المبنى يحمي المدينة طول اللعبة، فيكفي تبنونه مرة وحدة.</p>
         <h3 class="em-lh">🏗️ المباني</h3>
         <div class="em-legend">${EM_BK.map(b => { const B = EM_B[b]; return `<span><i>${B.e}</i><b>${B.n}</b><small>${emCost(B.cost)}</small><small>${b === "p" ? "👥 10، و20 لكل بيت" : `👥 ${n(B.st)}`}${B.pr ? ` · يحمي من ${EM_EV[B.pr].e}` : ""}</small></span>`; }).join("")}</div>
       </div>
@@ -8686,18 +8706,19 @@ function emSetup(keepScroll){
           <div><h2 class="h4">🤝 التجارة بين المدن</h2>${sjSeg("data-emo-trade", emCfg.trade ? 1 : 0, [[0,"مقفلة"],[1,"مفعّلة"]])}<p class="em-small">القادة يرسلون عروض تبادل موارد لبعض ويقبلونها أو يرفضونها.</p></div>
           <div><h2 class="h4">🌉 المشاريع المشتركة</h2>${sjSeg("data-emo-proj", emCfg.proj ? 1 : 0, [[0,"مقفلة"],[1,"مفعّلة"]])}<p class="em-small">جسر وميناء وسكة قطار وجامعة، تبنيها 2 إلى 3 مدن مع بعض، وكل شريك ياخذ سكان وفايدة.</p></div>
           ${emCfg.proj ? `<div><h2 class="h4">↩️ الانسحاب من المشاريع</h2>${sjSeg("data-emo-betray", emCfg.betray ? 1 : 0, [[0,"ممنوع"],[1,"مسموح"]])}<p class="em-small">المنسحب ترجع له موارده، بس يخسر ${n(EM_REP)} ساكن من سمعته.</p></div>` : ""}
-          <div><h2 class="h4">❓ نشرة الأرصاد</h2>${sjSeg("data-emo-surprise", emCfg.surprise ? 1 : 0, [[0,"معلنة"],[1,"مفاجأة"]])}<p class="em-small">«مفاجأة» تخفي الحدث لين نهاية الجولة، فيصير الحظ له دور أكبر.</p></div>
+          <div><h2 class="h4">📡 نشرة الأرصاد</h2>${sjSeg("data-emfc", emCfg.hint ? "hint" : emCfg.surprise ? "surprise" : "open", [["open","معلنة"],["hint","تلميح"],["surprise","مفاجأة"]])}<p class="em-small">«معلنة» تكتب الحدث من أول الجولة. «تلميح» يطلع على شاشة العرض دليل عن الحدث لمدة ${n(EM_HINT_SECS)} ثانية ثم يختفي، والفرق تستنتج وش هو. «مفاجأة» تخفي الحدث لين نهاية الجولة.</p></div>
         </div></div>
       ${dispBox("em")}
     </div></div>
-    ${bar(`${n(N)} مدن · ${emCfg.rounds ? n(emCfg.rounds) + " جولات" : "جولات مفتوحة"} · ${emCfg.level}${["trade","proj","surprise"].filter(k => emCfg[k]).map(k => " · " + {trade:"تجارة", proj:"مشاريع", surprise:"أحداث مفاجئة"}[k]).join("")}`, EM ? "مسابقة جديدة" : "افتح غرفة المسابقة", "emGo", false, "start")}</section>`;
+    ${bar(`${n(N)} مدن · ${emCfg.rounds ? n(emCfg.rounds) + " جولات" : "جولات مفتوحة"} · ${emCfg.level}${["trade","proj","hint","surprise"].filter(k => emCfg[k]).map(k => " · " + {trade:"تجارة", proj:"مشاريع", hint:"نشرة بالتلميح", surprise:"أحداث مفاجئة"}[k]).join("")}`, EM ? "مسابقة جديدة" : "افتح غرفة المسابقة", "emGo", false, "start")}</section>`;
   window.scrollTo({top: keepScroll ? y : 0});
   const re = () => { emSaveCfg(); emSetup(true); };
   document.getElementById("emTPlus").onclick = () => { emCfg.teams++; re(); };
   document.getElementById("emTMinus").onclick = () => { emCfg.teams--; re(); };
   [["data-emr","rounds",1],["data-eml","level",0],["data-emw","work",1]].forEach(([a, k, num]) =>
     $app.querySelectorAll(`[${a}]`).forEach(b => b.onclick = () => { emCfg[k] = num ? +b.getAttribute(a) : b.getAttribute(a); re(); }));
-  ["trade","proj","betray","surprise"].forEach(k => $app.querySelectorAll(`[data-emo-${k}]`).forEach(b => b.onclick = () => { emCfg[k] = b.getAttribute(`data-emo-${k}`) === "1"; re(); }));
+  $app.querySelectorAll("[data-emfc]").forEach(b => b.onclick = () => { const v = b.dataset.emfc; emCfg.hint = v === "hint"; emCfg.surprise = v === "surprise"; re(); });
+  ["trade","proj","betray"].forEach(k => $app.querySelectorAll(`[data-emo-${k}]`).forEach(b => b.onclick = () => { emCfg[k] = b.getAttribute(`data-emo-${k}`) === "1"; re(); }));
   $app.querySelectorAll("[data-emn]").forEach(inp => inp.oninput = () => { emCfg.names[+inp.dataset.emn] = inp.value; emSaveCfg(); });
   const r = document.getElementById("emResume"); if (r) r.onclick = () => nav("emplay");
   document.getElementById("emMeBtn").onclick = () => nav("emjoin");
@@ -8717,6 +8738,8 @@ function emClock(){
   if (!EM) return;
   const el = document.getElementById("emClock");
   if (EM.phase === "event" && EM.ev && Date.now() - EM.ev.at > 4200) return emAfterEvent();
+  const hs = emHintSt(); if (hs !== emClock.hs){ emClock.hs = hs; if (location.hash === "#emplay") return emRender(); }
+  if (hs === "on"){ const e = document.querySelector("[data-emhl]"); if (e) e.textContent = n(Math.max(0, Math.ceil((EM.hintAt + EM_HINT_SECS * 1000 - Date.now()) / 1000))); }
   document.querySelectorAll("#emModal [data-emclk]").forEach(e => { if (e.textContent && EM.endsAt) e.textContent = emFmt((EM.endsAt - Date.now()) / 1000); });
   if (EM.endsAt){ const left = (EM.endsAt - Date.now()) / 1000;
     if (el){ el.textContent = emFmt(left); el.classList.toggle("low", left <= 10); }
@@ -8741,7 +8764,7 @@ async function emRender(){
       <div class="tk-link"><span dir="ltr">${esc(link)}</span><button type="button" class="mini" id="emCopy">نسخ رابط اللاعبين</button></div>
       ${ROOM ? "" : `<p class="ss-warn">ربط الجوالات غير متاح على هذا الجهاز. اضغطوا على أي مدينة لتلعبوها من الشاشة.</p>`}
       <button class="btn lg" type="button" id="emStart">ابدأ الجولة الأولى</button></div></div>`;
-  } else if (ph === "work") panel = emFcHTML(emOpt("surprise") ? "?" : EM.fc);
+  } else if (ph === "work") panel = emFcHTML(emOpt("hint") ? "@" + (emHintSt() || "post") : emOpt("surprise") ? "?" : EM.fc);
   else panel = emEventPanel();
   const ctl = ph === "work" ? `<button class="mini" type="button" id="emMore">+30 ث</button><button class="btn" type="button" id="emSkip">أنهِ الجولة</button>`
     : ph === "rescue" ? `<button class="btn" type="button" id="emSkip">إنهاء الإنقاذ</button>` : "";
