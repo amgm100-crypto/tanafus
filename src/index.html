@@ -1070,7 +1070,7 @@ button.er-story{font:inherit;text-align:start;border:0;cursor:pointer;width:100%
 .em-ch b{font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .em-dev{margin-inline-start:auto;display:inline-flex;align-items:center;gap:2px;font-size:12px;color:var(--muted)}
 .em-dev svg{width:14px;height:14px}
-.em-res{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.em-res{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
 .em-res span{display:flex;align-items:center;justify-content:center;gap:3px;background:var(--bg-alt);border-radius:8px;padding:3px 2px;font-variant-numeric:tabular-nums;font-size:14px}
 .em-res i{font-style:normal;font-size:13px}
 .em-res.big span{font-size:20px;padding:8px 4px;border-radius:12px;background:var(--tile)}
@@ -1078,6 +1078,7 @@ button.er-story{font:inherit;text-align:start;border:0;cursor:pointer;width:100%
 .em-stats{display:flex;gap:10px;justify-content:space-between;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;flex-wrap:wrap}
 .em-score{color:var(--tc);font-weight:700;font-size:16px}
 .em-st{font-size:13px;border-radius:8px;padding:4px 8px;background:var(--bg-alt)}
+.em-st.st-eased{background:color-mix(in srgb,var(--c3) 16%,var(--tile));color:var(--c3)}
 .em-st.st-safe,.em-st.st-saved,.em-st.st-good{background:var(--good-soft);color:var(--good)}
 .em-st.st-lost{background:var(--bad-soft);color:var(--bad)}
 .em-st.st-need{background:color-mix(in srgb,var(--c3) 16%,var(--tile));color:var(--c3)}
@@ -1245,7 +1246,13 @@ button.em-cell:not(.on):hover,button.em-cell:not(.on):focus-visible{background:c
 .em-arrive.bad .em-big{animation:embump 1s cubic-bezier(.3,1.6,.5,1) both,emshake .5s .9s 2}
 @keyframes embump{from{transform:scale(.2);opacity:0}}
 @keyframes emshake{25%{transform:translateX(-6px) rotate(-4deg)}75%{transform:translateX(6px) rotate(4deg)}}
-.em-legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:10px}
+.em-lh{margin:18px 0 8px;font-size:18px}
+.em-fcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px;margin-bottom:8px}
+.em-fcr{display:grid;grid-template-columns:auto 1fr;column-gap:10px;border-radius:12px;padding:10px 12px;align-items:center}
+.em-fcr.bad{background:color-mix(in srgb,var(--bad) 9%,var(--tile))}.em-fcr.good{background:color-mix(in srgb,var(--good) 9%,var(--tile))}
+.em-fcr i{grid-row:1/4;font-style:normal;font-size:30px}
+.em-fcr b{font-size:16px}.em-fcr span{font-size:14px}.em-fcr small{font-size:12.5px;color:var(--muted)}
+.em-legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px;margin-top:10px}
 .em-legend span{display:grid;grid-template-columns:auto 1fr;column-gap:8px;background:var(--bg-alt);border-radius:12px;padding:8px 10px}
 .em-legend i{grid-row:1/4;font-style:normal;font-size:26px;align-self:center}
 .em-legend small{font-size:12.5px;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap}
@@ -1257,6 +1264,36 @@ button.em-cell:not(.on):hover,button.em-cell:not(.on):focus-visible{background:c
 .em-bb.hot{box-shadow:inset 0 0 0 2.5px var(--bad),var(--shadow)}
 .em-bb.hot::after{content:"تحمي من الأزمة الجاية";grid-column:1/-1;font-size:11.5px;color:var(--bad);font-weight:600}
 .em-ch .em-score{margin-inline-start:6px}
+.em-pj{display:grid;gap:4px}
+.em-pj>div:first-child{display:flex;justify-content:space-between;font-size:14px}
+.em-pj>div:first-child span{color:var(--muted);font-variant-numeric:tabular-nums}
+.em-pj>i{height:6px;border-radius:3px;background:var(--bg-alt);position:relative;overflow:hidden}
+.em-pj>i::after{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:var(--w);background:var(--blue);border-radius:3px}
+.em-pj.done>i::after{background:var(--good)}
+.em-pjm{display:flex;flex-wrap:wrap;gap:4px}
+.em-pjm span{font-size:12px;border-radius:980px;padding:1px 8px;background:color-mix(in srgb,var(--tc) 16%,var(--tile));color:var(--tc);font-weight:600}
+.em-pjm small{color:var(--muted);font-size:12px}
+.em-offers{display:grid;gap:8px}
+.em-of{background:var(--tile);border-radius:14px;padding:12px;border-inline-start:5px solid var(--tc);display:grid;gap:6px;box-shadow:var(--shadow)}
+.em-of p{margin:0;font-size:15px}
+.em-of.st-ok{opacity:.8}.em-of.st-no,.em-of.st-x{opacity:.55}
+.em-tos{display:flex;flex-wrap:wrap;gap:6px}
+.em-tos button{border:1.5px solid var(--hair);background:var(--tile);border-radius:980px;padding:6px 12px;font-size:14px}
+.em-tos button.on{border-color:var(--tc);background:color-mix(in srgb,var(--tc) 14%,var(--tile));color:var(--tc);font-weight:600}
+.em-two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.em-two h2.h4{margin:0 0 6px;font-size:14px}
+.em-two1{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.em-amt{display:flex;align-items:center;gap:4px;background:var(--bg-alt);border-radius:10px;padding:4px;margin-bottom:4px}
+.em-amt i{font-style:normal;width:24px;text-align:center}
+.em-amt b{flex:1;text-align:center;font-variant-numeric:tabular-nums}
+.em-amt button{width:32px;height:32px;border-radius:50%;border:0;background:var(--tile);font-size:18px}
+.em-pjs{display:grid;gap:10px}
+.em-pjc.done{box-shadow:inset 0 0 0 2px var(--good),var(--shadow)}
+.em-need2{display:flex;gap:10px;flex-wrap:wrap;font-size:14px;font-variant-numeric:tabular-nums}
+.em-lands{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.em-land{border:0;background:var(--tile);border-radius:16px;padding:6px 6px 10px;display:grid;gap:4px;box-shadow:var(--shadow);color:var(--ink)}
+.em-land b{font-size:15px}
+.em-land.sel{box-shadow:inset 0 0 0 3px var(--tc),var(--shadow)}
 /*EM-CSS-END*/
 /*DISP-CSS-START*/
 /* display orientation: host screen and players' devices (html[data-orient][data-orole]) */
@@ -4916,7 +4953,7 @@ const CONTESTS = [
   {name:"مسابقة 6×6", icon:"six", go:"ss", desc:"صورة مغبّشة تتضح مع كل إجابة صحيحة", how:"كل فريق يرفع صورًا والفريق المنافس يخمّنها. كل إجابة صحيحة تزيل 10% من التغبيش، ومن يخمّن مبكرًا يكسب أكثر.", meta:"⁦2–4⁩ فرق"},
   {name:"غرفة الهروب", icon:"erdoor", go:"er", desc:"غرفة مجسّمة يمشي فيها الفريق ويحل الألغاز ليفتح الصندوق", how:"ثلاث غرف وثلاث قصص. يتجوّل الفريق في الغرفة ويحل ألغاز المنطق والشيفرات ليجمع رمز الصندوق السداسي قبل انتهاء الوقت.", meta:"⁦2–10⁩ فرق · ⁦5–10⁩ لاعبين"},
   {name:"تكبيس", icon:"tkphone", go:"tk", desc:"أسرع فريق يكبس من جواله يكسب السؤال", how:"اللاعبون يكبسون من جوالاتهم خلال ثوانٍ، وعدد الكبسات قيمة السؤال: الصحيحة تضيفها والخاطئة تخصمها.", meta:"⁦2–6⁩ فرق · جوالات"},
-  {name:"إعمار", icon:"emcity", go:"em", desc:"كل فريق يبني مدينته وينافس على أزهى مدينة", how:"اللاعبون يحلّون تحديات قصيرة من جوالاتهم ليجمعوا الموارد، ثم يبنون مدينتهم ويحمونها من الأزمة اللي تعلنها نشرة الأرصاد. صاحب أكثر نجوم يفوز.", meta:"⁦2–10⁩ فرق · جوالات"},
+  {name:"إعمار", icon:"emcity", go:"em", desc:"كل فريق يبني مدينته وينافس على أزهى مدينة", how:"اللاعبون يحلّون تحديات قصيرة من جوالاتهم ليجمعوا الموارد، ثم يبنون مدينتهم ويحمونها من الأزمة اللي تعلنها نشرة الأرصاد. المدينة الأكثر سكانًا تفوز.", meta:"⁦2–10⁩ فرق · جوالات"},
   {name:"حقل الألغام", icon:"mine", go:"mf", desc:"كل فريق يزرع ألغامه بالسر، ومن يدوس لغمًا ينفجر عليه", how:"كل فريق يزرع ألغامه بالسر في لوحة المربعات، ثم تتناوب الفرق على كشف المربعات بالأسئلة. المربع الآمن يكشف كم لغمًا حوله، واللغم ينفجر على من يدوسه ويكسب صاحبه.", meta:"⁦2–8⁩ فرق · شاشة واحدة"},
 ];
 /* ---------- subscriber accounts (organisations) ----------
@@ -6884,11 +6921,11 @@ const JOIN_INFO = {
   em: { name:"إعمار", go:"emjoin", icon:"emcity", tag:"اجمع وابنِ واحمِ مدينتك",
     lead:"حلّوا تحديات قصيرة على جوالاتكم، اجمعوا موارد، وابنوا مدينتكم.",
     steps:["اختر مدينتك (فريقك) من القائمة.",
-      "اختر تحديًا على جوالك: الأنابيب تعطي 💧 ماء، والكهرباء ⚡ طاقة، والبنّاء 🧱 حجارة.",
-      "قائد الفريق يبني على الخريطة، والباقون يقترحون عليه. كل مبنى مكتوب عليه نجومه ⭐.",
-      "أول كل جولة تطلع <b>نشرة الأرصاد</b> بالأزمة الجاية. ابنوا المبنى اللي يحمي منها، وإلا يتهدّم آخر مبنى بنيتوه.",
-      "تفوز المدينة صاحبة أكثر نجوم في النهاية."],
-    note:"الحديقة جنب البيوت تكسب نجوم زيادة، فمكان المبنى مهم." }
+      "اختر تحديًا على جوالك: الأنابيب 💧 ماء، والكهرباء ⚡ طاقة، والبنّاء 🧱 حجارة، والسوق 🪙 ذهب، والمزرعة 🌾 غذاء.",
+      "قائد الفريق يبني على الخريطة، والباقون يقترحون عليه. كل مبنى يزيد سكان المدينة 👥.",
+      "أول كل جولة تطلع <b>نشرة الأرصاد</b> بالأزمة الجاية: ☀️ جفاف يحمي منه 🚰 محطة تحلية، و🌋 زلزال يحمي منه 🚒 دفاع مدني، و🦠 وباء يحمي منه 🏥 مستشفى. بدون حماية يتهدّم آخر مبنيين بنيتوهم، وتحدي الإنقاذ يخففها لمبنى واحد.",
+      "تفوز المدينة صاحبة أكثر سكان في النهاية."],
+    note:"الحديقة جنب البيوت تجيب سكان زيادة، فمكان المبنى مهم." }
 };
 let joinMe = { typed:"", tried:false, seen:{}, at:0 };
 const joinHashCode = () => { const m = decodeURIComponent(location.hash).match(/^#join\D?(\d{6})/); return m ? m[1] : ""; };
@@ -8304,32 +8341,33 @@ async function erJoin(){
    leader builds on the 6x6 map at any time) -> the forecast event arrives
    (announced at the start of the round, so protecting the city is planning,
    not luck; unprotected cities get one rescue puzzle) -> result.
-   Score = stars: every building shows its stars; a park gets +2 for each
-   house next to it.
+   Score = population: every building adds residents; a park adds +20 for
+   each house next to it.
    Transport: phones write their actions into room presence (anyone may set
    presence); the host applies them and broadcasts the state on the
    admin-only topics em.g (global) and em.t (one message per team).
    Without phones the host opens any city on the big screen and plays it.
    The map is drawn as a 3D (isometric) diorama with CSS transforms only. */
-const EM_RES = {w:{n:"ماء", e:"💧"}, e:{n:"طاقة", e:"⚡"}, s:{n:"حجارة", e:"🧱"}};
-const EM_RK = ["w","e","s"];
+const EM_RES = {w:{n:"ماء", e:"💧"}, e:{n:"طاقة", e:"⚡"}, s:{n:"حجارة", e:"🧱"}, g:{n:"ذهب", e:"🪙"}, f:{n:"غذاء", e:"🌾"}};
+const EM_RK = ["w","e","s","g","f"];
 const EM_COL = ["var(--c1)","var(--c5)","var(--c2)","var(--c3)","var(--c4)","var(--c6)","var(--c7)","var(--c8)","#0F8A6B","#B8326E"];
 /* the land only changes how the city looks */
 const EM_TERR = {
-  coast:{n:"ساحلية", e:"🌊", blk:"🌊", kind:"water", cells:[5,11,17,23,29,35]},
+  coast:{n:"ساحلية", e:"🌊", blk:"🌊", kind:"water", cells:[11,17,23,29,35]},
   desert:{n:"صحراوية", e:"🏜️", blk:"🌵", kind:"sand", cells:[5,11,24,30,31]},
   mount:{n:"جبلية", e:"⛰️", blk:"⛰️", kind:"rock", cells:[0,1,2,6,7]},
-  oasis:{n:"واحة", e:"🌴", blk:"🌴", kind:"palm", cells:[14,15,20,21]}
+  oasis:{n:"واحة", e:"🌴", blk:"🌴", kind:"palm", cells:[14,15,16,20,21]}
 };
+/* every land blocks exactly 5 cells, so all cities get 31 cells to build on */
 const EM_TK = ["coast","desert","mount","oasis"];
 /* h: box height (in % of the map width), c: roof colour */
 const EM_B = {
-  h:{n:"بيت", e:"🏠", cost:{s:5}, st:3, d:"3 نجوم.", h:5, c:"#E8B07A"},
-  p:{n:"حديقة", e:"🌳", cost:{w:5}, st:1, d:"نجمة، و+2 لكل بيت ملاصق لها.", h:1, c:"#6CC17E"},
-  d:{n:"محطة تحلية", e:"🚰", cost:{s:5, e:5}, st:2, d:"تحمي من الجفاف.", pr:"drought", h:6, c:"#7DB7E8"},
-  r:{n:"دفاع مدني", e:"🚒", cost:{s:5, w:5}, st:2, d:"تحمي من الزلزال.", pr:"quake", h:6, c:"#E88A7D"},
-  o:{n:"مستشفى", e:"🏥", cost:{s:5, w:5, e:5}, st:3, d:"يحمي من الوباء.", pr:"plague", h:8, c:"#F2F2F2"},
-  m:{n:"معلم حضاري", e:"🕌", cost:{s:15, w:10, e:10}, st:15, d:"15 نجمة.", h:12, c:"#E3B341"}
+  h:{n:"بيت", e:"🏠", cost:{s:5, f:3}, st:30, d:"+30 ساكن.", h:5, c:"#E8B07A"},
+  p:{n:"حديقة", e:"🌳", cost:{w:5}, st:10, d:"+10 سكان، و+20 لكل بيت ملاصق لها.", h:1, c:"#6CC17E"},
+  d:{n:"محطة تحلية", e:"🚰", cost:{s:5, e:5}, st:20, d:"تحمي من الجفاف.", pr:"drought", h:6, c:"#7DB7E8"},
+  r:{n:"دفاع مدني", e:"🚒", cost:{s:5, g:5}, st:20, d:"تحمي من الزلزال.", pr:"quake", h:6, c:"#E88A7D"},
+  o:{n:"مستشفى", e:"🏥", cost:{s:5, w:5, g:5}, st:30, d:"يحمي من الوباء.", pr:"plague", h:8, c:"#F2F2F2"},
+  m:{n:"معلم حضاري", e:"🕌", cost:{s:10, g:15, e:5, w:5, f:5}, st:150, d:"+150 ساكن.", h:12, c:"#E3B341"}
 };
 const EM_BK = Object.keys(EM_B);
 /* every round has one forecast: a crisis (with the building that protects
@@ -8340,20 +8378,35 @@ const EM_EV = {
   plague:{n:"وباء", e:"🦠", bad:true, by:"o"},
   rain:{n:"أمطار الخير", e:"🌧️", give:{w:8}},
   mine:{n:"اكتشاف منجم", e:"⛏️", give:{s:8}},
-  sun:{n:"صيف مشمس", e:"🔆", give:{e:8}}
+  sun:{n:"صيف مشمس", e:"🔆", give:{e:8}},
+  trade:{n:"موسم القوافل", e:"🐪", give:{g:8}},
+  harvest:{n:"حصاد وفير", e:"🌾", give:{f:8}}
 };
 const EM_EK = Object.keys(EM_EV), EM_BAD = EM_EK.filter(k => EM_EV[k].bad), EM_GOOD = EM_EK.filter(k => !EM_EV[k].bad);
-const emEvDesc = k => { const E = EM_EV[k]; return E.bad ? `المدن بلا ${EM_B[E.by].e} ${EM_B[E.by].n} يتهدّم آخر مبنى بنته.` : `كل مدينة تكسب ${emResTxt(E.give)}.`; };
+const emEvDesc = k => { const E = EM_EV[k]; return E.bad ? `المدن بلا ${EM_B[E.by].e} ${EM_B[E.by].n} يتهدّم آخر مبنيين بنتهم، وتحدي الإنقاذ يخففها لمبنى واحد.` : `كل مدينة تكسب ${emResTxt(E.give)}.`; };
 const EM_CH = {
   pipes:{n:"تحدي الأنابيب", r:"w", e:"💧", d:"دوّر القطع حتى يصل الماء من البئر إلى المدينة.", secs:[60,50,45]},
   grid:{n:"لوحة الكهرباء", r:"e", e:"⚡", d:"كل ضغطة تقلب المصباح وجيرانه. أضئ كل المصابيح.", secs:[40,45,50]},
-  tiles:{n:"تحدي البنّاء", r:"s", e:"🧱", d:"رتّب القطع لتملأ الأرض بالضبط.", secs:[60,60,60]}
+  tiles:{n:"تحدي البنّاء", r:"s", e:"🧱", d:"رتّب القطع لتملأ الأرض بالضبط.", secs:[60,60,60]},
+  market:{n:"تحدي السوق", r:"g", e:"🪙", d:"اكتشف النمط في الأسعار واختر أفضل صفقة.", secs:[45,40,35]},
+  farm:{n:"تحدي المزرعة", r:"f", e:"🌾", d:"احفظ مكان كل محصول قبل أن يختفي، ثم أرجعه لمكانه.", secs:[40,35,30]}
 };
 const EM_CK = Object.keys(EM_CH);
+/* optional add-ons (off by default, the host turns them on in the settings):
+   trade between cities, shared projects (with or without withdrawing), and
+   surprise events (the forecast is hidden until the end of the round) */
+const EM_PJ = {
+  bridge:{n:"جسر", e:"🌉", need:{s:30, g:20}, pop:100, give:{g:5}, d:"+100 ساكن، و+5 🪙 كل جولة لكل شريك."},
+  port:{n:"ميناء", e:"⚓", need:{s:20, w:20, g:10}, pop:100, give:{w:5, f:5}, d:"+100 ساكن، و+5 💧 و+5 🌾 كل جولة لكل شريك."},
+  rail:{n:"سكة قطار", e:"🚆", need:{s:30, e:20}, pop:100, give:{s:5, e:5}, d:"+100 ساكن، و+5 🧱 و+5 ⚡ كل جولة لكل شريك."},
+  uni:{n:"جامعة", e:"🎓", need:{s:20, g:20, e:10}, pop:120, d:"+120 ساكن، وكل تحدٍّ يعطي 7 بدل 5 لكل شريك."}
+};
+const EM_PK = Object.keys(EM_PJ);
+const EM_REP = 50;   // residents lost for each withdrawal from a project
 const EM_WIN = 5;   // every solved puzzle adds 5 of its resource
 const EM_LV = {"سهل":0, "متوسط":1, "صعب":2};
 const emDefName = i => "مدينة " + ["الأولى","الثانية","الثالثة","الرابعة","الخامسة","السادسة","السابعة","الثامنة","التاسعة","العاشرة"][i];
-let emCfg = Object.assign({teams:4, names:Array(10).fill(""), rounds:7, work:180, level:"متوسط"}, store.get("em2-cfg", {}));
+let emCfg = Object.assign({teams:4, names:Array(10).fill(""), rounds:7, work:180, level:"متوسط", trade:false, proj:false, betray:false, surprise:false}, store.get("em2-cfg", {}));
 let EM = store.get("em2-game", null);
 if (EM && !(EM.v === 2 && EM.teams && EM.names)) EM = null;
 let emTick = null, emBeat = null, emDeb = null, emWired = false;
@@ -8367,9 +8420,10 @@ const emCan = (res, c) => EM_RK.every(r => (res[r] || 0) >= (c[r] || 0));
 const emResTxt = o => EM_RK.filter(r => o[r]).map(r => `${EM_RES[r].e}${n(o[r])}`).join(" ");
 function emTidy(){
   emCfg.teams = Math.min(10, Math.max(2, +emCfg.teams || 4));
-  emCfg.rounds = [5,7,10].includes(+emCfg.rounds) ? +emCfg.rounds : 7;
+  emCfg.rounds = [5,7,10,0].includes(+emCfg.rounds) ? +emCfg.rounds : 7;
   emCfg.work = [120,180,240].includes(+emCfg.work) ? +emCfg.work : 180;
   if (!(emCfg.level in EM_LV)) emCfg.level = "متوسط";
+  ["trade","proj","betray","surprise"].forEach(k => emCfg[k] = !!emCfg[k]); if (!emCfg.proj) emCfg.betray = false;
   while (emCfg.names.length < 10) emCfg.names.push("");
 }
 function emStop(){ [emTick, emBeat].forEach(t => t && clearInterval(t)); emTick = emBeat = null; const m = document.getElementById("emModal"); if (m) m.remove(); emPlayClose(); }
@@ -8378,14 +8432,19 @@ function emStop(){ [emTick, emBeat].forEach(t => t && clearInterval(t)); emTick 
 const emNb4 = i => { const r = Math.floor(i / 6), c = i % 6, o = [];
   if (r > 0) o.push(i - 6); if (r < 5) o.push(i + 6); if (c > 0) o.push(i - 1); if (c < 5) o.push(i + 1); return o; };
 const emCount = (map, b) => map.filter(x => x === b).length;
-const emParkBonus = (map, i) => 2 * emNb4(i).filter(j => map[j] === "h").length;
+const emParkBonus = (map, i) => 20 * emNb4(i).filter(j => map[j] === "h").length;
 function emScore(t){
-  const m = EM.teams[t].map, parts = {h:0, p:0, x:0, m:0};
+  const m = EM.teams[t].map, parts = {h:0, p:0, x:0, m:0, pj:0, rep:0};
   m.forEach((b, i) => { if (!b || b === "#") return; const B = EM_B[b];
     if (b === "h") parts.h += B.st; else if (b === "p") parts.p += B.st + emParkBonus(m, i); else if (b === "m") parts.m += B.st; else parts.x += B.st; });
-  return {parts, total: parts.h + parts.p + parts.x + parts.m};
+  if (EM.proj) parts.pj = EM_PK.filter(p => emMember(t, p)).reduce((a, p) => a + EM_PJ[p].pop, 0);
+  parts.rep = -EM_REP * (EM.teams[t].rep || 0);
+  return {parts, total: Math.max(0, parts.h + parts.p + parts.x + parts.m + parts.pj + parts.rep)};
 }
 const emHas = (t, b) => EM.teams[t].map.includes(b);
+const emOpt = k => !!(EM && EM.opts && EM.opts[k]);
+const emMember = (t, p) => !!(EM.proj && EM.proj[p].done && EM.proj[p].by[t] != null);
+const emWinAmt = t => EM_WIN + (emMember(t, "uni") ? 2 : 0);
 const emAdd = (t, o, sign = 1) => { const R = EM.teams[t].res; EM_RK.forEach(r => { if (o[r]) R[r] = Math.max(0, (R[r] || 0) + sign * o[r]); }); };
 function emLog(s){ EM.log.unshift({s, at: Date.now()}); EM.log = EM.log.slice(0, 12); }
 
@@ -8395,9 +8454,11 @@ function emNew(){
   const N = emCfg.teams, terr = shuffle(EM_TK); const tr = Array.from({length:N}, (_,i) => terr[i % 4]);
   EM = { v:2, id: Math.random().toString(36).slice(2, 10), code: tkNewCode(), names: Array.from({length:N}, (_,i) => emName(i)), terr: tr,
     lvl: emCfg.level, rounds: emCfg.rounds, tWork: emCfg.work,
+    opts: {trade: emCfg.trade, proj: emCfg.proj, betray: emCfg.betray, surprise: emCfg.surprise},
+    offers: [], oseq: 0, proj: Object.fromEntries(EM_PK.map(p => [p, {have:{}, by:{}, done:false}])),
     round: 0, phase: "lobby", endsAt: 0, fc: "", teams: tr.map(k => {
       const map = Array(36).fill(""); EM_TERR[k].cells.forEach(i => map[i] = "#");
-      return {res:{w:5, e:5, s:10}, map, order:[], last:null, wins:0, sug:[]}; }),
+      return {res:{w:5, e:5, s:10, g:5, f:5}, map, order:[], last:null, wins:0, sug:[], rep:0}; }),
     ev: null, log: [], seen: {}, fcUsed: [] };
   emSave();
 }
@@ -8412,11 +8473,17 @@ function emForecast(){
 function emPhase(ph, secs){ EM.phase = ph; EM.endsAt = secs ? Date.now() + secs * 1000 : 0; emSave(); emPush(); emRender(); }
 function emStartRound(){
   EM.round++; EM.ev = null; EM.fc = emForecast(); EM.fcUsed.push(EM.fc);
-  const E = EM_EV[EM.fc]; emLog(`📡 النشرة: ${E.e} ${E.n} نهاية الجولة ${n(EM.round)}`);
+  (EM.offers || []).forEach(o => { if (o.st === "open") o.st = "x"; });
+  if (EM.round > 1 && EM.proj){ const lines = [];
+    EM.teams.forEach((T, t) => { const g = {}; EM_PK.forEach(p => { if (emMember(t, p) && EM_PJ[p].give) EM_RK.forEach(r => { if (EM_PJ[p].give[r]) g[r] = (g[r] || 0) + EM_PJ[p].give[r]; }); });
+      if (Object.keys(g).length){ emAdd(t, g); lines.push(`${EM.names[t]} ${emResTxt(g)}`); } });
+    if (lines.length) emLog("إنتاج المشاريع: " + lines.join(" · ")); }
+  const E = EM_EV[EM.fc]; emLog(emOpt("surprise") ? `❓ حدث مفاجئ نهاية الجولة ${n(EM.round)}` : `📡 النشرة: ${E.e} ${E.n} نهاية الجولة ${n(EM.round)}`);
   emPhase("work", EM.tWork);
 }
 function emEndWork(){
   const k = EM.fc, E = EM_EV[k];
+  (EM.offers || []).forEach(o => { if (o.st === "open") o.st = "x"; });
   EM.ev = {k, id: Math.random().toString(36).slice(2, 8), at: Date.now(), st: [], note: []};
   EM.teams.forEach((T, t) => {
     if (E.bad){ const safe = emHas(t, E.by) || !T.order.length; EM.ev.st[t] = safe ? "safe" : "need"; EM.ev.note[t] = emHas(t, E.by) ? `${EM_B[E.by].e} حمتها` : safe ? "ما فيها مبانٍ" : ""; }
@@ -8425,40 +8492,79 @@ function emEndWork(){
   emPhase("event", 0);
 }
 function emAfterEvent(){ if (EM && EM.phase === "event"){ if (EM.ev.st.includes("need")) emPhase("rescue", 45); else emPhase("result", 0); } }
-function emPenalty(t){
-  const T = EM.teams[t]; let i = -1;
-  while (T.order.length && i < 0){ const c = T.order.pop(); if (T.map[c] && T.map[c] !== "#") i = c; }
-  if (i >= 0){ EM.ev.note[t] = `تهدّم ${EM_B[T.map[i]].e} ${EM_B[T.map[i]].n}`; T.map[i] = ""; T.lost = {c:i, at:Date.now()}; }
-  EM.ev.st[t] = "lost";
+/* the last buildings fall: 2 without a rescue, 1 when the team solved it */
+function emPenalty(t, cnt){
+  const T = EM.teams[t], gone = [];
+  while (gone.length < cnt && T.order.length){ const c = T.order.pop(); if (T.map[c] && T.map[c] !== "#"){ gone.push(EM_B[T.map[c]]); T.map[c] = ""; } }
+  EM.ev.note[t] = gone.length ? "تهدّم " + gone.map(B => B.e + " " + B.n).join(" و") : "ما بقى مبنى يتهدّم";
+  EM.ev.st[t] = EM.ev.st[t] === "saved" ? "eased" : "lost";
 }
-function emEndRescue(){ EM.ev.st.forEach((s, t) => { if (s === "need") emPenalty(t); });
-  const lost = EM.ev.st.map((s, t) => s === "lost" ? EM.names[t] : null).filter(Boolean);
+function emEndRescue(){ EM.ev.st.forEach((s, t) => { if (s === "need") emPenalty(t, 2); else if (s === "saved") emPenalty(t, 1); });
+  const lost = EM.ev.st.map((s, t) => s === "lost" || s === "eased" ? EM.names[t] : null).filter(Boolean);
   if (lost.length) emLog(`${EM_EV[EM.ev.k].e} تضررت: ${lost.join("، ")}`);
   emPhase("result", 0); }
-function emNext(){ if (EM.round >= EM.rounds){ EM.phase = "end"; emSave(); emPush(); return emRender(); } emStartRound(); }
+const emOf = () => EM.rounds ? ` من ${n(EM.rounds)}` : "";
+function emNext(){ if (EM.rounds && EM.round >= EM.rounds){ EM.phase = "end"; emSave(); emPush(); return emRender(); } emStartRound(); }
 
 /* ---------- actions (from phones or from the host screen) ---------- */
 function emLeader(t){ const d = emDevices()[t]; return d && d.length ? d[0].peer : null; }
 function emDo(t, a, src){
   if (!EM || !EM.teams[t] || !a || typeof a !== "object") return false;
   const T = EM.teams[t], ph = EM.phase, lead = src === "host" || src === emLeader(t);
+  const clean = o => { const x = {}; EM_RK.forEach(r => { const v = Math.floor(+((o || {})[r]) || 0); if (v > 0) x[r] = Math.min(999, v); }); return x; };
   if (a.k === "win"){
     if (!(ph === "work" || (ph === "event" && Date.now() - EM.ev.at < 4000))) return false;
     if (!(a.r in EM_RES)) return false;
-    emAdd(t, {[a.r]: EM_WIN}); T.wins++; return true;
+    emAdd(t, {[a.r]: emWinAmt(t)}); T.wins++; return true;
   }
   if (a.k === "rs"){ if (ph !== "rescue" || !EM.ev || a.ev !== EM.ev.id || EM.ev.st[t] !== "need") return false;
-    EM.ev.st[t] = "saved"; EM.ev.note[t] = "أنقذت نفسها"; emLog(`${EM.names[t]} أنقذت مدينتها`);
+    EM.ev.st[t] = "saved"; EM.ev.note[t] = "خففت الضرر لمبنى واحد"; emLog(`${EM.names[t]} خففت الضرر عن مدينتها`);
     if (!EM.ev.st.includes("need")) setTimeout(() => { if (EM && EM.phase === "rescue") emEndRescue(); }, 1200);
     return true; }
   if (a.k === "sg"){ if (ph !== "work" || !(a.b in EM_B) || !(a.c >= 0 && a.c < 36)) return false;
     T.sug = [{b:a.b, c:a.c, at:Date.now()}, ...T.sug.filter(s => s.c !== a.c)].slice(0, 4); return true; }
   if (!lead) return false;
+  if (a.k === "land"){
+    if (ph !== "lobby" || !(a.v in EM_TERR) || EM.terr[t] === a.v) return false;
+    EM.terr[t] = a.v; T.map = Array(36).fill(""); EM_TERR[a.v].cells.forEach(i => T.map[i] = "#"); T.order = []; T.last = null;
+    emLog(`${EM.names[t]} اختارت أرضًا ${EM_TERR[a.v].n}`); return true; }
   if (a.k === "b"){
     if (ph !== "work" || !(a.b in EM_B) || !(a.c >= 0 && a.c < 36) || T.map[a.c] !== "") return false;
     const c = EM_B[a.b].cost; if (!emCan(T.res, c)) return false;
     emAdd(t, c, -1); T.map[a.c] = a.b; T.order.push(a.c); T.last = {c:a.c, at:Date.now()}; T.sug = T.sug.filter(s => s.c !== a.c);
     emLog(`${EM.names[t]} بنت ${EM_B[a.b].e} ${EM_B[a.b].n}`); return true; }
+  if (a.k === "of"){
+    if (!emOpt("trade") || ph !== "work") return false;
+    const to = +a.to, give = clean(a.give), get = clean(a.get);
+    if (!(to >= 0 && to < EM.teams.length) || to === t || !Object.keys(give).length && !Object.keys(get).length) return false;
+    if (!emCan(T.res, give)) return false;
+    if (EM.offers.filter(o => o.from === t && o.st === "open").length >= 4) return false;
+    EM.offers.push({id: ++EM.oseq, from:t, to, give, get, st:"open", at:Date.now()}); EM.offers = EM.offers.slice(-30); return true; }
+  if (a.k === "ans"){
+    if (!emOpt("trade")) return false;
+    const o = EM.offers.find(x => x.id === +a.id); if (!o || o.st !== "open") return false;
+    if (o.from === t && a.ok === false){ o.st = "x"; return true; }   // cancel own offer
+    if (o.to !== t) return false;
+    if (!a.ok){ o.st = "no"; return true; }
+    if (!emCan(EM.teams[o.from].res, o.give) || !emCan(T.res, o.get)){ o.st = "no"; o.why = "الموارد لم تعد كافية"; return true; }
+    emAdd(o.from, o.give, -1); emAdd(t, o.give); emAdd(t, o.get, -1); emAdd(o.from, o.get); o.st = "ok";
+    emLog(`🤝 صفقة بين ${EM.names[o.from]} و${EM.names[t]}`); return true; }
+  if (a.k === "pj"){
+    if (!emOpt("proj") || ph !== "work" || !(a.p in EM_PJ)) return false;
+    const P = EM.proj[a.p], need = EM_PJ[a.p].need; if (P.done) return false;
+    const members = Object.keys(P.by); if (P.by[t] == null && members.length >= 3) return false;
+    const total = EM_RK.reduce((s, r) => s + (need[r] || 0), 0), mine = P.by[t] ? EM_RK.reduce((s, r) => s + (P.by[t][r] || 0), 0) : 0;
+    let room = Math.floor(total * .6) - mine; const give = clean(a.give), put = {};
+    EM_RK.forEach(r => { if (!give[r] || room <= 0) return; const v = Math.min(give[r], (need[r] || 0) - (P.have[r] || 0), T.res[r] || 0, room); if (v > 0){ put[r] = v; room -= v; } });
+    if (!Object.keys(put).length) return false;
+    emAdd(t, put, -1); P.by[t] = P.by[t] || {}; EM_RK.forEach(r => { if (put[r]){ P.have[r] = (P.have[r] || 0) + put[r]; P.by[t][r] = (P.by[t][r] || 0) + put[r]; } });
+    if (EM_RK.every(r => (P.have[r] || 0) >= (need[r] || 0)) && Object.keys(P.by).length >= 2){ P.done = true;
+      emLog(`${EM_PJ[a.p].e} اكتمل ${EM_PJ[a.p].n}: ${Object.keys(P.by).map(x => EM.names[x]).join(" و")}`); }
+    return true; }
+  if (a.k === "wd"){
+    if (!emOpt("betray") || !(a.p in EM_PJ)) return false; const P = EM.proj[a.p]; if (P.done || !P.by[t]) return false;
+    emAdd(t, P.by[t]); EM_RK.forEach(r => { if (P.by[t][r]) P.have[r] -= P.by[t][r]; }); delete P.by[t]; T.rep = (T.rep || 0) + 1;
+    emLog(`⚠️ ${EM.names[t]} انسحبت من مشروع ${EM_PJ[a.p].n} وخسرت من سمعتها`); return true; }
   return false;
 }
 function emHostDo(t, a){ if (emDo(t, a, "host")){ emSave(); emPush(); emRender(); return true; } return false; }
@@ -8486,11 +8592,14 @@ function emTV(t){
   const T = EM.teams[t];
   return { game: EM.id, t, res: T.res, map: T.map.map(b => b || ".").join(""), score: emScore(t).total,
     last: T.last && Date.now() - T.last.at < 3000 ? T.last.c : -1,
-    lead: emLeader(t), sug: T.sug.filter(s => Date.now() - s.at < 60000).map(s => [s.b, s.c]) };
+    lead: emLeader(t), sug: T.sug.filter(s => Date.now() - s.at < 60000).map(s => [s.b, s.c]), win: emWinAmt(t),
+    offers: (EM.offers || []).filter(o => (o.from === t || o.to === t) && (o.st === "open" || Date.now() - o.at < 60000)).slice(-8).map(o => ({id:o.id, from:o.from, to:o.to, give:o.give, get:o.get, st:o.st})) };
 }
 function emGV(){
   return { game: EM.id, code: EM.code, ph: EM.phase, round: EM.round, rounds: EM.rounds, left: EM.endsAt ? Math.max(0, EM.endsAt - Date.now()) : 0,
-    names: EM.names, terr: EM.terr, lvl: EM.lvl, orient: dispGet("em").player, fc: EM.fc,
+    names: EM.names, terr: EM.terr, lvl: EM.lvl, orient: dispGet("em").player, fc: emOpt("surprise") && EM.phase === "work" ? "?" : EM.fc,
+    opts: EM.opts || {}, betray: emOpt("betray"),
+    proj: EM.proj ? Object.fromEntries(EM_PK.map(p => [p, {have: EM.proj[p].have, by: Object.fromEntries(Object.entries(EM.proj[p].by).map(([k, v]) => [k, EM_RK.reduce((s, r) => s + (v[r] || 0), 0)])), done: EM.proj[p].done}])) : {},
     ev: EM.ev ? {k: EM.ev.k, id: EM.ev.id, st: EM.ev.st, note: EM.ev.note} : null,
     scores: EM.teams.map((_, t) => emScore(t).total), log: EM.log.slice(0, 3).map(l => l.s) };
 }
@@ -8521,11 +8630,14 @@ function emResHTML(res, big){ return `<div class="em-res${big ? " big" : ""}">${
 const emTerrTag = k => { const T = EM_TERR[k]; return `<span class="em-terr">${T.e} ${T.n}</span>`; };
 const EM_PHN = {lobby:"الاستعداد", work:"اشتغلوا وابنوا", event:"وصل الحدث", rescue:"الإنقاذ", result:"نتيجة الجولة", end:"النهاية"};
 /* one line on the big screen: what to do right now */
-const EM_NOW = {work:"حلّوا التحديات من جوالاتكم، والقائد يبني على الخريطة", event:"شوفوا مين نجا", rescue:"المدن غير المحمية تحل تحدي إنقاذ", result:""};
+const EM_NOW = {work:"حلّوا التحديات من جوالاتكم، والقائد يبني على الخريطة", event:"شوفوا مين نجا", rescue:"المدن غير المحمية تحل تحدي إنقاذ يخفف الضرر", result:""};
 function emFcHTML(k, compact){
-  if (!k) return ""; const E = EM_EV[k];
+  if (!k) return "";
+  if (k === "?") return `<div class="em-fc${compact ? " sm" : ""}"><span class="em-fci">❓</span><div><small>📡 نشرة الأرصاد · نهاية الجولة</small>
+    <b>حدث مفاجئ</b><p>ما نعرف وش بيصير نهاية الجولة: أزمة أو خبر حلو. اللي بنى مباني الحماية كلها في أمان.</p></div></div>`;
+  const E = EM_EV[k];
   return `<div class="em-fc${E.bad ? " bad" : " good"}${compact ? " sm" : ""}"><span class="em-fci">${E.e}</span><div><small>📡 نشرة الأرصاد · نهاية الجولة</small>
-    <b>${E.bad ? `متوقع ${E.n}` : E.n}</b><p>${E.bad ? `احموا مدينتكم بـ ${EM_B[E.by].e} ${EM_B[E.by].n}، وإلا يتهدّم آخر مبنى تبنونه.` : emEvDesc(k)}</p></div></div>`;
+    <b>${E.bad ? `متوقع ${E.n}` : E.n}</b><p>${E.bad ? `احموا مدينتكم بـ ${EM_B[E.by].e} ${EM_B[E.by].n}، وإلا يتهدّم آخر مبنيين تبنونهم.` : emEvDesc(k)}</p></div></div>`;
 }
 
 /* ---------- setup ---------- */
@@ -8541,35 +8653,51 @@ function emSetup(keepScroll){
       <div style="margin-top:18px"><button type="button" class="btn" id="emMeBtn">دخول اللاعبين</button></div>
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
-      ${EM ? `<div class="sj-resume"><span>عندك مسابقة جارية: الجولة ${n(EM.round)} من ${n(EM.rounds)}.</span><button class="btn" type="button" id="emResume">متابعة</button></div>` : ""}
+      ${EM ? `<div class="sj-resume"><span>عندك مسابقة جارية: الجولة ${n(EM.round)}${emOf()}.</span><button class="btn" type="button" id="emResume">متابعة</button></div>` : ""}
       <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
-          <li><b>اجمعوا الموارد:</b> كل لاعب يحل تحديات قصيرة على جواله. الأنابيب تعطي 💧 ماء، ولوحة الكهرباء ⚡ طاقة، والبنّاء 🧱 حجارة.</li>
-          <li><b>ابنوا:</b> قائد الفريق يبني على خريطة المدينة، والباقون يقترحون. كل مبنى مكتوب عليه نجومه، والحديقة جنب البيوت تكسب نجوم زيادة.</li>
-          <li><b>احموا مدينتكم:</b> أول كل جولة تطلع نشرة الأرصاد بالأزمة الجاية. ابنوا المبنى اللي يحمي منها، وإلا يتهدّم آخر مبنى بنيتوه (إلا إذا نجحتم في تحدي الإنقاذ).</li>
-          <li>في النهاية تفوز المدينة صاحبة أكثر نجوم ⭐.</li>
+          <li><b>اجمعوا الموارد:</b> كل لاعب يحل تحديات قصيرة على جواله، وكل تحدٍّ ينجح يعطي 5 من مورده: الأنابيب 💧 ماء، ولوحة الكهرباء ⚡ طاقة، والبنّاء 🧱 حجارة، والسوق 🪙 ذهب، والمزرعة 🌾 غذاء.</li>
+          <li><b>ابنوا:</b> قائد الفريق يبني على خريطة المدينة، والباقون يقترحون. كل مبنى يزيد سكان مدينتكم بعدد مكتوب عليه، والحديقة جنب البيوت تجيب سكان زيادة.</li>
+          <li><b>احموا مدينتكم:</b> أول كل جولة تطلع على الشاشة <b>نشرة الأرصاد</b>، وهي تخبركم وش اللي بيصير نهاية الجولة: أزمة أو خبر حلو (الجدول تحت). إذا كانت أزمة، ابنوا المبنى اللي يحمي منها قبل ما يخلص الوقت، وإلا يتهدّم آخر مبنيين بنيتوهم. والمدينة غير المحمية تاخذ فرصة أخيرة: <b>تحدي الإنقاذ</b> خلال 45 ثانية، إذا حلّه أي عضو يخف الضرر لمبنى واحد بس.</li>
+          <li>كل فريق يختار شكل أرضه قبل البداية (ساحلية، صحراوية، جبلية، واحة)، وكلها فيها نفس عدد الخانات.</li>
+          ${emCfg.trade ? `<li><b>التجارة:</b> القادة يتبادلون الموارد بعروض من جوالاتهم خلال الجولة.</li>` : ""}
+          ${emCfg.proj ? `<li><b>المشاريع المشتركة:</b> مدينتين أو ثلاث يساهمون في جسر أو ميناء أو سكة قطار أو جامعة، ولما يكتمل ياخذ كل شريك سكان وفايدة كل جولة.</li>` : ""}
+          <li>في النهاية تفوز المدينة صاحبة أكثر سكان 👥.</li>
         </ol>
-        <div class="em-legend">${EM_BK.map(b => { const B = EM_B[b]; return `<span><i>${B.e}</i><b>${B.n}</b><small>${emCost(B.cost)}</small><small>${b === "p" ? "⭐1 +2 لكل بيت" : `⭐${n(B.st)}`}${B.pr ? ` · يحمي من ${EM_EV[B.pr].e}` : ""}</small></span>`; }).join("")}</div>
+        <h3 class="em-lh">📡 نشرة الأرصاد</h3>
+        <div class="em-fcs">${EM_BAD.map(k => { const E = EM_EV[k], B = EM_B[E.by]; return `<div class="em-fcr bad"><i>${E.e}</i><b>${E.n}</b><span>يحمي منه ${B.e} ${B.n}</span><small>بدون حماية: يتهدّم آخر مبنيين (مبنى واحد مع الإنقاذ)</small></div>`; }).join("")}
+          ${EM_GOOD.map(k => { const E = EM_EV[k]; return `<div class="em-fcr good"><i>${E.e}</i><b>${E.n}</b><span>كل مدينة تكسب ${emResTxt(E.give)}</span><small>خبر حلو، ما يحتاج حماية</small></div>`; }).join("")}</div>
+        <p class="em-small">الجولة الأولى دايمًا خبر حلو، وبعدها أغلب الجولات أزمات، وما تتكرر نفس الأزمة جولتين ورا بعض. المبنى يحمي المدينة طول اللعبة، فيكفي تبنونه مرة وحدة.</p>
+        <h3 class="em-lh">🏗️ المباني</h3>
+        <div class="em-legend">${EM_BK.map(b => { const B = EM_B[b]; return `<span><i>${B.e}</i><b>${B.n}</b><small>${emCost(B.cost)}</small><small>${b === "p" ? "👥 10، و20 لكل بيت" : `👥 ${n(B.st)}`}${B.pr ? ` · يحمي من ${EM_EV[B.pr].e}` : ""}</small></span>`; }).join("")}</div>
       </div>
       <div class="sj-box"><h2 class="sjh">المدن<small>من 2 إلى 10 فرق</small></h2>
         <div class="stepper ss-step"><button type="button" id="emTPlus" aria-label="زيادة" ${N >= 10 ? "disabled" : ""}>+</button><output>${n(N)}</output><button type="button" id="emTMinus" aria-label="إنقاص" ${N <= 2 ? "disabled" : ""}>−</button></div>
         <div class="sj-names">${Array.from({length:N}, (_,i) => `<input type="text" maxlength="24" data-emn="${i}" style="--tc:${EM_COL[i]}" value="${esc(emCfg.names[i])}" placeholder="${emDefName(i)}" aria-label="اسم ${emDefName(i)}">`).join("")}</div>
       </div>
       <div class="sj-box sj-two">
-        <div><h2 class="h4">عدد الجولات</h2>${sjSeg("data-emr", emCfg.rounds, [[5,"5"],[7,"7"],[10,"10"]])}</div>
+        <div><h2 class="h4">عدد الجولات</h2>${sjSeg("data-emr", emCfg.rounds, [[5,"5"],[7,"7"],[10,"10"],[0,"مفتوح"]])}</div>
         <div><h2 class="h4">المستوى</h2>${sjSeg("data-eml", emCfg.level, [["سهل","سهل"],["متوسط","متوسط"],["صعب","صعب"]])}</div>
         <div><h2 class="h4">وقت الجولة</h2>${sjSeg("data-emw", emCfg.work, [[120,"2 د"],[180,"3 د"],[240,"4 د"]])}</div>
       </div>
       <p class="sj-sub" style="text-align:center">المستوى يكبّر حجم التحديات ويقلّل وقتها. «سهل» يناسب الابتدائي، و«متوسط» يناسب المتوسط.</p>
+      <div class="sj-box"><h2 class="sjh">إضافات اختيارية<small>للمتقدمين، وكلها مقفلة في البداية</small></h2>
+        <div class="sj-two">
+          <div><h2 class="h4">🤝 التجارة بين المدن</h2>${sjSeg("data-emo-trade", emCfg.trade ? 1 : 0, [[0,"مقفلة"],[1,"مفعّلة"]])}<p class="em-small">القادة يرسلون عروض تبادل موارد لبعض ويقبلونها أو يرفضونها.</p></div>
+          <div><h2 class="h4">🌉 المشاريع المشتركة</h2>${sjSeg("data-emo-proj", emCfg.proj ? 1 : 0, [[0,"مقفلة"],[1,"مفعّلة"]])}<p class="em-small">جسر وميناء وسكة قطار وجامعة، تبنيها 2 إلى 3 مدن مع بعض، وكل شريك ياخذ سكان وفايدة.</p></div>
+          ${emCfg.proj ? `<div><h2 class="h4">↩️ الانسحاب من المشاريع</h2>${sjSeg("data-emo-betray", emCfg.betray ? 1 : 0, [[0,"ممنوع"],[1,"مسموح"]])}<p class="em-small">المنسحب ترجع له موارده، بس يخسر ${n(EM_REP)} ساكن من سمعته.</p></div>` : ""}
+          <div><h2 class="h4">❓ نشرة الأرصاد</h2>${sjSeg("data-emo-surprise", emCfg.surprise ? 1 : 0, [[0,"معلنة"],[1,"مفاجأة"]])}<p class="em-small">«مفاجأة» تخفي الحدث لين نهاية الجولة، فيصير الحظ له دور أكبر.</p></div>
+        </div></div>
       ${dispBox("em")}
     </div></div>
-    ${bar(`${n(N)} مدن · ${n(emCfg.rounds)} جولات · ${emCfg.level}`, EM ? "مسابقة جديدة" : "افتح غرفة المسابقة", "emGo", false, "start")}</section>`;
+    ${bar(`${n(N)} مدن · ${emCfg.rounds ? n(emCfg.rounds) + " جولات" : "جولات مفتوحة"} · ${emCfg.level}${["trade","proj","surprise"].filter(k => emCfg[k]).map(k => " · " + {trade:"تجارة", proj:"مشاريع", surprise:"أحداث مفاجئة"}[k]).join("")}`, EM ? "مسابقة جديدة" : "افتح غرفة المسابقة", "emGo", false, "start")}</section>`;
   window.scrollTo({top: keepScroll ? y : 0});
   const re = () => { emSaveCfg(); emSetup(true); };
   document.getElementById("emTPlus").onclick = () => { emCfg.teams++; re(); };
   document.getElementById("emTMinus").onclick = () => { emCfg.teams--; re(); };
   [["data-emr","rounds",1],["data-eml","level",0],["data-emw","work",1]].forEach(([a, k, num]) =>
     $app.querySelectorAll(`[${a}]`).forEach(b => b.onclick = () => { emCfg[k] = num ? +b.getAttribute(a) : b.getAttribute(a); re(); }));
+  ["trade","proj","betray","surprise"].forEach(k => $app.querySelectorAll(`[data-emo-${k}]`).forEach(b => b.onclick = () => { emCfg[k] = b.getAttribute(`data-emo-${k}`) === "1"; re(); }));
   $app.querySelectorAll("[data-emn]").forEach(inp => inp.oninput = () => { emCfg.names[+inp.dataset.emn] = inp.value; emSaveCfg(); });
   const r = document.getElementById("emResume"); if (r) r.onclick = () => nav("emplay");
   document.getElementById("emMeBtn").onclick = () => nav("emjoin");
@@ -8596,7 +8724,7 @@ function emClock(){
       if (EM.phase === "work") emEndWork();
       else if (EM.phase === "rescue") emEndRescue(); } }
 }
-const EM_STN = {safe:"✓ محمية", need:"⏳ تحاول الإنقاذ", saved:"✓ أنقذت نفسها", lost:"✗ تضررت", good:"✓"};
+const EM_STN = {safe:"✓ محمية", need:"⏳ تحاول الإنقاذ", saved:"✓ خففت الضرر", eased:"◐ خففت الضرر", lost:"✗ تضررت", good:"✓"};
 async function emRender(){
   if (!EM) return emSetup();
   if (location.hash !== "#emplay") return;
@@ -8609,16 +8737,16 @@ async function emRender(){
     const link = emLink(EM.code);
     panel = `<div class="tk-panel tk-lobby em-lobby"><div class="tk-lobby-qr">${tkQR(link)}</div>
       <div class="tk-lobby-tx"><small>رمز دخول الغرفة</small>${tkCodeHTML(EM.code)}
-      <p>صوّروا الباركود أو افتحوا رابط اللاعبين واكتبوا الرمز، ثم اختاروا مدينتكم. أول جهاز ينضم لكل مدينة يكون قائدها.</p>
+      <p>صوّروا الباركود أو افتحوا رابط اللاعبين واكتبوا الرمز، ثم اختاروا مدينتكم. أول جهاز ينضم لكل مدينة يكون قائدها ويختار شكل أرضها. (تقدرون تختارونها من هنا بالضغط على المدينة.)</p>
       <div class="tk-link"><span dir="ltr">${esc(link)}</span><button type="button" class="mini" id="emCopy">نسخ رابط اللاعبين</button></div>
       ${ROOM ? "" : `<p class="ss-warn">ربط الجوالات غير متاح على هذا الجهاز. اضغطوا على أي مدينة لتلعبوها من الشاشة.</p>`}
       <button class="btn lg" type="button" id="emStart">ابدأ الجولة الأولى</button></div></div>`;
-  } else if (ph === "work") panel = emFcHTML(EM.fc);
+  } else if (ph === "work") panel = emFcHTML(emOpt("surprise") ? "?" : EM.fc);
   else panel = emEventPanel();
   const ctl = ph === "work" ? `<button class="mini" type="button" id="emMore">+30 ث</button><button class="btn" type="button" id="emSkip">أنهِ الجولة</button>`
     : ph === "rescue" ? `<button class="btn" type="button" id="emSkip">إنهاء الإنقاذ</button>` : "";
   $app.innerHTML = `<section class="em gut view"><div class="wrap em-wrap">
-    <div class="b4-top"><div class="b4-title"><b>إعمار</b><span class="tk-room">الغرفة ${tkCodeHTML(EM.code)}</span><span>الجولة ${n(Math.max(1, EM.round))} من ${n(EM.rounds)}</span></div>
+    <div class="b4-top"><div class="b4-title"><b>إعمار</b><span class="tk-room">الغرفة ${tkCodeHTML(EM.code)}</span><span>الجولة ${n(Math.max(1, EM.round))}${emOf()}</span></div>
       <div class="b4-acts"><button class="mini" type="button" id="emFull">${I(P.sjfull)}ملء الشاشة</button><button class="mini" type="button" id="emEnd">إنهاء المسابقة</button><button class="mini" type="button" id="emMenu">${I(P.sjgear)}الإعدادات</button></div></div>
     ${ph !== "lobby" ? `<div class="em-phase ph-${ph}"><div><small>${EM_NOW[ph] || ""}</small><b>${EM_PHN[ph]}</b></div>
       ${EM.endsAt ? `<span class="em-clock" id="emClock">${emFmt((EM.endsAt - Date.now()) / 1000)}</span>` : ""}<div class="em-ctl">${ctl}</div></div>` : ""}
@@ -8626,14 +8754,17 @@ async function emRender(){
     <div class="em-body"><div class="em-cities" style="--n:${N}">${EM.names.map((nm, t) => { const T = EM.teams[t], sc = emScore(t), st = EM.ev && EM.ev.st[t];
       const fresh = T.last && Date.now() - T.last.at < 2500 ? T.last.c : -1;
       return `<button type="button" class="em-city" data-emcity="${t}" style="--tc:${EM_COL[t]}">
-        <div class="em-ch"><b>${esc(nm)}</b><span class="em-dev">${I(P.tkphone)}<span data-emdev="${t}">${n((by[t] || []).length)}</span></span><span class="em-score">⭐ ${n(sc.total)}</span></div>
+        <div class="em-ch"><b>${esc(nm)}</b><span class="em-dev">${I(P.tkphone)}<span data-emdev="${t}">${n((by[t] || []).length)}</span></span><span class="em-score">👥 ${n(sc.total)}</span></div>
         ${emMapHTML(T.map, EM.terr[t], {fresh})}
         ${emResHTML(T.res)}
         ${st && ph !== "work" ? `<div class="em-st st-${st}">${EM_STN[st]} ${esc(EM.ev.note[t] || "")}</div>` : ""}
       </button>`; }).join("")}</div>
       <aside class="em-side">
-        <div class="em-box em-rank"><h2 class="h4">الترتيب</h2><ol>${EM.names.map((nm, t) => ({nm, t, s: emScore(t).total})).sort((a, b) => b.s - a.s).map(r => `<li style="--tc:${EM_COL[r.t]}"><b>${esc(r.nm)}</b><span>⭐ ${n(r.s)}</span></li>`).join("")}</ol></div>
-        <div class="em-box"><h2 class="h4">المباني</h2><ul class="em-keys">${EM_BK.map(b => { const B = EM_B[b]; return `<li><i>${B.e}</i><span><b>${B.n}</b> ${emCost(B.cost)}</span><small>${b === "p" ? "⭐1 +2/بيت" : "⭐" + n(B.st)}${B.pr ? " · " + EM_EV[B.pr].e : ""}</small></li>`; }).join("")}</ul></div>
+        <div class="em-box em-rank"><h2 class="h4">الترتيب</h2><ol>${EM.names.map((nm, t) => ({nm, t, s: emScore(t).total})).sort((a, b) => b.s - a.s).map(r => `<li style="--tc:${EM_COL[r.t]}"><b>${esc(r.nm)}</b><span>👥 ${n(r.s)}</span></li>`).join("")}</ol></div>
+        <div class="em-box"><h2 class="h4">المباني</h2><ul class="em-keys">${EM_BK.map(b => { const B = EM_B[b]; return `<li><i>${B.e}</i><span><b>${B.n}</b> ${emCost(B.cost)}</span><small>${b === "p" ? "👥 10، 20/بيت" : "👥 " + n(B.st)}${B.pr ? " · " + EM_EV[B.pr].e : ""}</small></li>`; }).join("")}</ul></div>
+        ${emOpt("proj") ? `<div class="em-box"><h2 class="h4">المشاريع المشتركة</h2>${EM_PK.map(p => { const P = EM.proj[p], D = EM_PJ[p], tot = EM_RK.reduce((s, r) => s + (D.need[r] || 0), 0), have = EM_RK.reduce((s, r) => s + Math.min(D.need[r] || 0, P.have[r] || 0), 0);
+          return `<div class="em-pj${P.done ? " done" : ""}"><div><b>${D.e} ${D.n}</b><span>${P.done ? "اكتمل" : n(Math.round(have / tot * 100)) + "%"}</span></div><i style="--w:${have / tot * 100}%"></i>
+            <div class="em-pjm">${Object.keys(P.by).map(t => `<span style="--tc:${EM_COL[t]}">${esc(EM.names[t])}</span>`).join("") || "<small>بلا شركاء بعد</small>"}</div></div>`; }).join("")}</div>` : ""}
         <div class="em-box"><h2 class="h4">آخر الأخبار</h2><ul class="em-log">${EM.log.slice(0, 6).map(l => `<li>${esc(l.s)}</li>`).join("") || "<li>تبدأ الأخبار مع أول جولة.</li>"}</ul></div>
       </aside></div>
   </div></section>`;
@@ -8643,6 +8774,7 @@ async function emRender(){
   on("emMore", () => { EM.endsAt += 30000; emSave(); emPush(); emClock(); });
   on("emSkip", () => { if (EM.phase === "work") emEndWork(); else if (EM.phase === "rescue") emEndRescue(); });
   on("emNext", () => emNext());
+  on("emFin", () => { EM.phase = "end"; emSave(); emPush(); emRender(); });
   on("emFull", () => { try { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); } catch(e){} });
   on("emMenu", () => nav("em"));
   $app.querySelectorAll("[data-emsave]").forEach(b => b.onclick = () => { const t = +b.dataset.emsave; if (EM.ev.st[t] === "need") emHostDo(t, {k:"rs", ev:EM.ev.id}); });
@@ -8657,19 +8789,19 @@ function emEventPanel(){
   if (ph === "event") return `<div class="tk-panel em-evp em-arrive ${E.bad ? "bad" : "good"}"><span class="em-big">${E.e}</span><div class="em-evtx"><small>نهاية الجولة ${n(EM.round)}</small><h2>${E.bad ? `وصل ${E.n}!` : E.n}</h2><p>${emEvDesc(ev.k)}</p></div></div>`;
   const need = ev.st.map((s, t) => s === "need" ? t : -1).filter(t => t >= 0);
   if (ph === "rescue") return `<div class="tk-panel em-evp"><div class="em-evtx"><small>${E.e} ${E.n}</small><h2>تحدي الإنقاذ</h2>
-    <p>المدن غير المحمية تلعب تحدي إنقاذ من جوالاتها. يكفي عضو واحد يحلّه، وإلا يتهدّم آخر مبنى بنته المدينة.</p>
-    <div class="em-need">${need.map(t => `<button type="button" class="mini" data-emsave="${t}" style="--tc:${EM_COL[t]}">${esc(EM.names[t])}: نجت</button>`).join("")}</div></div></div>`;
+    <p>المدن غير المحمية يتهدّم فيها آخر مبنيين. إذا حلّ أي عضو تحدي الإنقاذ من جواله، يخف الضرر لمبنى واحد.</p>
+    <div class="em-need">${need.map(t => `<button type="button" class="mini" data-emsave="${t}" style="--tc:${EM_COL[t]}">${esc(EM.names[t])}: حلّت التحدي</button>`).join("")}</div></div></div>`;
   return `<div class="tk-panel em-evp"><div class="em-evtx"><small>نتيجة الجولة ${n(EM.round)}</small><h2>${E.e} ${E.n}</h2><p>${emEvDesc(ev.k)}</p>
-    <button class="btn lg" type="button" id="emNext">${EM.round >= EM.rounds ? "عرض النتائج النهائية" : `ابدأ الجولة ${n(EM.round + 1)}`}</button></div></div>`;
+    <div class="em-ofb" style="justify-content:center"><button class="btn lg" type="button" id="emNext">${EM.rounds && EM.round >= EM.rounds ? "عرض النتائج النهائية" : `ابدأ الجولة ${n(EM.round + 1)}`}</button>${EM.rounds ? "" : `<button class="btn lg sec" type="button" id="emFin">إنهاء وعرض النتائج</button>`}</div></div></div>`;
 }
 function emFinal(){
   emStop(); if (ROOM) emBroadcast();
   const rows = EM.names.map((nm, t) => Object.assign({nm, t}, emScore(t))).sort((a, b) => b.total - a.total), top = rows.filter(r => r.total === rows[0].total);
   $app.innerHTML = `<section class="done gut view em-final"><div class="wrap">${I(P.trophy)}
-    <h1>${top.length > 1 ? "تعادل في الصدارة" : `${esc(rows[0].nm)} أزهى مدينة`}</h1><p>${n(EM.round)} جولات من البناء</p>
-    <div class="em-podium">${rows.map((r, k) => `<div class="em-fcard" style="--tc:${EM_COL[r.t]}"><div class="em-fh"><i>${n(k + 1)}</i><b>${esc(r.nm)}</b><span>⭐ ${n(r.total)}</span></div>
+    <h1>${top.length > 1 ? "تعادل في الصدارة" : `${esc(rows[0].nm)} أكبر مدينة`}</h1><p>${n(EM.round)} ${EM.round > 10 || EM.round < 3 ? "جولة" : "جولات"} من البناء</p>
+    <div class="em-podium">${rows.map((r, k) => `<div class="em-fcard" style="--tc:${EM_COL[r.t]}"><div class="em-fh"><i>${n(k + 1)}</i><b>${esc(r.nm)}</b><span>👥 ${n(r.total)}</span></div>
       ${emMapHTML(EM.teams[r.t].map, EM.terr[r.t], {cls:"sm"})}
-      <ul><li>🏠 البيوت<span>${n(r.parts.h)}</span></li><li>🌳 الحدائق<span>${n(r.parts.p)}</span></li><li>🚰 مباني الحماية<span>${n(r.parts.x)}</span></li><li>🕌 المعالم<span>${n(r.parts.m)}</span></li></ul></div>`).join("")}</div>
+      <ul><li>🏠 البيوت<span>${n(r.parts.h)}</span></li><li>🌳 الحدائق<span>${n(r.parts.p)}</span></li><li>🚰 مباني الحماية<span>${n(r.parts.x)}</span></li><li>🕌 المعالم<span>${n(r.parts.m)}</span></li>${r.parts.pj ? `<li>🌉 المشاريع<span>${n(r.parts.pj)}</span></li>` : ""}${r.parts.rep ? `<li>⚠️ السمعة<span>${n(r.parts.rep)}</span></li>` : ""}</ul></div>`).join("")}</div>
     <div class="cta" style="margin-top:28px"><button class="btn sec" type="button" id="emBack">رجوع للمدن</button><button class="btn" type="button" id="emAgain">مسابقة جديدة</button></div></div></section>`;
   document.getElementById("emBack").onclick = () => { EM.phase = "result"; emSave(); emRender(); };
   document.getElementById("emAgain").onclick = () => { EM = null; emSave(); emSetup(); };
@@ -8691,54 +8823,115 @@ function emModalRefresh(){
 }
 
 /* ---------- team console: the phone page, also used by the host screen ---------- */
-const emUI = {tab:"", sel:""};
+const emUI = {tab:"", sel:"", give:{}, get:{}, to:null, pj:"", pjGive:{}};
 function emConsole(el, ctx){
   const {g, tv, t} = ctx, ph = g.ph, map = tv.map.split("").map(c => c === "." ? "" : c), ter = EM_TERR[g.terr[t]];
   const tabs = ph === "work" ? [["ch","التحديات"], ["map", ctx.lead ? "البناء" : "الخريطة"]] : [];
+  if (ph === "work" && g.opts && g.opts.trade) tabs.push(["tr","التجارة"]);
+  if (ph === "work" && g.opts && g.opts.proj) tabs.push(["pj","المشاريع"]);
+  const inOffers = (tv.offers || []).filter(o => o.to === t && o.st === "open").length;
   if (!tabs.find(x => x[0] === emUI.tab)) emUI.tab = tabs.length ? tabs[0][0] : "";
   const rescue = g.ev && g.ev.st[t] === "need" && ph === "rescue";
   const city = o => emMapHTML(map, g.terr[t], Object.assign({cls:"md", fresh: tv.last}, o || {}));
   let body = "";
-  if (ph === "lobby") body = `<div class="em-card hot"><h2>أنتم في الغرفة</h2><p>انتظروا حتى يبدأ المقدّم الجولة الأولى.</p></div>${city()}`;
+  if (ph === "lobby") body = `<div class="em-card hot"><h2>أنتم في الغرفة</h2><p>${ctx.lead ? "اختاروا شكل أرض مدينتكم، ثم انتظروا حتى يبدأ المقدّم الجولة الأولى." : "القائد يختار شكل الأرض. انتظروا حتى يبدأ المقدّم الجولة الأولى."}</p></div>
+    ${ctx.lead ? `<div class="em-lands">${EM_TK.map(k => `<button type="button" class="em-land${g.terr[t] === k ? " sel" : ""}" data-emland="${k}">${emMapHTML(Array.from({length:36}, (_, i) => EM_TERR[k].cells.includes(i) ? "#" : ""), k, {cls:"sm"})}<b>${EM_TERR[k].e} ${EM_TERR[k].n}</b></button>`).join("")}</div><p class="em-small" style="text-align:center">كل الأراضي فيها 31 خانة للبناء. الفرق في الشكل بس.</p>` : ""}${city()}`;
   else if (ph === "event"){ const E = g.ev && EM_EV[g.ev.k];
     body = `<div class="em-card hot"><h2>${E ? `${E.e} ${E.bad ? "وصل " + E.n : E.n}` : ""}</h2><p>${E ? emEvDesc(g.ev.k) : ""}</p></div>${city()}`; }
   else if (ph === "rescue" || ph === "result"){ const st = g.ev && g.ev.st[t], E = g.ev && EM_EV[g.ev.k];
-    body = rescue ? `<div class="em-card hot"><small>${E.e} ${E.n}</small><h2>أنقذوا مدينتكم!</h2><p>حلّوا تحدي الإنقاذ قبل نهاية الوقت، وإلا يتهدّم آخر مبنى بنيتوه. يكفي أن يحلّه عضو واحد.</p>
+    body = rescue ? `<div class="em-card hot"><small>${E.e} ${E.n}</small><h2>خففوا الضرر!</h2><p>بدون حماية يتهدّم آخر مبنيين بنيتوهم. إذا حلّ أي عضو تحدي الإنقاذ قبل نهاية الوقت، يتهدّم مبنى واحد بس.</p>
       <button type="button" class="btn lg" id="emRescue">ابدأ تحدي الإنقاذ</button></div>`
-      : `<div class="em-card${st === "lost" ? " bad" : " hot"}"><small>${E ? E.e + " " + E.n : ""}</small><h2>${{safe:"مدينتكم محمية", saved:"أنقذتم مدينتكم!", lost:"تضررت مدينتكم", good:"خبر حلو!", need:"…"}[st] || "نتيجة الجولة"}</h2><p>${esc((g.ev && g.ev.note[t]) || "")}</p></div>`;
+      : `<div class="em-card${st === "lost" ? " bad" : " hot"}"><small>${E ? E.e + " " + E.n : ""}</small><h2>${{safe:"مدينتكم محمية", saved:"خففتم الضرر!", eased:"خففتم الضرر", lost:"تضررت مدينتكم", good:"خبر حلو!", need:"…"}[st] || "نتيجة الجولة"}</h2><p>${esc((g.ev && g.ev.note[t]) || "")}</p></div>`;
     body += city(); }
   else if (ph === "end"){ const rank = g.scores.filter(x => x > tv.score).length + 1;
-    body = `<div class="em-card hot"><h2>${rank === 1 ? "مبروك! مدينتكم الأزهى" : "انتهت المسابقة"}</h2><p>مركزكم ${n(rank)} من ${n(g.names.length)} بـ ⭐ ${n(tv.score)}.</p></div>${city()}`; }
+    body = `<div class="em-card hot"><h2>${rank === 1 ? "مبروك! مدينتكم الأكبر" : "انتهت المسابقة"}</h2><p>مركزكم ${n(rank)} من ${n(g.names.length)} بـ 👥 ${n(tv.score)} ساكن.</p></div>${city()}`; }
   else if (emUI.tab === "ch") body = `${emFcHTML(g.fc, true)}
-    <div class="em-chs">${EM_CK.map(k => { const C = EM_CH[k]; return `<button type="button" class="em-chb" data-emch="${k}"><i>${C.e}</i><b>${C.n}</b><small>${C.d}</small><span>+${n(EM_WIN)} ${EM_RES[C.r].e}</span></button>`; }).join("")}</div>`;
+    <div class="em-chs">${EM_CK.map(k => { const C = EM_CH[k]; return `<button type="button" class="em-chb" data-emch="${k}"><i>${C.e}</i><b>${C.n}</b><small>${C.d}</small><span>+${n(tv.win || EM_WIN)} ${EM_RES[C.r].e}</span></button>`; }).join("")}</div>`;
+  else if (emUI.tab === "tr") body = emTradeHTML(ctx);
+  else if (emUI.tab === "pj") body = emProjHTML(ctx);
   else if (emUI.tab === "map"){
     const sel = emUI.sel && EM_B[emUI.sel], fc = g.fc && EM_EV[g.fc];
     body = `${ctx.lead ? `<p class="em-small">${sel ? `اضغط مكانًا فاضيًا على الخريطة لـ${sel.e} ${sel.n}.` : "اختر مبنى، ثم اضغط مكانه على الخريطة."}</p>` : `<p class="em-small">القائد يبني. اختر مبنى ومكانًا لترسل اقتراحك له.</p>`}
       ${city({click:true, sug: ctx.lead ? tv.sug : null})}
       <div class="em-pal">${EM_BK.map(b => { const B = EM_B[b], ok = emCan(tv.res, B.cost), hot = fc && fc.bad && fc.by === b && !map.includes(b);
-        return `<button type="button" class="em-bb${emUI.sel === b ? " sel" : ""}${ok ? "" : " no"}${hot ? " hot" : ""}" data-emb="${b}"><i>${B.e}</i><b>${B.n}</b><span>${emCost(B.cost)}</span><small>${b === "p" ? "⭐1 و+2 لكل بيت ملاصق" : `⭐${n(B.st)}`}${B.pr ? ` · يحمي من ${EM_EV[B.pr].e} ${EM_EV[B.pr].n}` : ""}</small></button>`; }).join("")}</div>`;
+        return `<button type="button" class="em-bb${emUI.sel === b ? " sel" : ""}${ok ? "" : " no"}${hot ? " hot" : ""}" data-emb="${b}"><i>${B.e}</i><b>${B.n}</b><span>${emCost(B.cost)}</span><small>${b === "p" ? "👥 10 سكان، و20 لكل بيت ملاصق" : `👥 ${n(B.st)} ساكن`}${B.pr ? ` · يحمي من ${EM_EV[B.pr].e} ${EM_EV[B.pr].n}` : ""}</small></button>`; }).join("")}</div>`;
   }
   const others = g.scores.filter(x => x > tv.score).length + 1;
   el.innerHTML = `<div class="em-con" style="--tc:${EM_COL[t]}">
     <div class="em-ch2"><div><small>${ctx.host ? "تتحكم من الشاشة في" : ctx.lead ? "أنت قائد" : "فريقك"}</small><b>${esc(g.names[t])}</b></div>
-      <div class="em-ph"><small>${EM_PHN[ph]}${g.round ? ` · الجولة ${n(g.round)}/${n(g.rounds)}` : ""}</small><strong class="em-pclk" data-emclk>${(ph === "work" || ph === "rescue") ? emFmt(ctx.left != null ? ctx.left : g.left / 1000) : ""}</strong></div></div>
+      <div class="em-ph"><small>${EM_PHN[ph]}${g.round ? ` · الجولة ${n(g.round)}${g.rounds ? "/" + n(g.rounds) : ""}` : ""}</small><strong class="em-pclk" data-emclk>${(ph === "work" || ph === "rescue") ? emFmt(ctx.left != null ? ctx.left : g.left / 1000) : ""}</strong></div></div>
     ${emResHTML(tv.res, true)}
-    <div class="em-stats"><span class="em-score">⭐ ${n(tv.score)}</span><span>المركز ${n(others)} من ${n(g.names.length)}</span></div>
-    ${tabs.length > 1 ? `<div class="seg em-tabs">${tabs.map(([k, l]) => `<button type="button" role="radio" aria-checked="${emUI.tab === k}" data-emtab="${k}">${l}</button>`).join("")}</div>` : ""}
+    <div class="em-stats"><span class="em-score">👥 ${n(tv.score)} ساكن</span><span>المركز ${n(others)} من ${n(g.names.length)}</span></div>
+    ${tabs.length > 1 ? `<div class="seg em-tabs">${tabs.map(([k, l]) => `<button type="button" role="radio" aria-checked="${emUI.tab === k}" data-emtab="${k}">${l}${k === "tr" && inOffers ? ` <em class="em-dot">${n(inOffers)}</em>` : ""}</button>`).join("")}</div>` : ""}
     ${body}
   </div>`;
   const q = s => el.querySelectorAll(s);
   q("[data-emtab]").forEach(b => b.onclick = () => { emUI.tab = b.dataset.emtab; emConsole(el, ctx); });
+  q("[data-emland]").forEach(b => b.onclick = () => { ctx.send({k:"land", v:b.dataset.emland}); if (!ctx.host){ g.terr = g.terr.slice(); g.terr[t] = b.dataset.emland; emConsole(el, ctx); } });
   q("[data-emch]").forEach(b => b.onclick = () => emPlay(b.dataset.emch, g.lvl, ok => { if (ok) ctx.send({k:"win", r: EM_CH[b.dataset.emch].r}); }, ctx));
-  const rs = el.querySelector("#emRescue"); if (rs) rs.onclick = () => emPlay(EM_CK[Math.floor(Math.random() * EM_CK.length)], g.lvl, ok => { if (ok) ctx.send({k:"rs", ev:g.ev.id}); }, Object.assign({rescue:true}, ctx));
+  const rs = el.querySelector("#emRescue"); if (rs) rs.onclick = () => { const pool = EM_CK.filter(k => k !== "farm"); emPlay(pool[Math.floor(Math.random() * pool.length)], g.lvl, ok => { if (ok) ctx.send({k:"rs", ev:g.ev.id}); }, Object.assign({rescue:true}, ctx)); };
   q("[data-emb]").forEach(b => b.onclick = () => { emUI.sel = emUI.sel === b.dataset.emb ? "" : b.dataset.emb; emConsole(el, ctx); });
   q("[data-emcell]").forEach(b => b.onclick = () => { const c = +b.dataset.emcell; if (!emUI.sel || map[c] !== ""){ if (!emUI.sel) emToast("اختر مبنى من تحت أولًا"); return; }
     if (ctx.lead){ if (!emCan(tv.res, EM_B[emUI.sel].cost)){ emToast("الموارد ما تكفي لهذا المبنى. حلّوا تحديات أكثر."); return; } ctx.send({k:"b", b:emUI.sel, c}); emToast(`${EM_B[emUI.sel].e} تم البناء`); }
     else { ctx.send({k:"sg", b:emUI.sel, c}); emToast("أُرسل اقتراحك للقائد"); }
     emUI.sel = ""; if (ctx.host) return; emConsole(el, ctx); });
+  emTradeBind(el, ctx); emProjBind(el, ctx);
 }
 function emToast(s){ let x = document.getElementById("emToast"); if (!x){ x = document.createElement("div"); x.id = "emToast"; x.className = "em-toast"; document.body.appendChild(x); }
   x.textContent = s; x.classList.remove("on"); void x.offsetWidth; x.classList.add("on"); clearTimeout(emToast.t); emToast.t = setTimeout(() => x.classList.remove("on"), 2200); }
+
+/* ---------- optional: trade and shared projects ---------- */
+function emStepper(key, side, r, val){ return `<div class="em-amt"><i>${EM_RES[r].e}</i><button type="button" data-emst="${key}|${side}|${r}|-5">−</button><b>${n(val || 0)}</b><button type="button" data-emst="${key}|${side}|${r}|5">+</button></div>`; }
+function emTradeHTML(ctx){
+  const {g, tv, t} = ctx;
+  if (!ctx.lead) return `<div class="em-card"><p>القائد هو من يرسل العروض ويقبلها. هذه عروض فريقكم الحالية:</p></div>${emOffersHTML(ctx, false)}`;
+  const tos = g.names.map((nm, i) => i).filter(i => i !== t); if (emUI.to == null || emUI.to === t || emUI.to >= g.names.length) emUI.to = tos[0];
+  return `${emOffersHTML(ctx, true)}
+    <div class="em-card em-new"><h3>عرض جديد</h3>
+      <div class="em-tos">${tos.map(i => `<button type="button" class="${emUI.to === i ? "on" : ""}" data-emto="${i}" style="--tc:${EM_COL[i]}">${esc(g.names[i])} <small>${EM_TERR[g.terr[i]].e}</small></button>`).join("")}</div>
+      <div class="em-two"><div><h2 class="h4">نعطيهم</h2>${EM_RK.map(r => emStepper("tr", "give", r, emUI.give[r])).join("")}</div>
+      <div><h2 class="h4">ونأخذ منهم</h2>${EM_RK.map(r => emStepper("tr", "get", r, emUI.get[r])).join("")}</div></div>
+      <button type="button" class="btn" id="emSendOf">أرسل العرض</button></div>`;
+}
+function emOffersHTML(ctx, act){
+  const {g, tv, t} = ctx, L = (tv.offers || []).slice().reverse();
+  if (!L.length) return `<p class="em-small">لا توجد عروض بعد.</p>`;
+  const stn = {open:"بانتظار الرد", ok:"تمت ✓", no:"رُفض", x:"أُلغي"};
+  return `<div class="em-offers">${L.map(o => { const mine = o.from === t, other = mine ? o.to : o.from;
+    return `<div class="em-of st-${o.st}" style="--tc:${EM_COL[other]}"><div class="em-ofh"><b>${mine ? "عرضنا إلى" : "عرض من"} ${esc(g.names[other])}</b><span>${stn[o.st]}</span></div>
+      <p>${mine ? "نعطي" : "يعطونكم"} ${emResTxt(o.give) || "لا شيء"} · ${mine ? "ونأخذ" : "مقابل"} ${emResTxt(o.get) || "لا شيء"}</p>
+      ${act && o.st === "open" ? (mine ? `<div class="em-ofb"><button type="button" class="mini" data-emans="${o.id}|0">إلغاء</button></div>`
+        : `<div class="em-ofb"><button type="button" class="btn" data-emans="${o.id}|1" ${emCan(tv.res, o.get) ? "" : "disabled"}>قبول</button><button type="button" class="mini" data-emans="${o.id}|0">رفض</button><button type="button" class="mini" data-emctr="${o.id}">عرض مضاد</button></div>`) : ""}</div>`; }).join("")}</div>`;
+}
+function emTradeBind(el, ctx){
+  const re = () => emConsole(el, ctx);
+  el.querySelectorAll("[data-emst]").forEach(b => b.onclick = () => { const [key, side, r, d] = b.dataset.emst.split("|");
+    const o = key === "tr" ? emUI[side] : emUI.pjGive; o[r] = Math.max(0, Math.min(key === "tr" && side === "give" ? (ctx.tv.res[r] || 0) : 300, (o[r] || 0) + +d)); re(); });
+  el.querySelectorAll("[data-emto]").forEach(b => b.onclick = () => { emUI.to = +b.dataset.emto; re(); });
+  el.querySelectorAll("[data-emans]").forEach(b => b.onclick = () => { const [id, ok] = b.dataset.emans.split("|"); ctx.send({k:"ans", id:+id, ok: ok === "1"}); });
+  el.querySelectorAll("[data-emctr]").forEach(b => b.onclick = () => { const o = ctx.tv.offers.find(x => x.id === +b.dataset.emctr); if (!o) return;
+    ctx.send({k:"ans", id:o.id, ok:false}); emUI.to = o.from; emUI.give = Object.assign({}, o.get); emUI.get = Object.assign({}, o.give); emToast("عدّل الكميات ثم أرسل عرضك"); setTimeout(re, 50); });
+  const s = el.querySelector("#emSendOf"); if (s) s.onclick = () => { if (!EM_RK.some(r => emUI.give[r] || emUI.get[r])) return emToast("حدّد الكميات أولًا");
+    ctx.send({k:"of", to: emUI.to, give: emUI.give, get: emUI.get}); emUI.give = {}; emUI.get = {}; emToast("أُرسل العرض"); if (!ctx.host) re(); };
+}
+function emProjHTML(ctx){
+  const {g, tv, t} = ctx;
+  return `<p class="em-small">مشاريع كبيرة ما تبنيها مدينة وحدها: يشترك فيها 2 إلى 3 مدن، ونصيب المدينة الواحدة ما يزيد عن 60%. لما يكتمل ياخذ كل شريك سكانه وفايدته.${g.betray ? ` تقدرون تنسحبون قبل ما يكتمل وترجع لكم مواردكم، بس تخسرون ${n(EM_REP)} ساكن من سمعتكم.` : ""}</p>
+    <div class="em-pjs">${EM_PK.map(p => { const P = g.proj[p], D = EM_PJ[p], mem = Object.keys(P.by).map(Number), isM = mem.includes(t), full = !isM && mem.length >= 3;
+      const open = emUI.pj === p && ctx.lead && !P.done && !full;
+      return `<div class="em-card em-pjc${P.done ? " done" : ""}"><div class="em-ofh"><b>${D.e} ${D.n}</b><span>${P.done ? (isM ? "اكتمل ✓ وأنتم شركاء" : "اكتمل") : full ? "مكتمل الشركاء" : `👥 ${n(D.pop)}`}</span></div>
+        <p class="em-small">${D.d}</p>
+        <div class="em-need2">${EM_RK.filter(r => D.need[r]).map(r => `<span>${EM_RES[r].e} ${n(Math.min(D.need[r], P.have[r] || 0))}/${n(D.need[r])}</span>`).join("")}</div>
+        <div class="em-pjm">${mem.map(i => `<span style="--tc:${EM_COL[i]}">${esc(g.names[i])} ${n(P.by[i])}</span>`).join("")}</div>
+        ${open ? `<div class="em-two1">${EM_RK.filter(r => D.need[r] > (P.have[r] || 0)).map(r => emStepper("pj", "give", r, emUI.pjGive[r])).join("")}</div><div class="em-ofb"><button type="button" class="btn" data-empjgo="${p}">ساهم</button><button type="button" class="mini" data-empj="">إغلاق</button></div>`
+          : ctx.lead && !P.done && !full ? `<div class="em-ofb"><button type="button" class="mini" data-empj="${p}">${isM ? "ساهم أكثر" : "انضم وساهم"}</button>${isM && g.betray ? `<button type="button" class="mini danger" data-emwd="${p}">انسحاب</button>` : ""}</div>` : ""}</div>`; }).join("")}</div>`;
+}
+function emProjBind(el, ctx){
+  el.querySelectorAll("[data-empj]").forEach(b => b.onclick = () => { emUI.pj = b.dataset.empj; emUI.pjGive = {}; emConsole(el, ctx); });
+  el.querySelectorAll("[data-empjgo]").forEach(b => b.onclick = () => { if (!EM_RK.some(r => emUI.pjGive[r])) return emToast("حدّد الكميات أولًا");
+    ctx.send({k:"pj", p:b.dataset.empjgo, give: emUI.pjGive}); emUI.pj = ""; emUI.pjGive = {}; emToast("تمت المساهمة"); if (!ctx.host) emConsole(el, ctx); });
+  el.querySelectorAll("[data-emwd]").forEach(b => b.onclick = () => { if (!b.dataset.sure){ b.dataset.sure = 1; b.textContent = "متأكد؟"; return; } ctx.send({k:"wd", p:b.dataset.emwd}); });
+}
 
 /* ---------- mini challenges ---------- */
 let emCur = null;
@@ -8751,7 +8944,7 @@ function emPlay(kind, lvl, done, ctx){
   const cur = emCur = {end: Date.now() + secs * 1000, over:false, kind, rescue: !!(ctx && ctx.rescue)};
   const fin = (ok, msg) => { if (cur.over) return; cur.over = true; clearInterval(cur.timer);
     const pm = document.getElementById("emPm");
-    if (pm) pm.innerHTML = `<div class="em-done ${ok ? "ok" : "no"}"><b>${ok ? (ctx && ctx.rescue ? "أنقذتم مدينتكم!" : "أحسنت!") : "لم تنجح هذه المرة"}</b><span>${ok ? (ctx && ctx.rescue ? "" : `أضيف ${n(EM_WIN)} ${EM_RES[C.r].e} ${EM_RES[C.r].n} لمخزن فريقك.`) : (msg || "جرّب تحديًا جديدًا.")}</span>
+    if (pm) pm.innerHTML = `<div class="em-done ${ok ? "ok" : "no"}"><b>${ok ? (ctx && ctx.rescue ? "خففتم الضرر! يتهدّم مبنى واحد بس." : "أحسنت!") : "لم تنجح هذه المرة"}</b><span>${ok ? (ctx && ctx.rescue ? "" : `أضيف ${n((ctx && ctx.tv && ctx.tv.win) || EM_WIN)} ${EM_RES[C.r].e} ${EM_RES[C.r].n} لمخزن فريقك.`) : (msg || "جرّب تحديًا جديدًا.")}</span>
       <div class="em-ofb">${ctx && ctx.rescue ? "" : `<button type="button" class="btn" id="emAgain2">تحدٍّ جديد</button>`}<button type="button" class="mini" id="emBack2">رجوع</button></div></div>`;
     o.classList.add(ok ? "won" : "lost");
     try { navigator.vibrate && navigator.vibrate(ok ? [60, 40, 60] : 200); } catch(e){}
@@ -8763,7 +8956,7 @@ function emPlay(kind, lvl, done, ctx){
   cur.timer = setInterval(() => { const l = (cur.end - Date.now()) / 1000, el = document.getElementById("emPc"); if (el){ el.textContent = emFmt(l); el.classList.toggle("low", l <= 10); }
     if (l <= 0) fin(false, "انتهى الوقت. جرّب تحديًا جديدًا."); }, 250);
   const pb = document.getElementById("emPb");
-  ({pipes: emPipes, grid: emGrid, tiles: emTiles})[kind](pb, L, fin, cur);
+  ({pipes: emPipes, grid: emGrid, tiles: emTiles, market: emMarket, farm: emFarm})[kind](pb, L, fin, cur);
 }
 /* pipes: rotate tiles to connect the well (left) to the city (right). bits N1 E2 S4 W8 */
 function emPipes(el, L, fin){
@@ -8852,6 +9045,59 @@ function emTiles(el, L, fin){
 }
 
 
+/* market: spot the price pattern, pick the best deal */
+function emMarket(el, L, fin){
+  const R = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+  const seqs = [
+    () => { const a = R(2, 20), d = R(2, 9); return [0,1,2,3,4].map(i => a + d * i); },
+    () => { const a = R(2, 5), q = R(2, 3); return [0,1,2,3,4].map(i => a * q ** i); },
+    () => { const a = R(1, 10), d1 = R(2, 6), d2 = R(7, 12), s = [a]; for (let i = 1; i < 5; i++) s.push(s[i - 1] + (i % 2 ? d1 : d2)); return s; },
+    () => { const a = R(1, 9), s = [a]; for (let i = 1; i < 5; i++) s.push(s[i - 1] + i + R(0, 0) + (L ? 1 : 0) * i); return s; },
+    () => { const a = R(1, 5), b = R(2, 6), s = [a, b]; for (let i = 2; i < 5; i++) s.push(s[i - 1] + s[i - 2]); return s; },
+    () => { const c = R(0, 5); return [1,2,3,4,5].map(i => i * i + c); },
+    () => { const a = R(1, 4), s = [a]; for (let i = 1; i < 5; i++) s.push(s[i - 1] * 2 + 1); return s; }
+  ];
+  const pick = L === 0 ? seqs.slice(0, 3) : L === 1 ? seqs.slice(1, 6) : seqs.slice(3);
+  const items = [];
+  const cnt = [3, 4, 5][L];
+  for (let k = 0; k < cnt; k++){
+    if (k % 2 === 0 || L === 0 && k === 2){ const s = pick[Math.floor(Math.random() * pick.length)](), ans = s[4];
+      const opts = new Set([ans]); while (opts.size < 4){ const v = ans + R(-6, 6) * (Math.abs(ans) > 40 ? 3 : 1); if (v > 0 && v !== ans) opts.add(v); }
+      items.push({q:`سعر الكيس في السوق: ${s.slice(0, 4).map(n).join("، ")}، ثم؟`, opts: shuffle([...opts]).map(v => [n(v), v === ans])}); }
+    else { const res = EM_RES[EM_RK[R(0, EM_RK.length - 1)]], prices = shuffle([2, 3, 4, 5, 6, 8]).slice(0, L === 2 ? 4 : 3).sort((a, b) => a - b);
+      const best = prices[0], offs = prices.map(p => { const q = R(2, 9) * (L ? 1 : 1); return {q, p, t: q * p}; });
+      if (L) offs.forEach(o => { if (o.p !== best) { o.q = R(2, 9); o.t = o.q * o.p; } });
+      items.push({q:`أي عرض أرخص لكيس ${res.n} الواحد؟`, opts: shuffle(offs).map(o => [`${n(o.q)} أكياس بـ ${n(o.t)} ذهب`, o.p === best])}); }
+  }
+  let i = 0;
+  const draw = () => { const it = items[i];
+    el.innerHTML = `<div class="em-mk"><small>${n(i + 1)} من ${n(items.length)}</small><h3>${it.q}</h3><div class="em-mko">${it.opts.map(([l], j) => `<button type="button" class="btn sec" data-o="${j}">${l}</button>`).join("")}</div></div>`;
+    el.querySelectorAll("[data-o]").forEach(b => b.onclick = () => { if (emCur && emCur.over) return; const ok = it.opts[+b.dataset.o][1];
+      b.classList.add(ok ? "ok" : "no"); if (!ok){ const j = it.opts.findIndex(x => x[1]); el.querySelector(`[data-o="${j}"]`).classList.add("ok"); return setTimeout(() => fin(false, "إجابة غير صحيحة. السوق يحتاج تركيزًا!"), 700); }
+      i++; setTimeout(() => i >= items.length ? fin(true) : draw(), 350); }); };
+  draw();
+}
+/* farm: remember where the crops were, then put them back */
+function emFarm(el, L, fin, cur){
+  const N = 4, K = [3,4,5][L], show = [5,4,3][L], kinds = shuffle(["🌾","🌽","🍅","🥕","🍉","🍆","🥔","🍇"]).slice(0, K);
+  const pos = shuffle([...Array(N * N).keys()]).slice(0, K), ans = Array(N * N).fill(""); pos.forEach((p, i) => ans[p] = kinds[i]);
+  const mine = Array(N * N).fill(""); let sel = null, phase = "show";
+  cur.end += show * 1000;
+  const draw = () => {
+    const left = kinds.filter(k => !mine.includes(k));
+    el.innerHTML = `<div class="em-mem"><p class="em-small" style="text-align:center">${phase === "show" ? `احفظ مكان كل محصول… <b id="emMs">${n(show)}</b>` : "اختر المحصول ثم مكانه. اضغط محصولًا موضوعًا لإرجاعه."}</p>
+      <div class="em-mg">${(phase === "show" ? ans : mine).map((b, i) => `<button type="button" data-m="${i}">${b}</button>`).join("")}</div>
+      ${phase === "play" ? `<div class="em-tray">${left.map(k => `<button type="button" class="${sel === k ? "sel" : ""}" data-mk="${k}">${k}</button>`).join("")}</div>
+      ${!left.length ? `<button type="button" class="btn" id="emMChk">تحقق</button>` : ""}` : ""}</div>`;
+    el.querySelectorAll("[data-mk]").forEach(b => b.onclick = () => { sel = sel === b.dataset.mk ? null : b.dataset.mk; draw(); });
+    el.querySelectorAll("[data-m]").forEach(b => b.onclick = () => { if (phase !== "play" || (emCur && emCur.over)) return; const i = +b.dataset.m;
+      if (mine[i]){ mine[i] = ""; draw(); return; } if (!sel) return; mine[i] = sel; sel = null; draw(); });
+    const ck = el.querySelector("#emMChk"); if (ck) ck.onclick = () => { const ok = mine.every((b, i) => b === ans[i]); fin(ok, "المزرعة لم تطابق. ركّز أكثر في المرة القادمة!"); };
+  };
+  draw();
+  let s = show; const iv = setInterval(() => { s--; const e = document.getElementById("emMs"); if (e) e.textContent = n(Math.max(0, s)); if (s <= 0){ clearInterval(iv); phase = "play"; if (emCur === cur) draw(); } }, 1000);
+}
+
 /* ---------- players: room code / QR, then the team console ---------- */
 const emLink = code => (window.claude && window.claude.use ? TK_ART : location.href.split("#")[0]) + "#join=" + code;
 const emHashCode = () => { const m = decodeURIComponent(location.hash).match(/^#emjoin\D?(\d{6})/); return m ? m[1] : ""; };
@@ -8895,7 +9141,7 @@ async function emJoin(){
       return; }
     const tv = emMe.tv;
     if (!tv || tv.t !== emMe.team || tv.game !== g.game){ $app.innerHTML = `<section class="section gut view"><div class="wrap sheet tk-join"><h1>جاري الاتصال بمدينتك…</h1></div></section>`; return; }
-    const key = JSON.stringify([g.ph, g.round, g.ev, g.fc, g.scores, g.names, tv]);
+    const key = JSON.stringify([g.ph, g.round, g.ev, g.fc, g.scores, g.names, g.proj, tv]);
     if (!force && key === emMe.key) return; emMe.key = key;
     const myPeer = (ROOM.peers().find(p => p.sameTab) || {}).peer;
     $app.innerHTML = `<section class="section gut view em-phone"><div class="wrap" id="emPh"></div>
