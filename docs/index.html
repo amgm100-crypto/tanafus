@@ -1373,14 +1373,14 @@ textarea.gm-in{min-height:120px;resize:vertical;line-height:1.7}
 .em-phase:not(:has(.em-clock)) .em-ctl{margin-inline-start:auto}
 .em-lobby{margin-bottom:16px}
 .em-body{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start}
-.em-cities{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.em-cities{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
 .em-city{background:var(--tile);border:0;border-radius:18px;padding:12px;display:grid;gap:8px;text-align:start;border-top:5px solid var(--tc);box-shadow:var(--shadow);color:var(--ink);transition:transform .15s}
 .em-city:hover{transform:translateY(-2px)}
 .em-ch{display:flex;align-items:center;gap:6px;min-width:0}
 .em-ch b{font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .em-dev{margin-inline-start:auto;display:inline-flex;align-items:center;gap:2px;font-size:12px;color:var(--muted)}
 .em-dev svg{width:14px;height:14px}
-.em-res{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.em-res{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}.em-city,.em-cities>*{min-width:0}.em-res span{min-width:0}
 .em-res span{display:flex;align-items:center;justify-content:center;gap:3px;background:var(--bg-alt);border-radius:8px;padding:3px 2px;font-variant-numeric:tabular-nums;font-size:14px}
 .em-res i{font-style:normal;font-size:13px}
 .em-res.big span{font-size:20px;padding:8px 4px;border-radius:12px;background:var(--tile)}
@@ -1512,35 +1512,27 @@ textarea.gm-in{min-height:120px;resize:vertical;line-height:1.7}
 .em-mg button{aspect-ratio:1;border:0;border-radius:12px;background:color-mix(in srgb,var(--c2) 12%,var(--tile));font-size:clamp(24px,8vw,36px);padding:0}
 @media (max-width:960px){.em-body{grid-template-columns:1fr}.em-side{position:static;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}}
 @media (max-width:560px){.em-evp{grid-template-columns:1fr;justify-items:center;text-align:center}.em-pal{grid-template-columns:1fr}.em-phase{flex-wrap:wrap}}
-/* إعمار: the 3D (isometric) city — CSS transforms only, no library */
-.em-iso{--gd:#9FCF8B;--gs:#6E9E5E;--tl:#B9DDA6;container-type:inline-size;width:100%;aspect-ratio:1.3;display:grid;place-items:center;position:relative;border-radius:14px;background:linear-gradient(180deg,color-mix(in srgb,#BFE3F5 55%,var(--tile)),var(--tile) 75%);overflow:hidden}
+/* إعمار: the voxel city — pre-rendered block sprites on an isometric grid (no library) */
+.em-iso{--gd:#9FCF8B;--sky:#CFEAF7;--gs:#6E9E5E;--tl:#B9DDA6;container-type:inline-size;width:100%;aspect-ratio:1.3;display:grid;place-items:center;position:relative;border-radius:14px;background:linear-gradient(180deg,color-mix(in srgb,#BFE3F5 55%,var(--tile)),var(--tile) 75%);overflow:hidden}
 .em-iso.g-sand{--gd:#E9CF97;--gs:#BF9F62;--tl:#F2DEAF}
 .em-iso.g-rock{--gd:#B9C4A2;--gs:#879272;--tl:#CBD5B6}
 .em-iso.g-palm{--gd:#A9D49A;--gs:#77A468;--tl:#C3E3B6}
-.em-map{width:66cqw;aspect-ratio:1;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(6,1fr);gap:.7cqw;padding:1.4cqw;direction:ltr;background:var(--gd);border-radius:2.4cqw;transform:translateY(7cqw) rotateX(56deg) rotateZ(45deg);transform-style:preserve-3d;box-shadow:.9cqw .9cqw 0 var(--gs),1.6cqw 1.6cqw 2.4cqw rgba(30,47,77,.22)}
-.em-cell{position:relative;border:0;padding:0;margin:0;min-width:0;min-height:0;width:100%;height:100%;border-radius:.9cqw;background:var(--tl);transform-style:preserve-3d;font:inherit;color:inherit;box-shadow:inset 0 0 0 .15cqw rgba(255,255,255,.35);transform:translateZ(.15cqw)}
-.em-cell.blk{background:transparent;box-shadow:none}
-.em-cell.k-water{background:#6FB9DB;border-radius:0;box-shadow:none}
-.em-wv{position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 1.2cqw,rgba(255,255,255,.35) 1.2cqw 1.5cqw);animation:emwave 3s linear infinite}
-@keyframes emwave{to{background-position:6cqw 0}}
-button.em-cell{cursor:pointer}
-button.em-cell:not(.on):hover,button.em-cell:not(.on):focus-visible{background:color-mix(in srgb,var(--tc,var(--blue)) 30%,var(--tl));outline:0}
-.em-bx{--hh:calc(var(--h) * 1.5cqw);position:absolute;inset:13%;transform-style:preserve-3d;pointer-events:none}
-.em-bx b{position:absolute;display:block}
-.em-bx .t{inset:0;background:var(--rc);border-radius:.4cqw;transform:translateZ(var(--hh))}
-.em-bx .s1{left:0;top:100%;width:100%;height:var(--hh);background:color-mix(in srgb,var(--rc) 78%,#2a2a2a);transform-origin:top;transform:rotateX(90deg)}
-.em-bx .s2{left:100%;top:0;width:var(--hh);height:100%;background:color-mix(in srgb,var(--rc) 62%,#2a2a2a);transform-origin:left;transform:rotateY(-90deg)}
-.em-bx i,.em-ghost i,.em-bn{position:absolute;left:50%;top:50%;font-style:normal;line-height:1;white-space:nowrap;transform:translate(-50%,-50%) translateZ(var(--hh,0px)) rotateZ(-45deg) rotateX(-56deg) translateY(-55%)}
-.em-bx i,.em-ghost i{font-size:8.5cqw;filter:drop-shadow(0 .3cqw .2cqw rgba(0,0,0,.18))}
-.em-bx.k-sand,.em-bx.k-palm{--rc:transparent}.em-bx.k-sand b,.em-bx.k-palm b{display:none}
-.em-bx.k-rock{--rc:#9AA08F}
-.em-bn{font-size:3.2cqw;font-weight:700;color:#fff;background:var(--good);border-radius:980px;padding:.3cqw .9cqw;transform:translate(-50%,-50%) translateZ(calc(var(--hh) + 1cqw)) rotateZ(-45deg) rotateX(-56deg) translate(60%,-190%)}
-.em-ghost{position:absolute;inset:0;transform-style:preserve-3d;pointer-events:none}
-.em-ghost i{opacity:.5;animation:empulse 1.2s infinite}
-@keyframes empulse{50%{opacity:.9}}
-.em-bx.new{animation:emrise .8s cubic-bezier(.3,1.5,.5,1) both}
-@keyframes emrise{from{transform:scale3d(.4,.4,.01);opacity:0}}
-.em-bn{z-index:2}
+.em-vmap{position:absolute;inset:0;filter:drop-shadow(0 1.6cqw 1.4cqw rgba(30,47,77,.22))}
+.em-vmap>*{--sx:calc(50cqw + (var(--c) - var(--r)) * 7.283cqw);--sy:calc(47cqw + (var(--c) + var(--r) - 5) * 4.072cqw);position:absolute}
+.em-v{left:calc(var(--sx) - 12.36cqw);top:calc(var(--sy) - 26.37cqw);width:24.72cqw;height:32.96cqw;background:url(shots/vx.webp?v1) no-repeat;background-size:1200% 100%;background-position-x:calc(var(--f) * 100% / 11);image-rendering:auto;pointer-events:none;z-index:calc(var(--c) + var(--r))}
+.em-v.b{z-index:calc(20 + var(--c) + var(--r))}
+.em-v.ghost{opacity:.45;animation:empulse 1.2s infinite;filter:saturate(.6)}
+@keyframes empulse{50%{opacity:.85}}
+.em-v.new{transform-origin:50% 80%;animation:emrise .9s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes emrise{0%{transform:translateY(4cqw) scaleY(.15);opacity:0}40%{opacity:1}}
+.em-dust,.em-puff{left:calc(var(--sx) - 7cqw);top:calc(var(--sy) - 4cqw);width:14cqw;height:8cqw;border-radius:50%;z-index:60;pointer-events:none}
+.em-dust{background:radial-gradient(closest-side,rgba(255,255,255,.9),rgba(255,255,255,0));animation:emdust 1s ease-out both}
+@keyframes emdust{from{transform:scale(.3);opacity:1}to{transform:scale(1.8);opacity:0}}
+.em-puff{font-style:normal;font-size:7cqw;line-height:8cqw;text-align:center;border-radius:0;animation:empuff 1.6s ease-out both}
+@keyframes empuff{from{transform:translateY(0) scale(.6);opacity:1}to{transform:translateY(-6cqw) scale(1.4);opacity:0}}
+.em-cell{left:calc(var(--sx) - 7.283cqw);top:calc(var(--sy) - 4.072cqw);width:14.57cqw;height:8.14cqw;border:0;padding:0;margin:0;background:transparent;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);z-index:70;font:inherit;color:inherit}
+button.em-cell{cursor:pointer}button.em-cell:not(.on):hover,button.em-cell:not(.on):focus-visible{background:color-mix(in srgb,var(--tc,var(--blue)) 45%,transparent);outline:0}button.em-cell.on{cursor:default}.em-vmap.pick button.em-cell:not(.on){background:rgba(255,255,255,.62);animation:empick 1.4s ease-in-out infinite}@keyframes empick{50%{background:rgba(255,255,255,.22)}}
+.em-bn{left:var(--sx);top:calc(var(--sy) - 13cqw);transform:translateX(-50%);z-index:80;font-style:normal;font-size:3.2cqw;font-weight:700;line-height:1;white-space:nowrap;direction:ltr;unicode-bidi:isolate;color:#fff;background:var(--good);border-radius:980px;padding:.4cqw 1cqw;pointer-events:none}
 /* the forecast and the arriving event */
 .em-fc{display:flex;gap:16px;align-items:center;background:var(--tile);border-radius:20px;padding:14px 20px;margin-bottom:14px;box-shadow:var(--shadow);border-inline-start:6px solid var(--c4)}
 .em-fc.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 7%,var(--tile))}
@@ -5097,7 +5089,7 @@ const TN_ABOUT = {
   ss:["كل فريق يرفع صوره بنفسه", "كل إجابة صحيحة تزيل 10% من التغبيش", "التخمين المبكر يكسب نقاطًا أكثر", "شعار جهتك على شريحة العرض"],
   mf:["شاشة واحدة بدون جوالات", "كل فريق يزرع ألغامه بالسر", "كاشف ودرع لكل فريق", "مكافأة «أخطر زارع» في النهاية"],
   tk:["اللاعبون يدخلون بالباركود من جوالاتهم", "خمس ثوانٍ تكبيس قبل كل سؤال", "عدد الكبسات هو قيمة السؤال", "تكبيس جماعي يحسم نهاية الجولة"],
-  em:["خمسة تحديات قصيرة على جوال كل لاعب", "مدن ثلاثية الأبعاد، وكل فريق يختار شكل أرضه", "نشرة أرصاد تعلن الأزمة، أو تلمّح لها، أو تخفيها", "إضافات للمتقدمين: التجارة والمشاريع المشتركة"],
+  em:["خمسة تحديات قصيرة على جوال كل لاعب", "مدن مكعّبات ثلاثية الأبعاد على طريقة ألعاب البناء، وكل فريق يختار شكل أرضه", "نشرة أرصاد تعلن الأزمة، أو تلمّح لها، أو تخفيها", "إضافات للمتقدمين: التجارة والمشاريع المشتركة"],
   er:["أربع غرف وأربع قصص على زوايا إشارة واحدة", "كل لاعب يتجوّل من جواله واسمه فوق شخصيته", "ثلاثة مناظر: الأصلي والعلوي ومنظور اللاعب", "ألغاز منطق وشيفرات ولغة وتروس ومرايا، وصندوق برمز سداسي", "مشهد سينمائي يعبر فيه الفريق الإشارة إلى الغرفة التالية", "شاشة العرض تعرض غرفة كل فريق حيّة"]
 };
 function tnAbout(k){
@@ -5893,7 +5885,7 @@ const CONTESTS = [
   {name:"مسابقة 6×6", icon:"six", go:"ss", desc:"صورة مغبّشة تتضح مع كل إجابة صحيحة", how:"كل فريق يرفع صورًا والفريق المنافس يخمّنها. كل إجابة صحيحة تزيل 10% من التغبيش، ومن يخمّن مبكرًا يكسب أكثر.", meta:"⁦2–4⁩ فرق"},
   {name:"غرفة الهروب", icon:"erdoor", go:"er", desc:"غرفة مجسّمة يمشي فيها الفريق ويحل الألغاز ليفتح الصندوق", how:"أربع غرف وأربع قصص على زوايا إشارة واحدة. يتجوّل الفريق في الغرفة ويحل ألغاز المنطق والشيفرات واللغة ليجمع رمز الصندوق السداسي قبل انتهاء الوقت، ثم يعبر الإشارة إلى الغرفة التالية.", meta:"⁦2–10⁩ فرق · ⁦5–10⁩ لاعبين"},
   {name:"تكبيس", icon:"tkphone", go:"tk", desc:"أسرع فريق يكبس من جواله يكسب السؤال", how:"اللاعبون يكبسون من جوالاتهم خلال ثوانٍ، وعدد الكبسات قيمة السؤال: الصحيحة تضيفها والخاطئة تخصمها.", meta:"⁦2–6⁩ فرق · جوالات"},
-  {name:"إعمار", icon:"emcity", go:"em", desc:"كل فريق يبني مدينته وينافس على أكبر عدد سكان", how:"اللاعبون يحلّون تحديات قصيرة من جوالاتهم ليجمعوا الموارد، ثم يبنون مدينتهم ويحمونها من الأزمة اللي تعلنها نشرة الأرصاد. المدينة الأكثر سكانًا تفوز.", meta:"⁦2–10⁩ فرق · جوالات"},
+  {name:"إعمار", icon:"emcity", go:"em", desc:"كل فريق يبني مدينته بالمكعّبات وينافس على أكبر عدد سكان", how:"اللاعبون يحلّون تحديات قصيرة من جوالاتهم ليجمعوا الموارد، ثم يبنون مدينتهم ويحمونها من الأزمة اللي تعلنها نشرة الأرصاد. المدينة الأكثر سكانًا تفوز.", meta:"⁦2–10⁩ فرق · جوالات"},
   {name:"حقل الألغام", icon:"mine", go:"mf", desc:"كل فريق يزرع ألغامه بالسر، ومن يدوس لغمًا ينفجر عليه", how:"كل فريق يزرع ألغامه بالسر في لوحة المربعات، ثم تتناوب الفرق على كشف المربعات بالأسئلة. المربع الآمن يكشف كم لغمًا حوله، واللغم ينفجر على من يدوسه ويكسب صاحبه.", meta:"⁦2–8⁩ فرق · شاشة واحدة"},
 ];
 /* ---------- subscriber accounts (organisations) ----------
@@ -7945,7 +7937,7 @@ const JOIN_INFO = {
     lead:"حلّوا تحديات قصيرة على جوالاتكم، اجمعوا موارد، وابنوا مدينتكم.",
     steps:["اختر مدينتك (فريقك) من القائمة.",
       "اختر تحديًا على جوالك: الأنابيب 💧 ماء، والكهرباء ⚡ طاقة، والبنّاء 🧱 حجارة، والسوق 🪙 ذهب، والمزرعة 🌾 غذاء.",
-      "قائد الفريق يبني على الخريطة، والباقون يقترحون عليه. كل مبنى يزيد سكان المدينة 👥.",
+      "قائد الفريق يختار مبنى ويضغط مكانًا فاضيًا على الخريطة، فيطلع المبنى بالمكعّبات في مكانه، والباقون يقترحون عليه (يظهر اقتراحهم شفافًا). كل مبنى يزيد سكان المدينة 👥.",
       "أول كل جولة تطلع <b>نشرة الأرصاد</b> بالأزمة الجاية: ☀️ جفاف يحمي منه 🚰 محطة تحلية، و🌋 زلزال يحمي منه 🚒 دفاع مدني، و🦠 وباء يحمي منه 🏥 مستشفى. بدون حماية يتهدّم آخر مبنيين بنيتوهم، وتحدي الإنقاذ يخففها لمبنى واحد.",
       "تفوز المدينة صاحبة أكثر سكان في النهاية."],
     note:"الحديقة جنب البيوت تجيب سكان زيادة، فمكان المبنى مهم." }
@@ -10154,21 +10146,24 @@ function emBroadcast(){
   EM.teams.forEach((_, t) => ROOM.emit("em.t", emTV(t)).catch(() => {}));
 }
 
-/* ---------- shared drawing: the 3D city ---------- */
-/* cells are laid on a tilted plane; every building is a CSS box with a roof
-   and two walls, and its emoji stands up facing the camera */
+/* ---------- shared drawing: the voxel city ---------- */
+/* voxel city: pre-rendered block sprites (shots/vx.webp, 12 frames) laid out on a 2D isometric grid */
+const EM_VXF = {tg:0, ts:1, tw:2, h:3, p:4, d:5, r:6, o:7, m:8, rock:9, palm:10, sand:11};
 function emMapHTML(map, terr, opts = {}){
-  const ter = EM_TERR[terr];
-  const cells = map.map((b, i) => {
-    const blk = b === "#", B = !blk && b && EM_B[b], sg = opts.sug && opts.sug.find(s => s[1] === i);
-    const tag = opts.click && !blk ? "button" : "div";
-    const bonus = b === "p" ? emParkBonus(map, i) : 0;
-    let inner = "";
-    if (blk) inner = ter.kind === "water" ? `<span class="em-wv"></span>` : `<span class="em-bx k-${ter.kind}" style="--h:${ter.kind === "rock" ? 6 : 2}"><b class="t"></b><b class="s1"></b><b class="s2"></b><i>${ter.blk}</i></span>`;
-    else if (B) inner = `<span class="em-bx${opts.fresh === i ? " new" : ""}" style="--h:${B.h};--rc:${B.c}"><b class="t"></b><b class="s1"></b><b class="s2"></b><i>${B.e}</i>${bonus ? `<em class="em-bn">+${n(bonus)}</em>` : ""}</span>`;
-    else if (sg) inner = `<span class="em-ghost"><i>${EM_B[sg[0]].e}</i></span>`;
-    return `<${tag} ${tag === "button" ? `type="button" data-emcell="${i}" aria-label="خانة ${n(i + 1)}"` : ""} class="em-cell${blk ? " blk k-" + ter.kind : ""}${B ? " on" : ""}${opts.gone === i ? " gone" : ""}">${inner}</${tag}>`; }).join("");
-  return `<div class="em-iso ${opts.cls || ""} g-${ter.kind}"><div class="em-map">${cells}</div></div>`;
+  const ter = EM_TERR[terr], k = ter.kind, ground = k === "sand" ? "ts" : "tg";
+  const at = i => `--c:${i % 6};--r:${Math.floor(i / 6)}`, spr = (f, cls = "", st = "") => `<i class="em-v ${cls}" style="--f:${EM_VXF[f]};${st}"></i>`;
+  let tiles = "", tops = "", hits = "";
+  map.forEach((b, i) => {
+    const blk = b === "#", B = !blk && b && EM_B[b], sg = !blk && !B && opts.sug && opts.sug.find(s => s[1] === i), st = at(i);
+    tiles += spr(blk && k === "water" ? "tw" : ground, "t", st);
+    if (blk && k !== "water") tops += spr(k, "b", st);
+    else if (B){ const bonus = b === "p" ? emParkBonus(map, i) : 0;
+      tops += spr(b, "b" + (opts.fresh === i ? " new" : ""), st) + (opts.fresh === i ? `<i class="em-dust" style="${st}"></i>` : "") + (bonus ? `<em class="em-bn" style="${st}">+${n(bonus)}</em>` : ""); }
+    else if (sg) tops += spr(sg[0], "b ghost", st);
+    if (opts.gone === i) tops += `<i class="em-puff" style="${st}">💨</i>`;
+    if (opts.click && !blk) hits += `<button type="button" data-emcell="${i}" aria-label="خانة ${n(i + 1)}" class="em-cell${B ? " on" : ""}" style="${st}"></button>`;
+  });
+  return `<div class="em-iso ${opts.cls || ""} g-${k}"><div class="em-vmap${opts.pick ? " pick" : ""}">${tiles}${tops}${hits}</div></div>`;
 }
 function emResHTML(res, big){ return `<div class="em-res${big ? " big" : ""}">${EM_RK.map(r => `<span title="${EM_RES[r].n}"><i>${EM_RES[r].e}</i><b>${n(res[r] || 0)}</b></span>`).join("")}</div>`; }
 const emTerrTag = k => { const T = EM_TERR[k]; return `<span class="em-terr">${T.e} ${T.n}</span>`; };
@@ -10408,7 +10403,7 @@ function emConsole(el, ctx){
   else if (emUI.tab === "map"){
     const sel = emUI.sel && EM_B[emUI.sel], fc = g.fc && EM_EV[g.fc];
     body = `${ctx.lead ? `<p class="em-small">${sel ? `اضغط مكانًا فاضيًا على الخريطة لـ${sel.e} ${sel.n}.` : "اختر مبنى، ثم اضغط مكانه على الخريطة."}</p>` : `<p class="em-small">القائد يبني. اختر مبنى ومكانًا لترسل اقتراحك له.</p>`}
-      ${city({click:true, sug: ctx.lead ? tv.sug : null})}
+      ${city({click:true, pick: !!emUI.sel, sug: ctx.lead ? tv.sug : null})}
       <div class="em-pal">${EM_BK.map(b => { const B = EM_B[b], ok = emCan(tv.res, B.cost), hot = fc && fc.bad && fc.by === b && !map.includes(b);
         return `<button type="button" class="em-bb${emUI.sel === b ? " sel" : ""}${ok ? "" : " no"}${hot ? " hot" : ""}" data-emb="${b}"><i>${B.e}</i><b>${B.n}</b><span>${emCost(B.cost)}</span><small>${b === "p" ? "👥 10 سكان، و20 لكل بيت ملاصق" : `👥 ${n(B.st)} ساكن`}${B.pr ? ` · يحمي من ${EM_EV[B.pr].e} ${EM_EV[B.pr].n}` : ""}</small></button>`; }).join("")}</div>`;
   }
