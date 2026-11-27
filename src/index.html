@@ -1968,6 +1968,15 @@ a.btn{text-decoration:none}
 .tn-qzc .c-body{width:100%}
 @media (max-width:620px){.tn-kinds{gap:8px;grid-template-columns:repeat(2,minmax(0,1fr))}.tn-kind{padding:12px 6px;border-radius:16px}.tn-kind b{font-size:15px}.tn-kind i{font-size:24px}.tn-kind small{font-size:13px}.tn-kind-d{font-size:15px}}
 .contests-soon{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.soon-h{font-size:20px;margin:26px 0 12px;display:flex;align-items:center;gap:8px}.soon-h::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c4);box-shadow:0 0 0 4px color-mix(in srgb,var(--c4) 22%,transparent)}
+.soon-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.soon-card{background:var(--tile);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.sc-cv{position:relative;display:block;aspect-ratio:16/9;background:#0B1A33}.sc-cv img{width:100%;height:100%;object-fit:cover;display:block}
+.sc-badge{position:absolute;top:10px;inset-inline-start:10px;background:rgba(15,24,40,.78);color:#fff;font-size:13px;font-weight:700;padding:5px 12px;border-radius:980px;backdrop-filter:blur(4px)}
+.sc-tx{display:flex;flex-direction:column;gap:6px;padding:14px 16px 16px;text-align:start}
+.sc-head{display:flex;align-items:center;gap:8px}.sc-head svg{width:26px;height:26px;color:var(--blue)}.sc-head b{font-size:18px}
+.sc-tx small{color:var(--muted);font-size:14px;line-height:1.6}
+.sc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.sc-tags span{font-size:12px;background:var(--bg-alt);border-radius:980px;padding:3px 10px;color:var(--ink)}
 .contests-soon .contest{min-height:0;flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;padding:14px 16px;text-align:start}
 .contests-soon .contest svg{width:26px;height:26px;margin:0}
 .contests-soon .contest b{font-size:16px}
@@ -5745,6 +5754,7 @@ const CONTESTS = [
   {name:"تكبيس", icon:"tkphone", go:"tk", desc:"أسرع فريق يكبس من جواله يكسب السؤال", how:"اللاعبون يكبسون من جوالاتهم خلال ثوانٍ، وعدد الكبسات قيمة السؤال: الصحيحة تضيفها والخاطئة تخصمها.", meta:"⁦2–6⁩ فرق · جوالات"},
   {name:"إعمار", icon:"emcity", go:"em", desc:"كل فريق يبني مدينته بالمكعّبات وينافس على أكبر عدد سكان", how:"اللاعبون يحلّون تحديات قصيرة من جوالاتهم ليجمعوا الموارد، ثم يبنون مدينتهم ويحمونها من الأزمة اللي تعلنها نشرة الأرصاد. المدينة الأكثر سكانًا تفوز.", meta:"⁦2–10⁩ فرق · جوالات"},
   {name:"حقل الألغام", icon:"mine", go:"mf", desc:"كل فريق يزرع ألغامه بالسر، ومن يدوس لغمًا ينفجر عليه", how:"كل فريق يزرع ألغامه بالسر في لوحة المربعات، ثم تتناوب الفرق على كشف المربعات بالأسئلة. المربع الآمن يكشف كم لغمًا حوله، واللغم ينفجر على من يدوسه ويكسب صاحبه.", meta:"⁦2–8⁩ فرق · شاشة واحدة"},
+  {name:"خريطة العالم", icon:"geo", soon:"wm", desc:"الكرة الأرضية كاملة على شاشة العرض، وكل فريق يحاول يستولي على دول العالم ويوسّع مساحته", tags:["شاشة عرض فقط", "فرق تتنافس", "كل دول العالم"]},
 ];
 /* ---------- subscriber accounts (organisations) ----------
    Admin (site owner) creates accounts: username, organisation, password, logo, two colours.
@@ -6266,8 +6276,11 @@ function landing(){
           return live ? `<button type="button" class="contest live${c.go === "er" ? " feat" : ""}" data-go="${c.go}">${shot}<span class="c-body">${body}<span class="go">العب الآن</span></span></button>`
                     : `<button type="button" class="contest info${c.go === "er" ? " feat" : ""}" data-about="${c.go}">${shot}<span class="c-body">${body}<span class="go sec">التفاصيل والصور</span></span></button>`; }).join("")}
       </div>
+      ${mine.some(c => c.soon) ? `<h3 class="soon-h">قريبًا في تنافس</h3><div class="soon-cards">${mine.filter(c => c.soon).map(c => `<article class="soon-card">
+        <span class="sc-cv"><img src="covers/${c.soon}.webp" alt="${c.name}" loading="lazy" decoding="async"><span class="sc-badge">✦ قريبًا</span></span>
+        <span class="sc-tx"><span class="sc-head">${I(P[c.icon])}<b>${c.name}</b></span><small>${c.desc}</small>${c.tags ? `<span class="sc-tags">${c.tags.map(t => `<span>${t}</span>`).join("")}</span>` : ""}</span></article>`).join("")}</div>` : ""}
       <div class="contests-soon">
-        ${mine.filter(c => !c.go).map(c => `<article class="contest">${I(P[c.icon])}<b>${c.name}</b><span class="soon">قيد التجهيز</span></article>`).join("")}
+        ${mine.filter(c => !c.go && !c.soon).map(c => `<article class="contest">${I(P[c.icon])}<b>${c.name}</b><span class="soon">قيد التجهيز</span></article>`).join("")}
         ${soon.map(() => `<article class="contest ghost" aria-label="مسابقة قادمة">${I(P.plus)}<b>مسابقة جديدة</b><span class="soon">قريبًا</span></article>`).join("")}
       </div>
       ${tnHow()}
