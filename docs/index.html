@@ -788,6 +788,8 @@ button.er-story{font:inherit;text-align:start;border:0;cursor:pointer;width:100%
 @media (max-width:734px){.er-stories{grid-template-columns:1fr}.er-story{min-height:0}}
 
 /* game screen */
+/* the rooms are drawn on light surfaces, so the escape game keeps the light tokens even when the phone is in dark mode */
+.er-game{--bg:#FFFFFF;--bg-alt:#F8F8FA;--tile:#FFFFFF;--ink:#26323E;--muted:#5B656E;--hair:#DFE1E5;--blue:#0B7D65;--blue-link:#0A6E59;--on-blue:#FFFFFF;--gold-ink:#8F7128;--good:#248A3D;--good-soft:#E3F4E7;--bad:#D70015;--bad-soft:#FCE6E8;--shadow:0 4px 24px rgba(38,50,62,.08);--scrim:rgba(38,50,62,.42);--c1:#0071E3;--c2:#248A3D;--c3:#C93400;--c4:#8944AB;--c5:#D30F45;--c6:#0E7C86;--c7:#3634A3;--c8:#B25000;color-scheme:light}
 .er-game{position:fixed;inset:0;z-index:40;background:#E4ECF5;overflow:hidden;color:var(--ink);font-family:var(--f);-webkit-user-select:none;user-select:none;touch-action:none}
 .er-stage{position:absolute;inset:0}
 .er-views{position:absolute;left:12px;top:calc(max(10px,env(safe-area-inset-top,0px)) + 64px);display:flex;flex-direction:column;gap:6px;z-index:3;transition:opacity .3s}
@@ -4589,6 +4591,7 @@ const P = {tnwa:'<path d="M4.5 19.5l1.2-3.6A8 8 0 1 1 8.6 18.8z"/><path d="M9.2 
   four:`<rect x="3.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.8"/><path d="M15.5 17l1.5 1.5 2.5-3"/>`,
   five:`<path d="M12 3l8.5 6.2-3.2 10H6.7L3.5 9.2z"/><circle cx="12" cy="12" r="1.2"/><circle cx="12" cy="7" r=".9"/><circle cx="16.3" cy="10.3" r=".9"/><circle cx="7.7" cy="10.3" r=".9"/><circle cx="14.6" cy="15.6" r=".9"/><circle cx="9.4" cy="15.6" r=".9"/>`,
   six:`<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/><text x="12" y="14.2" text-anchor="middle" font-size="6" fill="currentColor" stroke="none" font-family="-apple-system,'IBM Plex Sans Arabic',sans-serif">6</text>`,
+  paw:`<ellipse cx="12" cy="15.6" rx="4.3" ry="3.7"/><circle cx="6.3" cy="10.2" r="1.9"/><circle cx="9.7" cy="6.4" r="1.9"/><circle cx="14.3" cy="6.4" r="1.9"/><circle cx="17.7" cy="10.2" r="1.9"/>`,
   mine:`<circle cx="12" cy="13" r="6.5"/><path d="M12 3.5v3M12 19.5v1.5M2.5 13H5M19 13h2.5M5.3 6.3l1.8 1.8M16.9 17.9l1.6 1.6M5.3 19.7l1.8-1.8M16.9 8.1l1.8-1.8"/><path d="M9.5 11a2.5 2.5 0 0 1 2.5-2"/>`,
   plus:`<rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke-dasharray="3 3"/><path d="M12 8.5v7M8.5 12h7"/>`,
   sj:`<path d="M3.5 6a2.5 2.5 0 0 1 2.5-2.5h5A2.5 2.5 0 0 1 13.5 6v4a2.5 2.5 0 0 1-2.5 2.5H8l-3 2.5v-2.8A2.5 2.5 0 0 1 3.5 10z"/><path d="M15.5 9.5H18a2.5 2.5 0 0 1 2.5 2.5v4a2.5 2.5 0 0 1-1.5 2.3V21l-3-2.5h-3a2.5 2.5 0 0 1-2.5-2.5v-1"/><text x="8.5" y="10.4" text-anchor="middle" font-size="6.5" fill="currentColor" stroke="none" font-family="-apple-system,'IBM Plex Sans Arabic',sans-serif">س</text><text x="16" y="16.6" text-anchor="middle" font-size="6.5" fill="currentColor" stroke="none" font-family="-apple-system,'IBM Plex Sans Arabic',sans-serif">ج</text>`,
@@ -5897,6 +5900,7 @@ const CONTESTS = [
   {name:"إعمار", icon:"emcity", go:"em", desc:"كل فريق يبني مدينته بالمكعّبات وينافس على أكبر عدد سكان", how:"اللاعبون يحلّون تحديات قصيرة من جوالاتهم ليجمعوا الموارد، ثم يبنون مدينتهم ويحمونها من الأزمة اللي تعلنها نشرة الأرصاد. المدينة الأكثر سكانًا تفوز.", meta:"⁦2–10⁩ فرق · جوالات"},
   {name:"حقل الألغام", icon:"mine", go:"mf", desc:"كل فريق يزرع ألغامه بالسر، ومن يدوس لغمًا ينفجر عليه", how:"كل فريق يزرع ألغامه بالسر في لوحة المربعات، ثم تتناوب الفرق على كشف المربعات بالأسئلة. المربع الآمن يكشف كم لغمًا حوله، واللغم ينفجر على من يدوسه ويكسب صاحبه.", meta:"⁦2–8⁩ فرق · شاشة واحدة"},
   {name:"خريطة العالم", icon:"geo", soon:"wm", desc:"الكرة الأرضية كاملة على شاشة العرض، وكل فريق يحاول يستولي على دول العالم ويوسّع مساحته", tags:["شاشة عرض فقط", "فرق تتنافس", "كل دول العالم"]},
+  {name:"الاستيلاء على الغابة", icon:"paw", soon:"jg", desc:"كل فريق يخبّي حيواناته في أقفاصه بالسر، ثم تبدأ الهجمات على أقفاص الفرق الثانية. الأسد ملك الغابة وقيمته الأعلى", tags:["شاشة عرض فقط", "4 فرق", "أقفاص 4×4 إلى 6×6"]},
 ];
 /* ---------- subscriber accounts (organisations) ----------
    Admin (site owner) creates accounts: username, organisation, password, logo, two colours.
