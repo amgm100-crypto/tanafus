@@ -810,6 +810,15 @@ button.er-story{font:inherit;text-align:start;border:0;cursor:pointer;width:100%
 .er-cine.on .er-skip{opacity:1}
 .er-fade{position:absolute;inset:0;background:#0B0F14;opacity:0;transition:opacity .55s}
 .er-cine.out .er-fade{opacity:1}.er-cine.gone{opacity:0;transition:opacity .6s}.er-cine.gone .er-cb.t{transform:translateY(-100%)}.er-cine.gone .er-cb.b{transform:translateY(100%)}
+.er-game.horror .er-stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 55%,transparent 45%,rgba(0,0,0,.55) 100%)}
+.er-game.scare .er-stage{animation:erglitch 1.6s steps(1)}
+.er-game.scare .er-stage::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,40,40,.12) 0 2px,transparent 2px 5px);animation:erscan 1.6s linear}
+@keyframes erglitch{0%{filter:none;transform:none}8%{filter:brightness(.15) contrast(1.6);transform:translateX(-6px)}14%{filter:hue-rotate(-40deg) saturate(3);transform:translateX(5px)}22%{filter:brightness(.1)}40%{filter:none;transform:none}55%{filter:brightness(.4) saturate(2);transform:translateY(3px)}62%,100%{filter:none;transform:none}}
+@keyframes erscan{0%{opacity:0}10%{opacity:1}70%{opacity:.6}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.er-game.scare .er-stage{animation:none}}
+.er-knownote{display:flex;gap:10px;align-items:flex-start;background:#FFF6DB;border:1.5px solid #F2D27A;border-radius:14px;padding:10px 12px;margin:10px 0;text-align:start}
+.er-knownote b{flex:none;width:28px;height:28px;border-radius:9px;background:#F5C542;color:#26323E;display:grid;place-items:center;font-size:17px}
+.er-knownote p{margin:0;font-size:14px;line-height:1.7;color:#4A3B12}
 .er-story.r3{background:linear-gradient(160deg,#C98B4E,#6B3A1E 75%)}
 .er-gears,.er-mir,.er-net{width:100%;height:auto}
 .er-letter{font-size:26px;font-weight:700;line-height:1}
@@ -4947,7 +4956,7 @@ const TN_ABOUT = {
   mf:["شاشة واحدة بدون جوالات", "كل فريق يزرع ألغامه بالسر", "كاشف ودرع لكل فريق", "مكافأة «أخطر زارع» في النهاية"],
   tk:["اللاعبون يدخلون بالباركود من جوالاتهم", "خمس ثوانٍ تكبيس قبل كل سؤال", "عدد الكبسات هو قيمة السؤال", "تكبيس جماعي يحسم نهاية الجولة"],
   em:["خمسة تحديات قصيرة على جوال كل لاعب", "مدن ثلاثية الأبعاد، وكل فريق يختار شكل أرضه", "نشرة أرصاد تعلن الأزمة، أو تلمّح لها، أو تخفيها", "إضافات للمتقدمين: التجارة والمشاريع المشتركة"],
-  er:["أربع غرف وأربع قصص على زوايا إشارة واحدة", "كل لاعب يتجوّل من جواله واسمه فوق شخصيته", "ثلاثة مناظر: الأصلي والعلوي ومنظور اللاعب", "ألغاز منطق وشيفرات وصندوق برمز سداسي", "شاشة العرض تعرض غرفة كل فريق حيّة"]
+  er:["أربع غرف وأربع قصص على زوايا إشارة واحدة", "كل لاعب يتجوّل من جواله واسمه فوق شخصيته", "ثلاثة مناظر: الأصلي والعلوي ومنظور اللاعب", "ألغاز منطق وشيفرات ولغة وتروس ومرايا، وصندوق برمز سداسي", "مشهد سينمائي يعبر فيه الفريق الإشارة إلى الغرفة التالية", "شاشة العرض تعرض غرفة كل فريق حيّة"]
 };
 function tnAbout(k){
   const isG = !!GM[k], c = isG ? GM[k] : CONTESTS.find(x => x.go === k); if (!c) return tn404();
@@ -5704,7 +5713,13 @@ const TN_INFO = {
   sj:{tag:"فرق على شاشة واحدة", players:"2–4 فرق", dur:"1–3 مجالات لكل فريق", dev:"screen", tip:"اختاروا لكل فريق مجالات يعرفها أعضاؤه، عشان تحمى المنافسة على الأسئلة الكبيرة."},
   b4:{tag:"فرق على شاشة واحدة", players:"2–4 فرق", dur:"لوحة 3×3 إلى 5×5", dev:"screen", tip:"كل ما كبرت اللوحة طالت المسابقة: 3×3 للجلسات القصيرة، و5×5 للمنافسة الطويلة."},
   ss:{tag:"فرق على شاشة واحدة", players:"2–4 فرق", dur:"حسب عدد الصور", dev:"screen", tip:"ارفعوا صورًا واضحة ومعروفة للحضور، عشان يكون التخمين ممتع مو مستحيل."},
-  er:{tag:"فرق بالجوالات وشاشة عرض", players:"2–10 فرق · 5–10 لاعبين", dur:"20 دقيقة للغرفة افتراضيًا", dev:"phones", tip:"أطول مسابقة عندنا: خصّصوا لكل غرفة وقتها كامل، وخلّوا الفريق يتوزع على أركانها."},
+  er:{tag:"فرق بالجوالات وشاشة عرض", players:"2–10 فرق · 5–10 لاعبين", dur:"20 دقيقة للغرفة افتراضيًا", dev:"phones",
+    steps:[["افتح الغرفة","يختار المقدّم الغرف الأربع أو بعضها، والمستوى ووقت كل غرفة، فيظهر على شاشة العرض رمز دخول وباركود."],
+      ["ادخلوا من الجوالات","كل لاعب يصوّر الباركود ويكتب اسمه ويختار فريقه، فيظهر اسمه فوق شخصيته داخل الغرفة."],
+      ["تجوّلوا وحلّوا","اضغطوا على أي ركن فتمشي الشخصية إليه ويظهر لغزه. بدّلوا المنظر: الأصلي، أو العلوي لترون الإشارة كلها، أو منظور اللاعب."],
+      ["اجمعوا الرمز","كل لغز محلول يكشف رقمًا من رمز الصندوق، وبعض الأركان تحتاج مفتاحًا أو أداة من ركن آخر."],
+      ["اعبروا الإشارة","إذا انفتح الصندوق يطلع الفريق من الباب ويعبر الإشارة إلى الغرفة التالية، والفائز من يهرب من غرف أكثر في وقت أقل."]],
+    tip:"أطول مسابقة عندنا: خصّصوا لكل غرفة وقتها كامل، وخلّوا الفريق يتوزع على أركانها. والغرفة الرابعة ألغازها لغة وتفكير، ما تحتاج حساب."},
   tk:{tag:"فرق بالجوالات وشاشة عرض", players:"2–6 فرق", dur:"3 أو 5 أو 10 جولات، أو مفتوحة", dev:"phones", tip:"تأكدوا إن جوالات اللاعبين متصلة بالإنترنت قبل البداية، لأن الكبسة تنحسب بالثانية."},
   em:{tag:"فرق بالجوالات وشاشة عرض", players:"2–10 فرق", dur:"5 أو 7 أو 10 جولات، أو مفتوحة", dev:"phones", tip:"مع الطلاب الكبار جرّبوا نشرة الأرصاد بخيار «تلميح»، يخليهم يستنتجون الأزمة قبل وقتها."},
   mf:{tag:"فرق على شاشة واحدة", players:"2–8 فرق", dur:"مفتوحة أو 10–30 دقيقة", dev:"screen", tip:"أول مرة ابدأوا بـ 3 ألغام لكل فريق، وبعدها زيدوها لين تصير المخاطرة أكبر."}
@@ -8366,10 +8381,11 @@ const ER_ROOMS = [
       {id:"r2e", name:"مكتب الفلكي", gen:"seq", model:"desk", pos:[4.3, 1.7]},
       {id:"r2f", name:"نقش الجُمَّل", gen:"abjad", model:"tablet", pos:[-4.8, 2.0], needs:"lens"}],
     chest:[1.3, 2.6], know:[[-2.6,-3.8],[2.6,0.2]] },
-  { key:"r3", name:"المختبر الأخير", tag:"القصة الثالثة", time:"قبل الإغلاق التام",
+  { key:"r3", name:"المختبر الأخير", tag:"القصة الثالثة · غرفة رعب", time:"قبل الإغلاق التام",
     intro:["وصلتم إلى مختبر الأبحاث حيث تحفظ «نَواة»، أذكى حاسوب في المدينة، كل المعارف التي جمعها النوخذة والفلكي.",
            "فجأة أعلنت نَواة الإغلاق التام: الأبواب ستُقفل والبيانات ستُمحى. الطريقة الوحيدة لإيقافها رمز من ست خانات محفوظ في خزنة المختبر.",
-           "لوحة دوائر، وخزائن عيّنات، وشاشة رموز، وروبوت مساعد، ومسارات خادم، ومربع سحري. فكّروا كفريق واحد… فالوقت يمضي."],
+           "وانقطعت الكهرباء. لا يضيء المختبر إلا مصباح كل لاعب وأضواء الطوارئ الحمراء، والأنوار تنطفئ فجأة بين حين وآخر… والروبوت المساعد لم يعد يبتسم.",
+           "لوحة دوائر، وخزائن عيّنات، وشاشة رموز، وروبوت يراقبكم، ومسارات خادم، ومربع سحري. ابقوا معًا… فالوقت يمضي."],
     outro:"توقّف العدّ التنازلي وانطفأت الأضواء الحمراء. قالت نَواة بصوت هادئ: «أثبتم أن العقول حين تتعاون أقوى من أي آلة. المعرفة الآن بأمان». وعلى الشاشة الأخيرة ظهر مخطط ورشة قديمة على الطرف الآخر من الإشارة…",
     st:[
       {id:"r3a", name:"لوحة الدوائر", gen:"gates", model:"panel", pos:[-1.6, -4.05]},
@@ -8429,7 +8445,7 @@ function erThree(){
 const ER_THEME = [
   {bg:"#E4ECF5", fog:"#E4ECF5", wall:"#F6F0E4", trim:"#8B6B43", base:"#6E5537", hemi:["#FFF6E8","#B9A27F"], sun:"#FFF1DA", sunI:1.0, hemiI:.75, ring:"#F5B942"},
   {bg:"#1A2944", fog:"#1A2944", wall:"#24375C", trim:"#C9A253", base:"#14213A", hemi:["#9DB8F0","#2A3A5E"], sun:"#C7D8FF", sunI:.55, hemiI:.55, ring:"#F5C542"},
-  {bg:"#DCE5EF", fog:"#DCE5EF", wall:"#DDE5EE", trim:"#1593A3", base:"#5B656E", hemi:["#E8F1FB","#7F8EA8"], sun:"#FFFFFF", sunI:.75, hemiI:.5, ring:"#12B5C9"},
+  {bg:"#06080C", fog:"#06080C", wall:"#7C8794", trim:"#1593A3", base:"#2A3038", hemi:["#5D7390","#0E1118"], sun:"#8FA6C8", sunI:.07, hemiI:.09, ring:"#12B5C9", horror:true},
   {bg:"#EADCC6", fog:"#EADCC6", wall:"#E9D3B2", trim:"#9C5B2E", base:"#6B4A2E", hemi:["#FFF1DE","#B08A60"], sun:"#FFE7C2", sunI:1.0, hemiI:.7, ring:"#E8A33D"}
 ];
 function erTex(T, w, h, draw, rep){
@@ -8488,13 +8504,14 @@ class ErScene {
     const S = this.scene = new T.Scene(); S.background = new T.Color(this.th.bg); S.fog = new T.Fog(this.th.fog, 26, 48);
     this.cam = new T.PerspectiveCamera(38, 1, .1, 120);
     this.view = {yaw:.62, pitch:.9, dist:17, tx:0, ty:.4, tz:.3}; this.goal = Object.assign({}, this.view); this.home = Object.assign({}, this.view);
-    S.add(new T.HemisphereLight(this.th.hemi[0], this.th.hemi[1], this.th.hemiI));
-    const sun = new T.DirectionalLight(this.th.sun, this.th.sunI); sun.position.set(11, 16, 13); sun.castShadow = true; sun.target.position.set(5, 0, 5); S.add(sun.target);
-    sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, {left:-17, right:17, top:17, bottom:-17, near:1, far:60}); sun.shadow.bias = -.0008; sun.shadow.radius = 3;
+    this.night = r === 1 || !!this.th.horror; this.hemiL = new T.HemisphereLight(this.th.hemi[0], this.th.hemi[1], this.th.hemiI); S.add(this.hemiL);
+    const sun = this.sunL = new T.DirectionalLight(this.th.sun, this.th.sunI); sun.position.set(11, 16, 13); sun.castShadow = true; sun.target.position.set(5, 0, 5); S.add(sun.target);
+    sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, {left:-17, right:17, top:17, bottom:-17, near:1, far:60}); sun.shadow.bias = -.0015; sun.shadow.normalBias = .04; sun.shadow.radius = 3;
     S.add(sun);
     this.buildShell(); this.buildDecor(); this.buildStations(); this.buildChest(); this.buildKnow(); this.mode = "home";
     if (opts.city !== false){ try { this.buildCity(); } catch(e){ console.warn("er city", e); } }
     this.me = this.avatar(opts.color || "#0071E3"); this.me.position.set(0, 0, 3.2); S.add(this.me); this.walk = null;
+    if (this.th.horror && opts.horror !== false) this.horror();
     this.ray = new T.Raycaster(); this.clock = new T.Clock(); this.bindInput();
     this.ro = new ResizeObserver(() => this.resize()); this.ro.observe(el); this.resize();
     const loop = () => { if (this.dead) return; this.raf = requestAnimationFrame(loop); this.frame(); }; loop();
@@ -8575,14 +8592,14 @@ class ErScene {
       [[-.5, -3.2],[2.6, 3.6]].forEach(([x,z]) => { const d = this.group(x, z); d.add(this.box(1.3, .06, .6, "#F4F7FA", 0, .74, 0)); [[-.58,-.24],[.58,-.24],[-.58,.24],[.58,.24]].forEach(([a,b]) => d.add(this.box(.05, .74, .05, "#A9B6CC", a, .37, b)));
         d.add(this.box(.5, .32, .03, "#34496F", 0, 1.0, -.1)); const sc = new T.Mesh(new T.PlaneGeometry(.46, .28), new T.MeshBasicMaterial({map:screenTex})); sc.position.set(0, 1.0, -.08); d.add(sc);
         const ch = this.cyl(.22, .22, .08, "#22C3D6", 0, .45, .5, 16); d.add(ch); d.add(this.cyl(.03, .03, .42, "#5B656E", 0, .22, .5, 8)); });
-      for (let i = -1; i <= 1; i++){ const l = this.box(.08, .04, 6, "#FFFFFF", i*3, 3.05, 0, {emissive:"#E6FBFF", emissiveIntensity:.9}); l.castShadow = false; this.scene.add(l); }
-      this.lamp(0, 3.0, 0, "#E8FBFF", true);
+      this.strips = []; for (let i = -1; i <= 1; i++){ const l = this.box(.08, .04, 6, this.th.horror ? "#2E343C" : "#FFFFFF", i*3, 3.05, 0, {emissive:"#E6FBFF", emissiveIntensity:.9}); l.castShadow = false; this.scene.add(l); this.strips.push(l.material); }
+      this.lamp(0, 3.0, 0, "#E8FBFF", true); this.labLamp = this.lastLamp;
     }
   }
   plant(x, z, c = "#4E8C4A"){ const g = this.group(x, z); g.add(this.cyl(.2, .16, .36, "#C9B79C", 0, .18, 0, 12)); for (let i = 0; i < 6; i++){ const l = new this.T.Mesh(new this.T.ConeGeometry(.12, .7, 6), erMat(this.T, c)); l.position.set(Math.cos(i)*.08, .7, Math.sin(i)*.08); l.rotation.set(Math.cos(i*1.7)*.5, 0, Math.sin(i*1.3)*.5); l.castShadow = true; g.add(l); } return g; }
   candle(x, z){ const g = this.group(x, z); g.add(this.cyl(.12, .14, .06, "#C9A253", 0, .03, 0, 12)); g.add(this.cyl(.05, .05, .3, "#F6EEDD", 0, .21, 0, 10)); const f = this.sph(.04, this.glow("#FFB347", 2), 0, .4, 0); f.scale.y = 1.6; g.add(f);
     const L = new this.T.PointLight("#FFB347", .6, 3.2); L.position.y = .5; g.add(L); this.anim.push(t => { L.intensity = .5 + Math.sin(t*9 + x)*.08 + Math.sin(t*23)*.05; f.scale.x = 1 + Math.sin(t*17 + z)*.12; }); return g; }
-  lamp(x, y, z, c, flat){ const T = this.T; const L = new T.PointLight(c, .55, 14); L.position.set(x, y - .6, z); this.scene.add(L);
+  lamp(x, y, z, c, flat){ const T = this.T; const L = new T.PointLight(c, .55, 14); L.position.set(x, y - .6, z); this.scene.add(L); this.lastLamp = L;
     if (!flat){ const a = this.cyl(.01, .01, .5, "#5B656E", x, y - .1, z, 6), sh = new T.Mesh(new T.ConeGeometry(.32, .3, 20, 1, true), erMat(T, "#8B6B43", {side:T.DoubleSide})); sh.position.set(x, y - .45, z); const bl = this.sph(.09, this.glow(c, 1.6), x, y - .55, z);
       [a, sh, bl].forEach(m => { this.scene.add(m); (this.shades = this.shades || []).push(m); }); } }
   /* ---------- stations ---------- */
@@ -8661,7 +8678,7 @@ class ErScene {
     sc.position.set(0, 1.15, -.09); g.add(sc); g.add(this.box(.6, .03, .2, "#A9B6CC", 0, .82, .15)); }
   m_robot(g){ const T = this.T, body = new T.Group(); g.add(body); body.add(this.cyl(.32, .38, .9, "#C9D4E2", 0, .75, 0, 20)); body.add(this.cyl(.38, .38, .1, "#1FA7B8", 0, .3, 0, 20));
     const head = this.sph(.3, "#C9D4E2", 0, 1.45, 0); body.add(head); const visor = this.box(.42, .14, .05, "#13324A", 0, 1.47, .26); body.add(visor);
-    const eyeM = this.glow("#22C3D6", 2.2); [-.09, .09].forEach(x => body.add(this.sph(.035, eyeM, x, 1.47, .29)));
+    const eyeM = this.glow("#22C3D6", 2.2); [-.09, .09].forEach(x => body.add(this.sph(.035, eyeM, x, 1.47, .29))); this.robot = {body, eyeM, g};
     const ant = this.cyl(.012, .012, .25, "#5B656E", 0, 1.85, 0, 6); body.add(ant); body.add(this.sph(.04, this.glow("#F2B233", 2), 0, 1.98, 0));
     [-.42, .42].forEach(x => { const a = this.cyl(.06, .06, .55, "#A9B6CC", x, .85, 0, 10); a.rotation.z = x > 0 ? .25 : -.25; body.add(a); });
     this.anim.push(t => { body.position.y = Math.sin(t*2) * .04; head.rotation.y = Math.sin(t*.7)*.5; }); }
@@ -8740,9 +8757,9 @@ class ErScene {
   /* ---------- per frame ---------- */
   resize(){ const w = this.el.clientWidth || 1, h = this.el.clientHeight || 1; this.renderer.setSize(w, h, false); this.cam.aspect = w / h; this.cam.updateProjectionMatrix();
     const a = this.cam.aspect, portrait = a < .9;
-    this.home.dist = portrait ? 16.5 * Math.max(1, .95 / a) * 1.0 : 16.5 * Math.max(1, 1.45 / a);
-    if (portrait !== this.portrait){ this.portrait = portrait; this.home.yaw = portrait ? 1.25 : .62; this.home.pitch = portrait ? 1.08 : .9; if (!this.userMoved){ this.goal.yaw = this.home.yaw; this.goal.pitch = this.home.pitch; } }
-    if (!this.mode || this.mode === "home"){ this.scene.fog.near = this.home.dist + 8; this.scene.fog.far = this.home.dist + 46; if (!this.focused) this.goal.dist = this.home.dist; } }
+    this.home.dist = portrait ? Math.min(66, 6.3 / (Math.tan(19 * Math.PI / 180) * a)) : 16.5 * Math.max(1, 1.45 / a);
+    if (portrait !== this.portrait){ this.portrait = portrait; this.home.yaw = portrait ? 1.55 : .62; this.home.pitch = portrait ? 1.18 : .9; this.home.tx = portrait ? -.8 : 0; if (!this.userMoved){ this.goal.yaw = this.home.yaw; this.goal.pitch = this.home.pitch; this.goal.tx = this.home.tx; } }
+    if (!this.mode || this.mode === "home"){ this.scene.fog.near = this.home.dist + (this.th.horror ? 2 : 8); this.scene.fog.far = this.home.dist + (this.th.horror ? 30 : 46); if (!this.focused) this.goal.dist = this.home.dist; } }
   frame(){
     const T = this.T, dt = Math.min(.12, this.clock.getDelta()), t = this.clock.elapsedTime, v = this.view, g = this.goal;
     if (this.mode === "cine") this.stepCine(dt); else if (this.mode === "follow") this.followCam(dt);
@@ -8798,7 +8815,7 @@ Object.assign(ErScene.prototype, {
   flush(){ const T = this.T; Object.values(this.batch).forEach(b => { const geo = erMergeGeo(T, b.list); b.list.forEach(m => { m.parent && m.parent.remove(m); m.geometry.dispose(); });
       const mesh = new T.Mesh(geo, erMat(T, b.c, b.e ? {emissive:b.c, emissiveIntensity:.9} : {roughness:.85})); mesh.castShadow = b.sh; mesh.receiveShadow = true; mesh.matrixAutoUpdate = false; this.scene.add(mesh); }); this.batch = {}; },
   buildCity(){
-    const T = this.T, C = ER_CITY.C, R = ER_CITY.road / 2, night = this.r === 1;
+    const T = this.T, C = ER_CITY.C, R = ER_CITY.road / 2, night = this.night;
     this.batch = {}; this.cityRoot = new T.Group(); this.scene.add(this.cityRoot);
     // the junction frame: city centre at (C, C); lot q sits on corner q, the current room's lot at the origin
     const city = this.city = new T.Group(); city.position.set(C, 0, C); city.rotation.y = -this.r * Math.PI / 2; this.scene.add(city);
@@ -8849,7 +8866,7 @@ Object.assign(ErScene.prototype, {
   palm(x, z, h = 4.2){ const T = this.T; for (let i = 0; i < 5; i++){ this.scyl("#8B6B43", .16 - i * .015, .19 - i * .015, h / 5, x + Math.sin(i) * .05, i * h / 5 + h / 10, z, 7); }
     for (let i = 0; i < 7; i++){ const a = i / 7 * Math.PI * 2, l = this.sb("#4E8C4A", new T.ConeGeometry(.22, 2.1, 4), x + Math.cos(a) * .85, h + .15, z + Math.sin(a) * .85, {rz:Math.cos(a) * 1.25, rx:-Math.sin(a) * 1.25}); l.scale.set(1, 1, .3); l.rotation.order = "XYZ"; } },
   tree(x, z){ this.scyl("#7A5634", .1, .14, 1.1, x, .55, z, 6); this.sb("#5E9C4E", new this.T.IcosahedronGeometry(.85, 0), x, 1.6, z); },
-  streetLamp(x, z, ry){ const T = this.T, night = this.r === 1; this.scyl("#5B656E", .05, .07, 3.6, x, 1.8, z, 6);
+  streetLamp(x, z, ry){ const T = this.T, night = this.night; this.scyl("#5B656E", .05, .07, 3.6, x, 1.8, z, 6);
     const g = new T.Group(); g.position.set(x, 3.55, z); g.rotation.y = ry; this.scene.add(g); g.add(this.box(.9, .06, .08, "#5B656E", .45, 0, 0)); g.add(this.box(.34, .1, .2, "#5B656E", .85, -.06, 0));
     g.add(this.box(.26, .03, .14, this.glow("#FFE6A8", night ? 2.2 : .4), .85, -.12, 0));
     if (night){ const L = new T.PointLight("#FFD89A", .7, 9); L.position.set(.85, -.4, 0); g.add(L); } },
@@ -8857,10 +8874,10 @@ Object.assign(ErScene.prototype, {
     const T = this.T, cur = q === this.r, lot = this.lots[q], P = this.lotP;
     const box = (c, w, h, d, x, y, z, o = {}) => { const v = P(q, x, z); return this.sbox(c, w, h, d, v.x, y, v.z, Object.assign({ry: (q - this.r) * Math.PI / 2}, o)); };
     // grass, pavements with a striped kerb near the junction, the path to the door
-    box(this.r === 1 ? "#41613F" : "#8DB360", 23, .1, 23, -2.5, -.05, -2.5, {sh:false});
+    box(this.night ? "#41613F" : "#8DB360", 23, .1, 23, -2.5, -.085, -2.5, {sh:false});
     box("#D8D2C6", 2, .16, 23, 8, .02, -2.5, {sh:false}); box("#D8D2C6", 21, .16, 2, -3.5, .02, 8, {sh:false});
     for (let k = 0; k < 7; k++){ box(k % 2 ? "#F2C230" : "#26323E", .14, .2, 1.3, 9, .04, 8.4 - k * 1.3, {sh:false}); box(k % 2 ? "#F2C230" : "#26323E", 1.3, .2, .14, 8.4 - k * 1.3, .04, 9, {sh:false}); }
-    box("#C9B79C", 1.6, .1, 2.6, 4, .0, 5.8, {sh:false});
+    box("#C9B79C", 1.6, .1, 2.6, 4, -.03, 5.9, {sh:false});
     box("#E9DCC3", .3, 1.1, 23, -13.9, .55, -2.5); box("#E9DCC3", 23, 1.1, .3, -2.5, .55, -13.9);
     // palms along the pavement, trees and lamps
     [[8.2, -11], [8.2, -5], [8.2, 1.5], [-11, 8.2], [-5, 8.2], [1, 8.2]].forEach(([x, z], i) => { if (cur && (x > -6 && z > -6)) return; const v = P(q, x, z); i % 3 === 1 ? this.tree(v.x, v.z) : this.palm(v.x, v.z, 3.8 + (i % 2) * .6); });
@@ -8876,7 +8893,7 @@ Object.assign(ErScene.prototype, {
     g.add(this.box(W, H, D, wall, 0, H/2, 0)); g.add(this.box(W + .3, .3, D + .3, trim, 0, H + .15, 0)); g.add(this.box(W + .4, .18, D + .4, trim, 0, .09, 0));
     g.add(this.box(W - .4, .05, D - .4, q === 1 ? "#24375C" : "#CFC3AE", 0, H + .31, 0));
     [[-3, -2], [2.6, 1.2]].forEach(([x, z]) => { g.add(this.box(1.1, .7, .8, "#DDE3E8", x, H + .65, z)); g.add(this.cyl(.45, .45, .9, "#F4F7FA", x + 1.6, H + .75, z, 14)); });
-    const win = this.glow(q === 1 ? "#FFE6A8" : "#BFE6EE", this.r === 1 ? 1.2 : .25);
+    const win = this.glow(q === 1 ? "#FFE6A8" : "#BFE6EE", this.night ? 1.2 : .25);
     [-4.4, -2.2, 0, 1.9].forEach(x => { g.add(this.box(1.2, 1.4, .06, win, x, 2.0, D/2 + .02)); g.add(this.box(1.36, .1, .1, trim, x, 1.25, D/2 + .05)); });
     [-3, 0, 3].forEach(z => { g.add(this.box(.06, 1.4, 1.2, win, W/2 + .02, 2.0, z)); });
     // the door the team will walk through, and its sign
@@ -8924,7 +8941,7 @@ Object.assign(ErScene.prototype, {
   /* camera modes */
   setMode(m){ this.mode = m; const g = this.goal;
     if (m === "top"){ Object.assign(g, {tx:ER_CITY.C * .7, ty:0, tz:ER_CITY.C * .7, dist:this.portrait ? 78 : 56, pitch:1.18, yaw:.62 + (this.portrait ? .5 : 0)}); this.focused = null; }
-    else if (m === "follow"){ this.fdist = this.fdist || 6.8; this.fyaw = this.me.rotation.y + Math.PI; this.fTouch = 0; this.focused = null; }
+    else if (m === "follow"){ this.fdist = this.fdist || (this.portrait ? 8.5 : 6.8); this.fyaw = this.me.rotation.y + Math.PI; this.fTouch = 0; this.focused = null; }
     else { Object.assign(g, {tx:this.home.tx, ty:this.home.ty, tz:this.home.tz, dist:this.home.dist, pitch:this.home.pitch, yaw:this.home.yaw}); this.userMoved = false; this.focused = null; }
     (this.shades || []).forEach(o => o.visible = m !== "follow");
     const f = this.scene.fog; if (m === "top"){ f.near = 70; f.far = 190; } else { f.near = this.home.dist + 8; f.far = this.home.dist + 46; } },
@@ -8958,6 +8975,32 @@ Object.assign(ErScene.prototype, {
   }
 });
 
+/* TN-ERHORROR: the last lab is the horror room. The power is cut: only the player's torch, red emergency
+   beacons and dying ceiling strips light it. Every half minute or so the lights black out, the robot turns to
+   look at the nearest player with red eyes, and the screen glitches. Scary but safe for students: no gore. */
+Object.assign(ErScene.prototype, {
+  horror(){ const T = this.T, me = this.me;
+    const torch = new T.SpotLight("#FFF1D0", 3.4, 15, .6, .5, 1.1); torch.position.set(0, 1.25, .15); const tg = new T.Object3D(); tg.position.set(0, .2, 4); me.add(tg); torch.target = tg; me.add(torch);
+    const aura = new T.PointLight("#9FB8D8", .55, 4.2); aura.position.set(0, 2.2, 0); me.add(aura);
+    const beacons = [[5.6, 2.9, -4.2], [-5.6, 2.9, 2.6]].map(([x, y, z]) => { const L = new T.PointLight("#FF2D2D", .9, 12); L.position.set(x, y - .3, z); this.scene.add(L);
+      const m = this.glow("#FF3B30", 2); const b = this.sph(.12, m, x, y, z); this.scene.add(b); this.scene.add(this.box(.3, .08, .3, "#2A3038", x, y + .1, z)); return {L, m}; });
+    if (this.labLamp) this.labLamp.intensity = 0;
+    const H = this.hz = {torch, aura, beacons, next: 14 + Math.random() * 10, dark:0, t0:null};
+    this.anim.push(t => { if (H.t0 == null) H.t0 = t; const e = t - H.t0, alarm = this.alarm || 0;
+      // red beacons pulse faster as the time runs out
+      beacons.forEach((b, i) => { const k = Math.max(0, Math.sin(t * (2.2 + alarm * 2.5) + i * Math.PI)); b.L.intensity = H.dark ? k * .6 : .2 + k * (2.0 + alarm * .8); b.m.emissiveIntensity = .3 + k * 2.4; });
+      // dying ceiling strips: mostly dead, with short flickers
+      const fl = !H.dark && (Math.sin(t * 13.7) * Math.sin(t * 7.3) > .82 || Math.sin(t * 2.1) > .985);
+      (this.strips || []).forEach((m, i) => m.emissiveIntensity = fl && i !== 1 ? 1.4 : .04);
+      torch.intensity = H.dark && e - H.dark < .7 ? 0 : 3.4 + (Math.random() < .03 ? -2.4 : 0); aura.intensity = H.dark ? .05 : .45; this.hemiL.intensity = H.dark ? .01 : this.th.hemiI; this.sunL.intensity = H.dark ? 0 : this.th.sunI;
+      // the robot watches the player
+      if (this.robot){ const R = this.robot, p = R.g.position, dx = me.position.x - p.x, dz = me.position.z - p.z, want = Math.atan2(dx, dz) - R.g.rotation.y;
+        const look = H.dark || e % 30 > 24; R.body.rotation.y += ((look ? want : 0) - R.body.rotation.y) * .05; R.eyeM.emissive.set(look ? "#FF2020" : "#22C3D6"); R.eyeM.color.set(look ? "#FF2020" : "#22C3D6"); }
+      // blackouts
+      if (!H.dark && e > H.next){ H.dark = e; this.o.onScare && this.o.onScare(); }
+      if (H.dark && e - H.dark > 1.8){ H.dark = 0; H.next = e + 26 + Math.random() * 22; } });
+  }
+});
 /* TN-ER4: the workshop of al-Jazari (room four) */
 Object.assign(ErScene.prototype, {
   gearMesh(r, teeth, c, th = .1){ const T = this.T, g = new T.Group(), m = erMat(T, c, {metalness:.55, roughness:.38});
@@ -9061,6 +9104,7 @@ const ERA = {
     else if (k === "chest"){ this.breath(.7, .1, 0, true); [196, 247, 294, 392].forEach((f, j) => this.voice(f, 2.2, j % 2 ? "o" : "a", .085, .35 + j * .15)); [0, .3, .6, .9].forEach(o => this.clap(.22, 1.2 + o)); }
     else if (k === "fail"){ [294, 262, 220, 196].forEach((f, j) => this.voice(f, .7, "u", .09, j * .3)); this.breath(1, .08, 1.2, false); }
     else if (k === "tick") this.click(.22, 0, 3200);
+    else if (k === "scare"){ this.breath(1.1, .16, 0, true); this.voice(123, 1.3, "u", .13, .05, 78); this.voice(185, .9, "o", .06, .25, 110); this.heart(.9); }
     else if (k === "beat") this.heart(.55);
     else if (k === "flash") this.voice([262, 330, 392, 494][i] || 262, .45, ["a","o","u","a"][i] || "a", .16);
     else if (k === "step") this.noise(.05, .04, 500, 0, 2);
@@ -9164,13 +9208,14 @@ function erLoadRoom(r){
   if (X.scene){ X.scene.dispose(); X.scene = null; } X.room = r; X.open = null; erClosePanel(true);
   const data = erRoomData(r);
   X.scene = new ErScene(T, el, r, { color: X.col,
-    onPick: sid => erGoSt(sid), onMove: (x, z) => { X.me.x = x; X.me.z = z; erPublish(); }, onFrame: erTagsFrame });
+    onPick: sid => erGoSt(sid), onMove: (x, z) => { X.me.x = x; X.me.z = z; erPublish(); }, onFrame: erTagsFrame, onScare: erScare });
+  const sec = document.querySelector(".er-game"); if (sec) sec.classList.toggle("horror", !!ER_THEME[r].horror);
   if (X.me.x != null && X.me.room === r){ X.scene.me.position.set(X.me.x, 0, X.me.z); if (X.me.z > 3) X.scene.me.rotation.y = Math.PI; } X.me.room = r;
   erBuildStates(); if (X.viewMode && X.viewMode !== "home") X.scene.setMode(X.viewMode); erViews();
   const tags = document.getElementById("erTags");
   tags.innerHTML = data.room.st.map(s => `<button type="button" class="er-tag" data-ersid="${s.id}"><i></i><span>${s.name}</span></button>`).join("")
     + `<button type="button" class="er-tag chest" data-ersid="chest"><i></i><span>${ER_CHEST[r]}</span></button>`
-    + (X.G.know ? data.room.know.map((_, i) => `<button type="button" class="er-tag know" data-ersid="k${i}"><i></i><span>سؤال إضافي</span></button>`).join("") : "");
+    + (X.G.know ? data.room.know.map((_, i) => `<button type="button" class="er-tag know" data-ersid="k${i}"><i></i><span>سؤال إضافي = تلميح</span></button>`).join("") : "");
   tags.querySelectorAll("[data-ersid]").forEach(b => b.onclick = () => erGoSt(b.dataset.ersid));
   if (!X.G.know) Object.values(X.scene.know).forEach(k => k.g.visible = false);
   ERA.ambient(r); erHud(); erBag(); erSync(); erPublish();
@@ -9185,6 +9230,8 @@ const ER_VIEWS = [["home","المنظر الأصلي",`<path d="M4 11 12 4l8 7v8
 function erViews(){ const X = ERX, el = document.getElementById("erViews"); if (!el || !X) return; const cur = X.viewMode || "home";
   el.innerHTML = ER_VIEWS.map(([k, t, ic]) => `<button type="button" data-erv2="${k}" aria-pressed="${k === cur}" title="${t}">${I(ic)}<span>${t}</span></button>`).join("");
   el.querySelectorAll("[data-erv2]").forEach(b => b.onclick = () => { const k = b.dataset.erv2; X.viewMode = k; if (X.scene){ if (k === "home" && X.scene.mode === "home"){ X.scene.userMoved = false; } X.scene.setMode(k); } ERA.sfx("tap"); erViews(); }); }
+function erScare(){ const X = ERX, sec = document.querySelector(".er-game"); if (!X || !sec || X.cine) return; ERA.sfx("scare");
+  if (X.open) return; sec.classList.remove("scare"); void sec.offsetWidth; sec.classList.add("scare"); setTimeout(() => sec.classList.remove("scare"), 1900); }
 function erTagsFrame(){
   const X = ERX; if (!X || !X.scene) return; const S = X.scene, tags = document.getElementById("erTags"); if (!tags) return;
   tags.classList.toggle("far", S.mode === "top" || S.mode === "cine");
@@ -9216,7 +9263,7 @@ function erTick(first){
   if (pr.r !== X.room){ erLoadRoom(pr.r); if (!X.me.seen[pr.r]) erIntro(pr.r); return; }
   if (!G.startAt && !X.net) return;                 // practice: waiting for the intro's start button
   if (pr.left <= 0 && !m.open[pr.r] && !m.fail[pr.r]){ X.me.f[pr.r] = now; erSave(); erPublish(); ERA.sfx("fail"); erTick(); return; }
-  ERA.level = pr.left < 60 ? 2 : pr.left < 180 ? 1 : 0;
+  ERA.level = pr.left < 60 ? 2 : pr.left < 180 ? 1 : 0; if (X.scene) X.scene.alarm = ERA.level / 2;
   if (pr.left < 11 && Math.floor(pr.left) !== X.lastTick){ X.lastTick = Math.floor(pr.left); ERA.sfx("tick"); }
   erSync(); erHud();
 }
@@ -9393,6 +9440,7 @@ function erIntro(r, again){
   const X = ERX, room = ER_ROOMS[r], G = X.G;
   const m = erModal(`<p class="er-eyebrow">${room.tag} · الغرفة ${n(erPickOf(G).indexOf(r) + 1)} من ${n(erPickOf(G).length)}</p><h2>${room.name}</h2>${room.intro.map(t => `<p>${t}</p>`).join("")}
     <div class="er-facts"><span><b>${n(G.mins)}</b><small>دقيقة ${room.time}</small></span><span><b>6</b><small>ألغاز وصندوق</small></span><span><b>${n(Math.max(0, X.pr ? X.pr.hintsLeft : G.hints))}</b><small>تلميحات للفريق</small></span></div>
+    ${G.know ? `<div class="er-knownote"><b>؟</b><p><strong>الصناديق الذهبية «سؤال إضافي»:</strong> في الغرفة صندوقان، في كل واحد سؤال من الموسوعة. الإجابة الصحيحة تعطي فريقكم <strong>تلميحًا إضافيًا</strong> فوق تلميحاتكم، والخاطئة تخصم ${n(G.pen)} ثانية. لكل صندوق محاولة واحدة فقط.</p></div>` : ""}
     <p class="er-small">اضغطوا على أي ركن أو على اسمه ليمشي إليه اللاعب. اسحبوا لتدوير الغرفة، وكبّروا بإصبعين أو بعجلة الفأرة. وغيّروا المنظر من الأزرار: الأصلي، أو العلوي لترى الإشارة كلها، أو منظور اللاعب.</p>
     <button type="button" class="btn lg" id="erGo">${again ? "متابعة" : G.startAt || X.net ? "ادخلوا الغرفة" : "ابدأ العدّ التنازلي"}</button>`, "story");
   ERA.sfx("open");
@@ -9532,10 +9580,10 @@ function ervScene(r){
   if (!ERV.box){ ERV.box = document.createElement("div"); ERV.box.setAttribute("aria-hidden", "true");
     ERV.box.style.cssText = "position:fixed;left:-12000px;top:0;width:960px;height:600px;pointer-events:none;visibility:hidden"; document.body.appendChild(ERV.box); }
   const el = document.createElement("div"); el.style.cssText = "position:absolute;inset:0"; ERV.box.appendChild(el);
-  const sc = new ErScene(window.THREE, el, r, {color:"#0071E3"});
+  const sc = new ErScene(window.THREE, el, r, {color:"#0071E3", horror:false});
   sc.dead = true; cancelAnimationFrame(sc.raf);           // no own loop: rendered on demand below
   window.removeEventListener("keydown", sc.onKey); window.removeEventListener("keyup", sc.onKey);
-  sc.me.visible = false; sc.renderer.setPixelRatio(1); sc.resize(); sc.home.dist *= 1.08; sc.goal.dist = sc.home.dist; sc.view = Object.assign({}, sc.goal);
+  sc.me.visible = false; sc.renderer.setPixelRatio(1); if (sc.th.horror){ sc.hemiL.intensity = .75; (sc.strips || []).forEach(m => m.emissiveIntensity = .9); } sc.resize(); sc.home.dist *= 1.08; sc.goal.dist = sc.home.dist; sc.view = Object.assign({}, sc.goal);
   return ERV.scenes[r] = sc;
 }
 function ervDraw(H, rows){
