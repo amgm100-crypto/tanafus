@@ -1109,14 +1109,17 @@ button.er-story{font:inherit;text-align:start;border:0;cursor:pointer;width:100%
 /*GM-CSS-START*/
 /* ===== solo / gathering games and tools ===== */
 .gmc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
-.gmc{display:flex;gap:14px;align-items:flex-start;text-align:start;border:1.5px solid var(--hair);background:var(--tile);border-radius:20px;padding:16px;color:var(--ink);font:inherit;cursor:pointer;transition:transform .15s,border-color .15s,box-shadow .15s}
-.gmc:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--blue) 45%,var(--hair));box-shadow:var(--shadow)}
-.gmc-ic{flex:none;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:#26323E;color:#D1B871}
-.gmc-ic svg{width:28px;height:28px}
-.gmc-tx{display:grid;gap:3px;min-width:0}
-.gmc-tx b{font-size:17px}.gmc-tx small{color:var(--muted);font-size:13.5px;line-height:1.6}
+.gmc{display:flex;flex-direction:column;align-items:stretch;text-align:start;border:1.5px solid var(--hair);background:var(--tile);border-radius:22px;padding:0;overflow:hidden;color:var(--ink);font:inherit;cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s}
+.gmc:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--blue) 45%,var(--hair));box-shadow:var(--shadow)}
+.gmc-cv{position:relative;display:block;aspect-ratio:16/9;background:#26323E}
+.gmc-cv img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.gmc:hover .gmc-cv img{transform:scale(1.04)}
+.gmc-ic{position:absolute;inset-inline-start:14px;bottom:-22px;width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:#26323E;color:#D1B871;border:3px solid var(--tile);box-shadow:0 6px 14px -6px rgba(0,0,0,.5)}
+.gmc-ic svg{width:24px;height:24px}
+.gmc-tx{display:grid;gap:3px;min-width:0;padding:30px 16px 16px}
+.gmc-tx b{font-size:18px}.gmc-tx small{color:var(--muted);font-size:15px;line-height:1.65}
 .gmc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-.gmc-tags i{font-style:normal;font-size:12px;font-weight:600;color:var(--blue-link);background:color-mix(in srgb,var(--blue) 10%,var(--tile));border-radius:980px;padding:2px 9px}
+.gmc-tags i{font-style:normal;font-size:13px;font-weight:600;color:var(--blue-link);background:color-mix(in srgb,var(--blue) 10%,var(--tile));border-radius:980px;padding:2px 9px}
 .gm-wrap{max-width:760px}
 .gm-top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .gm-title{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;font-size:20px}
@@ -1135,12 +1138,12 @@ button.er-story{font:inherit;text-align:start;border:0;cursor:pointer;width:100%
 .gm-code{display:grid;gap:2px}.gm-code small{color:var(--muted)}
 .gm-acts{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 .gm-namebox{display:grid;gap:4px;width:min(320px,100%);text-align:start}
-.gm-namebox span{font-size:13px;color:var(--muted)}
+.gm-namebox span{font-size:14px;color:var(--muted)}
 .gm-namebox input,.gm-in{font:inherit;font-size:17px;border:1.5px solid var(--hair);border-radius:12px;padding:10px 12px;background:var(--bg-alt);color:var(--ink);width:100%}
 .gm-wait{display:flex;gap:8px;align-items:center;justify-content:center;color:var(--muted);font-size:15px}.gm-wait.ok{color:var(--good)}
 .gm-spin{width:16px;height:16px;border-radius:50%;border:2.5px solid var(--hair);border-top-color:var(--blue);animation:gmspin .8s linear infinite}
 @keyframes gmspin{to{transform:rotate(360deg)}}
-.gm-small{font-size:13px;color:var(--muted);margin:0}
+.gm-small{font-size:14.5px;color:var(--muted);margin:0}
 .gm-opp{display:flex;align-items:center;gap:10px;background:#26323E;color:#fff;border-radius:14px;padding:8px 14px;margin-bottom:12px;font-size:14px}
 .gm-dot{width:9px;height:9px;border-radius:50%;background:#888}.gm-dot.on{background:#3FC29F;box-shadow:0 0 0 3px rgba(63,194,159,.25)}
 .gm-oppbar{flex:1;height:7px;border-radius:9px;background:rgba(255,255,255,.15);overflow:hidden}.gm-oppbar i{display:block;height:100%;background:#D1B871;transition:width .4s}
@@ -1154,7 +1157,7 @@ button.er-story{font:inherit;text-align:start;border:0;cursor:pointer;width:100%
 .gm-vs{display:flex;align-items:center;gap:16px}.gm-vs span{display:grid;justify-items:center}.gm-vs b{font-size:34px}.gm-vs small{color:var(--muted)}.gm-vs i{font-style:normal;color:var(--muted)}
 @keyframes gmfade{from{opacity:0}}
 .gm-bar{display:flex;align-items:center;gap:10px;justify-content:space-between;background:var(--tile);border-radius:16px;padding:10px 14px;box-shadow:var(--shadow)}
-.gm-bar b{font-size:18px}.gm-bar small{color:var(--muted);font-size:12.5px;display:block}
+.gm-bar b{font-size:19px}.gm-bar small{color:var(--muted);font-size:13.5px;display:block}
 .gm-stat{display:grid;text-align:center}
 .gm-clock{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}.gm-clock.low{color:var(--bad)}
 .gm-q{background:var(--tile);border-radius:22px;padding:20px;box-shadow:var(--shadow);display:grid;gap:12px}
@@ -1172,13 +1175,13 @@ button.er-story{font:inherit;text-align:start;border:0;cursor:pointer;width:100%
 .gm-pass{display:grid;place-items:center;gap:14px;text-align:center;min-height:300px;background:#26323E;color:#fff;border-radius:24px;padding:24px}
 .gm-pass h3{margin:0;font-size:26px}.gm-pass p{margin:0;color:rgba(255,255,255,.75)}
 .gm-pass .btn{background:#D1B871;color:#26323E}
-.gm-tip{font-size:14px;color:var(--muted);text-align:center;margin:0}
+.gm-tip{font-size:15px;color:var(--muted);text-align:center;margin:0}
 .gm-list{display:grid;gap:6px}
 .gm-row{display:flex;align-items:center;gap:8px;background:var(--tile);border-radius:14px;padding:10px 12px;box-shadow:var(--shadow)}
 .gm-row b{flex:1}
 .gm-chip{display:inline-block;background:var(--bg-alt);border-radius:980px;padding:4px 12px;font-size:14px;margin:3px}
 textarea.gm-in{min-height:120px;resize:vertical;line-height:1.7}
-@media (max-width:620px){.gmc-grid{grid-template-columns:1fr}.gm-title{font-size:17px}.gm-top .mini{font-size:12.5px;padding-inline:8px}}
+@media (max-width:620px){.gmc-grid{grid-template-columns:1fr 1fr;gap:10px}.gmc{border-radius:18px}.gmc-tx{padding:26px 12px 12px}.gmc-tx b{font-size:16px}.gmc-tx small{display:none}.gmc-ic{width:40px;height:40px;border-radius:12px;bottom:-18px;inset-inline-start:10px}.gmc-ic svg{width:20px;height:20px}.gmc-tags i{font-size:12px;padding:2px 7px}.gm-title{font-size:17px}.gm-top .mini{font-size:12.5px;padding-inline:8px}}
 /* tools */
 .tl-bal{background:linear-gradient(160deg,#2C3946,#1C252F 75%);color:#fff;border-radius:24px;padding:18px;display:grid;gap:12px}
 .tl-bal-t{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;text-align:center}
@@ -1186,7 +1189,7 @@ textarea.gm-in{min-height:120px;resize:vertical;line-height:1.7}
 .tl-nm{font:inherit;font-size:17px;font-weight:600;text-align:center;background:none;border:0;border-bottom:1px dashed rgba(255,255,255,.3);color:#D1B871;padding:2px}
 .tl-prog{display:grid;gap:5px}.tl-prog i{display:block;height:6px;border-radius:9px;background:#3FC29F}.tl-prog i.b{background:#D1B871}
 .tl-win{text-align:center;font-size:22px;font-weight:700;color:#D1B871}
-.tl-in2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.tl-in2 label{display:grid;gap:4px}.tl-in2 small{color:var(--muted);font-size:13px}
+.tl-in2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.tl-in2 label{display:grid;gap:4px}.tl-in2 small{color:var(--muted);font-size:14px}
 .tl-chk{display:flex;gap:8px;align-items:center;font-size:15px}
 .tl-wheel{position:relative;width:min(360px,88vw);margin:0 auto}
 .tl-wheel svg{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 20px rgba(38,50,62,.25))}
@@ -1240,26 +1243,52 @@ textarea.gm-in{min-height:120px;resize:vertical;line-height:1.7}
 .ml-aud{margin-inline-start:auto;display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}.ml-aud i{display:block;height:8px;width:50px;border-radius:9px;background:#D1B871}
 .tf-b{background:var(--bg-alt);border-radius:12px;padding:10px 14px;font-size:17px}.tf-k{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tf-k .gm-o{justify-content:center;font-weight:700;font-size:19px;min-height:60px}
 .fl-f{font-size:clamp(90px,26vw,140px);line-height:1.1;text-align:center}.fl-o{grid-template-columns:1fr 1fr}.fl-o .gm-o{justify-content:center}
-.tl-ref{background:#26323E;color:#fff;border-radius:18px;padding:14px;display:grid;text-align:center;gap:2px}.tl-ref small{color:rgba(255,255,255,.6)}.tl-ref b{font-size:19px}.tl-ref span{color:#D1B871;font-weight:700;font-size:22px}
 @media (max-width:620px){.ml{grid-template-columns:1fr}.ml-lad{grid-template-columns:repeat(5,1fr);font-size:11px}.ml-lad span{flex-direction:column;align-items:center;padding:2px}}
 /* baloot */
-.bl-score{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;background:#26323E;color:#fff;border-radius:18px;padding:10px 16px;text-align:center}
-.bl-score span{display:grid}.bl-score small{color:rgba(255,255,255,.6);font-size:12px}.bl-score b{font-size:28px}.bl-con{color:#D1B871;font-weight:700;font-size:16px}
-.bl-table{position:relative;height:clamp(300px,62vw,380px);border-radius:28px;background:radial-gradient(circle at 50% 45%,#1f8a6a,#0B5E4B 70%);box-shadow:inset 0 0 0 6px #6b4a2b,inset 0 0 40px rgba(0,0,0,.35);overflow:hidden}
-.bl-seat{position:absolute;display:grid;text-align:center;color:#fff;background:rgba(0,0,0,.28);border-radius:12px;padding:5px 10px;font-size:13px;min-width:80px}
-.bl-seat small{color:rgba(255,255,255,.7);font-size:11px}.bl-seat.on{background:#D1B871;color:#26323E}.bl-seat.on small{color:#26323E}
-.bl-seat.p-t{top:10px;left:50%;transform:translateX(-50%)}.bl-seat.p-r{right:8px;top:50%;transform:translateY(-50%)}.bl-seat.p-l{left:8px;top:50%;transform:translateY(-50%)}
-.bl-mid{position:absolute;inset:0}
-.bl-tc{position:absolute;left:50%;top:50%;animation:gmpop .25s both}.bl-tc.p-b{transform:translate(-50%,10%)}.bl-tc.p-t{transform:translate(-50%,-110%)}.bl-tc.p-r{transform:translate(20%,-50%)}.bl-tc.p-l{transform:translate(-120%,-50%)}
-.bl-flip{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;justify-items:center;gap:4px;color:#fff;font-size:12px}
-.bl-c{width:clamp(42px,11.5vw,58px);aspect-ratio:5/7;border:0;border-radius:8px;background:#fff;color:#26323E;display:grid;place-content:center;gap:0;box-shadow:0 2px 6px rgba(0,0,0,.25);font:inherit;cursor:pointer;padding:0;line-height:1}
-.bl-c b{font-size:clamp(15px,4vw,20px);direction:ltr}.bl-c i{font-style:normal;font-size:clamp(17px,4.6vw,24px)}.bl-c.red{color:#C0392B}
-.bl-c.dim{opacity:.4}.bl-c:disabled{cursor:default}
-.bl-hand{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;direction:ltr}.bl-hand .bl-c:not(:disabled):hover{transform:translateY(-6px)}
-.bl-log{text-align:center;color:var(--muted);margin:0;min-height:1.4em}
-.bl-bid{background:var(--tile);border-radius:18px;padding:12px;box-shadow:var(--shadow);display:grid;gap:8px;text-align:center}
-.bl-end{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:8px;background:rgba(0,0,0,.55);color:#fff;text-align:center;padding:10px}.bl-end b{font-size:22px}.bl-win{color:#D1B871}
-.bl-end .btn{background:#D1B871;color:#26323E}
+.bl-score{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;background:linear-gradient(160deg,#2C3946,#1C252F 75%);color:#fff;border-radius:20px;padding:10px 14px;text-align:center;box-shadow:0 10px 24px -14px rgba(0,0,0,.6)}
+.bl-score>span{display:grid;justify-items:center}.bl-score small{color:rgba(255,255,255,.65);font-size:13px}.bl-score b{font-size:30px;line-height:1.1}
+.bl-score em{display:block;width:80%;height:5px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden}.bl-score em i{display:block;height:100%;background:#3FC29F}.bl-score .them em i{background:#E59A8C}
+.bl-con{color:#D1B871;font-weight:700;font-size:17px}.bl-con .red{color:#FF8A80}
+.bl-table{position:relative;height:clamp(380px,108vw,470px);border-radius:34px;padding:12px;background:linear-gradient(145deg,#8B5E34,#5E3B1C 60%,#4a2e15);box-shadow:0 18px 40px -18px rgba(0,0,0,.6),inset 0 2px 0 rgba(255,255,255,.18)}
+.bl-felt{position:absolute;inset:12px;border-radius:26px;background:radial-gradient(ellipse at 50% 42%,#2a9d78 0%,#13775a 45%,#0a4f3c 100%);box-shadow:inset 0 0 50px rgba(0,0,0,.45),inset 0 0 0 2px rgba(209,184,113,.35)}
+.bl-felt::after{content:"تنافس";position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(34px,10vw,56px);font-weight:700;color:rgba(255,255,255,.05)}
+.bl-seat{position:absolute;z-index:2;display:flex;align-items:center;gap:6px;color:#fff}
+.bl-seat .av,.bl-me .av{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#26323E;font-size:22px;box-shadow:0 0 0 3px rgba(255,255,255,.25),0 4px 10px rgba(0,0,0,.35);transition:box-shadow .2s}
+.bl-seat.us .av,.bl-me .av{background:#0B7D65}.bl-seat.them .av{background:#7E3B30}
+.bl-seat.on .av,.bl-me.on .av{box-shadow:0 0 0 3px #D1B871,0 0 18px #D1B871;animation:blpulse 1.2s ease-in-out infinite}
+@keyframes blpulse{50%{transform:scale(1.07)}}
+.bl-seat .nm{display:grid;line-height:1.2;text-shadow:0 1px 3px rgba(0,0,0,.6)}.bl-seat .nm b{font-size:14px}.bl-seat .nm small{font-size:11.5px;color:#F3E3B5}
+.bl-seat.p-t{top:18px;left:50%;transform:translateX(-50%);flex-direction:column}
+.bl-seat.p-r{right:16px;top:44%;transform:translateY(-50%);flex-direction:column}.bl-seat.p-l{left:16px;top:44%;transform:translateY(-50%);flex-direction:column}
+.bl-backs{display:flex;direction:ltr}.bl-backs i{width:15px;height:22px;margin-inline-start:-8px;border-radius:3px;background:repeating-linear-gradient(45deg,#26323E 0 4px,#33475a 4px 8px);border:1.5px solid #D1B871;box-shadow:0 1px 2px rgba(0,0,0,.4)}
+.bl-backs i:first-child{margin-inline-start:0}
+.bl-me{position:absolute;z-index:2;bottom:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;color:#fff;font-size:14px;text-shadow:0 1px 3px rgba(0,0,0,.6)}.bl-me small{color:#F3E3B5}
+.bl-mid{position:absolute;inset:0;z-index:3;pointer-events:none}
+.bl-tc{position:absolute;left:50%;top:52%}
+.bl-tc.p-b{transform:translate(-50%,8%);animation:blinB .3s ease-out both}.bl-tc.p-t{transform:translate(-50%,-96%);animation:blinT .3s ease-out both}
+.bl-tc.p-r{transform:translate(18%,-50%) rotate(8deg);animation:blinR .3s ease-out both}.bl-tc.p-l{transform:translate(-118%,-50%) rotate(-8deg);animation:blinL .3s ease-out both}
+@keyframes blinB{from{transform:translate(-50%,120%);opacity:0}}@keyframes blinT{from{transform:translate(-50%,-220%);opacity:0}}
+@keyframes blinR{from{transform:translate(160%,-50%);opacity:0}}@keyframes blinL{from{transform:translate(-260%,-50%);opacity:0}}
+.bl-tc.win .bl-c{box-shadow:0 0 0 3px #D1B871,0 0 22px rgba(209,184,113,.9)}
+.bl-flip{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);display:grid;justify-items:center;gap:6px;color:#fff;font-size:12.5px}
+.bl-flip .bl-c{transform:rotate(-4deg);box-shadow:0 0 0 3px #D1B871,0 8px 20px rgba(0,0,0,.4)}
+.bl-c{position:relative;width:clamp(48px,13vw,66px);aspect-ratio:5/7;border:0;border-radius:9px;background:linear-gradient(160deg,#fff,#F4F1EA);color:#1d2630;font:inherit;cursor:pointer;padding:0;box-shadow:0 3px 8px rgba(0,0,0,.3),inset 0 0 0 1px rgba(0,0,0,.08);line-height:1;direction:ltr}
+.bl-c .ix{position:absolute;top:4px;left:5px;display:grid;justify-items:center;gap:0}.bl-c .ix b{font-size:clamp(13px,3.4vw,17px);font-weight:700;letter-spacing:-1px}.bl-c .ix i{font-style:normal;font-size:clamp(11px,3vw,14px)}
+.bl-c .ix.bt{top:auto;left:auto;bottom:4px;right:5px;transform:rotate(180deg)}
+.bl-c .pip{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(22px,6vw,32px)}.bl-c .pip.face{font-size:clamp(20px,5.4vw,28px)}
+.bl-c.red{color:#C0392B}.bl-c.dim{filter:grayscale(.6) brightness(.8);opacity:.55}.bl-c:disabled{cursor:default}
+.bl-hand{display:flex;justify-content:center;direction:ltr;padding:16px 6px 4px;min-height:110px}
+.bl-hand .bl-c{margin-inline-start:calc(clamp(48px,13vw,66px) * -.28);transform:rotate(calc((var(--i) - (var(--n) - 1) / 2) * 3deg)) translateY(calc(abs(var(--i) - (var(--n) - 1) / 2) * 3px));transition:transform .15s}
+.bl-hand .bl-c:first-child{margin-inline-start:0}
+.bl-hand .bl-c.ok{transform:translateY(-12px);box-shadow:0 0 0 2px #0B7D65,0 8px 16px rgba(0,0,0,.3)}
+.bl-hand .bl-c.ok:hover{transform:translateY(-20px)}
+.bl-log{text-align:center;color:var(--muted);margin:0;min-height:1.4em;font-size:15px}.bl-yt{color:var(--blue)}
+.bl-bid{background:var(--tile);border-radius:20px;padding:12px;box-shadow:var(--shadow);display:grid;gap:10px;text-align:center}
+.bl-bidk{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.bl-bb{border:0;border-radius:14px;padding:12px 18px;font:inherit;font-weight:700;font-size:17px;background:#26323E;color:#fff;cursor:pointer;min-width:84px}.bl-bb.sun{background:linear-gradient(160deg,#E8C96A,#C9A53E);color:#26323E}.bl-bb.pass{background:var(--bg-alt);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--hair)}
+.bl-end{position:absolute;inset:12px;z-index:5;border-radius:26px;display:grid;place-content:center;justify-items:center;gap:10px;background:rgba(10,30,24,.78);backdrop-filter:blur(3px);color:#fff;text-align:center;padding:10px;animation:gmfade .3s both}
+.bl-end>b{font-size:24px}.bl-endsc{display:flex;gap:30px}.bl-endsc span{display:grid}.bl-endsc small{color:rgba(255,255,255,.7)}.bl-endsc b{font-size:30px;color:#D1B871}
+.bl-win{color:#D1B871;font-size:22px}.bl-end .btn{background:#D1B871;color:#26323E}
 /* gathering games */
 .gm-pass.sec{background:linear-gradient(160deg,#2C3946,#1C252F 75%)}.gm-pass h3 b,.gm-pass p b{color:#D1B871}
 .gp-card{background:var(--tile);border-radius:24px;padding:24px 18px;box-shadow:var(--shadow);display:grid;gap:10px;text-align:center;justify-items:center;min-height:180px;align-content:center}
@@ -1285,6 +1314,11 @@ textarea.gm-in{min-height:120px;resize:vertical;line-height:1.7}
 .bz[style*="--n:3"] .p2{grid-column:1/3;grid-row:3}.bz[style*="--n:4"] .p2{grid-row:3}.bz[style*="--n:4"] .p3{grid-row:3}
 .bz-q{grid-column:1/3;grid-row:2;background:var(--tile);border-radius:22px;padding:16px;box-shadow:var(--shadow);display:grid;gap:8px;text-align:center;align-content:center}.bz-q h3{margin:0}
 .em-q{direction:ltr}
+/* fixes: sudoku boxes, 2048 swipe */
+.sd{border:3px solid var(--ink);border-radius:8px;overflow:hidden}
+.sd .sd-c.br{border-right:3px solid var(--ink)}.sd .sd-c.bb{border-bottom:3px solid var(--ink)}
+.sd .sd-c.alt:not(.sel):not(.same):not(.hl){background:color-mix(in srgb,var(--ink) 4%,var(--tile))}
+.g48{touch-action:none;overscroll-behavior:contain;user-select:none;-webkit-user-select:none}
 /*GM-CSS-END*/
 /*EM-CSS-START*/
 /* إعمار */
@@ -1890,9 +1924,18 @@ a.btn{text-decoration:none}
 .tn-kind-d{text-align:center;color:var(--muted);margin:6px 0 18px}
 .tn-qzc{background:linear-gradient(160deg,#2C3946,#1C252F 70%);color:#fff}
 .tn-qzc small{color:rgba(255,255,255,.7)}
+.tn-qzc .gmc-ic{border-color:#2A3642}
+.ab-cover.has-img{min-height:0;aspect-ratio:16/9;padding:0;align-content:end;justify-items:stretch;text-align:start;background:#1C252F}
+.ab-cover.has-img::before{display:none}
+.ab-cover.has-img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.ab-cover.has-img::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(14,20,27,.88),rgba(14,20,27,.35) 38%,transparent 62%)}
+.ab-cv-row{display:flex;align-items:center;gap:14px;padding:clamp(16px,3vw,28px)}
+.ab-cover.has-img .ab-cv-ic{width:clamp(48px,7vw,68px);height:clamp(48px,7vw,68px);border-radius:18px;transform:none;background:rgba(38,50,62,.85);flex:none}
+.ab-cover.has-img .ab-cv-n{font-size:clamp(28px,5.4vw,56px)}
+@media (min-width:760px){.ab-cover.has-img{aspect-ratio:2/1}.ab-cover.has-img>img{object-position:50% 40%}}
 .tn-qzc .c-head,.tn-qzc .c-head b{color:#fff}.tn-qzc .c-head svg{color:#D1B871}
 .tn-qzc .c-body{width:100%}
-@media (max-width:620px){.tn-kinds{gap:6px;grid-template-columns:repeat(2,minmax(0,1fr))}.tn-kind{padding:10px 4px;border-radius:14px}.tn-kind b{font-size:13.5px}.tn-kind i{font-size:22px}.tn-kind small{font-size:11.5px}}
+@media (max-width:620px){.tn-kinds{gap:8px;grid-template-columns:repeat(2,minmax(0,1fr))}.tn-kind{padding:12px 6px;border-radius:16px}.tn-kind b{font-size:15px}.tn-kind i{font-size:24px}.tn-kind small{font-size:13px}.tn-kind-d{font-size:15px}}
 .contests-soon{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
 .contests-soon .contest{min-height:0;flex-direction:row;align-items:center;justify-content:flex-start;gap:10px;padding:14px 16px;text-align:start}
 .contests-soon .contest svg{width:26px;height:26px;margin:0}
@@ -1951,6 +1994,13 @@ body{font-feature-settings:"ss01"}
 .gnav .links button{color:rgba(248,248,250,.82)}
 .gnav .links button:hover{background:rgba(255,255,255,.08)}
 .gnav .links button[aria-current="true"]{color:#D1B871}
+.theme-t{flex:none;margin-inline-start:4px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#F8F8FA;font-size:17px;cursor:pointer;display:grid;place-items:center}
+.theme-t:hover{background:rgba(255,255,255,.14)}
+.ab-modes{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(560px,100%)}
+.ab-mode{display:grid;justify-items:center;gap:2px;border:1.5px solid var(--hair);background:var(--tile);color:var(--ink);border-radius:22px;padding:18px 12px;font:inherit;cursor:pointer;box-shadow:var(--shadow)}
+.ab-mode i{font-style:normal;font-size:34px}.ab-mode b{font-size:19px}.ab-mode small{color:var(--muted);font-size:14px}
+.ab-mode.duo{background:linear-gradient(160deg,#2C3946,#1C252F 75%);color:#fff;border-color:transparent}.ab-mode.duo small{color:rgba(255,255,255,.75)}
+.ab-mode:hover{transform:translateY(-2px)}
 /* eyebrow: a row of coloured shapes then gold text */
 .eyebrow{color:var(--gold-ink)!important;font-weight:600}
 .eyebrow::before{content:"";display:inline-block;width:52px;height:10px;margin-inline-end:8px;vertical-align:-1px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 74 14'%3E%3Ccircle cx='7' cy='7' r='6' fill='%23D07362'/%3E%3Cpath d='M17 13 24 1 31 13Z' fill='%230B7D65'/%3E%3Crect x='35' y='1' width='5' height='12' rx='1.5' fill='%23D1B871'/%3E%3Crect x='46' y='2' width='9' height='9' rx='2' transform='rotate(45 50.5 6.5)' fill='%23509CB5'/%3E%3Ccircle cx='66' cy='7' r='6' fill='%2383779F'/%3E%3C/svg%3E") center/contain no-repeat}
@@ -2141,7 +2191,7 @@ body[data-ct] .subnav{background:color-mix(in srgb,var(--ctbg) 86%,transparent)}
 .ab-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px}
 .ab-facts span{display:grid;justify-items:center;text-align:center;gap:4px;border:1.5px solid var(--hair);background:var(--tile);border-radius:20px;padding:16px 10px}
 .ab-facts svg{width:26px;height:26px;color:var(--blue)}
-.ab-facts b{font-size:17px;line-height:1.35}.ab-facts small{color:var(--muted);font-size:13px}
+.ab-facts b{font-size:17px;line-height:1.35}.ab-facts small{color:var(--muted);font-size:14px}
 .ab-card{background:var(--tile);border-radius:24px;padding:22px 24px;box-shadow:var(--shadow);margin-bottom:16px}
 .ab-h{font-size:22px;margin:0 0 14px;padding-inline-start:12px;border-inline-start:5px solid var(--gold,#D1B871);line-height:1.2}
 .ab-card .ab-shots{margin:0}
@@ -2212,6 +2262,7 @@ body[data-ct] .subnav{background:color-mix(in srgb,var(--ctbg) 86%,transparent)}
 <nav class="gnav gut" aria-label="التنقل الرئيسي"><div class="wrap">
   <button class="logo" id="logo" type="button" aria-label="تنافس، الرئيسية"><svg class="wm" viewBox="16 6 358 160" role="img" aria-label="تنافس"><g fill="currentColor"><rect x="248" y="110" width="112" height="16"/><rect x="344" y="78" width="16" height="48"/><rect x="296" y="62" width="16" height="64"/><rect x="248" y="14" width="16" height="112"/><path d="M168 62h48v64h-48z M184 78h16v32h-16z" fill-rule="evenodd"/><rect x="72" y="110" width="100" height="16"/><rect x="136" y="86" width="16" height="40"/><rect x="104" y="86" width="16" height="40"/><rect x="72" y="86" width="16" height="72"/><rect x="24" y="142" width="64" height="16"/><rect x="24" y="102" width="16" height="56"/><rect x="296" y="30" width="16" height="16"/><rect x="184" y="30" width="16" height="16"/></g><rect x="326" y="46" width="16" height="16" fill="var(--blue)"/><rect x="350" y="46" width="16" height="16" fill="var(--red2)"/></svg></button>
   <div class="links" id="links"></div>
+  <button type="button" class="theme-t" id="themeT" aria-label="الوضع الليلي أو النهاري"></button>
 </div></nav>
 <main id="app"><div class="empty">جارٍ تحميل الأسئلة…</div></main>
 <footer class="gut"><div class="wrap"><span>تنافس · مسابقات ثقافية للأندية الشبابية والتعليمية</span><span><span id="foot"></span><span class="flink"> · </span><a href="#admin" class="flink">إدارة الأسئلة</a></span></div></footer>
@@ -4390,6 +4441,17 @@ var qrcode = function() {
 <script>
 (() => {
 document.documentElement.dir = "rtl"; document.documentElement.lang = "ar";
+/* night / day mode: follows the device until the visitor picks one; the choice is kept on this device */
+(() => { const KEY = "tn-theme", root = document.documentElement;
+  let saved = null; try { saved = localStorage.getItem(KEY); } catch(e){}
+  const sysDark = () => window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
+  const cur = () => root.dataset.theme || (sysDark() ? "dark" : "light");
+  const paint = () => { const b = document.getElementById("themeT"); if (b){ const d = cur() === "dark"; b.textContent = d ? "☀️" : "🌙"; b.title = d ? "الوضع النهاري" : "الوضع الليلي"; b.setAttribute("aria-label", b.title); } };
+  if (saved === "dark" || saved === "light") root.dataset.theme = saved;
+  document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("#themeT"); if (!b) return;
+    const next = cur() === "dark" ? "light" : "dark"; root.dataset.theme = next; try { localStorage.setItem(KEY, next); } catch(e){} paint(); });
+  if (window.matchMedia) try { matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paint); } catch(e){}
+  paint(); setTimeout(paint, 0); })();
 const $app = document.getElementById("app");
 const LETTERS = ["أ","ب","ت","ث","ج","ح","خ","د","ذ","ر","ز","س","ش","ص","ض","ط","ظ","ع","غ","ف","ق","ك","ل","م","ن","هـ","و","ي"];
 const KEYS = ["أ","ب","ج","د","هـ","و"];
@@ -5008,10 +5070,10 @@ function tnAbout(k){
   const img = (f, a, cls) => `<figure class="ab-fig ${cls}"><img src="shots/${f}.webp" alt="${a}" loading="lazy" decoding="async"><figcaption>${a}</figcaption></figure>`;
   const badge = k === "er" ? "جديد" : free ? "مجانًا" : "";
   const steps = X.steps ? `<ol class="ab-steps">${X.steps.map(([t, d], i) => `<li><i>${n(i + 1)}</i><div><b>${t}</b><p>${d}</p></div></li>`).join("")}</ol>` : `<p class="ab-how">${c.how}</p>`;
-  const dev = TN_DEV[X.dev || (duo ? "phones" : "screen")].concat(isG && c.duel ? [["tnwa", "مع صديق", "اختر «العب مع صديق»، وأرسل له الرابط أو خله يصوّر الباركود. يدخل من جواله فورًا بدون تسجيل."]] : []);
+  const dev = TN_DEV[X.dev || (duo ? "phones" : "screen")].concat(isG && c.duel ? [["tnwa", "مع خويك", "اختر «العب مع خويك»، وأرسل له الرابط أو خله يصوّر الباركود. يدخل من جواله فورًا بدون تسجيل."]] : []);
   $app.innerHTML = `<section class="section gut view tn-about"><div class="wrap">
     <nav class="ab-crumb"><a href="#${isG ? c.kind : "contests"}">${isG ? KN.n : "المسابقات"}</a><span>‹</span><b>${c.name}</b></nav>
-    <div class="ab-cover"><span class="ab-cv-ic">${I(isG ? c.ic : P[c.icon])}</span><h1 class="ab-cv-n">${c.name}</h1>${badge ? `<span class="ab-badge">✦ ${badge}</span>` : ""}</div>
+    ${isG || ["sj", "b4", "ss", "er", "tk", "em", "mf"].includes(k) ? `<div class="ab-cover has-img"><img src="covers/${k}.webp" alt="${c.name}" decoding="async"><div class="ab-cv-row"><span class="ab-cv-ic">${I(isG ? c.ic : P[c.icon])}</span><h1 class="ab-cv-n">${c.name}</h1></div>${badge ? `<span class="ab-badge">✦ ${badge}</span>` : ""}</div>` : `<div class="ab-cover"><span class="ab-cv-ic">${I(isG ? c.ic : P[c.icon])}</span><h1 class="ab-cv-n">${c.name}</h1>${badge ? `<span class="ab-badge">✦ ${badge}</span>` : ""}</div>`}
     <div class="ab-title">${X.tag ? `<p class="ab-eye">${X.tag}</p>` : ""}<p class="lead">${c.desc}</p></div>
     <div class="ab-facts">
       <span>${I(AB_IC.people)}<b>${X.players || c.meta || "—"}</b><small>عدد اللاعبين</small></span>
@@ -5023,12 +5085,13 @@ function tnAbout(k){
     ${(isG ? c.hl : TN_ABOUT[k]) ? `<div class="ab-card"><h2 class="ab-h">أبرز ما فيها</h2><ul class="ab-list">${(isG ? c.hl : TN_ABOUT[k]).map(x => `<li>${I(P.check)}${x}</li>`).join("")}</ul></div>` : ""}
     <div class="ab-card"><h2 class="ab-h">على أي جهاز؟</h2><div class="ab-devs">${dev.map(([ic, t, d]) => `<div class="ab-dev"><span>${I(P[ic])}</span><div><b>${t}</b><p>${d}</p></div></div>`).join("")}</div></div>
     ${X.tip ? `<div class="ab-tip"><h2>💡 معلومة سريعة</h2><p>${X.tip}</p></div>` : ""}
-    <div class="ab-cta">${can ? `<button type="button" class="btn lg" id="abPlay">${isG && c.kind === "tools" ? "افتح الأداة" : free ? "العب الآن مجانًا" : "العب الآن"}</button>` : `<a class="btn lg" href="#order-one">اطلبها لجهتك · ${k === "er" ? 99 : 39} ريال</a><a class="btn sec lg" href="#plans">كل الباقات</a>`}
+    <div class="ab-cta">${isG && c.duel ? `<div class="ab-modes"><button type="button" class="ab-mode" data-pm="solo"><i>👤</i><b>العب لحالك</b><small>${c.duel === "turn" ? "ضد الجهاز" : "تحدَّ نفسك"}</small></button><button type="button" class="ab-mode duo" data-pm="duo"><i>👥</i><b>العب مع خويك</b><small>كل واحد على جواله</small></button></div>` : can ? `<button type="button" class="btn lg" id="abPlay">${isG && c.kind === "tools" ? "افتح الأداة" : isG ? "ابدأ اللعب" : free ? "العب الآن مجانًا" : "العب الآن"}</button>` : `<a class="btn lg" href="#order-one">اطلبها لجهتك · ${k === "er" ? 99 : 39} ريال</a><a class="btn sec lg" href="#plans">كل الباقات</a>`}
       <button type="button" class="btn sec lg" id="abBack2">${isG ? "عودة إلى " + KN.n : "عودة للمسابقات"}</button></div>
   </div></section>`;
   const back = () => { if (history.length > 1 && TNS.prev && TNS.prev !== "about-" + k) history.back(); else nav(isG ? c.kind : "contests"); };
   document.getElementById("abBack2").onclick = back;
   const pl = document.getElementById("abPlay"); if (pl) pl.onclick = () => nav(isG ? "g-" + k : k);
+  $app.querySelectorAll("[data-pm]").forEach(b => b.onclick = () => nav("g-" + k + "~" + b.dataset.pm));
 }
 /* ordering */
 const ORD = {plan:"", games:[], step:1, f:{org:"", person:"", phone:"", email:"", logo:""}, sent:false};
@@ -5342,10 +5405,10 @@ const GM_IC = {
 
 /* ---------- landing cards and details-page data ---------- */
 function gmCards(kind){
-  const TOP = ["baloot","million","wordle","links","xo","outsider","wolf","headsup","codes","baloot-calc","roulette"];
+  const TOP = ["baloot","million","links","xo","outsider","wolf","headsup","codes","baloot-calc","roulette"];
   const L = TN_GAMES.filter(g => g.kind === kind).map((g, i) => [g, TOP.includes(g.go) ? TOP.indexOf(g.go) : 100 + i]).sort((a, b) => a[1] - b[1]).map(x => x[0]);
-  return L.map(g => `<button type="button" class="gmc" data-gm="${g.go}"><span class="gmc-ic">${I(g.ic)}</span>
-    <span class="gmc-tx"><b>${g.name}</b><small>${g.desc}</small><span class="gmc-tags">${g.duel ? "<i>👥 لحالك أو مع صديق</i>" : `<i>${GM_DEVN[g.dev] || ""}</i>`}</span></span></button>`).join("");
+  return L.map(g => `<button type="button" class="gmc" data-gm="${g.go}"><span class="gmc-cv"><img src="covers/${g.go}.webp" alt="" loading="lazy" decoding="async"><span class="gmc-ic">${I(g.ic)}</span></span>
+    <span class="gmc-tx"><b>${g.name}</b><small>${g.desc}</small><span class="gmc-tags">${g.duel ? "<i>👥 لحالك أو مع خويك</i>" : `<i>${GM_DEVN[g.dev] || ""}</i>`}</span></span></button>`).join("");
 }
 
 /* ---------- game page ---------- */
@@ -5361,6 +5424,8 @@ function gmPage(arg){
     <div id="gmOpp"></div><div id="gmBody" class="gm-body"></div></div></section>`;
   document.getElementById("gmBack").onclick = () => nav(g.kind);
   GMX = {go, stops: []};
+  if (code === "solo") return gmStart(g, {mode:"solo"});
+  if (code === "duo") return gmDuelHost(g);
   if (code) return gmDuelJoin(g, code);
   if (g.duel) return gmChoose(g);
   gmStart(g, {mode:"solo"});
@@ -5369,7 +5434,7 @@ function gmChoose(g){
   const b = document.getElementById("gmBody");
   b.innerHTML = `<div class="gm-modes"><p class="gm-lead">${g.desc}</p>
     <button type="button" class="gm-mode" id="gmSolo"><i>👤</i><b>العب لحالك</b><small>${g.duel === "turn" ? "ضد الجهاز" : "تحدَّ نفسك وحطّم رقمك"}</small></button>
-    <button type="button" class="gm-mode duo" id="gmDuo"><i>👥</i><b>العب مع صديق</b><small>كل واحد على جواله: أرسل له رابط أو رمز، ويدخل معك فورًا</small></button>
+    <button type="button" class="gm-mode duo" id="gmDuo"><i>👥</i><b>العب مع خويك</b><small>كل واحد على جواله: أرسل له رابط أو رمز، ويدخل معك فورًا</small></button>
     ${store.get("gm-best-" + g.go, null) != null && g.duel === "race" ? `<p class="gm-best">أفضل نتيجة لك: <b>${n(store.get("gm-best-" + g.go, 0))}</b></p>` : ""}</div>`;
   document.getElementById("gmSolo").onclick = () => gmStart(g, {mode:"solo"});
   document.getElementById("gmDuo").onclick = () => gmDuelHost(g);
@@ -5404,7 +5469,7 @@ function gmFinish(g, ctx, fin, txt, extra){
     if (typeof fin === "number" && g.duel === "race"){ if (best == null || (lowBetter ? fin < best : fin > best)){ best = fin; rec = true; store.set("gm-best-" + g.go, fin); } }
     const box = document.createElement("div"); box.className = "gm-res";
     box.innerHTML = `<div class="gm-res-in"><h3>${txt || "انتهت اللعبة"}</h3>${typeof fin === "number" && g.duel === "race" ? `<p class="gm-res-sc">${n(fin)}${g.unit ? " " + g.unit : ""}</p>${rec ? `<p class="gm-rec">🏆 رقم قياسي جديد!</p>` : best != null ? `<p class="gm-best">أفضل نتيجة لك: ${n(best)}</p>` : ""}` : ""}${extra || ""}
-      <div class="gm-acts"><button type="button" class="btn" data-gma="again">العب مرة ثانية</button>${g.duel ? `<button type="button" class="btn sec" data-gma="duo">تحدَّ صديق</button>` : ""}</div></div>`;
+      <div class="gm-acts"><button type="button" class="btn" data-gma="again">العب مرة ثانية</button>${g.duel ? `<button type="button" class="btn sec" data-gma="duo">تحدَّ خويك</button>` : ""}</div></div>`;
     el.appendChild(box);
     box.querySelector('[data-gma="again"]').onclick = () => gmStart(g, {mode:"solo"});
     const d = box.querySelector('[data-gma="duo"]'); if (d) d.onclick = () => gmDuelHost(g);
@@ -5466,7 +5531,7 @@ async function gmDuelHost(g){
   const code = tkNewCode(), D = gmDuelMake(g, code, "h"); GMX.duel = D;
   const link = location.href.split("#")[0] + "#g-" + g.go + "~" + code;
   const b = document.getElementById("gmBody");
-  b.innerHTML = `<div class="gm-card gm-lobby"><h3>ادعُ صديقك</h3><p>خله يصوّر الباركود، أو أرسل له الرابط. لما يدخل يطلع اسمه هنا وتبدؤون.</p>
+  b.innerHTML = `<div class="gm-card gm-lobby"><h3>ادعُ خويك</h3><p>خله يصوّر الباركود، أو أرسل له الرابط. لما يدخل يطلع اسمه هنا وتبدؤون.</p>
     <div class="gm-qr">${tkQR(link)}</div><div class="gm-code"><small>رمز الغرفة</small>${tkCodeHTML(code)}</div>
     <div class="gm-acts"><button type="button" class="btn" id="gmShare">أرسل الرابط</button><button type="button" class="btn sec" id="gmCopy">نسخ الرابط</button></div>
     ${gmNameBox()}<div id="gmWait" class="gm-wait"><span class="gm-spin"></span>ننتظر صديقك يدخل…</div>
@@ -6076,7 +6141,7 @@ function tnmEnter(view){
   blocks.slice(0, 30).forEach((b, i) => queue(b, Math.min(i * 90, 540)));
   let grids = 0;
   view.querySelectorAll("div,ul,ol,section").forEach(g => {
-    if (grids > 24 || g.classList.contains("em-map") || g.children.length < 3 || g.children.length > 140 || g.querySelector("canvas")) return;
+    if (grids > 24 || g.classList.contains("em-map") || g.closest(".gm") || g.children.length < 3 || g.children.length > 140 || g.querySelector("canvas")) return;
     const cs = getComputedStyle(g); if (cs.display !== "grid" && cs.display !== "inline-grid") return;
     grids++; [...g.children].forEach((c, i) => { if (c.offsetParent !== null) queue(c, 160 + Math.min(i * 45, 700)); });
   });
@@ -6296,7 +6361,7 @@ function landing(){
         return `<button type="button" role="tab" class="tn-kind" data-kind="${K.k}" aria-selected="${TN_KIND === K.k}"><i>${K.e}</i><b>${K.n}</b><small>${c ? (c === 1 ? w[0] + " وحدة" : c === 2 ? w[1] : n(c) + " " + (c <= 10 ? w[2] : w[0])) : "قريبًا"}</small></button>`; }).join("")}</div>
       <p class="tn-kind-d">${KD.d}</p>
       ${TN_KIND !== "group" ? "" : ok ? "" : `<p class="band-sub">تعرّف على مسابقات تنافس. اللعب فيها متاح للجهات المشتركة بعد <a href="#" id="acJump">تسجيل الدخول</a>${CONTESTS.some(c => freeOn(c.go)) ? `، و${CONTESTS.filter(c => freeOn(c.go)).map(c => "«" + c.name + "»").join(" و")} مجانية للجميع لفترة محدودة` : ""}.</p>`}
-      ${TN_GAMES.some(g => g.kind === TN_KIND) ? `<div class="gmc-grid">${TN_KIND === "solo" ? `<button type="button" class="gmc tn-qzc" id="tnQzGo"><span class="gmc-ic">${I(P.ency)}</span><span class="gmc-tx"><b>اختبر ثقافتك</b><small>عشرة أسئلة متنوعة، وتقييمك من عشرة. موجود فوق في الصفحة.</small><span class="gmc-tags"><i>كل لاعب على جهازه</i></span></span></button>` : ""}${gmCards(TN_KIND)}</div>` : ""}
+      ${TN_GAMES.some(g => g.kind === TN_KIND) ? `<div class="gmc-grid">${TN_KIND === "solo" ? `<button type="button" class="gmc tn-qzc" id="tnQzGo"><span class="gmc-cv"><img src="covers/quiz.webp" alt="" loading="lazy" decoding="async"><span class="gmc-ic">${I(P.ency)}</span></span><span class="gmc-tx"><b>اختبر ثقافتك</b><small>عشرة أسئلة متنوعة، وتقييمك من عشرة. موجود فوق في الصفحة.</small><span class="gmc-tags"><i>كل لاعب على جهازه</i></span></span></button>` : ""}${gmCards(TN_KIND)}</div>` : ""}
       <div class="contests tn-cards"${TN_GAMES.some(g => g.kind === TN_KIND) ? " hidden" : ""}>
         ${TN_KIND === "solo" && !TN_GAMES.some(g => g.kind === "solo") ? `<button type="button" class="contest live tn-qzc" id="tnQzGo"><span class="c-body"><span class="c-badge free">مجانية للجميع</span><span class="c-head">${I(P.ency)}<b>اختبر ثقافتك</b></span><small>عشرة أسئلة متنوعة من مجالات مختلفة، 20 ثانية لكل سؤال، وفي النهاية تقييمك من عشرة.</small><span class="go">العب الآن</span></span></button>` : ""}
         ${mine.filter(c => c.go).map(c => {
@@ -6356,7 +6421,7 @@ function landing(){
   $app.querySelectorAll("[data-about]").forEach(b => b.onclick = () => nav("about-" + b.dataset.about));
   $app.querySelectorAll("[data-kind]").forEach(b => b.onclick = () => { if (TN_KIND === b.dataset.kind) return; TN_KIND = b.dataset.kind; store.set("tn-kind", TN_KIND);
     const y = window.scrollY; landing(); window.scrollTo({top: y}); });
-  $app.querySelectorAll("[data-gm]").forEach(b => b.onclick = () => nav("g-" + b.dataset.gm));
+  $app.querySelectorAll("[data-gm]").forEach(b => b.onclick = () => nav("about-" + b.dataset.gm));
   const qg = document.getElementById("tnQzGo"); if (qg) qg.onclick = () => { const q = document.querySelector(".qz-panel"); if (q) q.scrollIntoView({behavior:"smooth", block:"center"}); };
   $app.querySelectorAll("[data-go]").forEach(b => b.onclick = () => {
     if (!SESSION && !CAN_EDIT) return nav("about-" + b.dataset.go);
