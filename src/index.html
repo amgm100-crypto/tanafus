@@ -818,10 +818,20 @@ button.er-story{font:inherit;text-align:start;border:0;cursor:pointer;width:100%
 @keyframes erglitch{0%{filter:none;transform:none}8%{filter:brightness(.15) contrast(1.6);transform:translateX(-6px)}14%{filter:hue-rotate(-40deg) saturate(3);transform:translateX(5px)}22%{filter:brightness(.1)}40%{filter:none;transform:none}55%{filter:brightness(.4) saturate(2);transform:translateY(3px)}62%,100%{filter:none;transform:none}}
 @keyframes erscan{0%{opacity:0}10%{opacity:1}70%{opacity:.6}100%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.er-game.scare .er-stage{animation:none}}
+.er-scareov{position:absolute;inset:0;z-index:90;pointer-events:none;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 50%,rgba(90,0,0,.55),rgba(0,0,0,.94) 70%);animation:erscareov 3s ease-out forwards}
+.er-scareov b{color:#FF3B30;font-size:clamp(26px,7vw,54px);font-weight:800;letter-spacing:1px;text-shadow:0 0 18px rgba(255,40,40,.9),3px 0 0 rgba(0,255,255,.35),-3px 0 0 rgba(255,0,80,.5);animation:erscaretx .18s steps(2) 10}
+@keyframes erscareov{0%{opacity:0}4%{opacity:1;background-color:rgba(255,255,255,.45)}10%{background-color:transparent}82%{opacity:1}100%{opacity:0}}
+@keyframes erscaretx{50%{transform:translate(4px,-2px) skewX(8deg)}}
+@media (prefers-reduced-motion:reduce){.er-scareov b{animation:none}}
 .er-knownote{display:flex;gap:10px;align-items:flex-start;background:#FFF6DB;border:1.5px solid #F2D27A;border-radius:14px;padding:10px 12px;margin:10px 0;text-align:start}
 .er-knownote b{flex:none;width:28px;height:28px;border-radius:9px;background:#F5C542;color:#26323E;display:grid;place-items:center;font-size:17px}
 .er-knownote p{margin:0;font-size:14px;line-height:1.7;color:#4A3B12}
-.er-story.r3{background:linear-gradient(160deg,#C98B4E,#6B3A1E 75%)}
+.er-story.r3{background:linear-gradient(160deg,#E8A35C,#8B5A2B 75%)}
+.er-story.r4{background:linear-gradient(160deg,#E8B100,#A0522D 75%)}
+.er-story.r5{background:linear-gradient(160deg,#C77DFF,#6B3FA0 78%)}
+.er-morse{display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:center;background:#F6F1E6;border-radius:12px;padding:10px;margin:8px 0;font-size:14px}.er-morse code{font-family:monospace;letter-spacing:1px}
+.er-route,.er-lever{width:100%;max-width:420px;display:block;margin:6px auto;background:#FBF7EF;border-radius:12px}.er-clockm{width:170px;display:block;margin:6px auto;transform:none}
+.er-tick b{font-size:18px;letter-spacing:2px;background:#26323E;color:#fff;border-radius:8px;padding:1px 8px}
 .er-gears,.er-mir,.er-net{width:100%;height:auto}
 .er-letter{font-size:26px;font-weight:700;line-height:1}
 .er-opts.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(56px,1fr));gap:8px}
@@ -1087,7 +1097,7 @@ button.er-story{font:inherit;text-align:start;border:0;cursor:pointer;width:100%
 .er-rdone{margin:0;color:var(--good);font-weight:700}
 .er-qrpop{margin-top:10px}
 .er-pick .btn{color:#FFFFFF}
-.er-tnames{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:4px}.er-tnames li{font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:color-mix(in srgb,var(--tc) 14%,var(--tile));color:var(--tc)}
+.er-tnames{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:4px}.er-tnames li{font-size:16px;font-weight:700;padding:5px 12px;border-radius:999px;background:color-mix(in srgb,var(--tc) 14%,var(--tile));color:var(--tc)}
 .er-grp{display:inline-block;border:2px solid rgba(127,227,238,.55);border-radius:12px;padding:0 6px;margin:3px 2px;line-height:2.2}
 .er-grp .er-grp{border-color:rgba(255,214,10,.55)}
 /* quick quiz on the home page: a slate panel in the site colours (green, gold, slate) with a glass card */
@@ -1997,6 +2007,7 @@ a.btn{text-decoration:none}
 .er-race.er-live{padding:0;gap:0;overflow:hidden;border-inline-start:0;box-shadow:0 0 0 3px var(--tc),var(--shadow)}
 .er-view{position:relative;aspect-ratio:16/10;background:linear-gradient(160deg,#EAF1FB,#DCE6F4)}
 .er-vslot,.er-vcv{position:absolute;inset:0;display:block;width:100%;height:100%}
+.er-vnames{position:absolute;inset:auto 12px 12px;display:flex;flex-wrap:wrap;gap:6px;z-index:2;pointer-events:none}.er-vnames i{font-style:normal;font-size:15px;font-weight:700;background:rgba(255,255,255,.94);color:#26323E;border-radius:999px;padding:4px 12px;box-shadow:0 0 0 2px var(--tc),0 4px 10px -4px rgba(16,32,72,.4)}
 .er-vtop{position:absolute;inset:12px 12px auto;display:flex;justify-content:space-between;align-items:center;gap:8px}
 .er-vtop b{background:var(--tc);color:#fff;font-size:20px;padding:6px 16px;border-radius:999px;box-shadow:0 6px 18px -6px rgba(16,32,72,.5)}
 .er-vrooms{display:flex;gap:6px;background:rgba(255,255,255,.86);padding:7px 10px;border-radius:999px;backdrop-filter:blur(6px)}
@@ -4378,6 +4389,29 @@ const P = {tnwa:'<path d="M4.5 19.5l1.2-3.6A8 8 0 1 1 8.6 18.8z"/><path d="M9.2 
   eranchor:`<circle cx="12" cy="5" r="2"/><path d="M12 7v13M8 10.5h8M5 14a7 7 0 0 0 14 0"/>`,
   erplay:`<path d="M7 5v14l12-7Z"/>`,
   er_maptable:`<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2Z"/><path d="M9 4v14M15 6v14"/>`,
+  er_gears:`<circle cx="9" cy="10" r="3"/><path d="M9 4v2M9 14v2M3 10h2M13 10h2M4.8 5.8l1.4 1.4M11.8 12.8l1.4 1.4M4.8 14.2l1.4-1.4M11.8 7.2l1.4-1.4"/><circle cx="17" cy="17" r="2.2"/><path d="M17 13.5v1.3M17 19.2v1.3M13.5 17h1.3M19.2 17h1.3"/>`,
+  er_mirrors:`<path d="M4 20 20 4M8 20l-4-4"/><path d="M3 5h4l3 3" stroke-dasharray="2 2"/>`,
+  er_lectern:`<path d="M6 9h12l-2 4H8z"/><path d="M12 13v7M9 20h6"/>`,
+  er_wordladder:`<path d="M8 3v18M16 3v18M8 7h8M8 12h8M8 17h8"/>`,
+  er_cubetable:`<path d="M12 3 20 7.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/>`,
+  er_lettertray:`<rect x="3" y="8" width="18" height="9" rx="2"/><path d="M7 11v3M11 11v3M15 11v3"/>`,
+  er_stick:`<path d="M12 3v15"/><path d="M12 18l7-3" stroke-dasharray="2 2"/><circle cx="18" cy="5" r="2.5"/><path d="M5 21h14"/>`,
+  er_engine:`<rect x="4" y="8" width="13" height="9" rx="1.5"/><path d="M17 11h3v3h-3M8 8V5h5v3M7 12h7"/>`,
+  er_jerry:`<path d="M6 6h9l3 3v12H6z"/><path d="M9 3h4v3M9 12h6"/>`,
+  er_skins:`<path d="M8 4h4M10 4v2c-4 1-5 5-5 8a5 5 0 0 0 10 0c0-3-1-7-5-8"/>`,
+  er_sandword:`<path d="M3 18c3-3 6-3 9 0s6 3 9 0"/><path d="M7 11h2M11 11h2M15 11h2"/>`,
+  er_photos:`<rect x="3" y="5" width="8" height="10" rx="1"/><rect x="13" y="8" width="8" height="10" rx="1"/><path d="M3 3c6 2 12 2 18 0"/>`,
+  er_phonedesk:`<rect x="8" y="3" width="8" height="15" rx="2"/><path d="M11 15h2M4 21h16"/>`,
+  er_memorybox:`<path d="M4 10h16v10H4z"/><path d="M3 6h18v4H3zM10 14h4"/>`,
+  er_sign:`<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M10 9a2 2 0 1 1 2 2v1.5M12 14.5v.5"/>`,
+  er_beads:`<circle cx="6" cy="8" r="2"/><circle cx="9" cy="14" r="2"/><circle cx="15" cy="14" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="12" cy="17" r="2"/>`,
+  er_jugs:`<path d="M8 4h3M9.5 4v2c-3 1-4 4-4 7s1 6 4 6 4-3 4-6-1-6-4-7"/><path d="M16 9h3M17.5 9v1.5c-2 .8-2.5 2.6-2.5 4.5s.6 4 2.5 4 2.5-2 2.5-4-.5-3.7-2.5-4.5"/>`,
+  er_stall:`<path d="M3 9l2-5h14l2 5z"/><path d="M5 9v11M19 9v11M3 20h18M8 14h8v6H8z"/>`,
+  er_board:`<rect x="3" y="4" width="18" height="13" rx="1.5"/><path d="M6 8h5M14 8h4M6 11h5M14 11h4M6 14h5M14 14h4M12 17v3"/>`,
+  er_telegraph:`<path d="M4 17h16M6 17v-3h12v3"/><path d="M8 14l7-3"/><circle cx="16" cy="10.5" r="1.3"/><path d="M5 7h1M8 7h3M13 7h1"/>`,
+  er_ticketbox:`<path d="M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z"/><path d="M13 7v12" stroke-dasharray="2 2"/>`,
+  er_postclock:`<circle cx="12" cy="8" r="5"/><path d="M12 5.5V8l1.8 1.2M12 13v8M9 21h6"/>`,
+  er_lever:`<path d="M3 13 21 9"/><path d="M12 11l-3 8h6z"/><rect x="4" y="8" width="4" height="4"/>`,
   er_scale:`<path d="M12 4v16M7 20h10M5 7h14"/><path d="M5 7l-2.5 6a2.5 2.5 0 0 0 5 0Z M19 7l-2.5 6a2.5 2.5 0 0 0 5 0Z"/>`,
   er_wallclock:`<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/>`,
   er_lantern:`<path d="M9 3h6M12 3v2M8 7h8l-1 10H9Z"/><path d="M7 20h10M12 10v4"/>`,
@@ -4960,7 +4994,7 @@ const TN_ABOUT = {
   mf:["شاشة واحدة بدون جوالات", "كل فريق يزرع ألغامه بالسر", "كاشف ودرع لكل فريق", "مكافأة «أخطر زارع» في النهاية"],
   tk:["اللاعبون يدخلون بالباركود من جوالاتهم", "خمس ثوانٍ تكبيس قبل كل سؤال", "عدد الكبسات هو قيمة السؤال", "تكبيس جماعي يحسم نهاية الجولة"],
   em:["خمسة تحديات قصيرة على جوال كل لاعب", "مدن مكعّبات ثلاثية الأبعاد على طريقة ألعاب البناء، وكل فريق يختار شكل أرضه", "نشرة أرصاد تعلن الأزمة، أو تلمّح لها، أو تخفيها", "إضافات للمتقدمين: التجارة والمشاريع المشتركة"],
-  er:["أربع غرف وأربع قصص على زوايا إشارة واحدة", "كل لاعب يتجوّل من جواله واسمه فوق شخصيته", "ثلاثة مناظر: الأصلي والعلوي ومنظور اللاعب", "ألغاز منطق وشيفرات ولغة وتروس ومرايا، وصندوق برمز سداسي", "مشهد سينمائي يعبر فيه الفريق الإشارة إلى الغرفة التالية", "شاشة العرض تعرض غرفة كل فريق حيّة"]
+  er:["ست غرف وست قصص حول إشارة المدينة", "كل لاعب يتجوّل من جواله واسمه فوق شخصيته", "ثلاثة مناظر: الأصلي والعلوي ومنظور اللاعب", "ألغاز منطق وشيفرات ولغة وتروس ومرايا، وصندوق برمز سداسي", "مشهد سينمائي يعبر فيه الفريق الإشارة إلى الغرفة التالية", "شاشة العرض تعرض غرفة كل فريق حيّة"]
 };
 function tnAbout(k){
   const isG = !!GM[k], c = isG ? GM[k] : CONTESTS.find(x => x.go === k); if (!c) return tn404();
@@ -5718,7 +5752,7 @@ const TN_INFO = {
   b4:{tag:"فرق على شاشة واحدة", players:"2–4 فرق", dur:"لوحة 3×3 إلى 5×5", dev:"screen", tip:"كل ما كبرت اللوحة طالت المسابقة: 3×3 للجلسات القصيرة، و5×5 للمنافسة الطويلة."},
   ss:{tag:"فرق على شاشة واحدة", players:"2–4 فرق", dur:"حسب عدد الصور", dev:"screen", tip:"ارفعوا صورًا واضحة ومعروفة للحضور، عشان يكون التخمين ممتع مو مستحيل."},
   er:{tag:"فرق بالجوالات وشاشة عرض", players:"2–10 فرق · 5–10 لاعبين", dur:"20 دقيقة للغرفة افتراضيًا", dev:"phones",
-    steps:[["افتح الغرفة","يختار المقدّم الغرف الأربع أو بعضها، والمستوى ووقت كل غرفة، فيظهر على شاشة العرض رمز دخول وباركود."],
+    steps:[["افتح الغرفة","يختار المقدّم الغرف الست أو بعضها، والمستوى ووقت كل غرفة، فيظهر على شاشة العرض رمز دخول وباركود."],
       ["ادخلوا من الجوالات","كل لاعب يصوّر الباركود ويكتب اسمه ويختار فريقه، فيظهر اسمه فوق شخصيته داخل الغرفة."],
       ["تجوّلوا وحلّوا","اضغطوا على أي ركن فتمشي الشخصية إليه ويظهر لغزه. بدّلوا المنظر: الأصلي، أو العلوي لترون الإشارة كلها، أو منظور اللاعب."],
       ["اجمعوا الرمز","كل لغز محلول يكشف رقمًا من رمز الصندوق، وبعض الأركان تحتاج مفتاحًا أو أداة من ركن آخر."],
@@ -5753,7 +5787,7 @@ const CONTESTS = [
   {name:"بالأربع تربح", icon:"four", go:"b4", desc:"لوحة حروف، وكل إجابة صحيحة ترسم ضلعًا", how:"لوحة مربعات بالحروف. كل إجابة صحيحة ترسم ضلعًا، ومن يغلق المربع يكسب نقاطه، ومعها بطاقات حظ.", meta:"⁦2–4⁩ فرق"},
   {name:"خماسيات", icon:"five"},
   {name:"مسابقة 6×6", icon:"six", go:"ss", desc:"صورة مغبّشة تتضح مع كل إجابة صحيحة", how:"كل فريق يرفع صورًا والفريق المنافس يخمّنها. كل إجابة صحيحة تزيل 10% من التغبيش، ومن يخمّن مبكرًا يكسب أكثر.", meta:"⁦2–4⁩ فرق"},
-  {name:"غرفة الهروب", icon:"erdoor", go:"er", desc:"غرفة مجسّمة يمشي فيها الفريق ويحل الألغاز ليفتح الصندوق", how:"أربع غرف وأربع قصص على زوايا إشارة واحدة. يتجوّل الفريق في الغرفة ويحل ألغاز المنطق والشيفرات واللغة ليجمع رمز الصندوق السداسي قبل انتهاء الوقت، ثم يعبر الإشارة إلى الغرفة التالية.", meta:"⁦2–10⁩ فرق · ⁦5–10⁩ لاعبين"},
+  {name:"غرفة الهروب", icon:"erdoor", go:"er", desc:"غرفة مجسّمة يمشي فيها الفريق ويحل الألغاز ليفتح الصندوق", how:"ست غرف وست قصص حول إشارة المدينة. يتجوّل الفريق في الغرفة ويحل ألغاز المنطق والشيفرات واللغة ليجمع رمز الصندوق السداسي قبل انتهاء الوقت، ثم يعبر الإشارة إلى الغرفة التالية.", meta:"⁦2–10⁩ فرق · ⁦5–10⁩ لاعبين"},
   {name:"تكبيس", icon:"tkphone", go:"tk", desc:"أسرع فريق يكبس من جواله يكسب السؤال", how:"اللاعبون يكبسون من جوالاتهم خلال ثوانٍ، وعدد الكبسات قيمة السؤال: الصحيحة تضيفها والخاطئة تخصمها.", meta:"⁦2–6⁩ فرق · جوالات"},
   {name:"إعمار", icon:"emcity", go:"em", desc:"كل فريق يبني مدينته بالمكعّبات وينافس على أكبر عدد سكان", how:"اللاعبون يحلّون تحديات قصيرة من جوالاتهم ليجمعوا الموارد، ثم يبنون مدينتهم ويحمونها من الأزمة اللي تعلنها نشرة الأرصاد. المدينة الأكثر سكانًا تفوز.", meta:"⁦2–10⁩ فرق · جوالات"},
   {name:"حقل الألغام", icon:"mine", go:"mf", desc:"كل فريق يزرع ألغامه بالسر، ومن يدوس لغمًا ينفجر عليه", how:"كل فريق يزرع ألغامه بالسر في لوحة المربعات، ثم تتناوب الفرق على كشف المربعات بالأسئلة. المربع الآمن يكشف كم لغمًا حوله، واللغم ينفجر على من يدوسه ويكسب صاحبه.", meta:"⁦2–8⁩ فرق · شاشة واحدة"},
@@ -7804,7 +7838,7 @@ const JOIN_INFO = {
       "كل لغز تحله يعطيك رقمًا أو أداة. <b>تعاونوا</b> وتكلموا مع بعض، لأن الألغاز مقسومة بينكم.",
       "اجمعوا الأرقام لرمز الصندوق (6 أرقام) وافتحوه عشان تنتقلون للغرفة اللي بعدها.",
       "<b>الإجابة الخاطئة تخصم من وقتكم</b> وتقفل اللغز لحظات، والتلميح له ثمن من الوقت. والفائز أسرع فريق يطلع."],
-    note:"أربع غرف بالترتيب من الأسهل للأصعب. الوقت يظهر فوق الشاشة دائمًا، وتقدرون تغيّرون المنظر من الأزرار." },
+    note:"الغرف بالترتيب من الأسهل للأصعب. الوقت يظهر فوق الشاشة دائمًا، وتقدرون تغيّرون المنظر من الأزرار." },
   em: { name:"إعمار", go:"emjoin", icon:"emcity", tag:"اجمع وابنِ واحمِ مدينتك",
     lead:"حلّوا تحديات قصيرة على جوالاتكم، اجمعوا موارد، وابنوا مدينتكم.",
     steps:["اختر مدينتك (فريقك) من القائمة.",
@@ -8362,7 +8396,234 @@ const ER_LIARS = [
     opts:["كاذب حتمًا","صادق حتمًا","لا يمكن التحديد","نصف صادق"], h:["جرّب حالتين: «أ» صادق، ثم «أ» كاذب.","في الحالتين يكون «أ» و«ب» من نوعين مختلفين."], w:"إن كان «أ» صادقًا فـ«ب» كاذب و«ج» يخالف «أ» فهو كاذب؛ وإن كان «أ» كاذبًا فـ«ب» صادق و«ج» مثل «أ» كاذب."}
 ];
 
-/* ---------- the three stories ---------- */
+/* ---------- rooms five and six: the gold souq and the Hejaz railway station ---------- */
+const ER_COINL = ["أ","ب","ج","د","هـ","و","ز","ح","ط","ي","ك","ل"];
+const ER_RIDDLES = [
+  {b:0, q:"له أسنان كثيرة لكنه لا يعضّ أبدًا. فما هو؟", a:"المشط", o:["المفتاح","الشوكة","المقص"]},
+  {b:0, q:"يكتب ولا يقرأ، ويمشي على الورق بلا قدمين. فما هو؟", a:"القلم", o:["الكتاب","الحاسوب","الممحاة"]},
+  {b:0, q:"له عين واحدة لكنه لا يرى بها شيئًا. فما هو؟", a:"الإبرة", o:["الزجاج","الدمية","المنظار"]},
+  {b:0, q:"لا يدخل في الخشب إلا إذا ضربته على رأسه. فما هو؟", a:"المسمار", o:["الباب","المفتاح","الكرة"]},
+  {b:0, q:"بيت ليس له أبواب ولا نوافذ، وإذا انكسر خرج منه ساكنه. فما هو؟", a:"البيضة", o:["الصندوق","الكهف","الخيمة"]},
+  {b:1, q:"يمشي بلا رجلين، ويبكي بلا عينين. فما هو؟", a:"السحاب", o:["النهر","الريح","الشمعة"]},
+  {b:1, q:"كلما أخذت منه كبر وازداد. فما هو؟", a:"الحفرة", o:["الظل","الدَّين","الجبل"]},
+  {b:1, q:"شيء كلما زاد نقص. فما هو؟", a:"العمر", o:["المال","العلم","الماء"]},
+  {b:1, q:"أخت خالك، وليست خالتك. فمن هي؟", a:"أمك", o:["عمتك","جدتك","أختك"]},
+  {b:1, q:"له أوراق وليس بنبات، وله جلد وليس بحيوان. فما هو؟", a:"الكتاب", o:["الشجرة","الحقيبة","الطبل"]},
+  {b:1, q:"له رقبة وليس له رأس، ويُحمل من رقبته. فما هو؟", a:"القارورة", o:["الزرافة","الكرسي","الطاولة"]},
+  {b:2, q:"تراه في «الليل» ثلاث مرات، وفي «النهار» مرة واحدة. فما هو؟", a:"حرف اللام", o:["حرف الياء","حرف الألف","حرف الراء"]},
+  {b:2, q:"يوجد في «القرن» مرة، وفي «الدقيقة» مرتين، ولا يوجد في «الساعة». فما هو؟", a:"حرف القاف", o:["حرف الدال","حرف النون","حرف الراء"]},
+  {b:2, q:"يُكسَر ولا يُلمَس، ويُحفَظ ولا يُرى. فما هو؟", a:"الوعد", o:["الزجاج","الظل","الغصن"]},
+  {b:2, q:"ابن أبيك وليس أخاك. فمن هو؟", a:"أنت", o:["عمك","ابن عمك","جدك"]},
+  {b:2, q:"يسمع بلا أذن، ويتكلم بلا لسان، ويحمل صوتك إلى البعيد. فما هو؟", a:"الهاتف", o:["المرآة","الكتاب","الجدار"]}
+];
+const ER_BEAD = ["🔴","🟡","🔵","🟢","🟣","🟠"];
+const ER_GOODS = [["كيس تمر","أكياس تمر"],["كيس قهوة","أكياس قهوة"],["صرّة هيل","صُرر هيل"],["علبة زعفران","علب زعفران"],["قطعة عود","قطع عود"]];
+const erOptsOf = (R, right, wrongs) => { const set = [right]; wrongs.forEach(w => { if (set.length < 4 && !set.includes(w)) set.push(w); }); const all = erShuf(R, set); return {opts:all, v:all.indexOf(right)}; };
+Object.assign(ER_GEN, {
+  /* the money changer's scale: one coin is lighter (or heavier) than the rest; the weighings point to it */
+  coins(R, lv){
+    const N = lv <= 1 ? 6 : lv === 2 ? 8 : 9, heavy = lv >= 4, labels = erShuf(R, ER_COINL.slice(0, N)), f = erRi(R, 0, N - 1);
+    const g = N === 6 ? [2,2,2] : N === 8 ? [3,3,2] : [3,3,3], groups = [labels.slice(0, g[0]), labels.slice(g[0], g[0] + g[1]), labels.slice(g[0] + g[1])];
+    const fake = labels[f], inG = groups.findIndex(x => x.includes(fake)), W = [];
+    const res = (L, Rr) => { const lf = L.includes(fake), rf = Rr.includes(fake); if (!lf && !rf) return "توازنت الكفتان."; const side = lf ? "اليمنى" : "اليسرى"; return heavy ? `نزلت الكفة ${side}.` : `ارتفعت الكفة ${side}.`; };
+    W.push([groups[0], groups[1]]);
+    const cand = groups[inG];
+    if (cand.length >= 2){ const a = cand[0], b = cand[1]; W.push([[a], [b]]); }
+    const lines = W.map(([L, Rr]) => `<li>⚖️ في الكفة اليمنى: <b>${L.join("، ")}</b> — وفي اليسرى: <b>${Rr.join("، ")}</b>. ${res(L, Rr)}</li>`).join("");
+    const wrong = erShuf(R, labels.filter(x => x !== fake)); const o = erOptsOf(R, fake, [...cand.filter(x => x !== fake), ...wrong]);
+    return { title:"ميزان الصرّاف", html:`<p>عند الصرّاف ${n(N)} عملات ذهبية متشابهة: ${labels.slice().sort((a, b) => ER_COINL.indexOf(a) - ER_COINL.indexOf(b)).join("، ")}. واحدة منها مغشوشة ${heavy ? "<b>أثقل</b>" : "<b>أخف</b>"} من الباقي، وكل العملات الأخرى متساوية الوزن.</p><ol class="er-steps">${lines}</ol><p>ما العملة المغشوشة؟</p>`,
+      ans:{type:"choice", opts:o.opts, v:o.v},
+      hints:[heavy ? "الكفة التي فيها العملة الأثقل تنزل، والكفتان تتوازنان إذا لم تكن فيهما." : "الكفة التي فيها العملة الأخف ترتفع، والكفتان تتوازنان إذا لم تكن فيهما.", `العملة المغشوشة في المجموعة: ${cand.join("، ")}.`],
+      why:`الوزنة الأولى حصرت الغش في (${cand.join("، ")})، و${cand.length >= 2 ? "الوزنة الثانية كشفت" : "بقيت"} العملة «${fake}».` };
+  },
+  /* the merchant's ledger: buy, lose some, sell, pay the rent */
+  ledger(R, lv){
+    const items = erPick(R, [["مسبحة","مسابح"],["قنينة عطر","قناني عطر"],["سجادة صغيرة","سجادات صغيرة"],["فانوس","فوانيس"]]);
+    const k = erPick(R, lv <= 1 ? [10, 12, 20] : [15, 20, 24, 30]), buy = erRi(R, 3, lv <= 1 ? 6 : 9), sell = buy + erRi(R, 2, lv <= 1 ? 4 : 6);
+    const broken = lv >= 1 ? erRi(R, 1, Math.max(1, Math.floor(k / 6))) : 0, rent = lv >= 2 ? erPick(R, [10, 15, 20, 25]) : 0, bonus = lv >= 4 ? erRi(R, 2, 4) : 0;
+    let sell2 = sell; const val = () => (k - broken + bonus) * sell2 - k * buy - rent; while (val() <= 0) sell2++; const v = val();
+    const parts = [`اشترى التاجر ${n(k)} ${items[1]}، سعر الواحدة ${n(buy)} ريالات.`];
+    if (broken) parts.push(`انكسر منها ${n(broken)} في الطريق فلم تُبَع.`);
+    parts.push(`وباع الباقي كله، سعر الواحدة ${n(sell2)} ريالات.`);
+    if (bonus) parts.push(`ثم أعطاه جاره ${n(bonus)} ${items[1]} هدية فباعها بنفس السعر.`);
+    if (rent) parts.push(`ودفع إيجار الدكان ${n(rent)} ريالًا.`);
+    return { title:"دفتر التاجر", html:`<p>${parts.join(" ")}</p><p>كم ريالًا ربح التاجر في النهاية؟</p>`, ans:{type:"num", v},
+      hints:["الربح = كل ما دخل من البيع − كل ما دفعه التاجر.", `دخل من البيع ${n((k - broken + bonus) * sell2)} ريالًا، ودفع ${n(k * buy + rent)} ريالًا.`],
+      why:`البيع ${n((k - broken + bonus) * sell2)} − المصروف ${n(k * buy + rent)} = ${n(v)} ريالًا.` };
+  },
+  /* the riddle board: classic Arabic riddles */
+  riddle(R, lv){
+    const band = lv <= 1 ? 0 : lv <= 2 ? 1 : 2, pool = ER_RIDDLES.filter(x => x.b === band), q = erPick(R, pool), o = erOptsOf(R, q.a, erShuf(R, q.o));
+    return { title:"لوحة الألغاز", html:`<p>على لوحة خشبية في السوق كُتب لغز قديم، ومن يحلّه يأخذ ختم العطّار:</p><p class="er-big">«${q.q}»</p>`, ans:{type:"choice", opts:o.opts, v:o.v},
+      hints:["لا تأخذ الكلام على ظاهره: الألغاز تلعب بمعاني الكلمات.", band === 2 ? "فكّر في الكلمات نفسها وحروفها، أو في معنى مجازي." : "فكّر في أشياء تستعملها كل يوم."], why:`الجواب: ${q.a}.` };
+  },
+  /* the pearl necklace: what bead comes next */
+  beads(R, lv){
+    const c = erShuf(R, ER_BEAD), a = c[0], b = c[1], d = c[2], e = c[3]; let seq = [], rule = "";
+    if (lv <= 0){ for (let i = 0; i < 12; i++) seq.push([a, b][i % 2]); rule = "تتكرر حبتان بالتناوب."; }
+    else if (lv === 1){ const P = erPick(R, [[a, a, b], [a, b, d], [a, b, b, d]]); for (let i = 0; i < 13; i++) seq.push(P[i % P.length]); rule = `تتكرر المجموعة (${P.join("")}).`; }
+    else if (lv === 2){ for (let k = 1; seq.length < 16; k++){ for (let i = 0; i < k; i++) seq.push(a); seq.push(b); } rule = "يزيد عدد الحبات الأولى واحدة في كل مرة قبل الحبة الفاصلة."; }
+    else if (lv === 3){ const P = [a, b, d, b]; for (let i = 0; i < 14; i++) seq.push(P[i % 4]); rule = "النمط يذهب ثم يرجع: (" + P.join("") + ")."; }
+    else { for (let i = 0; i < 16; i++) seq.push(i % 2 ? [d, d, e][((i - 1) / 2) % 3] : [a, b][(i / 2) % 2]); rule = "سلسلتان متداخلتان: الحبات الفردية تتناوب بين لونين، والزوجية تتكرر بنمط ثلاثي."; }
+    const cut = lv === 2 ? erRi(R, 9, 14) : erRi(R, 8, seq.length - 2), next = seq[cut];
+    const o = erOptsOf(R, next, erShuf(R, c.filter(x => x !== next)));
+    return { title:"عقد اللؤلؤ", html:`<p>صائغ السوق ينظم عقدًا بنمط ثابت، لكنه توقف في المنتصف:</p><p class="er-big" dir="ltr" style="letter-spacing:2px;word-break:break-all">${seq.slice(0, cut).join("")} ❔</p><p>ما الحبة التالية في العقد؟ (العقد يُقرأ من اليسار إلى اليمين)</p>`,
+      ans:{type:"choice", opts:o.opts, v:o.v}, hints:["ابحث عن جزء يتكرر، أو عن عدد يزيد.", rule], why:`${rule} فالحبة التالية ${next}.` };
+  },
+  /* the perfumer's jars: measure an exact amount with two jars, in the fewest steps */
+  jugs(R, lv){
+    const sets = lv <= 1 ? [[3,5,4],[2,5,1],[3,4,2]] : lv === 2 ? [[3,5,1],[4,7,5],[3,7,5]] : [[5,8,2],[4,9,6],[5,7,4],[7,9,5]];
+    const [A, B, t] = erPick(R, sets);
+    const key = s => s.join(","), seen = {[key([0, 0])]:null}, q = [[0, 0]]; let hit = null;
+    const moves = ([x, y]) => { const p1 = Math.min(x, B - y), p2 = Math.min(y, A - x); return [[[A, y], `املأ الجرة الصغيرة`], [[x, B], `املأ الجرة الكبيرة`], [[0, y], `فرّغ الصغيرة`], [[x, 0], `فرّغ الكبيرة`], [[x - p1, y + p1], `صبّ من الصغيرة في الكبيرة`], [[x + p2, y - p2], `صبّ من الكبيرة في الصغيرة`]]; };
+    while (q.length && !hit){ const s = q.shift(); for (const [ns, txt] of moves(s)){ const k = key(ns); if (k in seen) continue; seen[k] = [key(s), txt]; if (ns[0] === t || ns[1] === t){ hit = ns; break; } q.push(ns); } }
+    const path = []; let k = key(hit); while (seen[k]){ path.unshift([k, seen[k][1]]); k = seen[k][0]; }
+    const v = path.length;
+    return { title:"جرار العطّار", html:`<p>عند العطّار جرّتان بلا علامات: صغيرة تسع <b>${n(A)} لترات</b>، وكبيرة تسع <b>${n(B)} لترات</b>، وبجانبه بئر ماء الورد لا ينفد.</p><p>يريد أن تكون في إحدى الجرتين <b>${n(t)} ${t > 2 ? "لترات" : t === 2 ? "لتران" : "لتر"}</b> بالضبط.</p><p>كل خطوة واحدة من: ملء جرة كاملة من البئر، أو تفريغ جرة كاملة، أو الصب من جرة في الأخرى حتى تمتلئ الثانية أو تفرغ الأولى.</p><p>ما <b>أقل عدد من الخطوات</b> يحتاجه؟</p>`,
+      ans:{type:"num", v}, hints:["اكتبوا محتوى الجرتين بعد كل خطوة مثل (0، 0) ثم (" + A + "، 0)… وجرّبوا البدء بالصغيرة مرة وبالكبيرة مرة.", `الخطوة الأولى في أقصر حل: ${path[0][1]}.`],
+      why:`أقصر حل ${n(v)} خطوات: ${path.map(([s, tx]) => tx + " (" + s.replace(",", "، ") + ")").join(" ← ")}.` };
+  },
+  /* barter: exchange rates along a chain of goods */
+  barter(R, lv){
+    const L = lv <= 1 ? 2 : lv <= 3 ? 3 : 4, goods = erShuf(R, ER_GOODS).slice(0, L + 1), rates = [];
+    let num = 1, den = 1;
+    for (let i = 0; i < L; i++){ const a = lv <= 1 ? 1 : erPick(R, [1, 2, 2, 3]), b = erRi(R, 2, 5) * (a === 1 ? 1 : 1); if (b === a) continue; rates.push([a, b]); num *= b; den *= a; }
+    while (rates.length < L){ rates.push([1, erRi(R, 2, 4)]); num *= rates[rates.length - 1][1]; }
+    const g = (x, y) => y ? g(y, x % y) : x, gg = g(num, den); num /= gg; den /= gg;
+    const m = den * erRi(R, 1, lv <= 1 ? 3 : 2), v = m * num / den;
+    const line = (i) => { const [a, b] = rates[i], A = goods[i + 1], B = goods[i]; return `<li>${n(a)} ${a === 1 ? A[0] : A[1]} = ${n(b)} ${b === 1 ? B[0] : B[1]}</li>`; };
+    const last = goods[L];
+    return { title:"بسطة المقايضة", html:`<p>في سوق المقايضة لا أحد يدفع نقدًا. هذه أسعار اليوم:</p><ul class="er-steps">${rates.map((_, i) => line(i)).join("")}</ul><p>كم <b>${goods[0][1]}</b> تأخذ مقابل <b>${n(m)} ${m === 1 ? last[0] : last[1]}</b>؟</p>`,
+      ans:{type:"num", v}, hints:["ابدأ من آخر سلعة وانزل خطوة خطوة إلى الأولى.", `كل ${last[0]} يساوي ${num % den ? n(num) + " ÷ " + n(den) : n(num / den)} من ${goods[0][1]}.`], why:`${n(m)} × ${num % den ? "(" + n(num) + " ÷ " + n(den) + ")" : n(num / den)} = ${n(v)}.` };
+  },
+  /* the ticket window lock: a code from right/wrong-place clues */
+  ticket(R, lv){
+    const L = lv >= 4 ? 4 : 3, all = [];
+    const rec = (a) => { if (a.length === L){ if (a[0] !== 0) all.push(a.slice()); return; } for (let d = 0; d <= 9; d++) if (!a.includes(d)){ a.push(d); rec(a); a.pop(); } }; rec([]);
+    const fb = (g, s) => { let p = 0, w = 0; g.forEach((d, i) => { if (s[i] === d) p++; else if (s.includes(d)) w++; }); return [p, w]; };
+    let sol, clues;
+    for (let tries = 0; tries < 60; tries++){
+      sol = erPick(R, all); clues = []; let cand = all.slice();
+      for (let g = 0; g < 300 && cand.length > 1 && clues.length < (L === 3 ? 6 : 7); g++){
+        const guess = erPick(R, all), f = fb(guess, sol); if (f[0] === L) continue; if (lv <= 1 && f[0] + f[1] === 0 && clues.some(c => c.f[0] + c.f[1] === 0)) continue;
+        const nc = cand.filter(c => { const h = fb(guess, c); return h[0] === f[0] && h[1] === f[1]; }); if (nc.length < cand.length && nc.length < cand.length * .8){ clues.push({guess, f}); cand = nc; } }
+      if (cand.length === 1) break;
+      if (tries === 59){ for (let g = 0; g < 4000 && cand.length > 1; g++){ const guess = erPick(R, all), f = fb(guess, sol); if (f[0] === L) continue; const nc = cand.filter(c => { const h = fb(guess, c); return h[0] === f[0] && h[1] === f[1]; }); if (nc.length < cand.length){ clues.push({guess, f}); cand = nc; } } } }
+    const ar = ["","رقم واحد","رقمان","ثلاثة أرقام","أربعة أرقام"];
+    const adj = c => c === 1 ? "صحيح" : c === 2 ? "صحيحان" : "صحيحة", pl = c => c === 1 ? "مكانه" : c === 2 ? "مكانيهما" : "أماكنها";
+    const say = ([p, w]) => !p && !w ? "لا يوجد أي رقم صحيح" : [p ? `${ar[p]} ${adj(p)} وفي ${pl(p)}` : "", w ? `${ar[w]} ${adj(w)} لكن في غير ${pl(w)}` : ""].filter(Boolean).join("، و");
+    const v = +sol.join("");
+    return { title:"شبّاك التذاكر", html:`<p>شبّاك التذاكر مقفل بقفل من ${n(L)} أرقام مختلفة (لا يبدأ بصفر). جرّب الموظف عدة أرقام وكتب ما حدث:</p><ul class="er-steps er-tick">${clues.map(c => `<li><b dir="ltr">${c.guess.join(" ")}</b> ← ${say(c.f)}</li>`).join("")}</ul><p>ما رقم القفل؟</p>`,
+      ans:{type:"num", v}, hints:["ابدأ بالسطر الذي لا يوجد فيه أي رقم صحيح: احذف أرقامه من كل الاحتمالات.", `رقم القفل يبدأ بـ ${sol[0]}.`], why:`رقم القفل ${v}، ويطابق كل الملاحظات.` };
+  },
+  /* the railway map: the quickest way from Madinah to Damascus */
+  route(R, lv, o = {}){
+    const N = lv <= 1 ? 5 : 6, names = N === 5 ? (o.names5 || ["المدينة","تبوك","معان","عمّان","دمشق"]) : (o.names || ["المدينة","تبوك","معان","عمّان","درعا","دمشق"]), xy = N === 5 ? [[30,90],[120,40],[120,140],[210,90],[300,90]] : [[25,90],[105,35],[105,145],[195,35],[195,145],[285,90]];
+    const E = N === 5 ? [[0,1],[0,2],[1,2],[1,3],[2,3],[3,4],[2,4]] : [[0,1],[0,2],[1,2],[1,3],[2,4],[3,4],[1,4],[3,5],[4,5]];
+    const w = E.map(() => erRi(R, 2, 9)), adj = names.map(() => []); E.forEach(([a, b], i) => { adj[a].push([b, w[i]]); adj[b].push([a, w[i]]); });
+    const dist = names.map(() => Infinity), prev = names.map(() => -1), done = new Set(); dist[0] = 0;
+    while (done.size < N){ let u = -1; dist.forEach((d, i) => { if (!done.has(i) && (u < 0 || d < dist[u])) u = i; }); done.add(u); adj[u].forEach(([x, c]) => { if (dist[u] + c < dist[x]){ dist[x] = dist[u] + c; prev[x] = u; } }); }
+    const v = dist[N - 1], path = []; for (let u = N - 1; u >= 0; u = prev[u]) path.unshift(names[u]);
+    const svg = `<svg viewBox="0 0 310 180" class="er-route" role="img" aria-label="خريطة السكة">${E.map(([a, b], i) => { const [x1, y1] = xy[a], [x2, y2] = xy[b]; return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#8B6B43" stroke-width="3" stroke-dasharray="7 4"/><text x="${(x1 + x2) / 2}" y="${(y1 + y2) / 2 - 5}" text-anchor="middle" font-size="15" font-weight="700" fill="#C93400" paint-order="stroke" stroke="#FBF7EF" stroke-width="4">${w[i]}</text>`; }).join("")}${xy.map(([x, y], i) => `<circle cx="${x}" cy="${y}" r="9" fill="${i === 0 || i === N - 1 ? "#0B7D65" : "#26323E"}"/><text x="${x}" y="${y + 25}" text-anchor="middle" font-size="12.5" font-weight="700" fill="#26323E">${names[i]}</text>`).join("")}</svg>`;
+    return { title:"خريطة السكة", html:`<p>هذه خريطة سكة الحجاز، والرقم على كل خط هو عدد الساعات بين المحطتين. القطار يستطيع أن يسير في أي اتجاه.</p>${svg}<p>ما <b>أقل عدد من الساعات</b> للوصول من المدينة إلى دمشق؟</p>`,
+      ans:{type:"num", v}, hints:["اكتب بجانب كل محطة أقل وقت للوصول إليها، وابدأ من المحطات القريبة من المدينة.", `أقصر طريق يمر بـ ${path[1]}.`], why:`أقصر طريق: ${path.join(" ← ")} = ${n(v)} ساعة.` };
+  },
+  /* the stick's shadow: find the way home from the sun */
+  shadow(R, lv){
+    const marks = erShuf(R, ["الخيمة","السيارة","الكثيب الكبير","شجرة الغضا"]), times = lv <= 1 ? ["morning"] : lv === 2 ? ["morning","afternoon"] : ["morning","afternoon","noon"];
+    const tm = erPick(R, times), shDir = tm === "morning" ? 3 : tm === "afternoon" ? 1 : 0; // shadow direction: 0 N, 1 E, 2 S, 3 W
+    const k = erRi(R, 0, 3), dirOf = i => ((i - k) % 4 + 4) % 4 + shDir; // mark i sits a quarter turn clockwise per step
+    const D = ["الشمال","الشرق","الجنوب","الغرب"], goal = lv <= 1 ? (shDir + 2) % 4 : erRi(R, 0, 3);
+    const ans = marks.findIndex((_, i) => dirOf(i) % 4 === goal), tt = tm === "morning" ? "الساعة الثامنة صباحًا" : tm === "afternoon" ? "الساعة الرابعة عصرًا" : "وقت الظهر (في الشتاء)";
+    const o = erOptsOf(R, marks[ans], marks.filter((_, i) => i !== ans));
+    return { title:"ظل العصا", html:`<p>غرزتم عصا في الرمل ${tt}. حولكم أربعة معالم بترتيب عقارب الساعة (كل معلم ربع دورة عن الذي قبله): <b>${marks.join("، ثم ")}</b>.</p><p>ظل العصا يمتد نحو <b>${marks[k]}</b>.</p><p>عنيزة في جهة <b>${D[goal]}</b>. نحو أي معلم تمشون؟</p>`,
+      ans:{type:"choice", opts:o.opts, v:o.v}, hints:["الشمس تشرق من الشرق وتغرب في الغرب، والظل دائمًا في الجهة المعاكسة للشمس. وفي الظهر شتاءً تكون الشمس جنوبًا.", `الظل الآن يشير إلى ${D[shDir]}.`],
+      why:`الظل ${tt} يشير إلى ${D[shDir]}، فـ«${marks[k]}» في ${D[shDir]}، و«${marks[ans]}» في ${D[goal]}.` };
+  },
+  /* the car engine: the fan's gear train (the gears puzzle, told in the desert) */
+  engine(R, lv){ const P = ER_GEN.gears(R, lv); P.title = "محرك السيارة"; P.html = `<p>فتحتم غطاء المحرك، والمروحة لا تدور إلا إذا عرفتم اتجاه آخر ترس في السلسلة.</p>` + P.html; return P; },
+  /* the signal mirror: bounce the sun to the rescue team (the mirrors puzzle, told in the desert) */
+  signal(R, lv){ const P = ER_GEN.mirrors(R, lv); P.title = "مرآة الإشارة"; P.html = P.html.replace("أشعلتم المصباح فخرج شعاع ضوء يمشي نحو اليمين", "وجّهتم ضوء الشمس بمرآة السيارة فخرج شعاع يمشي نحو اليمين").replace("من أي فتحة يخرج الشعاع من الصندوق؟", "من أي فتحة يخرج الشعاع ليراه فريق الإنقاذ؟"); return P; },
+  /* letters in the sand (the extra-letter puzzle, told in the desert) */
+  sandword(R, lv){ const P = ER_GEN.anagram(R, lv); P.title = "حروف على الرمل"; P.html = `<p>على الرمل كتب راعي إبل حروفًا ومشى، وتحتها سهم يدل على مكان مفتاح الصندوق.</p>` + P.html; return P; },
+  /* the fuel gauge */
+  fuel(R, lv){
+    const per = erPick(R, lv <= 1 ? [10, 12, 15] : [8, 12, 14, 16]), left = erPick(R, [12, 18, 24, 30, 36]);
+    if (lv <= 1){ const km = left * 100 / per; if (Number.isInteger(km)){} }
+    let v, html, h2, why;
+    if (lv <= 1){ const L = per * erRi(R, 1, 3); const km = L * 100 / per;
+      html = `<p>عداد الوقود يقول: باقي في الخزان <b>${n(L)} لترًا</b>. السيارة تصرف <b>${n(per)} لترًا لكل 100 كم</b>.</p><p>كم كيلومترًا تقدر السيارة تمشي قبل ما يخلص الوقود؟</p>`; v = km; h2 = `كل ${n(per)} لترًا = 100 كم.`; why = `${n(L)} ÷ ${n(per)} × 100 = ${n(km)} كم.`; }
+    else { const D = erPick(R, [60, 80, 90, 120, 150]), sand = lv >= 4 ? erPick(R, [20, 30]) : 0, need = D * per / 100 + sand * per / 100; const L = Math.max(4, Math.floor(need) - erRi(R, 4, 12));
+      v = Math.ceil(need - L);
+      html = `<p>عنيزة تبعد <b>${n(D)} كم</b>. السيارة تصرف <b>${n(per)} لترًا لكل 100 كم</b>${sand ? `، لكنها في الرمل تصرف الضعف، وأول ${n(sand)} كم من الطريق كلها رمل` : ""}. في الخزان <b>${n(L)} لترًا</b>.</p><p>كم لترًا على الأقل تحتاجون تضيفونه من جالون الطوارئ حتى توصلون؟ (قرّبوا لأقرب لتر كامل للأعلى)</p>`;
+      h2 = sand ? `الطريق يحتاج ${n(D * per / 100)} لترًا، والرمل يضيف ${n(sand * per / 100)} لترًا.` : `الطريق كله يحتاج ${n(D * per / 100)} لترًا.`; why = `تحتاجون ${n(need)} لترًا، ومعكم ${n(L)}، فالناقص ${n(v)} لترًا.`; }
+    return { title:"عداد الوقود", html, ans:{type:"num", v}, hints:["كل 100 كم تصرف السيارة الكمية المكتوبة بالضبط.", h2], why };
+  },
+  /* the water skins: how many full days */
+  water(R, lv){
+    const P = erRi(R, 3, 6), q = erPick(R, [2, 3]), skins = erRi(R, 3, 6), L = erPick(R, [5, 8, 10]), car = lv >= 2 ? erPick(R, [4, 6, 8]) : 0, spill = lv >= 4 ? erPick(R, [3, 5]) : 0;
+    const tot = skins * L - car - spill, v = Math.floor(tot / (P * q));
+    if (v < 1) return ER_GEN.water(R, lv);
+    return { title:"قِرب الماء", html:`<p>معكم <b>${n(skins)} قِرب</b>، في كل قربة <b>${n(L)} لترات</b>. عددكم <b>${n(P)}</b>، وكل واحد يحتاج <b>${n(q)} لترات في اليوم</b>.</p>${car ? `<p>والمبرّد في السيارة يحتاج ${n(car)} لترات مرة واحدة حتى يشتغل المحرك.</p>` : ""}${spill ? `<p>وانسكب من إحدى القرب ${n(spill)} لترات.</p>` : ""}<p>كم <b>يومًا كاملًا</b> يكفيكم الماء؟</p>`,
+      ans:{type:"num", v}, hints:["احسبوا كل الماء أولًا، ثم اطرحوا ما سيُصرف مرة واحدة.", `الفريق كله يشرب ${n(P * q)} لترًا في اليوم.`], why:`${n(tot)} لترًا ÷ ${n(P * q)} = ${n(v)} أيام كاملة.` };
+  },
+  /* Reem's diary: the first letter of each line hides a word */
+  diary(R, lv){
+    const L = {"أ":["أحيانًا أحس أن لا أحد يسمعني.","أمي تسألني كل يوم: وش فيك؟"], "م":["مرّ أسبوع ما كلمت فيه أحدًا.","مكاني المفضل كان الحديقة مع صديقاتي."], "ل":["ليتني أقدر أقول اللي في قلبي.","لوحتي القديمة ما كملتها."],
+      "ن":["نسيت متى آخر مرة ضحكت من قلب.","نمت اليوم بدري وما تعشيت."], "و":["وصلتني رسالة من صديقتي وما رديت.","ودّي أرجع مثل أول."], "ر":["رسمت اليوم شجرة صغيرة.","رحت المدرسة وما تكلمت مع أحد."],
+      "ص":["صديقتي سارة كانت تفهمني بدون كلام.","صوت المطر يريحني."], "ب":["بابي مقفل من الصبح.","بكيت قبل النوم."], "ف":["فتحت الشباك أشم الهواء.","فكرت أكلم أختي."], "ح":["حتى أكلي المفضل ما صار له طعم.","حلمت أني في رحلة مع أهلي."],
+      "س":["ساعات أحس أني لحالي.","سمعت أختي تسأل عني."], "ا":["اليوم كان ثقيلًا علي.","الكل مشغول عني."]};
+    const words = ["أمل","نور","صبر","فرح","سلام"], w = erPick(R, words), letters = [...w].map(c => c === "ا" ? "ا" : c);
+    const days = ["السبت","الأحد","الاثنين","الثلاثاء","الأربعاء"], lines = letters.map((c, i) => ({d:days[i], t:erPick(R, L[c])}));
+    const shown = lv >= 2 ? erShuf(R, lines) : lines, o = erOptsOf(R, w, erShuf(R, words.filter(x => x !== w)));
+    return { title:"دفتر المذكرات", html:`<p>على مكتب ريم دفتر مذكرات صغير${lv >= 2 ? "، وصفحاته مبعثرة" : ""}. كتبت في أوله: «الكلمة اللي أحتاجها مخبّاة في أول حرف من كل سطر».</p><ul class="er-steps er-diary">${shown.map(x => `<li><b>${x.d}:</b> ${x.t}</li>`).join("")}</ul><p>ما الكلمة المخبّأة؟</p>`,
+      ans:{type:"choice", opts:o.opts, v:o.v}, hints:[lv >= 2 ? "رتّبوا الصفحات بأيام الأسبوع، بداية من السبت." : "اقرأوا أول حرف من كل سطر بالترتيب.", `الكلمة تبدأ بحرف «${letters[0]}».`], why:`أول الحروف بالترتيب تكوّن «${w}».` };
+  },
+  /* the photo wall: who stands in which frame */
+  photos(R, lv){
+    const F = erShuf(R, ["سارة","نورة","هيا","لمى"]), N = 4, perm = erShuf(R, F), all = [];
+    const rec = (a, rest) => { if (!rest.length){ all.push(a.slice()); return; } rest.forEach((x, i) => { a.push(x); rec(a, rest.filter((_, j) => j !== i)); a.pop(); }); }; rec([], F);
+    const pos = (p, x) => p.indexOf(x), mk = [];
+    const kinds = [p => { const a = erPick(R, F); return {t:`${a} في الإطار رقم ${n(pos(perm, a) + 1)}.`, f:q => pos(q, a) === pos(perm, a)}; },
+      p => { const a = erPick(R, F); let k; do { k = erRi(R, 0, 3); } while (k === pos(perm, a)); return {t:`${a} ليست في الإطار رقم ${n(k + 1)}.`, f:q => pos(q, a) !== k}; },
+      p => { const [a, b] = erShuf(R, F); return pos(perm, a) < pos(perm, b) ? {t:`صورة ${a} قبل صورة ${b} (من اليمين).`, f:q => pos(q, a) < pos(q, b)} : {t:`صورة ${b} قبل صورة ${a} (من اليمين).`, f:q => pos(q, b) < pos(q, a)}; },
+      p => { const [a, b] = erShuf(R, F), adj = Math.abs(pos(perm, a) - pos(perm, b)) === 1; return {t:`${a} و${b} ${adj ? "متجاورتان" : "ليستا متجاورتين"}.`, f:q => (Math.abs(pos(q, a) - pos(q, b)) === 1) === adj}; }];
+    let cand = all.slice(), clues = [];
+    for (let g = 0; g < 200 && cand.length > 1; g++){ const kk = lv <= 0 ? erPick(R, [kinds[0], kinds[1], kinds[2]]) : erPick(R, lv >= 3 ? [kinds[1], kinds[2], kinds[3], kinds[3]] : kinds), c = kk(); const nc = cand.filter(c.f); if (nc.length < cand.length && nc.length){ clues.push(c); cand = nc; } }
+    const ask = erRi(R, 0, 3), right = perm[ask], o = erOptsOf(R, right, F.filter(x => x !== right));
+    return { title:"جدار الصور", html:`<p>على جدار ريم أربع صور لها مع صديقاتها في أربعة إطارات مرقّمة من اليمين (1 إلى 4)، وفي كل إطار صديقة واحدة. أختها تتذكر:</p><ul class="er-steps">${clues.map(c => `<li>${c.t}</li>`).join("")}</ul><p>من في الإطار رقم ${n(ask + 1)}؟</p>`,
+      ans:{type:"choice", opts:o.opts, v:o.v}, hints:["ارسموا أربعة مربعات وجرّبوا الأسماء فيها واحدًا واحدًا.", `${perm[0]} في الإطار الأول.`], why:`الترتيب من اليمين: ${perm.join("، ")}.` };
+  },
+  /* Reem's phone: the code from right/wrong-place clues */
+  phone(R, lv){ const P = ER_GEN.ticket(R, Math.min(lv, 3)); P.title = "هاتف ريم"; P.html = P.html.replace(/شبّاك التذاكر مقفل بقفل من (.*?) أرقام مختلفة \(لا يبدأ بصفر\)\. جرّب الموظف عدة أرقام وكتب ما حدث:/, "هاتف ريم مقفل برمز من $1 أرقام مختلفة (لا يبدأ بصفر). أختها جرّبت عدة رموز وكتبت ما حدث:").replace("ما رقم القفل؟", "ما رمز الهاتف؟"); return P; },
+  /* the friends' messages: which reply truly helps */
+  reply(R, lv){
+    const S = [
+      {m:"«تعبت… محد يحس فيني»", a:"«أنا هنا وأسمعك. وش اللي صاير معك؟ خذي راحتك، ما راح أتركك»", o:["«لا تكبرين السالفة، كلنا نتعب»","«قومي نطلع السوق وانسي»","«أنتِ دايم كذا تحبين الدراما»"]},
+      {m:"«أحس إني عبء على الكل»", a:"«أبدًا، وجودك فارق معي. ودّي أفهم وش اللي مضايقك؟ وخلينا نكلم أحد نثق فيه يساعدنا»", o:["«طيب، بس لا تزعلين أحد»","«عادي، الكل يحس كذا»","«روحي نامي وبكرة تنسين»"]},
+      {m:"«ما أبي أكلم أحد اليوم»", a:"«أحترم هذا، بس أبيك تعرفين إني موجودة. بمرّك بكرة ولو بس نجلس سوا»", o:["«براحتك، أجل لا تكلميني أبد»","«ليش زعلانة مني؟»","«أنتِ ما تحبين أحد»"]},
+      {m:"«كل شي صاير ثقيل علي، حتى الدراسة»", a:"«أفهمك، وهذا شعور صعب. وش رايك نكلم المرشدة أو أمك سوا؟ ما يحتاج تشيلين الحمل لحالك»", o:["«ذاكري وبس، الدراسة أهم شي»","«أنا بعد عندي اختبارات، لا تشكين»","«أكيد لأنك ما تنامين زين»"]}];
+    const s = erPick(R, S), o = erOptsOf(R, s.a, erShuf(R, s.o));
+    return { title:"رسائل الأصدقاء", html:`<p>فتحتم هاتف ريم، وآخر رسالة كتبتها لصديقتها:</p><p class="er-big">${s.m}</p><p>أي ردّ يساعد ريم فعلًا ويخليها تحس إنها مو لحالها؟</p>`,
+      ans:{type:"choice", opts:o.opts, v:o.v}, hints:["الرد اللي يساعد: يسمع بدون حكم، ويقول «أنا معك»، ويقترح مساعدة من شخص نثق فيه.", "ابتعدوا عن الردود اللي تستهين بالشعور أو تلوم أو تغيّر الموضوع."],
+      why:`الرد الصحيح يسمع ريم، ويطمئنها أنها ليست وحدها، ويقترح أن يطلبوا المساعدة معًا من شخص كبير يثقون فيه.` };
+  },
+  /* the memory box: an age puzzle */
+  ages(R, lv){
+    const r = erRi(R, 12, 17);
+    if (lv <= 1){ const a = erRi(R, 2, 7); return { title:"صندوق الذكريات", html:`<p>في صندوق الذكريات بطاقة عيد ميلاد كتبتها أخت ريم: «مجموع عمري وعمرك ${n(2 * r + a)} سنة، وأنا أكبر منك بـ ${n(a)} سنوات».</p><p>كم عمر ريم؟</p>`, ans:{type:"num", v:r},
+      hints:["لو طرحتم الفرق من المجموع يبقى ضعف عمر ريم.", `${n(2 * r + a)} − ${n(a)} = ${n(2 * r)}.`], why:`(${n(2 * r + a)} − ${n(a)}) ÷ 2 = ${n(r)}.` }; }
+    let a, b; do { b = erRi(R, 2, 8); a = r - b; } while (a < 2 || r - b < 2);
+    return { title:"صندوق الذكريات", html:`<p>في صندوق الذكريات صورة قديمة مكتوب خلفها: «قبل ${n(b)} سنوات كان عمري ضعف عمر ريم». والكاتبة أخت ريم، وهي أكبر من ريم بـ ${n(a)} سنوات.</p><p>كم عمر ريم الآن؟</p>`, ans:{type:"num", v:r},
+      hints:["قبل تلك السنوات كان الفرق بينهما نفسه، وكان عمر الأخت ضعف عمر ريم.", "إذا كانت الأخت ضعف ريم، فالفرق بينهما يساوي عمر ريم وقتها."], why:`قبل ${n(b)} سنوات كان عمر ريم ${n(a)} (يساوي الفرق)، فعمرها الآن ${n(a)} + ${n(b)} = ${n(r)}.` };
+  },
+  /* the neighbourhood map: the quickest walk to Reem's house */
+  walk(R, lv){ const P = ER_GEN.route(R, lv, {names:["بيتكم","المسجد","المدرسة","الحديقة","المكتبة","بيت ريم"], names5:["بيتكم","المسجد","الحديقة","المكتبة","بيت ريم"]}); P.title = "خريطة الحي";
+    P.html = P.html.replace("هذه خريطة سكة الحجاز، والرقم على كل خط هو عدد الساعات بين المحطتين. القطار يستطيع أن يسير في أي اتجاه.", "هذه خريطة الحي، والرقم على كل طريق عدد الدقائق مشيًا. تقدرون تمشون في أي اتجاه.").replace("ما <b>أقل عدد من الساعات</b> للوصول من المدينة إلى دمشق؟", "ما <b>أقل عدد من الدقائق</b> للوصول من بيتكم إلى بيت ريم؟");
+    P.why = P.why.replace("ساعة.", "دقيقة."); return P; }
+});
+
+/* ---------- the stories ---------- */
 const ER_ROOMS = [
   { key:"r1", name:"بيت النوخذة", tag:"القصة الأولى", time:"قبل الغروب",
     intro:["في بيت قديم على ساحل الخليج عاش النوخذة سالم، أشهر ربابنة الغوص في زمانه. قبل رحيله أخفى «الدانة»، أكبر لؤلؤة وجدها في حياته، داخل صندوقه الخشبي.",
@@ -8395,7 +8656,7 @@ const ER_ROOMS = [
            "فجأة أعلنت نَواة الإغلاق التام: الأبواب ستُقفل والبيانات ستُمحى. الطريقة الوحيدة لإيقافها رمز من ست خانات محفوظ في خزنة المختبر.",
            "وانقطعت الكهرباء. لا يضيء المختبر إلا مصباح كل لاعب وأضواء الطوارئ الحمراء، والأنوار تنطفئ فجأة بين حين وآخر… والروبوت المساعد لم يعد يبتسم.",
            "لوحة دوائر، وخزائن عيّنات، وشاشة رموز، وروبوت يراقبكم، ومسارات خادم، ومربع سحري. ابقوا معًا… فالوقت يمضي."],
-    outro:"توقّف العدّ التنازلي وانطفأت الأضواء الحمراء. قالت نَواة بصوت هادئ: «أثبتم أن العقول حين تتعاون أقوى من أي آلة. المعرفة الآن بأمان». وعلى الشاشة الأخيرة ظهر مخطط ورشة قديمة على الطرف الآخر من الإشارة…",
+    outro:"توقّف العدّ التنازلي وانطفأت الأضواء الحمراء. قالت نَواة بصوت هادئ: «أثبتم أن العقول حين تتعاون أقوى من أي آلة. المعرفة الآن بأمان». وبعد كل هذا التعب قررتم ترتاحون برحلة برية إلى نفود الغضا…",
     st:[
       {id:"r3a", name:"لوحة الدوائر", gen:"gates", model:"panel", pos:[-1.6, -4.05]},
       {id:"r3b", name:"خزائن العيّنات", gen:"deduce", model:"lockers", pos:[-5.0, -1.4]},
@@ -8404,25 +8665,56 @@ const ER_ROOMS = [
       {id:"r3e", name:"خريطة الشبكة", gen:"paths", model:"holo", pos:[-2.2, 1.2]},
       {id:"r3f", name:"خادم نَواة", gen:"magic", model:"server", pos:[4.9, -3.0], needs:"card"}],
     chest:[0.6, 3.0], know:[[-4.6,3.4],[1.2,-3.6]] },
-  { key:"r4", name:"ورشة الجزري", tag:"القصة الرابعة", time:"قبل أن يفرغ خزان الماء",
-    intro:["على الشاشة الأخيرة في مختبر نَواة ظهر مخطط قديم لورشة على الطرف الآخر من الإشارة: ورشة المهندس الجزري، صانع الساعات المائية والآلات المتحركة قبل ثمانية قرون.",
-           "في وسط الورشة ساعة الفيل الشهيرة، يقطر منها الماء قطرة بعد قطرة. وحين يفرغ خزانها يُقفل صندوق الجزري إلى الأبد.",
-           "هنا لا تكفي الأرقام: تروس تدور، وضوء ينعكس، وحروف مبعثرة، وكلمات تتحوّل، وورقة تُطوى. فكّروا بالحرف والحركة والضوء."],
-    outro:"دارت التروس كلها معًا ورنّ جرس ساعة الفيل، وانفتح صندوق الجزري. في داخله رسالة بخطّه: «العلم بناءٌ يُكمله كل جيل… وأنتم الآن من بُناته».",
+  { key:"r4", name:"كشتة الغضا", tag:"القصة الرابعة", time:"قبل غروب الشمس",
+    intro:["رحلة برية مع الأصدقاء في نفود الغضا بعنيزة. الرمل ذهبي وشجر الغضا في كل مكان… حتى غاصت السيارة في الرمل وانطفأ المحرك.",
+           "الجوالات بلا شبكة، والشمس تميل للغروب. في استراحة البر القديمة صندوق طوارئ مقفل فيه جهاز لاسلكي، ورمزه من ست خانات.",
+           "ظل العصا، ومحرك السيارة، وعداد الوقود، ومرآة الإشارة، وقِرب الماء، وحروف على الرمل. فكّروا كأهل البر: بالشمس والظل والحساب."],
+    outro:"انفتح صندوق الطوارئ، وتكلمتم باللاسلكي مع فرقة الإنقاذ، ودليتوهم بالظل والإشارة بالمرآة. قبل الغروب بدقائق وصلت سياراتهم وسحبت سيارتكم من الرمل. الحمد لله على السلامة!",
+    lose:"غابت الشمس قبل أن ينفتح الصندوق، لكن فرقة الإنقاذ شافت نار الحطب من بعيد ووصلت لكم. درس البر الأول: خبّروا أهلكم بمكانكم دائمًا قبل الطلعة.",
     st:[
-      {id:"r4a", name:"تروس الساعة", gen:"gears", model:"gears", pos:[-1.6, -4.05]},
-      {id:"r4b", name:"مرايا الضوء", gen:"mirrors", model:"mirrors", pos:[-5.0, -1.4], needs:"lamp"},
-      {id:"r4c", name:"مخطوطة الجذور", gen:"roots", model:"lectern", pos:[2.2, -1.2]},
-      {id:"r4d", name:"سلّم الكلمات", gen:"ladder", model:"wordladder", pos:[4.6, 2.0], gives:"lamp"},
-      {id:"r4e", name:"المكعّب المطوي", gen:"cube", model:"cubetable", pos:[-2.2, 1.2]},
-      {id:"r4f", name:"الحرف الزائد", gen:"anagram", model:"lettertray", pos:[4.9, -3.0]}],
-    chest:[0.6, 3.0], know:[[-4.6,3.4],[1.2,-3.3]] }
+      {id:"r4a", name:"ظل العصا", gen:"shadow", model:"stick", pos:[-1.6, -3.2]},
+      {id:"r4b", name:"محرك السيارة", gen:"engine", model:"engine", pos:[-4.6, -1.3], gives:"mirror"},
+      {id:"r4c", name:"عداد الوقود", gen:"fuel", model:"jerry", pos:[2.2, -1.2]},
+      {id:"r4d", name:"مرآة الإشارة", gen:"signal", model:"mirrors", pos:[4.6, 2.0], needs:"mirror"},
+      {id:"r4e", name:"قِرب الماء", gen:"water", model:"skins", pos:[-2.0, 1.2]},
+      {id:"r4f", name:"حروف على الرمل", gen:"sandword", model:"sandword", pos:[4.6, -2.9]}],
+    chest:[0.8, 3.0], know:[[-4.0,3.4],[1.2,-3.3]] },
+  { key:"r5", name:"سوق الذهب", tag:"القصة الخامسة", time:"قبل أن يُغلق السوق",
+    intro:["في طريق رجوعكم من الغضا مررتم بسوق الذهب القديم، وعرفتم أن فيه صندوقًا تركه التجار أمانةً قبل مئة عام، يُفتح بختم تاجر قديم.",
+           "السوق يُغلق أبوابه عند أذان المغرب، ومن يبقَ داخله يبقَ حتى الصباح. والصندوق لا يُفتح إلا برمز من ست خانات.",
+           "ميزان الصرّاف، ودفتر التاجر، ولوحة الألغاز، وعقد اللؤلؤ، وجرار العطّار، وبسطة المقايضة. فكّروا كالتجار: بالوزن والحساب والحيلة."],
+    outro:"انفتح صندوق التجار، ورجعت الأمانات لأهلها بعد مئة عام. وأنتم تطلعون من السوق وصلتكم رسالة من صديقتكم ريم: «تعبت… محد يحس فيني». ما ترددتم لحظة: كلكم على بيتها.",
+    st:[
+      {id:"r5a", name:"ميزان الصرّاف", gen:"coins", model:"scale", pos:[3.4, -2.9]},
+      {id:"r5b", name:"دفتر التاجر", gen:"ledger", model:"desk", pos:[-2.6, 0.6]},
+      {id:"r5c", name:"لوحة الألغاز", gen:"riddle", model:"sign", pos:[0.4, -4.05]},
+      {id:"r5d", name:"عقد اللؤلؤ", gen:"beads", model:"beads", pos:[-4.6, -3.0]},
+      {id:"r5e", name:"جرار العطّار", gen:"jugs", model:"jugs", pos:[4.5, 1.6], gives:"seal"},
+      {id:"r5f", name:"بسطة المقايضة", gen:"barter", model:"stall", pos:[-5.0, 2.6], needs:"seal"}],
+    chest:[1.0, 2.7], know:[[5.0,-0.9],[-1.6,-3.7]] },
+  { key:"r6", name:"غرفة ريم", tag:"القصة السادسة", time:"قبل أن يحلّ الليل", opened:"انفتح الباب!", chestWord:"الباب",
+    intro:["ريم صديقتكم من أيام المدرسة. من أسابيع صارت هادئة، تنعزل عن الكل ولا ترد على أحد. واليوم أرسلت لصديقتها: «تعبت… محد يحس فيني».",
+           "أمها قلقة، وريم مقفلة باب غرفتها من الصبح. مهمتكم أن توصلوا لقلبها قبل الليل: تفهمون ما تمر به، وتجمعون ما يطمئنها، وتفتحون الباب بهدوء ومحبة.",
+           "دفتر المذكرات، وجدار الصور، وهاتفها، ورسائل الأصدقاء، وصندوق الذكريات، وخريطة الحي. كل لغز يقرّبكم منها خطوة، وأهم شيء أن تحس أنها ليست وحدها."],
+    outro:"انفتح الباب وجلستم حول ريم. ما قلتم كلامًا كثيرًا، بل سمعتموها حتى ارتاحت. ثم كلّمتم أمها ومختصّة نفسية، وصار لريم موعد بكرة. قالت ريم: «ما كنت أدري إن فيه أحد يهتم». إذا مرّ أحد قريب منكم بضيقة: اسمعوه، ولا تتركوه وحده، وخبّروا شخصًا كبيرًا تثقون فيه. وللاستشارة النفسية: 920033360، ووزارة الصحة على مدار الساعة: 937.",
+    lose:"وصلت أم ريم والمرشدة الطلابية قبلكم، وريم الآن بخير وفي أيدٍ أمينة، ومعها مختصّة تساعدها. لكن ريم سألت عنكم، كانت تتمنى أن تسمع أصواتكم. لا تترددوا أبدًا في السؤال عن صديق تحسون أنه يمر بضيقة. وللاستشارة النفسية: 920033360.",
+    st:[
+      {id:"r6a", name:"دفتر المذكرات", gen:"diary", model:"desk", pos:[-1.6, -1.0]},
+      {id:"r6b", name:"جدار الصور", gen:"photos", model:"photos", pos:[1.6, -4.05]},
+      {id:"r6c", name:"هاتف ريم", gen:"phone", model:"phonedesk", pos:[-2.6, -3.4], gives:"phone"},
+      {id:"r6d", name:"رسائل الأصدقاء", gen:"reply", model:"tablet", pos:[4.3, 1.7], needs:"phone"},
+      {id:"r6e", name:"صندوق الذكريات", gen:"ages", model:"memorybox", pos:[-4.6, 2.0]},
+      {id:"r6f", name:"خريطة الحي", gen:"walk", model:"maptable", pos:[1.4, 0.6]}],
+    chest:[3.4, 3.4], know:[[-2.6,3.6],[4.6,-1.6]] }
 ];
 const ER_ITEMS = {
   key:{name:"مفتاح نحاسي", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="7" cy="12" r="4"/><path d="M11 12h10M17 12v3M20 12v2"/></svg>`, from:"البوصلة", opens:"خزانة النوخذة"},
   lens:{name:"عدسة مكبّرة", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg>`, from:"التلسكوب", opens:"نقش الجُمَّل"},
   lamp:{name:"مصباح زيت", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 15c3 2 13 2 16-2-3-1-6-1-8 0"/><path d="M12 13V9M12 5c1 1.4 1 2.6 0 4-1-1.4-1-2.6 0-4Z"/></svg>`, from:"سلّم الكلمات", opens:"مرايا الضوء"},
-  card:{name:"بطاقة دخول", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h4M7 14h7"/><circle cx="17" cy="11" r="1.6"/></svg>`, from:"الروبوت", opens:"خادم نَواة"}
+  card:{name:"بطاقة دخول", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h4M7 14h7"/><circle cx="17" cy="11" r="1.6"/></svg>`, from:"الروبوت", opens:"خادم نَواة"},
+  seal:{name:"ختم العطّار", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 3h6v5l3 3v3H6v-3l3-3z"/><path d="M5 18h14v3H5z"/></svg>`, from:"جرار العطّار", opens:"بسطة المقايضة"},
+  phone:{name:"هاتف ريم", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>`, from:"هاتف ريم", opens:"رسائل الأصدقاء"},
+  mirror:{name:"مرآة السيارة", icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="6" width="14" height="9" rx="3"/><path d="M18 10h3M8 9l3-1"/></svg>`, from:"محرك السيارة", opens:"مرآة الإشارة"}
 };
 const ER_SYMS = ["◆","●","▲","■","★","✚"];
 
@@ -8455,7 +8747,9 @@ const ER_THEME = [
   {bg:"#E4ECF5", fog:"#E4ECF5", wall:"#F6F0E4", trim:"#8B6B43", base:"#6E5537", hemi:["#FFF6E8","#B9A27F"], sun:"#FFF1DA", sunI:1.0, hemiI:.75, ring:"#F5B942"},
   {bg:"#1A2944", fog:"#1A2944", wall:"#24375C", trim:"#C9A253", base:"#14213A", hemi:["#9DB8F0","#2A3A5E"], sun:"#C7D8FF", sunI:.55, hemiI:.55, ring:"#F5C542"},
   {bg:"#06080C", fog:"#06080C", wall:"#7C8794", trim:"#1593A3", base:"#2A3038", hemi:["#5D7390","#0E1118"], sun:"#8FA6C8", sunI:.07, hemiI:.09, ring:"#12B5C9", horror:true},
-  {bg:"#EADCC6", fog:"#EADCC6", wall:"#E9D3B2", trim:"#9C5B2E", base:"#6B4A2E", hemi:["#FFF1DE","#B08A60"], sun:"#FFE7C2", sunI:1.0, hemiI:.7, ring:"#E8A33D"}
+  {bg:"#F6D7A8", fog:"#F6D7A8", wall:"#5A3D2B", trim:"#C98B4E", base:"#4A3222", hemi:["#FFE8C4","#C08A50"], sun:"#FFD9A0", sunI:1.05, hemiI:.74, ring:"#E8A33D"},
+  {bg:"#F0E2C8", fog:"#F0E2C8", wall:"#EAD7B5", trim:"#A0522D", base:"#6B4A2E", hemi:["#FFF3DC","#B8946A"], sun:"#FFE9C4", sunI:1.0, hemiI:.72, ring:"#E8A33D"},
+  {bg:"#F1E4F0", fog:"#F1E4F0", wall:"#EBDDF0", trim:"#9C6FB5", base:"#5E4A6E", hemi:["#FFF4FB","#B79FC2"], sun:"#FFE9D6", sunI:.9, hemiI:.75, ring:"#C77DFF"}
 ];
 function erTex(T, w, h, draw, rep){
   const c = document.createElement("canvas"); c.width = w; c.height = h; const x = c.getContext("2d"); draw(x, w, h);
@@ -8464,6 +8758,12 @@ function erTex(T, w, h, draw, rep){
   return t;
 }
 function erFloorTex(T, r){
+  if (r === 3) return erTex(T, 512, 512, (x, w, h) => { x.fillStyle = "#E6C893"; x.fillRect(0, 0, w, h); for (let i = 0; i < 2600; i++){ x.fillStyle = ["#D9B87E","#EDD3A3","#CFAE74"][i % 3]; x.fillRect((i * 97) % w, (i * 53 + (i >> 4) * 7) % h, 3, 2); }
+    x.strokeStyle = "rgba(160,110,60,.25)"; x.lineWidth = 3; for (let k = 0; k < 7; k++){ x.beginPath(); for (let t = 0; t <= w; t += 16) x.lineTo(t, 40 + k * 72 + Math.sin(t / 50 + k) * 10); x.stroke(); } }, [2, 2]);
+  if (r === 5) return erTex(T, 512, 512, (x, w, h) => { const s2 = w / 8; for (let i = 0; i < 8; i++){ x.fillStyle = i % 2 ? "#E2C9A8" : "#D9BE9A"; x.fillRect(i * s2, 0, s2, h); x.fillStyle = "rgba(120,80,50,.25)"; x.fillRect(i * s2, 0, 2, h); x.fillRect(i * s2, (i * 131) % h, s2, 2); } }, [2, 2]);
+  if (r === 4) return erTex(T, 512, 512, (x, w, h) => {      // souq stone tiles with a brass star
+    const s = w/4; for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++){ x.fillStyle = (i + j) % 2 ? "#D9C29A" : "#E3CFAA"; x.fillRect(i*s, j*s, s, s); x.strokeStyle = "rgba(120,80,40,.3)"; x.lineWidth = 3; x.strokeRect(i*s + 1, j*s + 1, s - 2, s - 2);
+      x.fillStyle = "rgba(160,82,45,.35)"; x.beginPath(); for (let k = 0; k < 8; k++){ const a = k * Math.PI / 4, rr = k % 2 ? 10 : 22; x.lineTo(i*s + s/2 + Math.cos(a) * rr, j*s + s/2 + Math.sin(a) * rr); } x.closePath(); x.fill(); } }, [2, 2]);
   if (r === 3) return erTex(T, 512, 512, (x, w, h) => {      // terracotta tiles with eight-point stars
     const s = w/4; for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++){ const cx = i*s + s/2, cy = j*s + s/2;
       x.fillStyle = (i + j) % 2 ? "#C9946A" : "#D2A27A"; x.fillRect(i*s, j*s, s, s); x.strokeStyle = "rgba(90,50,25,.35)"; x.lineWidth = 2; x.strokeRect(i*s + 1, j*s + 1, s - 2, s - 2);
@@ -8492,6 +8792,12 @@ function erFloorTex(T, r){
   }, [3, 2.2]);
 }
 function erWallTex(T, r){
+  if (r === 3) return erTex(T, 512, 256, (x, w, h) => { for (let i = 0; i < 16; i++){ x.fillStyle = i % 4 === 1 ? "#E8D4B0" : i % 2 ? "#3B2A22" : "#4A3528"; x.fillRect(0, i * h / 16, w, h / 16); } x.fillStyle = "#8E2B22"; x.fillRect(0, h * .82, w, h * .06);
+    for (let i = 0; i < 20; i++){ x.fillStyle = "#E8C27A"; x.beginPath(); x.moveTo(i * w / 20, h * .82); x.lineTo(i * w / 20 + w / 40, h * .76); x.lineTo((i + 1) * w / 20, h * .82); x.fill(); } }, [2, 1]);
+  if (r === 5) return erTex(T, 512, 256, (x, w, h) => { x.fillStyle = "#EBDDF0"; x.fillRect(0, 0, w, h); x.fillStyle = "#D9C2E6"; for (let i = 0; i < 40; i++){ const a = (i * 89) % w, b = (i * 47) % (h * .7); x.beginPath(); for (let k = 0; k < 10; k++){ const r2 = k % 2 ? 3 : 7, an = k * Math.PI / 5; x.lineTo(a + Math.cos(an) * r2, b + Math.sin(an) * r2); } x.fill(); }
+    x.fillStyle = "#C9A6D6"; x.fillRect(0, h * .75, w, h * .25); x.fillStyle = "#FFFFFF"; x.fillRect(0, h * .74, w, h * .02); }, [2, 1]);
+  if (r === 4) return erTex(T, 512, 256, (x, w, h) => { x.fillStyle = "#EAD7B5"; x.fillRect(0,0,w,h); x.fillStyle = "#A0522D"; x.fillRect(0, h*.84, w, h*.08);
+    for (let i = 0; i < 16; i++){ x.fillStyle = i % 2 ? "#0B7D65" : "#E8B100"; x.beginPath(); x.arc(i*w/16 + w/32, h*.88, 5, 0, 7); x.fill(); } x.fillStyle = "rgba(160,82,45,.16)"; for (let i = 0; i < 36; i++) x.fillRect((i*89) % w, (i*41) % (h*.78), 16, 2); }, [2, 1]);
   if (r === 3) return erTex(T, 512, 256, (x, w, h) => { x.fillStyle = "#E9D3B2"; x.fillRect(0,0,w,h);
     x.fillStyle = "#2C7DA0"; x.fillRect(0, h*.82, w, h*.1); for (let i = 0; i < 16; i++){ x.fillStyle = i % 2 ? "#E8A33D" : "#F3E6C8"; x.beginPath(); x.moveTo(i*w/16 + w/32, h*.835); x.lineTo(i*w/16 + w/16 - 4, h*.87); x.lineTo(i*w/16 + w/32, h*.905); x.lineTo(i*w/16 + 4, h*.87); x.fill(); }
     x.fillStyle = "rgba(156,91,46,.18)"; for (let i = 0; i < 40; i++) x.fillRect((i*97) % w, (i*53) % (h*.78), 18, 2); }, [2, 1]);
@@ -8589,7 +8895,9 @@ class ErScene {
       const rug = new T.Mesh(new T.CircleGeometry(1.6, 40), new T.MeshStandardMaterial({map:erTex(T, 256, 256, (x, w, h) => { x.fillStyle = "#6B2E3E"; x.fillRect(0,0,w,h); x.strokeStyle = "#C9A253"; x.lineWidth = 5; for (let k = 1; k < 5; k++){ x.beginPath(); x.arc(w/2, h/2, k*26, 0, 7); x.stroke(); } for (let i = 0; i < 12; i++){ x.save(); x.translate(w/2, h/2); x.rotate(i*Math.PI/6); x.fillStyle = "#C9A253"; x.fillRect(-2, 30, 4, 90); x.restore(); } }), roughness:1}));
       rug.rotation.x = -Math.PI/2; rug.position.set(-1.2, .012, -1.2); this.scene.add(rug);
       this.plant(5.3, 3.8, "#3D8B5E"); this.lamp(0, 2.9, -.4, "#BFD2FF");
-    } else if (r === 3){ this.decor4();
+    } else if (r === 3){ this.decorGhada();
+    } else if (r === 4){ this.decor5();
+    } else if (r === 5){ this.decorReem();
     } else {
       // glass partition, desks with screens, plants, ceiling strip lights
       const glass = new T.Mesh(new T.BoxGeometry(.06, 2.2, 3.2), new T.MeshStandardMaterial({color:"#BFE6EE", transparent:true, opacity:.28, roughness:.1, metalness:.1})); glass.position.set(-3.2, 1.1, -2.9); this.scene.add(glass);
@@ -8619,7 +8927,7 @@ class ErScene {
       const hit = new this.T.Mesh(new this.T.BoxGeometry(1.5, 2.2, 1.3), new this.T.MeshBasicMaterial({transparent:true, opacity:0, depthWrite:false})); hit.position.y = 1.1; hit.userData.sid = s.id; g.add(hit);
       const ring = new this.T.Mesh(new this.T.RingGeometry(.62, .76, 48), new this.T.MeshBasicMaterial({color:this.th.ring, transparent:true, opacity:.85, depthWrite:false, side:this.T.DoubleSide}));
       ring.rotation.x = -Math.PI/2; const st = this.stand(x, z); ring.position.set(st[0], .02, st[1]); this.scene.add(ring);
-      this.stations[s.id] = {g, hit, ring, s, stand:st, state:"open", tagY: s.model === "wallclock" || s.model === "panel" || s.model === "starboard" || s.model === "gears" ? 3.0 : s.model === "wordladder" ? 2.9 : 2.5}; });
+      this.stations[s.id] = {g, hit, ring, s, stand:st, state:"open", tagY: s.model === "wallclock" || s.model === "panel" || s.model === "starboard" || s.model === "gears" || s.model === "sign" || s.model === "photos" ? 3.0 : s.model === "engine" ? 2.4 : s.model === "wordladder" ? 2.9 : 2.5}; });
   }
   faceIn(x, z){ // rotate a station so its front faces the room centre (snapped to the nearest wall direction)
     const ax = Math.abs(x) / (this.W/2), az = Math.abs(z) / (this.D/2);
@@ -8810,6 +9118,8 @@ class ErScene {
    Views: home (the dollhouse), top (the whole junction from above), follow (behind the player). Between rooms a short
    film walks the team out of the door, across the crossing and into the next building. */
 const ER_CITY = {C:12.5, road:7, lot:12.5};
+/* where each room's building stands: corner q of the junction, pushed sh further along the road (rooms five and six) */
+const ER_LOTS = [{q:0, sh:0}, {q:1, sh:0}, {q:2, sh:0}, {q:3, sh:0}, {q:0, sh:25}, {q:2, sh:25}];
 const erMergeGeo = (T, list) => { // merge transformed geometries that share one material (fewer draw calls on phones)
   let n = 0; const parts = list.map(m => { m.updateMatrixWorld(true); const g = (m.geometry.index ? m.geometry.toNonIndexed() : m.geometry.clone()); g.applyMatrix4(m.matrixWorld); n += g.attributes.position.count; return g; });
   const pos = new Float32Array(n * 3), nor = new Float32Array(n * 3); let o = 0;
@@ -8824,36 +9134,37 @@ Object.assign(ErScene.prototype, {
   flush(){ const T = this.T; Object.values(this.batch).forEach(b => { const geo = erMergeGeo(T, b.list); b.list.forEach(m => { m.parent && m.parent.remove(m); m.geometry.dispose(); });
       const mesh = new T.Mesh(geo, erMat(T, b.c, b.e ? {emissive:b.c, emissiveIntensity:.9} : {roughness:.85})); mesh.castShadow = b.sh; mesh.receiveShadow = true; mesh.matrixAutoUpdate = false; this.scene.add(mesh); }); this.batch = {}; },
   buildCity(){
-    const T = this.T, C = ER_CITY.C, R = ER_CITY.road / 2, night = this.night;
+    const T = this.T, C0 = ER_CITY.C, R = ER_CITY.road / 2, night = this.night, L0 = ER_LOTS[this.r] || ER_LOTS[0], CX = C0 + L0.sh, CZ = C0;
+    this.CX = CX; this.CZ = CZ; this.jr = L0.q;
     this.batch = {}; this.cityRoot = new T.Group(); this.scene.add(this.cityRoot);
     // the junction frame: city centre at (C, C); lot q sits on corner q, the current room's lot at the origin
-    const city = this.city = new T.Group(); city.position.set(C, 0, C); city.rotation.y = -this.r * Math.PI / 2; this.scene.add(city);
-    this.lots = [0,1,2,3].map(q => { const pv = new T.Group(); pv.rotation.y = q * Math.PI / 2; city.add(pv); const lot = new T.Group(); lot.position.set(-C, 0, -C); pv.add(lot); return lot; });
+    const city = this.city = new T.Group(); city.position.set(CX, 0, CZ); city.rotation.y = -L0.q * Math.PI / 2; this.scene.add(city);
+    this.lots = ER_LOTS.map(L => { const pv = new T.Group(); pv.rotation.y = L.q * Math.PI / 2; city.add(pv); const lot = new T.Group(); lot.position.set(-C0 - L.sh, 0, -C0); pv.add(lot); return lot; });
     city.updateMatrixWorld(true);
     const P = (q, x, z) => { const v = new T.Vector3(x, 0, z); this.lots[q].localToWorld(v); return v; };
     this.lotP = P;
-    const ground = new T.Mesh(new T.PlaneGeometry(220, 220), erMat(T, night ? "#3B4A3A" : "#D9C9A6", {roughness:1})); ground.rotation.x = -Math.PI/2; ground.position.set(C, -.06, C); ground.receiveShadow = true; this.scene.add(ground);
+    const ground = new T.Mesh(new T.PlaneGeometry(220, 220), erMat(T, night ? "#3B4A3A" : "#D9C9A6", {roughness:1})); ground.rotation.x = -Math.PI/2; ground.position.set(CX, -.06, CZ); ground.receiveShadow = true; this.scene.add(ground);
     // roads (two crossing streets) with markings
     const asphalt = night ? "#2A2F36" : "#4A4F57", line = night ? "#B9BFC6" : "#F4F1E8";
     const roadM = erMat(T, asphalt, {roughness:.95});
-    [[0, 0], [Math.PI/2, 0]].forEach(([ry]) => { const rd = new T.Mesh(new T.PlaneGeometry(130, ER_CITY.road), roadM); rd.rotation.set(-Math.PI/2, 0, ry); rd.position.set(C, -.04, C); rd.receiveShadow = true; this.scene.add(rd); });
+    [[0, 0], [Math.PI/2, 0]].forEach(([ry]) => { const rd = new T.Mesh(new T.PlaneGeometry(130, ER_CITY.road), roadM); rd.rotation.set(-Math.PI/2, 0, ry); rd.position.set(CX, -.04, CZ); rd.receiveShadow = true; this.scene.add(rd); });
     const mk = (w, d, x, z, c = line, ry = 0) => { const m = this.sbox(c, w, .02, d, x, -.02, z, {ry, sh:false}); return m; };
     for (let arm = 0; arm < 4; arm++){ const a = arm * Math.PI / 2, ca = Math.cos(a), sa = Math.sin(a);
-      const at = (s, l) => [C + ca * s - sa * l, C + sa * s + ca * l];
+      const at = (s, l) => [CX + ca * s - sa * l, CZ + sa * s + ca * l];
       for (let s = 10; s < 64; s += 4){ const [x, z] = at(s, 0); mk(arm % 2 ? .18 : 2, arm % 2 ? 2 : .18, x, z); }                    // centre dashes
       for (let k = -3; k <= 3; k++){ const [x, z] = at(5.2, k * .95); mk(arm % 2 ? .5 : 2.3, arm % 2 ? 2.3 : .5, x, z); }             // zebra crossing
       const [sx, sz] = at(6.9, arm % 2 ? 1.75 : -1.75); mk(arm % 2 ? 3.3 : .3, arm % 2 ? .3 : 3.3, sx, sz);                          // stop line
     }
     // the clock-tower island
-    this.scyl("#C9B79C", 2.4, 2.5, .3, C, .1, C, 28); this.scyl("#7FA35B", 2.1, 2.1, .32, C, .12, C, 28);
-    this.sbox("#E9DCC3", 1.9, 1.2, 1.9, C, .8, C); this.sbox("#D8C7A5", 1.5, 6.5, 1.5, C, 4.6, C); this.sbox("#C9A253", 1.75, .25, 1.75, C, 7.9, C);
-    this.sbox("#E9DCC3", 1.4, 1.6, 1.4, C, 8.8, C); this.sbox("#C9A253", 1.6, .2, 1.6, C, 9.7, C);
-    const roof = this.sb("#3D7A55", new T.ConeGeometry(1.05, 1.6, 4), C, 10.6, C, {ry:Math.PI/4}); this.scyl("#C9A253", .05, .05, .8, C, 11.7, C, 6);
-    for (let i = 0; i < 6; i++) this.sbox(i % 2 ? "#C9A253" : "#D8C7A5", 1.56, .08, 1.56, C, 2 + i * 1.05, C);
+    this.scyl("#C9B79C", 2.4, 2.5, .3, CX, .1, CZ, 28); this.scyl("#7FA35B", 2.1, 2.1, .32, CX, .12, CZ, 28);
+    this.sbox("#E9DCC3", 1.9, 1.2, 1.9, CX, .8, CZ); this.sbox("#D8C7A5", 1.5, 6.5, 1.5, CX, 4.6, CZ); this.sbox("#C9A253", 1.75, .25, 1.75, CX, 7.9, CZ);
+    this.sbox("#E9DCC3", 1.4, 1.6, 1.4, CX, 8.8, CZ); this.sbox("#C9A253", 1.6, .2, 1.6, CX, 9.7, CZ);
+    const roof = this.sb("#3D7A55", new T.ConeGeometry(1.05, 1.6, 4), CX, 10.6, CZ, {ry:Math.PI/4}); this.scyl("#C9A253", .05, .05, .8, CX, 11.7, CZ, 6);
+    for (let i = 0; i < 6; i++) this.sbox(i % 2 ? "#C9A253" : "#D8C7A5", 1.56, .08, 1.56, CX, 2 + i * 1.05, CZ);
     const face = erTex(T, 128, 128, (x, w, h) => { x.fillStyle = "#FBF7EF"; x.beginPath(); x.arc(w/2, h/2, w/2 - 3, 0, 7); x.fill(); x.strokeStyle = "#26323E"; x.lineWidth = 5; x.stroke();
       for (let i = 0; i < 12; i++){ x.save(); x.translate(w/2, h/2); x.rotate(i * Math.PI / 6); x.fillStyle = "#26323E"; x.fillRect(-2, -w/2 + 10, 4, i % 3 ? 7 : 13); x.restore(); } });
     this.clockHands = [];
-    [0, 1, 2, 3].forEach(i => { const g = new T.Group(); g.position.set(C, 8.8, C); g.rotation.y = i * Math.PI / 2; this.scene.add(g);
+    [0, 1, 2, 3].forEach(i => { const g = new T.Group(); g.position.set(CX, 8.8, CZ); g.rotation.y = i * Math.PI / 2; this.scene.add(g);
       const f = new T.Mesh(new T.CircleGeometry(.58, 32), new T.MeshBasicMaterial({map:face})); f.position.z = .71; g.add(f);
       const hh = new T.Mesh(new T.BoxGeometry(.05, .28, .02), new T.MeshBasicMaterial({color:"#26323E"})); hh.geometry.translate(0, .12, 0); hh.position.z = .73; g.add(hh);
       const mh = new T.Mesh(new T.BoxGeometry(.035, .42, .02), new T.MeshBasicMaterial({color:"#C93400"})); mh.geometry.translate(0, .19, 0); mh.position.z = .74; g.add(mh); this.clockHands.push([hh, mh]); });
@@ -8861,13 +9172,13 @@ Object.assign(ErScene.prototype, {
     // traffic lights on the four corners: this is the "إشارة"
     this.tl = [];
     for (let q = 0; q < 4; q++){ const base = P(q, 8.3, 8.3), axis = q % 2; this.scyl("#3A3F46", .08, .1, 3.4, base.x, 1.7, base.z, 8);
-      const arm = new T.Group(); arm.position.set(base.x, 3.3, base.z); arm.rotation.y = -this.r * Math.PI / 2 + q * Math.PI / 2 + (axis ? Math.PI / 2 : 0) + Math.PI; this.scene.add(arm);
+      const arm = new T.Group(); arm.position.set(base.x, 3.3, base.z); arm.rotation.y = -this.jr * Math.PI / 2 + q * Math.PI / 2 + (axis ? Math.PI / 2 : 0) + Math.PI; this.scene.add(arm);
       const head = this.box(.34, .95, .3, "#20252B", 0, -.25, .0); arm.add(head);
       const L = ["#FF3B30", "#FFCC00", "#34C759"].map((c, k) => { const m = erMat(T, c, {emissive:c, emissiveIntensity:.05, roughness:.4}); const s = this.sph(.1, m, 0, .03 - k * .29, .16); arm.add(s); return m; });
       this.tl.push({axis, L}); }
     this.phase = 0; this.allRed = false;
     // lots: pavements, gardens, palms, lamps, and the other rooms' buildings
-    for (let q = 0; q < 4; q++) this.buildLot(q);
+    for (let q = 0; q < ER_LOTS.length; q++) this.buildLot(q);
     this.buildCars();
     this.flush();
     this.cityReady = true;
@@ -8879,26 +9190,28 @@ Object.assign(ErScene.prototype, {
     const g = new T.Group(); g.position.set(x, 3.55, z); g.rotation.y = ry; this.scene.add(g); g.add(this.box(.9, .06, .08, "#5B656E", .45, 0, 0)); g.add(this.box(.34, .1, .2, "#5B656E", .85, -.06, 0));
     g.add(this.box(.26, .03, .14, this.glow("#FFE6A8", night ? 2.2 : .4), .85, -.12, 0));
     if (night){ const L = new T.PointLight("#FFD89A", .7, 9); L.position.set(.85, -.4, 0); g.add(L); } },
+  lotRY(q){ return ((ER_LOTS[q] || ER_LOTS[0]).q - (ER_LOTS[this.r] || ER_LOTS[0]).q) * Math.PI / 2; },
   buildLot(q){
-    const T = this.T, cur = q === this.r, lot = this.lots[q], P = this.lotP;
-    const box = (c, w, h, d, x, y, z, o = {}) => { const v = P(q, x, z); return this.sbox(c, w, h, d, v.x, y, v.z, Object.assign({ry: (q - this.r) * Math.PI / 2}, o)); };
+    const T = this.T, cur = q === this.r, lot = this.lots[q], P = this.lotP, far = !!ER_LOTS[q].sh;
+    const box = (c, w, h, d, x, y, z, o = {}) => { const v = P(q, x, z); return this.sbox(c, w, h, d, v.x, y, v.z, Object.assign({ry: this.lotRY(q)}, o)); };
     // grass, pavements with a striped kerb near the junction, the path to the door
     box(this.night ? "#41613F" : "#8DB360", 23, .1, 23, -2.5, -.085, -2.5, {sh:false});
-    box("#D8D2C6", 2, .16, 23, 8, .02, -2.5, {sh:false}); box("#D8D2C6", 21, .16, 2, -3.5, .02, 8, {sh:false});
-    for (let k = 0; k < 7; k++){ box(k % 2 ? "#F2C230" : "#26323E", .14, .2, 1.3, 9, .04, 8.4 - k * 1.3, {sh:false}); box(k % 2 ? "#F2C230" : "#26323E", 1.3, .2, .14, 8.4 - k * 1.3, .04, 9, {sh:false}); }
+    if (far){ box("#D8D2C6", 25, .16, 2, -1.5, .02, 8, {sh:false}); box(this.night ? "#41613F" : "#8DB360", 2.2, .1, 23, 10, -.085, -2.5, {sh:false}); }
+    else box("#D8D2C6", 2, .16, 23, 8, .02, -2.5, {sh:false}), box("#D8D2C6", 21, .16, 2, -3.5, .02, 8, {sh:false});
+    if (!far) for (let k = 0; k < 7; k++){ box(k % 2 ? "#F2C230" : "#26323E", .14, .2, 1.3, 9, .04, 8.4 - k * 1.3, {sh:false}); box(k % 2 ? "#F2C230" : "#26323E", 1.3, .2, .14, 8.4 - k * 1.3, .04, 9, {sh:false}); }
     box("#C9B79C", 1.6, .1, 2.6, 4, -.03, 5.9, {sh:false});
     box("#E9DCC3", .3, 1.1, 23, -13.9, .55, -2.5); box("#E9DCC3", 23, 1.1, .3, -2.5, .55, -13.9);
     // palms along the pavement, trees and lamps
-    [[8.2, -11], [8.2, -5], [8.2, 1.5], [-11, 8.2], [-5, 8.2], [1, 8.2]].forEach(([x, z], i) => { if (cur && (x > -6 && z > -6)) return; const v = P(q, x, z); i % 3 === 1 ? this.tree(v.x, v.z) : this.palm(v.x, v.z, 3.8 + (i % 2) * .6); });
+    [[8.2, -11], [8.2, -5], [8.2, 1.5], [-11, 8.2], [-5, 8.2], [1, 8.2]].forEach(([x, z], i) => { if (cur && (x > -6 && z > -6)) return; if (far && x === 8.2) return; const v = P(q, x, z); i % 3 === 1 ? this.tree(v.x, v.z) : this.palm(v.x, v.z, 3.8 + (i % 2) * .6); });
     [[-10.5, -10.5], [-11.5, 3], [3, -11.5]].forEach(([x, z]) => { const v = P(q, x, z); this.tree(v.x, v.z); });
-    const lv = P(q, 7.4, 4.6); this.streetLamp(lv.x, lv.z, (q - this.r) * Math.PI / 2);
+    const lv = P(q, 7.4, 4.6); this.streetLamp(lv.x, lv.z, this.lotRY(q));
     if (cur) return;
     this.buildBuilding(q);
   },
   buildBuilding(q){
-    const T = this.T, th = ER_THEME[q] || ER_THEME[0], P = this.lotP, ry = (q - this.r) * Math.PI / 2, room = ER_ROOMS[q];
+    const T = this.T, th = ER_THEME[q] || ER_THEME[0], P = this.lotP, ry = this.lotRY(q), room = ER_ROOMS[q];
     const g = new T.Group(); const o = P(q, 0, 0); g.position.copy(o); g.rotation.y = ry; this.scene.add(g);
-    const H = 3.6, W = 12, D = 9, wall = q === 1 ? "#2F4775" : q === 2 ? "#E6ECF2" : q === 3 ? "#E3CBA8" : "#EFE3CC", trim = th.trim;
+    const H = 3.6, W = 12, D = 9, wall = q === 1 ? "#2F4775" : q === 2 ? "#E6ECF2" : q === 3 ? "#E3CBA8" : q === 4 ? "#E8C98E" : q === 5 ? "#E7C6DA" : "#EFE3CC", trim = th.trim;
     g.add(this.box(W, H, D, wall, 0, H/2, 0)); g.add(this.box(W + .3, .3, D + .3, trim, 0, H + .15, 0)); g.add(this.box(W + .4, .18, D + .4, trim, 0, .09, 0));
     g.add(this.box(W - .4, .05, D - .4, q === 1 ? "#24375C" : "#CFC3AE", 0, H + .31, 0));
     [[-3, -2], [2.6, 1.2]].forEach(([x, z]) => { g.add(this.box(1.1, .7, .8, "#DDE3E8", x, H + .65, z)); g.add(this.cyl(.45, .45, .9, "#F4F7FA", x + 1.6, H + .75, z, 14)); });
@@ -8933,7 +9246,7 @@ Object.assign(ErScene.prototype, {
     this.anim.push((t, dt) => this.stepCars(dt || .016));
   },
   stepCars(dt){
-    const C = ER_CITY.C, th = this.r * Math.PI / 2;
+    const CX = this.CX, CZ = this.CZ, th = this.jr * Math.PI / 2;
     this.phase = (this.phase + dt) % 16; const p = this.phase, green = this.allRed ? -1 : p < 6 ? 0 : p < 8 ? 2 : p < 14 ? 1 : 3; // 0 x-green, 1 z-green, 2/3 yellow
     this.tl.forEach(l => { const go = green === l.axis, amber = green === l.axis + 2; l.L[0].emissiveIntensity = go || amber ? .05 : 1.6; l.L[1].emissiveIntensity = amber ? 1.6 : .05; l.L[2].emissiveIntensity = go ? 1.6 : .05; });
     const byLane = {}; this.cars.forEach(c => (byLane[c.axis + ":" + c.dir] = byLane[c.axis + ":" + c.dir] || []).push(c));
@@ -8945,11 +9258,11 @@ Object.assign(ErScene.prototype, {
       c.s += v * dt; if (c.s > 64) c.s -= 128;
       const lat = Math.abs(c.s) < 3.3 ? Math.max(1.75, Math.sqrt(3.3 * 3.3 - c.s * c.s)) : 1.75, a = c.axis * Math.PI / 2 + (c.dir < 0 ? Math.PI : 0) - th;
       const ca = Math.cos(a), sa = Math.sin(a); // local road frame: along (ca, -sa), right side (sa, ca)
-      c.g.position.set(C + ca * c.s + sa * lat, 0, C - sa * c.s + ca * lat); c.g.rotation.y = a; });
+      c.g.position.set(CX + ca * c.s + sa * lat, 0, CZ - sa * c.s + ca * lat); c.g.rotation.y = a; });
   },
   /* camera modes */
   setMode(m){ this.mode = m; const g = this.goal;
-    if (m === "top"){ Object.assign(g, {tx:ER_CITY.C * .7, ty:0, tz:ER_CITY.C * .7, dist:this.portrait ? 78 : 56, pitch:1.18, yaw:.62 + (this.portrait ? .5 : 0)}); this.focused = null; }
+    if (m === "top"){ Object.assign(g, {tx:(this.CX || ER_CITY.C) * .7, ty:0, tz:(this.CZ || ER_CITY.C) * .7, dist:this.portrait ? 78 : 56, pitch:1.18, yaw:.62 + (this.portrait ? .5 : 0)}); this.focused = null; }
     else if (m === "follow"){ this.fdist = this.fdist || (this.portrait ? 8.5 : 6.8); this.fyaw = this.me.rotation.y + Math.PI; this.fTouch = 0; this.focused = null; }
     else { Object.assign(g, {tx:this.home.tx, ty:this.home.ty, tz:this.home.tz, dist:this.home.dist, pitch:this.home.pitch, yaw:this.home.yaw}); this.userMoved = false; this.focused = null; }
     (this.shades || []).forEach(o => o.visible = m !== "follow");
@@ -8958,15 +9271,19 @@ Object.assign(ErScene.prototype, {
     Object.assign(g, {tx:a.position.x, ty:1.1, tz:a.position.z, dist:this.fdist, pitch:.5, yaw:this.fyaw}); },
   /* the film between two rooms */
   cinema(to, done){
-    const T = this.T, me = this.me, P = this.lotP, r = this.r, k = ((to - r) % 4 + 4) % 4; if (!this.cityReady || k === 0) return done();
-    const pts = [[me.position.x, me.position.z], [4, 3.3], [4, 4.6], [4, 6.2], [4, 8], [8, 8]];
-    const chain = k === 1 ? [r + 1] : k === 3 ? [r + 3] : [r + 1, r + 2];
-    chain.forEach(q => { const v = P(q % 4, 8, 8); pts.push([v.x, v.z]); });
-    [[4, 8], [4, 6.2], [4, 4.7], [4, 3.6]].forEach(([x, z]) => { const v = P(to % 4, x, z); pts.push([v.x, v.z]); });
-    this.cine = {pts, i:1, done, t0:this.clock.elapsedTime, to:to % 4, peers:Object.values(this.peers).map((p, j) => ({p, lag:(j + 1) * .9, i:1}))};
+    const T = this.T, me = this.me, P = this.lotP, r = this.r; if (!this.cityReady || to === r || !ER_LOTS[to]) return done();
+    // walk: out of the door, along the pavement to the junction corner, round the junction, then back in to the next door
+    const toJ = q => ER_LOTS[q].sh ? [[q, 8, 8], [ER_LOTS[q].q, 8, 8]] : [[q, 8, 8]];
+    const pts = [[me.position.x, me.position.z], [4, 3.3], [4, 4.6], [4, 6.2], [4, 8]];
+    const a = toJ(r), b = toJ(to).reverse(), qa = ER_LOTS[r].q, qb = ER_LOTS[to].q, k = ((qb - qa) % 4 + 4) % 4;
+    a.forEach(([q, x, z]) => { const v = P(q, x, z); pts.push([v.x, v.z]); });
+    (k === 0 ? [] : k === 1 ? [qa + 1] : k === 3 ? [qa + 3] : [qa + 1, qa + 2]).forEach(q => { const v = P(q % 4, 8, 8); pts.push([v.x, v.z]); });
+    b.forEach(([q, x, z]) => { const v = P(q, x, z); pts.push([v.x, v.z]); });
+    [[4, 8], [4, 6.2], [4, 4.7], [4, 3.6]].forEach(([x, z]) => { const v = P(to, x, z); pts.push([v.x, v.z]); });
+    this.cine = {pts, i:1, done, t0:this.clock.elapsedTime, to, peers:Object.values(this.peers).map((p, j) => ({p, lag:(j + 1) * .9, i:1}))};
     this.allRed = true; this.walk = null; this.mode = "cine"; this.focused = null;
     this.scene.fog.near = 60; this.scene.fog.far = 160;
-    const b = this.buildings && this.buildings[to % 4]; if (b) this.anim.push(() => { if (this.cine) b.door.rotation.y += ((this.cine.i >= this.cine.pts.length - 3 ? -1.5 : 0) - b.door.rotation.y) * .06; });
+    const bd = this.buildings && this.buildings[to]; if (bd) this.anim.push(() => { if (this.cine) bd.door.rotation.y += ((this.cine.i >= this.cine.pts.length - 3 ? -1.5 : 0) - bd.door.rotation.y) * .06; });
   },
   stepCine(dt){
     const c = this.cine, me = this.me, sp = 4.2; if (!c) return;
@@ -8984,6 +9301,102 @@ Object.assign(ErScene.prototype, {
   }
 });
 
+/* TN-ER56: rooms five (the gold souq) and six (the Hejaz railway station): their stations and decor */
+Object.assign(ErScene.prototype, {
+  txt(w, h, bg, draw){ return erTex(this.T, w, h, (x, W, H) => { x.fillStyle = bg; x.fillRect(0, 0, W, H); x.textAlign = "center"; x.textBaseline = "middle"; x.direction = "rtl"; draw(x, W, H); }); },
+  m_sign(g){ const T = this.T; g.add(this.box(1.8, 1.15, .08, "#7A4A2A", 0, 1.95, .02));
+    const p = new T.Mesh(new T.PlaneGeometry(1.6, .95), new T.MeshStandardMaterial({map:this.txt(320, 190, "#F3E2BF", (x, w, h) => { x.strokeStyle = "#9C5B2E"; x.lineWidth = 6; x.strokeRect(8, 8, w - 16, h - 16);
+      x.fillStyle = "#7A3B1E"; x.font = "bold 46px 'Readex Pro', sans-serif"; x.fillText("ما هو؟", w/2, h/2 - 22); x.font = "bold 64px 'Readex Pro', sans-serif"; x.fillStyle = "#C93400"; x.fillText("؟ ؟ ؟", w/2, h/2 + 40); }), roughness:.9}));
+    p.position.set(0, 1.95, .07); g.add(p); [-.7, .7].forEach(x => g.add(this.sph(.05, "#C9A253", x, 2.4, .08))); },
+  m_beads(g){ this.table(g, 1.1, .7, "#7A4A2A"); const T = this.T; g.add(this.box(.08, .7, .08, "#5C3F24", -.42, 1.13, 0)); g.add(this.box(.08, .7, .08, "#5C3F24", .42, 1.13, 0)); g.add(this.box(.95, .06, .08, "#5C3F24", 0, 1.48, 0));
+    const cols = ["#E0413A", "#F2C230", "#2F7BEA", "#2FA36B", "#8944AB", "#FBF8F2"];
+    for (let k = 0; k < 3; k++) for (let i = 0; i < 9; i++){ const a = i / 8 * Math.PI, x = -.3 + k * .3 + Math.cos(a) * .1, y = 1.42 - Math.sin(a) * .42; g.add(this.sph(.035, erMat(T, cols[(i + k) % 6], {roughness:.25, metalness:.2}), x, y, .02)); }
+    g.add(this.box(.5, .05, .3, "#9E3B32", 0, .82, .1)); },
+  m_jugs(g){ const T = this.T; g.add(this.box(1.3, .5, .7, "#8B6B43", 0, .25, 0));
+    [[-.35, .75, .26, "#B87333"], [.32, .95, .34, "#C98B4E"]].forEach(([x, h, r, c]) => { const j = new T.Group(); j.position.set(x, .5, 0); g.add(j);
+      j.add(this.cyl(r * .8, r * .7, h * .7, c, 0, h * .35, 0, 16)); j.add(this.sph(r, c, 0, h * .55, 0)); j.add(this.cyl(r * .35, r * .45, h * .3, c, 0, h * .9, 0, 12)); j.add(this.cyl(r * .42, r * .42, .04, "#5C3F24", 0, h * 1.05, 0, 12)); });
+    const well = this.cyl(.18, .2, .3, "#9BA0A6", .1, .15, .5, 14); g.add(well); g.add(this.cyl(.15, .15, .02, erMat(T, "#E58FB0", {roughness:.1, emissive:"#E58FB0", emissiveIntensity:.25}), .1, .31, .5, 14)); },
+  m_stall(g){ const T = this.T; g.add(this.box(1.5, .8, .8, "#8B6B43", 0, .4, 0));
+    [[-.5, -.35], [.5, -.35]].forEach(([x, z]) => g.add(this.box(.06, 2.1, .06, "#5C3F24", x * 1.4, 1.05, z)));
+    const awn = this.box(1.9, .05, 1.0, "#C93400", 0, 2.1, .05); awn.rotation.x = .18; g.add(awn); for (let i = 0; i < 5; i++){ const s = this.box(.19, .052, 1.0, "#F6EEDD", -.76 + i * .38, 2.105, .05); s.rotation.x = .18; g.add(s); }
+    [["#7A4A2A", -.45], ["#E8B100", 0], ["#C93400", .45]].forEach(([c, x]) => { g.add(this.cyl(.17, .2, .3, "#C9AE7C", x, .95, .05, 12)); g.add(this.cyl(.15, .15, .04, c, x, 1.11, .05, 12)); }); },
+  decor5(){ const T = this.T;
+    // fabric canopies under the ceiling, hanging lanterns, spice sacks, rugs, carved arches with daylight
+    const cols = ["#C93400", "#E8B100", "#0B7D65", "#8944AB"];
+    for (let i = 0; i < 14; i++){ const f = new T.Mesh(new T.ConeGeometry(.16, .34, 3), erMat(T, cols[i % 4], {roughness:.9})); f.rotation.z = Math.PI; f.scale.z = .2; this.onWall([0, -1], f, -5.4 + i * .83, 2.75, .14); }
+    for (let i = 0; i < 9; i++){ const f = new T.Mesh(new T.ConeGeometry(.16, .34, 3), erMat(T, cols[(i + 1) % 4], {roughness:.9})); f.rotation.z = Math.PI; f.scale.z = .2; this.onWall([-1, 0], f, -3.6 + i * .9, 2.75, .14); }
+    const sky = erTex(T, 128, 256, (x, w, h) => { const gr = x.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, "#F7C58A"); gr.addColorStop(1, "#F3E2BF"); x.fillStyle = gr; x.fillRect(0, 0, w, h); });
+    [[[-1, 0], -1.4], [[1, 0], 1.6]].forEach(([nn, ax]) => { const g = new T.Group(); g.add(this.box(.14, 1.9, .1, "#A0522D", -.55, .95, 0)); g.add(this.box(.14, 1.9, .1, "#A0522D", .55, .95, 0));
+      const arc = new T.Mesh(new T.TorusGeometry(.55, .07, 8, 20, Math.PI), erMat(T, "#A0522D")); arc.position.y = 1.9; g.add(arc);
+      const p = new T.Mesh(new T.PlaneGeometry(1.0, 2.3), new T.MeshBasicMaterial({map:sky})); p.position.set(0, 1.15, .02); g.add(p); this.onWall(nn, g, ax, .7, .1); });
+    [[-2.2, 3.7, "#C93400"], [-1.6, 3.9, "#E8B100"], [3.2, 3.8, "#7A4A2A"], [2.6, 3.95, "#2FA36B"]].forEach(([x, z, c]) => { const s = this.group(x, z); s.add(this.cyl(.24, .3, .5, "#C9AE7C", 0, .25, 0, 12)); s.add(this.cyl(.22, .22, .06, c, 0, .52, 0, 12)); const top = this.sph(.2, c, 0, .52, 0); top.scale.y = .35; s.add(top); });
+    const rug = new T.Mesh(new T.PlaneGeometry(3.4, 2.2), new T.MeshStandardMaterial({map:erTex(T, 256, 168, (x, w, h) => { x.fillStyle = "#7A2E2A"; x.fillRect(0, 0, w, h); x.strokeStyle = "#E8C27A"; x.lineWidth = 6; x.strokeRect(10, 10, w - 20, h - 20); x.strokeStyle = "#2C5D8F"; x.lineWidth = 4; x.strokeRect(24, 24, w - 48, h - 48);
+      x.fillStyle = "#E8C27A"; for (let i = 0; i < 4; i++){ x.beginPath(); x.moveTo(w/2, 40 + i * 6); x.lineTo(w/2 + 50 - i * 10, h/2); x.lineTo(w/2, h - 40 - i * 6); x.lineTo(w/2 - 50 + i * 10, h/2); x.closePath(); x.globalAlpha = .35 + i * .15; x.fill(); } x.globalAlpha = 1; }), roughness:.95}));
+    rug.rotation.x = -Math.PI / 2; rug.position.set(.4, .012, .2); rug.receiveShadow = true; this.scene.add(rug);
+    [[-1.4, 2.3, -1.2], [1.8, 2.3, 1.0], [-3.6, 2.4, .8]].forEach(([x, y, z], i) => { const l = new T.Group(); l.position.set(x, y, z); this.scene.add(l); l.add(this.cyl(.005, .005, .6, "#5C3F24", 0, .35, 0, 4));
+      l.add(this.cyl(.14, .1, .3, this.glow(["#FFB347", "#FF7A45", "#FFD27A"][i], 1.1), 0, 0, 0, 8)); l.add(this.cyl(.05, .16, .08, "#C9A253", 0, .18, 0, 8)); this.anim.push(t => l.rotation.z = Math.sin(t * 1.2 + i) * .05); });
+    this.plant(5.3, 3.8, "#5E8C3A"); this.plant(-5.3, -0.4, "#5E8C3A");
+    this.lamp(-1, 2.8, -.4, "#FFD08A"); this.lamp(2.4, 2.8, .8, "#FFD08A");
+  },
+  m_stick(g){ const T = this.T; g.add(this.cyl(.9, 1.0, .06, "#E3C48E", 0, .03, 0, 20)); const s = this.cyl(.03, .035, 1.4, "#7A4A2A", 0, .72, 0, 8); s.rotation.z = .06; g.add(s);
+    const sh = new T.Mesh(new T.PlaneGeometry(1.1, .06), new T.MeshBasicMaterial({color:"#8B6B43", transparent:true, opacity:.55})); sh.rotation.x = -Math.PI / 2; sh.position.set(.55, .065, .05); g.add(sh);
+    [[0, -.85], [.85, 0], [0, .85], [-.85, 0]].forEach(([x, z], i) => g.add(this.box(.12, .1, .12, ["#C93400", "#2F7BEA", "#2FA36B", "#E8B100"][i], x, .1, z))); },
+  m_engine(g){ const T = this.T; g.add(this.box(1.9, .75, 1.2, "#E9E4DA", 0, .62, 0)); g.add(this.box(1.95, .22, 1.25, "#2A2F36", 0, .24, 0));
+    [[-.62, .6], [.62, .6], [-.62, -.6], [.62, -.6]].forEach(([x, z]) => { const w = this.cyl(.26, .26, .18, "#1F2329", x, .26, z, 16); w.rotation.x = Math.PI / 2; g.add(w); });
+    const hood = this.box(1.6, .05, .95, "#E9E4DA", 0, 1.25, -.2); hood.rotation.x = -.9; g.add(hood);
+    g.add(this.box(1.2, .25, .7, "#5B656E", 0, 1.05, .1)); const fan = this.cyl(.22, .22, .04, "#9AA3AD", 0, 1.1, .52, 8); fan.rotation.x = Math.PI / 2; g.add(fan); this.anim.push(t => fan.rotation.y = t * .3);
+    g.add(this.box(.1, .06, .02, erMat(T, "#DDF3F7", {metalness:.9, roughness:.08}), .98, .95, .45)); },
+  m_jerry(g){ const T = this.T; [[-.35, "#C93400"], [.25, "#2E7D32"]].forEach(([x, c]) => { g.add(this.box(.4, .6, .2, c, x, .3, 0)); g.add(this.box(.25, .06, .06, "#26323E", x, .64, 0)); });
+    const dial = new T.Mesh(new T.CircleGeometry(.22, 24), new T.MeshBasicMaterial({map:erTex(T, 96, 96, (x, w, h) => { x.fillStyle = "#14202E"; x.beginPath(); x.arc(48, 48, 46, 0, 7); x.fill(); x.strokeStyle = "#F2C230"; x.lineWidth = 5; x.beginPath(); x.arc(48, 58, 30, Math.PI * 1.1, Math.PI * 1.9); x.stroke(); x.strokeStyle = "#E0413A"; x.lineWidth = 4; x.beginPath(); x.moveTo(48, 58); x.lineTo(28, 36); x.stroke(); })}));
+    const post = this.box(.08, 1.0, .08, "#5B656E", .7, .5, 0); g.add(post); dial.position.set(.7, 1.12, .05); g.add(dial); },
+  m_skins(g){ const T = this.T; g.add(this.box(1.4, .08, .5, "#7A4A2A", 0, 1.45, -.1)); [-.5, 0, .5].forEach((x, i) => { const s = this.sph(.2, "#8B5A2B", x, 1.05, 0); s.scale.set(1, 1.5, .8); g.add(s); g.add(this.cyl(.01, .01, .3, "#3E2A1A", x, 1.33, 0, 4)); });
+    [-.6, .6].forEach(x => g.add(this.box(.08, 1.5, .08, "#7A4A2A", x, .75, -.1))); g.add(this.cyl(.25, .3, .3, "#9BA0A6", 0, .15, .35, 14)); },
+  m_sandword(g){ const T = this.T; const p = new T.Mesh(new T.CircleGeometry(.9, 28), new T.MeshStandardMaterial({map:erTex(T, 192, 192, (x, w, h) => { x.fillStyle = "#E3C48E"; x.fillRect(0, 0, w, h); x.fillStyle = "#9C6B3A"; x.font = "bold 40px 'Readex Pro', sans-serif"; x.textAlign = "center"; x.fillText("ر ب ع", w/2, 90); x.fillText("← ن ي", w/2, 140); }), roughness:1}));
+    p.rotation.x = -Math.PI / 2; p.position.y = .02; g.add(p); g.add(this.cyl(.02, .025, 1.1, "#7A4A2A", .6, .55, -.4, 6)); },
+  decorGhada(){ const T = this.T;
+    // a desert rest-house in the Ghada sands: sunset dunes in the windows, ghada shrubs, a fire with coffee pots, rugs and floor cushions
+    const out = erTex(T, 256, 192, (x, w, h) => { const gr = x.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, "#F7A35C"); gr.addColorStop(.55, "#FFD9A0"); gr.addColorStop(1, "#E3B46E"); x.fillStyle = gr; x.fillRect(0, 0, w, h);
+      x.fillStyle = "#FFF3C4"; x.beginPath(); x.arc(w * .7, h * .52, 18, 0, 7); x.fill(); x.fillStyle = "#D99E52"; x.beginPath(); x.moveTo(0, h * .7); x.quadraticCurveTo(w * .3, h * .45, w * .6, h * .68); x.quadraticCurveTo(w * .85, h * .58, w, h * .66); x.lineTo(w, h); x.lineTo(0, h); x.fill();
+      x.fillStyle = "#C98B4E"; x.beginPath(); x.moveTo(0, h * .85); x.quadraticCurveTo(w * .5, h * .7, w, h * .86); x.lineTo(w, h); x.lineTo(0, h); x.fill(); x.fillStyle = "#5E7A3A"; [[.2, .74], [.45, .8], [.8, .76]].forEach(([a, b]) => { x.beginPath(); x.arc(w * a, h * b, 7, 0, 7); x.fill(); }); });
+    [[[0, -1], -3.4], [[0, -1], 3.6], [[-1, 0], -.8]].forEach(([nn, ax]) => { const g = new T.Group(); g.add(this.box(1.5, .12, .1, "#6B4A2E", 0, 2.25, 0)); g.add(this.box(1.5, .12, .1, "#6B4A2E", 0, .95, 0)); g.add(this.box(.1, 1.4, .1, "#6B4A2E", -.72, 1.6, 0)); g.add(this.box(.1, 1.4, .1, "#6B4A2E", .72, 1.6, 0));
+      const p = new T.Mesh(new T.PlaneGeometry(1.36, 1.2), new T.MeshBasicMaterial({map:out})); p.position.set(0, 1.6, .02); g.add(p); this.onWall(nn, g, ax, .3, .1); });
+    const shrub = (x, z, s = 1) => { const g = this.group(x, z); for (let i = 0; i < 7; i++){ const a = i / 7 * Math.PI * 2, b = this.cyl(.012 * s, .02 * s, .7 * s, "#7A5A3A", Math.cos(a) * .12 * s, .3 * s, Math.sin(a) * .12 * s, 4); b.rotation.set(Math.sin(a) * .5, 0, -Math.cos(a) * .5); g.add(b); g.add(this.sph(.16 * s, "#7D9A4E", Math.cos(a) * .32 * s, .6 * s, Math.sin(a) * .32 * s)); } };
+    shrub(5.2, 3.7, 1.1); shrub(-5.3, -3.6, .9); shrub(-5.2, .5, .8);
+    const fire = this.group(-2.6, 3.3); fire.add(this.cyl(.55, .6, .12, "#8C8C8C", 0, .06, 0, 14)); [0, 1, 2].forEach(i => { const l = this.cyl(.05, .05, .7, "#5C3F24", 0, .2, 0, 6); l.rotation.set(Math.PI / 2, i * 1.05, 0); fire.add(l); });
+    const fl = this.cyl(.0, .22, .5, this.glow("#FF8A1E", 2.2), 0, .45, 0, 8); fire.add(fl); const pl = new T.PointLight("#FF9A3D", 1.2, 6); pl.position.set(-2.6, 1.0, 3.3); this.scene.add(pl);
+    this.anim.push(t => { fl.scale.y = 1 + Math.sin(t * 11) * .18; pl.intensity = 1.1 + Math.sin(t * 9) * .25; });
+    [[.55, .25, "#C9A253"], [.7, -.2, "#B87333"]].forEach(([x, z, c]) => { fire.add(this.cyl(.09, .14, .26, c, x, .13, z, 12)); fire.add(this.cyl(.03, .06, .12, c, x, .31, z, 10)); });
+    const rug = new T.Mesh(new T.PlaneGeometry(3.6, 2.0), new T.MeshStandardMaterial({map:erTex(T, 256, 144, (x, w, h) => { x.fillStyle = "#8E2B22"; x.fillRect(0, 0, w, h); for (let i = 0; i < 9; i++){ x.fillStyle = ["#E8C27A", "#1E3A5F", "#F3E6C8"][i % 3]; x.fillRect(0, 10 + i * 14, w, 5); } }), roughness:.95}));
+    rug.rotation.x = -Math.PI / 2; rug.position.set(-.6, .012, .4); rug.receiveShadow = true; this.scene.add(rug);
+    [[-5.2, 2.2], [-5.2, 3.2], [-4.6, 3.9]].forEach(([x, z], i) => this.scene.add(this.box(.9, .22, .6, ["#8E2B22", "#1E3A5F", "#C98B4E"][i], x, .11, z)));
+    const tire = this.cyl(.38, .38, .22, "#1F2329", 3.4, .38, 3.9, 18); tire.rotation.x = Math.PI / 2; this.scene.add(tire);
+    this.lamp(-1, 2.8, -.6, "#FFC27A"); this.lamp(2.6, 2.8, .8, "#FFC27A");
+  },
+  m_photos(g){ const T = this.T; g.add(this.box(2.2, 1.3, .03, "#F6EEF4", 0, 1.95, 0));
+    const cols = ["#F2A7B8", "#A7C7F2", "#B8E0B0", "#F2D7A7"]; for (let i = 0; i < 4; i++){ const x = .8 - i * .53; g.add(this.box(.44, .52, .05, "#FFFFFF", x, 1.95 + (i % 2 ? .12 : -.08), .03));
+      g.add(this.box(.36, .36, .02, cols[i], x, 2.0 + (i % 2 ? .12 : -.08), .06)); g.add(this.sph(.06, "#C77DFF", x, 2.23 + (i % 2 ? .12 : -.08), .07)); }
+    for (let i = 0; i < 11; i++) g.add(this.sph(.03, this.glow(["#FFE08A", "#FFB3C7", "#B3E5FF"][i % 3], 1.6), -1.05 + i * .21, 2.62 - Math.sin(i / 10 * Math.PI) * .12, .06)); },
+  m_phonedesk(g){ const T = this.T; g.add(this.box(.9, .55, .55, "#F3E6F0", 0, .275, 0)); g.add(this.box(.95, .05, .6, "#B79FC2", 0, .575, 0)); g.add(this.box(.3, .2, .02, "#9C6FB5", -.05, .58, .24));
+    const ph = this.box(.16, .015, .3, "#26323E", .15, .61, .02); ph.rotation.y = .3; g.add(ph); const sc = this.box(.13, .005, .26, this.glow("#9FD8FF", 1.4), .15, .62, .02); sc.rotation.y = .3; g.add(sc);
+    g.add(this.cyl(.06, .08, .3, "#E8B100", -.3, .75, -.1, 10)); g.add(this.cyl(.16, .08, .16, this.glow("#FFF1C4", .9), -.3, .98, -.1, 12)); },
+  m_memorybox(g){ const T = this.T; this.table(g, 1.1, .7, "#C9A6D6"); g.add(this.box(.6, .3, .42, "#9C6FB5", 0, .9, 0)); const lid = this.box(.62, .05, .44, "#B98AD0", 0, 1.1, -.18); lid.rotation.x = -.9; g.add(lid);
+    [[-.15, .07, .2], [.12, .1, -.3], [.3, .06, .5]].forEach(([x, z, r]) => { const p = this.box(.18, .01, .22, "#FFFFFF", x, 1.07, z * .6); p.rotation.y = r; g.add(p); }); },
+  decorReem(){ const T = this.T;
+    // a girl's bedroom at dusk: a bed with cushions, fairy lights, a window with the evening sky, a plant, books and the closed door
+    const out = erTex(T, 192, 192, (x, w, h) => { const gr = x.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, "#5B4B8A"); gr.addColorStop(.6, "#E58FB0"); gr.addColorStop(1, "#FFD1A6"); x.fillStyle = gr; x.fillRect(0, 0, w, h);
+      x.fillStyle = "#FFF6D8"; [[30, 30], [140, 22], [90, 50], [165, 70]].forEach(([a, b]) => { x.beginPath(); x.arc(a, b, 2, 0, 7); x.fill(); }); x.fillStyle = "#3D2F5C"; x.fillRect(0, h * .78, w, h * .22); x.fillStyle = "#FFE7A3"; for (let i = 0; i < 8; i++) x.fillRect(10 + i * 23, h * .82, 5, 6); });
+    [[[0, -1], -3.6], [[-1, 0], -1.0]].forEach(([nn, ax]) => { const g = new T.Group(); g.add(this.box(1.5, 1.5, .08, "#FFFFFF", 0, 1.65, 0)); const p = new T.Mesh(new T.PlaneGeometry(1.32, 1.32), new T.MeshBasicMaterial({map:out})); p.position.set(0, 1.65, .05); g.add(p);
+      g.add(this.box(.06, 1.32, .06, "#FFFFFF", 0, 1.65, .06)); g.add(this.box(.4, 1.7, .06, "#C9A6D6", -.95, 1.55, .08)); g.add(this.box(.4, 1.7, .06, "#C9A6D6", .95, 1.55, .08)); this.onWall(nn, g, ax, 0, .1); });
+    const bed = this.group(-4.6, -2.2, Math.PI / 2); bed.add(this.box(2.1, .4, 1.4, "#FFFFFF", 0, .2, 0)); bed.add(this.box(2.1, .2, 1.4, "#E9B8D2", 0, .5, 0)); bed.add(this.box(.12, 1.0, 1.5, "#B79FC2", -1.05, .5, 0));
+    bed.add(this.box(.4, .18, .55, "#F6EEF4", -.75, .68, -.32)); bed.add(this.box(.4, .18, .55, "#C77DFF", -.75, .68, .32)); bed.add(this.box(.9, .05, 1.42, "#F2A7B8", .4, .62, 0));
+    const rug = new T.Mesh(new T.CircleGeometry(1.2, 32), new T.MeshStandardMaterial({color:"#F3D4E6", roughness:1})); rug.rotation.x = -Math.PI / 2; rug.position.set(.8, .012, .6); this.scene.add(rug);
+    const door = this.group(5.55, 3.0, -Math.PI / 2); door.add(this.box(1.1, 2.3, .1, "#B98AD0", 0, 1.15, 0)); door.add(this.sph(.05, "#E8B100", .4, 1.1, .08)); const crack = this.box(1.0, .02, .3, this.glow("#FFE6A8", 1.4), 0, .01, .2); door.add(crack);
+    const shelf = this.group(5.3, -1.2, -Math.PI / 2); shelf.add(this.box(1.4, .06, .35, "#B79FC2", 0, 1.6, 0)); for (let i = 0; i < 7; i++) shelf.add(this.box(.12, .3 + (i % 3) * .05, .26, ["#E58FB0", "#9FD8FF", "#FFE08A", "#B8E0B0"][i % 4], -.55 + i * .17, 1.8, 0));
+    this.plant(-5.3, 3.8, "#5E8C3A"); this.plant(3.6, -3.8, "#5E8C3A");
+    this.lamp(-1, 2.8, -.2, "#FFD6E8"); this.lamp(2.4, 2.8, .8, "#FFE8C4");
+  }
+});
+
 /* TN-ERHORROR: the last lab is the horror room. The power is cut: only the player's torch, red emergency
    beacons and dying ceiling strips light it. Every half minute or so the lights black out, the robot turns to
    look at the nearest player with red eyes, and the screen glitches. Scary but safe for students: no gore. */
@@ -8994,7 +9407,7 @@ Object.assign(ErScene.prototype, {
     const beacons = [[5.6, 2.9, -4.2], [-5.6, 2.9, 2.6]].map(([x, y, z]) => { const L = new T.PointLight("#FF2D2D", .9, 12); L.position.set(x, y - .3, z); this.scene.add(L);
       const m = this.glow("#FF3B30", 2); const b = this.sph(.12, m, x, y, z); this.scene.add(b); this.scene.add(this.box(.3, .08, .3, "#2A3038", x, y + .1, z)); return {L, m}; });
     if (this.labLamp) this.labLamp.intensity = 0;
-    const H = this.hz = {torch, aura, beacons, next: 14 + Math.random() * 10, dark:0, t0:null};
+    const H = this.hz = {torch, aura, beacons, next: 7 + Math.random() * 4, dark:0, t0:null};
     this.anim.push(t => { if (H.t0 == null) H.t0 = t; const e = t - H.t0, alarm = this.alarm || 0;
       // red beacons pulse faster as the time runs out
       beacons.forEach((b, i) => { const k = Math.max(0, Math.sin(t * (2.2 + alarm * 2.5) + i * Math.PI)); b.L.intensity = H.dark ? k * .6 : .2 + k * (2.0 + alarm * .8); b.m.emissiveIntensity = .3 + k * 2.4; });
@@ -9007,7 +9420,7 @@ Object.assign(ErScene.prototype, {
         const look = H.dark || e % 30 > 24; R.body.rotation.y += ((look ? want : 0) - R.body.rotation.y) * .05; R.eyeM.emissive.set(look ? "#FF2020" : "#22C3D6"); R.eyeM.color.set(look ? "#FF2020" : "#22C3D6"); }
       // blackouts
       if (!H.dark && e > H.next){ H.dark = e; this.o.onScare && this.o.onScare(); }
-      if (H.dark && e - H.dark > 1.8){ H.dark = 0; H.next = e + 26 + Math.random() * 22; } });
+      if (H.dark && e - H.dark > 2.2){ H.dark = 0; H.next = e + 17 + Math.random() * 14 - (this.alarm || 0) * 6; } });
   }
 });
 /* TN-ER4: the workshop of al-Jazari (room four) */
@@ -9139,7 +9552,7 @@ const ERA = {
 /* ---------- configuration ---------- */
 const ER_COL = ["#D30F45","#0071E3","#248A3D","#C93400","#8944AB","#0E7C86","#3634A3","#B25000","#C2185B","#2E7D32"];
 const erDefName = i => "الفريق " + ["الأول","الثاني","الثالث","الرابع","الخامس","السادس","السابع","الثامن","التاسع","العاشر"][i];
-let erCfg = Object.assign({mode:"race", teams:4, names:Array(10).fill(""), dev:6, base:1, mins:20, hints:3, hc:60, pen:30, rooms:4, pick:[0,1,2,3], know:true, cats:[]}, store.get("er-cfg", {}));
+let erCfg = Object.assign({mode:"race", teams:4, names:Array(10).fill(""), dev:6, base:1, mins:20, hints:3, hc:60, pen:30, rooms:6, pick:[0,1,2,3,4,5], know:true, cats:[]}, store.get("er-cfg", {}));
 const erSaveCfg = () => store.set("er-cfg", erCfg);
 const erName = i => (erCfg.names[i] || "").trim() || erDefName(i);
 function erTidy(){
@@ -9151,21 +9564,21 @@ function erTidy(){
 }
 /* TN-ERPICK: the host picks which rooms to play (any of the three, played in story order).
    G.pick lists room ids; open/fail/pen stay indexed by room id. Older games without pick play rooms 0..rooms-1. */
-const erPickOf = G => { const p = Array.isArray(G.pick) ? [...new Set(G.pick.map(Number))].filter(i => i === 0 || i === 1 || i === 2 || i === 3).sort() : [];
+const erPickOf = G => { const p = Array.isArray(G.pick) ? [...new Set(G.pick.map(Number))].filter(i => Number.isInteger(i) && i >= 0 && i < ER_ROOMS.length).sort((a, b) => a - b) : [];
   return p.length ? p : [0, 1, 2].slice(0, [1, 2, 3].includes(+G.rooms) ? +G.rooms : 3); };
 const erPrev = (G, r) => { const pk = erPickOf(G), i = pk.indexOf(r); return i > 0 ? pk[i - 1] : -1; };
 const ER_LVN = ["سهل","متوسط","صعب"];
-const ER_CHEST = ["صندوق النوخذة","الصندوق النحاسي","خزنة المختبر","صندوق الجزري"];
+const ER_CHEST = ["صندوق النوخذة","الصندوق النحاسي","خزنة المختبر","صندوق الطوارئ","صندوق التجار","باب غرفة ريم"];
 const erKnowPool = G => { const lv = ER_LVN[G.base]; let p = BANK.filter(q => q.kind === "mcq" && (!G.cats || !G.cats.length || G.cats.includes(q.category))); const p2 = p.filter(q => q.difficulty === lv); return p2.length >= 6 ? p2 : p; };
 const erClock = s => { s = Math.max(0, Math.ceil(s)); return `${Math.floor(s/60)}:${String(s % 60).padStart(2,"0")}`; };
 const erFromCfg = () => ({ id: Math.random().toString(36).slice(2, 10), seed: Math.random().toString(36).slice(2, 12), mode:erCfg.mode, base:erCfg.base, mins:erCfg.mins, hints:erCfg.hints, hc:erCfg.hc, pen:erCfg.pen, rooms:erCfg.pick.length, pick:erCfg.pick.slice(), know:erCfg.know, cats:erCfg.cats.slice(), dev:erCfg.dev });
 
 /* ---------- team state: every device keeps its own record; a team's state is the union of its devices ---------- */
 function erMerge(list, G){
-  const m = {solved:new Set(), know:{}, pen:[0,0,0,0], hints:[], bonus:0, open:[null,null,null,null], fail:[null,null,null,null], devs:list.length};
+  const m = {solved:new Set(), know:{}, pen:ER_ROOMS.map(() => 0), hints:[], bonus:0, open:ER_ROOMS.map(() => null), fail:ER_ROOMS.map(() => null), devs:list.length};
   list.forEach(s => { (Array.isArray(s.s) ? s.s : Object.keys(s.s || {})).forEach(id => m.solved.add(id)); Object.entries(s.k || {}).forEach(([k, v]) => { if (m.know[k] !== 1) m.know[k] = v; });
     (s.p || []).forEach((v, i) => m.pen[i] += +v || 0); (s.h || []).forEach(h => m.hints.push(h)); m.bonus += +s.b || 0;
-    [0,1,2,3].forEach(i => { const o = s.o && s.o[i], f = s.f && s.f[i]; if (o && (!m.open[i] || o < m.open[i])) m.open[i] = o; if (f && (!m.fail[i] || f < m.fail[i])) m.fail[i] = f; }); });
+    ER_ROOMS.forEach((_, i) => { const o = s.o && s.o[i], f = s.f && s.f[i]; if (o && (!m.open[i] || o < m.open[i])) m.open[i] = o; if (f && (!m.fail[i] || f < m.fail[i])) m.fail[i] = f; }); });
   return m;
 }
 function erProgress(G, m, now){
@@ -9197,8 +9610,8 @@ function erSave(){ if (ERX) store.set(erMeKey, ERX.me); }
 async function erStart(G, team, net){
   erStop(); tkStop();
   let me = store.get(erMeKey, null);
-  if (!me || me.g !== G.id || me.t !== team) me = {g:G.id, t:team, s:{}, k:{}, p:[0,0,0,0], h:[], b:0, o:[null,null,null,null], f:[null,null,null,null], seen:{}, j:Date.now()};
-  while (me.p.length < 4) me.p.push(0); while (me.o.length < 4) me.o.push(null); while (me.f.length < 4) me.f.push(null);
+  if (!me || me.g !== G.id || me.t !== team) me = {g:G.id, t:team, s:{}, k:{}, p:ER_ROOMS.map(() => 0), h:[], b:0, o:ER_ROOMS.map(() => null), f:ER_ROOMS.map(() => null), seen:{}, j:Date.now()};
+  while (me.p.length < ER_ROOMS.length) me.p.push(0); while (me.o.length < ER_ROOMS.length) me.o.push(null); while (me.f.length < ER_ROOMS.length) me.f.push(null);
   ERX = {G, team, net, me, built:{}, cool:{}, ended:{}, open:null, room:-1, col: ER_COL[team % 10], off: 0, spec:false};
   document.body.classList.add("er-lock");
   $app.innerHTML = `<section class="er-game view" style="--tc:${ERX.col}"><div class="er-stage" id="erStage"><div class="er-tags" id="erTags"></div></div>
@@ -9232,15 +9645,19 @@ function erLoadRoom(r){
 }
 /* the other rooms' buildings show whether they are done, next or later */
 function erBuildStates(){ const X = ERX, S = X && X.scene; if (!S || !S.setBuildingStates) return; const G = X.G, pk = erPickOf(G), m = X.merged || {open:[], fail:[]}, i = pk.indexOf(X.room), st = {};
-  [0,1,2,3].forEach(q => { if (q === X.room) return; const k = pk.indexOf(q); st[q] = k < 0 ? "out" : m.open[q] ? "done" : m.fail[q] ? "fail" : k === i + 1 ? "next" : k < i ? "fail" : "later"; });
+  ER_ROOMS.forEach((_, q) => { if (q === X.room) return; const k = pk.indexOf(q); st[q] = k < 0 ? "out" : m.open[q] ? "done" : m.fail[q] ? "fail" : k === i + 1 ? "next" : k < i ? "fail" : "later"; });
   S.setBuildingStates(st); }
 /* three ways to look: the room, the whole junction from above, or behind your own player */
 const ER_VIEWS = [["home","المنظر الأصلي",`<path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1Z"/>`],["top","منظر علوي",`<path d="M9 4 3 6.5v13L9 17l6 2.5 6-2.5v-13L15 7 9 4Z"/><path d="M9 4v13M15 7v12.5"/>`],["follow","منظور اللاعب",`<circle cx="12" cy="5" r="2.2"/><path d="M12 8v6M8.5 21l3.5-7 3.5 7M7 11h10"/>`]];
 function erViews(){ const X = ERX, el = document.getElementById("erViews"); if (!el || !X) return; const cur = X.viewMode || "home";
   el.innerHTML = ER_VIEWS.map(([k, t, ic]) => `<button type="button" data-erv2="${k}" aria-pressed="${k === cur}" title="${t}">${I(ic)}<span>${t}</span></button>`).join("");
   el.querySelectorAll("[data-erv2]").forEach(b => b.onclick = () => { const k = b.dataset.erv2; X.viewMode = k; if (X.scene){ if (k === "home" && X.scene.mode === "home"){ X.scene.userMoved = false; } X.scene.setMode(k); } ERA.sfx("tap"); erViews(); }); }
+const ER_WHISPER = ["نَواة تراقبكم…","لا تلتفتوا خلفكم","الأنظمة خارج السيطرة","هل سمعتم هذا الصوت؟","الكهرباء تنقطع… أسرعوا","أحدٌ ما يتحرك في الظلام","لن تخرجوا من هنا…","باقي القليل…"];
 function erScare(){ const X = ERX, sec = document.querySelector(".er-game"); if (!X || !sec || X.cine) return; ERA.sfx("scare");
-  if (X.open) return; sec.classList.remove("scare"); void sec.offsetWidth; sec.classList.add("scare"); setTimeout(() => sec.classList.remove("scare"), 1900); }
+  try { navigator.vibrate && navigator.vibrate([90, 50, 160]); } catch(e){}
+  sec.classList.remove("scare"); void sec.offsetWidth; sec.classList.add("scare"); setTimeout(() => sec.classList.remove("scare"), 2200);
+  // the flash covers the puzzle panel too, so the players feel it even while solving
+  const ov = document.createElement("div"); ov.className = "er-scareov"; ov.setAttribute("aria-hidden", "true"); ov.innerHTML = `<b>${ER_WHISPER[Math.floor(Math.random() * ER_WHISPER.length)]}</b>`; sec.appendChild(ov); setTimeout(() => ov.remove(), 3100); }
 function erTagsFrame(){
   const X = ERX; if (!X || !X.scene) return; const S = X.scene, tags = document.getElementById("erTags"); if (!tags) return;
   tags.classList.toggle("far", S.mode === "top" || S.mode === "cine");
@@ -9288,7 +9705,7 @@ function erSync(){
     ROOM.peers().forEach(p => { const s = p.presence && p.presence.er; if (!s || p.sameTab || s.g !== X.G.id || s.spec || s.x == null) return; if (X.G.mode !== "coop" && s.t !== X.team) return; if (s.r != null ? s.r !== X.room : (s.o || []).filter(Boolean).length + (s.f || []).filter(Boolean).length < X.room) return;
       seen[p.peer] = 1; S.peerAvatar(p.peer, ER_COL[(s.t || 0) % 10], s.x, s.z, s.n || "لاعب"); });
     Object.keys(S.peers).forEach(id => { if (!seen[id]) S.dropPeer(id); }); }
-  const bs = [0,1,2,3].map(i => (m.open[i] ? "o" : "") + (m.fail[i] ? "f" : "")).join(); if (bs !== X.bsSig){ X.bsSig = bs; erBuildStates(); }
+  const bs = ER_ROOMS.map((_, i) => (m.open[i] ? "o" : "") + (m.fail[i] ? "f" : "")).join(); if (bs !== X.bsSig){ X.bsSig = bs; erBuildStates(); }
   const sig = [...m.solved].join() + "|" + m.hints.length + "|" + m.bonus + "|" + JSON.stringify(m.know);
   if (sig !== X.bagSig){ const fresh = X.bagSig != null; X.bagSig = sig; erBag(fresh); if (X.open) erPanelRefresh(); }
 }
@@ -9469,20 +9886,23 @@ function erCinema(r, done){
   ov.querySelector(".er-skip").onclick = end;
   ERA.sfx("open"); S.cinema(to, end); setTimeout(end, 16000);
 }
+/* the "next room" button counts down and presses itself, so no phone stays stuck on the result card */
+function erAutoNext(secs){ const b = document.getElementById("erNext"); if (!b) return; const base = b.textContent.replace(/\s*‹$/, ""); let t = secs;
+  const tick = () => { if (!b.isConnected) return; if (t <= 0) return b.click(); b.textContent = `${base} (${n(t)}) ‹`; t--; setTimeout(tick, 1000); }; tick(); }
 function erOutro(r, mine){
   const X = ERX, room = ER_ROOMS[r], G = X.G, m = X.merged, last = erPickOf(G).indexOf(r) + 1 >= erPickOf(G).length;
   const pv = erPrev(G, r), st = pv < 0 ? G.startAt : (m.open[pv] || m.fail[pv]) + 15000, used = ((m.open[r] || erNow()) - st) / 1000 + m.pen[r];
-  erModal(`<div class="er-burst">${I(P.erchest)}</div><p class="er-eyebrow">نجحتم في الهروب</p><h2>انفتح ${r === 2 ? "الخزنة" : "الصندوق"}!</h2><p>${room.outro}</p>
+  erModal(`<div class="er-burst">${I(P.erchest)}</div><p class="er-eyebrow">نجحتم في الهروب</p><h2>${room.opened || `انفتح ${r === 2 ? "الخزنة" : "الصندوق"}!`}</h2><p>${room.outro}</p>
     <div class="er-facts"><span><b>${erClock(used)}</b><small>الوقت المستغرق</small></span><span><b>${n(m.hints.length)}</b><small>تلميحات مستخدمة</small></span><span><b dir="ltr">${erRoomData(r).code.join("")}</b><small>الرمز</small></span></div>
     <button type="button" class="btn lg" id="erNext">${last ? "النتيجة النهائية" : "إلى الغرفة التالية ‹"}</button>`, "win");
-  document.getElementById("erNext").onclick = () => { erHideModal(); const go = () => { X.ended[r] = true; X.modalFor = null; erTick(); }; if (last) go(); else erCinema(r, go); };
+  document.getElementById("erNext").onclick = () => { erHideModal(); const go = () => { X.ended[r] = true; X.modalFor = null; erTick(); }; if (last) go(); else erCinema(r, go); }; erAutoNext(15);
 }
 function erTransition(prev){ const X = ERX, m = X.merged; X.modalFor = prev; if (X.scene && m.open[prev]){ X.scene.openChest(); ERA.sfx("chest"); setTimeout(() => erOutro(prev), 1500); } else erTimeUp(prev); }
 function erTimeUp(r){
   const X = ERX, G = X.G, last = erPickOf(G).indexOf(r) + 1 >= erPickOf(G).length; X.modalFor = r; erClosePanel(true);
-  erModal(`<p class="er-eyebrow">انتهى الوقت</p><h2>لم ينفتح ${r === 2 ? "الخزنة" : "الصندوق"} هذه المرة</h2><p>كان الرمز <b dir="ltr">${erRoomData(r).code.join("")}</b>. لا بأس، الرحلة مستمرة والقصة لم تنتهِ بعد.</p>
+  erModal(`<p class="er-eyebrow">انتهى الوقت</p><h2>لم ينفتح ${ER_ROOMS[r].chestWord || (r === 2 ? "الخزنة" : "الصندوق")} هذه المرة</h2><p>${ER_ROOMS[r].lose || "بقي الرمز سرًّا هذه المرة. لا بأس، الرحلة مستمرة والقصة لم تنتهِ بعد."}</p>
     <button type="button" class="btn lg" id="erNext">${last ? "النتيجة النهائية" : "إلى الغرفة التالية ‹"}</button>`, "lose");
-  document.getElementById("erNext").onclick = () => { erHideModal(); const go = () => { X.ended[r] = true; X.modalFor = null; erTick(); }; if (last) go(); else erCinema(r, go); };
+  document.getElementById("erNext").onclick = () => { erHideModal(); const go = () => { X.ended[r] = true; X.modalFor = null; erTick(); }; if (last) go(); else erCinema(r, go); }; erAutoNext(12);
 }
 function erFinal(byHost){
   const X = ERX, G = X.G, m = X.merged, pr = erProgress(G, m, erNow()); X.room = -2; erClosePanel(true); ERA.stopAmb(); ERA.level = 0;
@@ -9512,13 +9932,13 @@ function erSetup(keepScroll){
   $app.innerHTML = `<section class="view">
     <div class="hero gut er-hero" style="padding-block:36px 26px"><div class="wrap">
       <p class="eyebrow">مسابقة ألغاز جماعية</p><h1>غرفة الهروب.</h1>
-      <p>أربع غرف وأربع قصص على زوايا إشارة واحدة. يمشي الفريق داخل الغرفة، ويحلّ ألغازها ليجمع رمز الصندوق قبل أن ينتهي الوقت، ثم يعبر الإشارة إلى الغرفة التالية.</p>
+      <p>ست غرف وست قصص حول إشارة المدينة. يمشي الفريق داخل الغرفة، ويحلّ ألغازها ليجمع رمز الصندوق قبل أن ينتهي الوقت، ثم يعبر الإشارة إلى الغرفة التالية.</p>
       <div class="cta"><button type="button" class="btn" id="erTry">جرّب الغرفة على هذا الجهاز</button><button type="button" class="btn sec" id="erJoinBtn">دخول الفرق</button></div>
     </div></div>
     <div class="gut" style="padding-bottom:28px"><div class="wrap sj-setup">
       ${ERH && ERH.phase !== "end" ? `<div class="sj-resume"><span>عندك مسابقة جارية (${n(ERH.names.length)} فرق، رمز الدخول ${ERH.code}).</span><button class="btn" type="button" id="erResume">متابعة</button></div>` : ""}
       ${local && local.startAt ? `<div class="sj-resume"><span>عندك تجربة جارية على هذا الجهاز.</span><button class="btn" type="button" id="erResumeL">متابعة التجربة</button></div>` : ""}
-      <div class="er-stories">${ER_ROOMS.map((r, i) => `<button type="button" class="er-story r${i}" data-erpk="${i}" role="checkbox" aria-checked="${c.pick.includes(i)}" ${c.pick.includes(i) ? "" : 'data-off="1"'}><span class="er-snum">${n(i + 1)}</span><i class="er-stick">${I(P.check)}</i><small>${r.tag} · ${["الأسهل","أصعب","أصعب","الأصعب"][i]}</small><b>${r.name}</b><p>${r.intro[0]}</p></button>`).join("")}</div>
+      <div class="er-stories">${ER_ROOMS.map((r, i) => `<button type="button" class="er-story r${i}" data-erpk="${i}" role="checkbox" aria-checked="${c.pick.includes(i)}" ${c.pick.includes(i) ? "" : 'data-off="1"'}><span class="er-snum">${n(i + 1)}</span><i class="er-stick">${I(P.check)}</i><small>${r.tag} · ${["الأسهل","أصعب","أصعب","الأصعب","الأصعب","الأصعب"][i]}</small><b>${r.name}</b><p>${r.intro[0]}</p></button>`).join("")}</div>
       <div class="sj-box"><h2 class="sjh">طريقة اللعب</h2>
         <ol class="b4-rules">
           <li>يفتح المقدّم الغرفة فيظهر رمز دخول وباركود. يدخل كل لاعب من جواله أو جهازه ويكتب اسمه ويختار فريقه (من ${n(5)} إلى ${n(10)} لاعبين في الفريق)، أو يلعب الفريق كله على جهاز واحد.</li>
@@ -9603,13 +10023,18 @@ function ervDraw(H, rows){
   const now = Date.now(); if (now - ERV.last < 700) return; ERV.last = now;
   rows.forEach(x => { const cv = ERV.cv[x.i]; if (!cv) return;
     const r = x.pr.r; let sc; try { sc = ervScene(r); } catch(e){ return; }
-    const want = new Set();
+    const want = new Set(), tags = [];
     (x.list || []).forEach(m => { if (m.x == null || m.z == null || (m.r != null && m.r !== r)) return; const id = (m.t || 0) + ":" + (m.j || 0); want.add(id);
-      const p = sc.peerAvatar(id, ER_COL[(m.t || 0) % 10], m.x, m.z); p.g.position.set(m.x, 0, m.z); p.g.visible = true; });
+      const p = sc.peerAvatar(id, ER_COL[(m.t || 0) % 10], m.x, m.z); p.g.position.set(m.x, 0, m.z); p.g.visible = true; tags.push([m.x, m.z, m.n || "لاعب", ER_COL[(m.t || 0) % 10]]); });
     Object.keys(sc.peers).forEach(id => { if (!want.has(id)) sc.peers[id].g.visible = false; });
     Object.values(sc.stations).forEach(st => { st.state = x.m.solved.has(st.s.id) ? "solved" : ""; });
     sc.chest.ready = false;
-    try { sc.frame(); cv.getContext("2d").drawImage(sc.renderer.domElement, 0, 0, cv.width, cv.height); } catch(e){}
+    try { sc.frame(); const c = cv.getContext("2d"); c.drawImage(sc.renderer.domElement, 0, 0, cv.width, cv.height);
+      const el = sc.renderer.domElement, kx = cv.width / (el.clientWidth || cv.width), ky = cv.height / (el.clientHeight || cv.height);
+      c.font = "700 24px " + getComputedStyle(document.body).fontFamily; c.textAlign = "center"; c.textBaseline = "middle"; c.direction = "rtl";
+      tags.forEach(([px, pz, nm, col]) => { const q = sc.project(px, 2.05, pz); if (!q.on) return; const tx = q.x * kx, ty = q.y * ky, w = c.measureText(nm).width + 22;
+        c.fillStyle = "rgba(255,255,255,.95)"; c.beginPath(); c.roundRect ? c.roundRect(tx - w / 2, ty - 17, w, 34, 17) : c.rect(tx - w / 2, ty - 17, w, 34); c.fill();
+        c.strokeStyle = col; c.lineWidth = 3; c.stroke(); c.fillStyle = "#26323E"; c.fillText(nm, tx, ty + 1); }); } catch(e){}
   });
 }
 async function erHost(){
@@ -9648,6 +10073,7 @@ async function erHost(){
     const card = x => { const pr = x.pr, r = pr.r, hot = pr.left < 60 ? " hot" : pr.left < 180 ? " warm" : "";
       return `<div class="er-race er-live${pr.done ? " done" : ""}" style="--tc:${H.mode === "coop" ? "var(--blue)" : ER_COL[x.i]}">
         <div class="er-view"><span class="er-vslot" data-erv="${x.i}"></span>
+          ${(x.list || []).length ? `<span class="er-vnames">${x.list.map(s => `<i>${esc(s.n || "لاعب")}</i>`).join("")}</span>` : ""}
           <div class="er-vtop"><b>${H.mode === "coop" ? "كل الفرق معًا" : esc(x.t)}</b><span class="er-vrooms">${erPickOf(H).map(k => `<i class="${x.m.open[k] ? "ok" : x.m.fail[k] ? "no" : !pr.done && k === pr.r ? "now" : ""}"></i>`).join("")}</span></div>
           ${pr.done ? `<div class="er-vdone">${pr.escaped === erPickOf(H).length ? "هرب!" : `${n(pr.escaped)} / ${n(erPickOf(H).length)}`}<small>${erClock(pr.used)}</small></div>`
             : `</div><div class="er-vbot"><div class="er-stp">${ER_ROOMS[r].st.map(s => `<i class="${x.m.solved.has(s.id) ? "on" : ""}"></i>`).join("")}<i class="chest${x.m.open[r] ? " on" : ""}"></i></div><span class="er-left${hot}">${pre ? Math.ceil((H.startAt - now) / 1000) : erClock(pr.left)}</span></div><div hidden>`}
